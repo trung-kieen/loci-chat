@@ -19,27 +19,30 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class JwtUserSyncFilter extends OncePerRequestFilter {
 
   @Autowired
-  private UserSynchronizeService userService;
+  private UserSynchronizeService userSynchronize;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+      throws ServletException, IOException {
 
     try {
       JwtAuthenticationToken token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
       Map<String, Object> attributes = token.getTokenAttributes();
-      Set<String> authorities = token.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+      Set<String> authorities = token.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+          .collect(Collectors.toSet());
       User user = User.fromTokenAttributes(attributes, authorities);
 
-
-      // TODO: change to domain object pass to service layer
-      userService.syncUser(user);
+      userSynchronize.syncUser(user);
     } catch (Exception e) {
-      throw new IllegalArgumentException("Unable to auth user");
+      // throw new IllegalArgumentException("Unable to auth user");
+      log.error("Unable to auth and sync user");
     }
 
     filterChain.doFilter(request, response);
