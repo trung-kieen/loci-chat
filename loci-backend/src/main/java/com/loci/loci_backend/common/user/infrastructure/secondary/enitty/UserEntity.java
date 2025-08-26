@@ -62,6 +62,13 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "last_seen")
   private Instant lastSeen;
 
+  @Column(name = "bio")
+  private String bio;
+
+  @Column(name = "last_active")
+  private Instant lastActive;
+
+
   @ManyToMany(cascade = CascadeType.REMOVE)
   @JoinTable(name = "user_authority", joinColumns = {
       @JoinColumn(name = "user_id", referencedColumnName = "id")

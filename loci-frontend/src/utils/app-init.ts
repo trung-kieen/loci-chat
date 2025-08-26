@@ -12,6 +12,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
       },
       initOptions: {
         onLoad: 'login-required', // Redirects to Keycloak login if not authenticated
+        // onLoad: 'check-sso',
         checkLoginIframe: true
       },
       loadUserProfileAtStartUp: true,

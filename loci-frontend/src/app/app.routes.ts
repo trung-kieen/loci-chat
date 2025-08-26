@@ -3,6 +3,7 @@ import { AccessDenied } from './access-denied/access-denied';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserInfo } from './user-info/user-info';
 import { NgModule } from '@angular/core';
+import { App } from './app';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     // The user need to have these roles to access page
     data: { roles: ['user'] }
-  }
+  },
+
 ];
 
 @NgModule({

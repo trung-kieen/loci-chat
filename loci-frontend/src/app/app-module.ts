@@ -1,6 +1,9 @@
 import { APP_INITIALIZER, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+
 import { App } from './app';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -24,8 +27,10 @@ import { AppRoutingModule } from './app.routes';
     RouterOutlet,
     FormsModule,
     HttpClientModule,
-    KeycloakAngularModule
-
+    KeycloakAngularModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

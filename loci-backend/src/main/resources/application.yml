@@ -73,3 +73,9 @@ flyway:
   url: jdbc:mysql://localhost:5432/loci
   user: admin
   password: admin
+
+
+
+server:
+  servlet:
+    context-path: /api
