@@ -1,5 +1,12 @@
 pipeline {
-    agent { label 'node18' }
+    agent {
+      docker {
+        image 'node:18-alpine'
+        args '-v /app/node_modules -w loci-frontend'
+      }
+    }
+    // agent { label 'node18' } // docker agent
+
 
     environment {
         NODE_OPTIONS = '--max_old_space_size=4096'  // avoid OOM on big apps
@@ -11,14 +18,16 @@ pipeline {
     }
 
   stages {
-      stage('Checkout') {
-          steps {
-              checkout scm  // re-uses webhook ref
-          }
-      }
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://gitlab.com/loci-project/loci',
+                    credentialsId: 'gitlab-loci'  // gitlab-token
+            }
+        }
   stage('Install dependencies') {
     steps {
-      dir('frontend') {
+      dir('loci-frontend') {
         sh 'npm ci'
       }
     }
@@ -26,7 +35,7 @@ pipeline {
 
   stage('Lint') {
     steps {
-      dir('frontend') {
+      dir('loci-frontend') {
         sh 'npm run lint'
       }
     }
@@ -56,33 +65,33 @@ pipeline {
 
   stage('Build') {
     steps {
-      dir('frontend') {
+      dir('loci-frontend') {
         sh 'npm run build'       // angular.json
         // or force prod:  sh 'npm run build -- --configuration=production'
       }
     }
   }
- stage('Docker build & push') {
-  steps {
-    script {
-      def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-      def image = "your-dockerhub/loci-frontend:${shortCommit}"
-      docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
-        def app = docker.build("${image}", "./loci")
-        app.push()
-        app.push("latest")
-      }
-    }
-  }
-}
+ // stage('Docker build & push') {
+ //  steps {
+ //    script {
+ //      def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+ //      def image = "your-dockerhub/loci-frontend:${shortCommit}"
+ //      docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
+ //        def app = docker.build("${image}", "./loci")
+ //        app.push()
+ //        app.push("latest")
+ //      }
+ //    }
+ //  }
+// }
 
-    post {
-        success {
-            updateGitlabCommitStatus name: 'jenkins-frontend', state: 'success'
-        }
-        failure {
-            updateGitlabCommitStatus name: 'jenkins-frontend', state: 'failed'
-        }
-    }
+    // post {
+    //     success {
+    //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'success'
+    //     }
+    //     failure {
+    //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'failed'
+    //     }
+    // }
 }
 }

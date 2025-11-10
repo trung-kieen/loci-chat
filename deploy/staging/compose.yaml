@@ -1,0 +1,94 @@
+services:
+  loci-db:
+    container_name: loci-db
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: locidb
+    volumes:
+      # - ./loci-db:/data/postgres
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./backups:/backups
+      # - ./postgres-entrypoint.sh:/postgres-entrypoint.sh
+    # entrypoint: ["postgres-entrypoint.sh"]
+
+    ports:
+      - 5432:5432
+    networks:
+      - loci-net
+
+  loci-pgadmin:
+    container_name: loci-pgadmin
+    image: dpage/pgadmin4:latest
+    restart: always
+    ports:
+      - "81:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - loci-net
+
+
+
+
+  loci-keycloak:
+    container_name: loci-keycloak
+    image: quay.io/keycloak/keycloak:26.0.0
+    ports:
+      - 9090:8080
+    environment:
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: admin
+        KC_DB: postgres
+        KC_DB_URL_HOST: loci-db
+        KC_DB_URL_DATABASE: locidb
+        KC_DB_USERNAME: admin
+        KC_DB_PASSWORD: admin
+    networks:
+      - loci-net
+    depends_on:
+      - loci-db
+    volumes:
+      # - ./apps/keycloak/import:/opt/keycloak/data/import
+      # - loci-keycloak:/opt/keycloak/data
+      - ./keycloak-data:/opt/keycloak/data/
+      # User export as the data import
+      # - ./keycloak-data/export/:/opt/keycloak/data/import
+
+    command:
+      start-dev --import-realm
+
+  loci-backend:
+    image: ${REGISTRY}/loci-backend:${SHA:-latest}
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: staging
+      DB_HOST: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - loci-db
+    networks:
+      - loci-net
+
+  loci-frontend:
+    image: ${REGISTRY}/chat-frontend:${SHA:-latest}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - loci-net
+
+networks:
+  loci-net:
+    driver: bridge
+volumes:
+  loci-db:
+    driver: local
+  loci-keycloak:
+    driver: local

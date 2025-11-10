@@ -1,24 +1,33 @@
 pipeline {
-    agent { label 'java17' }
-
+    // agent { lobel "java17" } // Docker agent
+    agent  {
+      docker {
+        image "maven:3.9.9-eclipse-temurin-17"
+        args '-v /root/.m2:/root/.m2 '
+      }
+    }
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitlab.com/trn-kieen/loci.git',
-                    credentialsId: 'jenkins'  // gitlab-token
+                    url: 'https://gitlab.com/loci-project/loci',
+                    credentialsId: 'gitlab-loci'  // gitlab-token
             }
         }
 
         stage('Compile') {
             steps {
-                sh 'mvn clean compile'
+                dir("loci-backend"){
+                  sh 'mvn clean compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir("loci-backend"){
+                  sh 'mvn test'
+                }
             }
             post {
                 always {
@@ -29,20 +38,14 @@ pipeline {
 
         stage('Package') {
             steps {
-                sh 'mvn package -DskipTests'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                dir("loci-backend"){
+                  sh 'mvn package -DskipTests'
+                  archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
             }
         }
     }
 
-    post {
-        success {
-            updateGitlabCommitStatus name: 'jenkins-build', state: 'success'
-        }
-        failure {
-            updateGitlabCommitStatus name: 'jenkins-build', state: 'failed'
-        }
-    }
   // stage('Docker build & push') {
   //   steps {
   //     script {
@@ -56,4 +59,13 @@ pipeline {
   //     }
   //   }
   // }
+
+    // post {
+    //     success {
+    //         updateGitlabCommitStatus name: 'jenkins-build', state: 'success'
+    //     }
+    //     failure {
+    //         updateGitlabCommitStatus name: 'jenkins-build', state: 'failed'
+    //     }
+    // }
 }
