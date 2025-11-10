@@ -4,7 +4,9 @@
 # READ docs; https://documenter.getpostman.com/view/7294517/SzmfZHnd
 curl --location 'http://127.0.0.1:9090/realms/loci-realm/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'client_id=loci-spring' \
---data-urlencode 'username=user' \
---data-urlencode 'password=user' \
+--data-urlencode 'client_id=spring' \
+--data-urlencode 'username=testuser1@gmail.com' \
+--data-urlencode 'password=example1' \
 --data-urlencode 'grant_type=password'
+# --data-urlencode 'username=user' \
+# --data-urlencode 'password=user' \

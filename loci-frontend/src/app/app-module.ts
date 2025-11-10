@@ -7,9 +7,9 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
+// import { MatInputModule } from '@angular/material/input';
 
-import { App } from './app';
+// import { App } from './app';
 import { RouterOutlet } from '@angular/router';
 import {
   HTTP_INTERCEPTORS,

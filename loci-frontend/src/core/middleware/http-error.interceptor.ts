@@ -7,7 +7,7 @@ import { catchError, Observable, throwError } from "rxjs";
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
   private errorHandler = inject(ErrorHandler)
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept<T>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<T>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);

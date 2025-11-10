@@ -8,7 +8,7 @@ import { throwError } from 'rxjs';
 })
 export class ErrorHandlerService implements ErrorHandler {
   private router = inject(Router);
-  handleError(error: any) {
+  handleError(error: unknown) {
     // TODO: log error
 
 
@@ -65,9 +65,16 @@ export class ErrorHandlerService implements ErrorHandler {
     this.showError(errorMessage);
   }
 
-  private handleGenericError(error: any) {
-    const errorMessage = `An unexpected error occurred: ${error.message || error}`;
-    this.showError(errorMessage);
+  private handleGenericError(error: HttpErrorResponse | Error | unknown) {
+    let message: string;
+    if (error instanceof HttpErrorResponse) {
+      message = error.error?.message || error.message || `${error.status} ${error.statusText}`;
+    } else if (error instanceof Error) {
+      message = error.message;
+    } else {                                           // last resort
+      message = 'An unexpected error occurred';
+    }
+    this.showError(message);
   }
 
   private showError(message: string) {

@@ -1452,6 +1452,55 @@ ba60553b-0e57-4d93-bc41-16bc0c2b86a7	\N	idp-email-verification	23677baa-69b5-4d4
 a2b82658-91ec-48dc-84b6-2ce08034d222	\N	auth-otp-form	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	cda71176-e968-432f-bd25-2a4f0e1b9390	0	20	f	\N	\N
 822accbe-0a61-41af-9965-3f6b63b97624	\N	http-basic-authenticator	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	aa4bbf9d-8ae7-45fb-ab4c-afaf175ef4fb	0	10	f	\N	\N
 842ee526-50a2-45bc-89c9-c307b0e4f7e6	\N	docker-http-basic-authenticator	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	9130db23-c271-4ae8-8461-d00c9acfb762	0	10	f	\N	\N
+7c40fc9b-67aa-4439-bb33-322ed0992605	\N	auth-cookie	83b6664d-539e-4bed-a376-685d50e40b98	801e570d-bc15-45e3-9f8e-afe9f8f28dec	2	10	f	\N	\N
+6ccb5c4c-a8df-4264-b6ce-5229fc151718	\N	auth-spnego	83b6664d-539e-4bed-a376-685d50e40b98	801e570d-bc15-45e3-9f8e-afe9f8f28dec	3	20	f	\N	\N
+2f009f60-39d5-4868-ada5-a35df9efccb2	\N	identity-provider-redirector	83b6664d-539e-4bed-a376-685d50e40b98	801e570d-bc15-45e3-9f8e-afe9f8f28dec	2	25	f	\N	\N
+f3d90ae3-d264-490a-a166-217df2e29550	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	801e570d-bc15-45e3-9f8e-afe9f8f28dec	2	30	t	4c7e2a97-05a5-4499-99d5-b0fe14711095	\N
+ded1308f-8981-44ac-bcc1-0d50ddfd281f	\N	auth-username-password-form	83b6664d-539e-4bed-a376-685d50e40b98	4c7e2a97-05a5-4499-99d5-b0fe14711095	0	10	f	\N	\N
+946f7190-7d7f-4016-a711-76744b9e696c	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	4c7e2a97-05a5-4499-99d5-b0fe14711095	1	20	t	936ccde4-b63d-4262-b8a6-af7d521dc3aa	\N
+66a0e930-e8b4-4d9d-8423-9502072f456d	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	936ccde4-b63d-4262-b8a6-af7d521dc3aa	0	10	f	\N	\N
+864d4e17-033a-4609-807b-fd48e1f1b9b9	\N	auth-otp-form	83b6664d-539e-4bed-a376-685d50e40b98	936ccde4-b63d-4262-b8a6-af7d521dc3aa	0	20	f	\N	\N
+ce2b4fd4-664e-40fd-8536-9839c67bbb8c	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	801e570d-bc15-45e3-9f8e-afe9f8f28dec	2	26	t	291b3c02-9178-4997-92a8-2c77b4a762da	\N
+c2d5d554-20ce-47a2-b8a7-4699de6bc59a	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	291b3c02-9178-4997-92a8-2c77b4a762da	1	10	t	dc1e8d98-e26a-437c-91a3-f8ca8ed2dd59	\N
+8eaa4c01-14f6-421c-952d-86bba46e7468	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	dc1e8d98-e26a-437c-91a3-f8ca8ed2dd59	0	10	f	\N	\N
+7a732148-3f18-47f6-894a-569a260ffa5e	\N	organization	83b6664d-539e-4bed-a376-685d50e40b98	dc1e8d98-e26a-437c-91a3-f8ca8ed2dd59	2	20	f	\N	\N
+63b7f7fd-ca02-4f55-b491-d6261eeeb2b4	\N	direct-grant-validate-username	83b6664d-539e-4bed-a376-685d50e40b98	d7b8234b-3d04-4263-ac07-79794e3fb8c0	0	10	f	\N	\N
+9dbdd003-a6d6-4efd-b2c0-7783c3102b80	\N	direct-grant-validate-password	83b6664d-539e-4bed-a376-685d50e40b98	d7b8234b-3d04-4263-ac07-79794e3fb8c0	0	20	f	\N	\N
+ac247bc6-cd70-4225-a4a7-5ba27c45b681	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	d7b8234b-3d04-4263-ac07-79794e3fb8c0	1	30	t	5b2379d9-11fb-476f-8530-5a91ca18e364	\N
+6987d8ff-f596-425b-8702-42a62b942daa	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	5b2379d9-11fb-476f-8530-5a91ca18e364	0	10	f	\N	\N
+96ae0dab-04c8-4199-b0fa-3da50cc5c015	\N	direct-grant-validate-otp	83b6664d-539e-4bed-a376-685d50e40b98	5b2379d9-11fb-476f-8530-5a91ca18e364	0	20	f	\N	\N
+62299b91-37d3-4c63-a998-5512949eca31	\N	registration-page-form	83b6664d-539e-4bed-a376-685d50e40b98	8c356fe3-6843-440d-ac93-b4cc6352781f	0	10	t	aa3e186d-9e97-41c0-a7f5-956fb754bdea	\N
+1ee13957-4fa7-49f0-9f7c-dbb85e2ffe10	\N	registration-user-creation	83b6664d-539e-4bed-a376-685d50e40b98	aa3e186d-9e97-41c0-a7f5-956fb754bdea	0	20	f	\N	\N
+4b358888-b6c0-4d08-9bd1-7c9ba0ac1f31	\N	registration-password-action	83b6664d-539e-4bed-a376-685d50e40b98	aa3e186d-9e97-41c0-a7f5-956fb754bdea	0	50	f	\N	\N
+5bbc9bf9-e1ab-4be8-b9ef-d0650e7e870d	\N	registration-recaptcha-action	83b6664d-539e-4bed-a376-685d50e40b98	aa3e186d-9e97-41c0-a7f5-956fb754bdea	3	60	f	\N	\N
+181988ef-fea9-4b96-ae09-e753ca50113c	\N	registration-terms-and-conditions	83b6664d-539e-4bed-a376-685d50e40b98	aa3e186d-9e97-41c0-a7f5-956fb754bdea	3	70	f	\N	\N
+e1363ac7-bf24-440d-8b1f-670d300c32de	\N	reset-credentials-choose-user	83b6664d-539e-4bed-a376-685d50e40b98	2ec9ca75-4f99-43e9-816d-708c9a550838	0	10	f	\N	\N
+84521bf1-42af-4521-b1c3-a52c6cc180ab	\N	reset-credential-email	83b6664d-539e-4bed-a376-685d50e40b98	2ec9ca75-4f99-43e9-816d-708c9a550838	0	20	f	\N	\N
+1b1704e1-39bd-48fd-9487-19a322a6e811	\N	reset-password	83b6664d-539e-4bed-a376-685d50e40b98	2ec9ca75-4f99-43e9-816d-708c9a550838	0	30	f	\N	\N
+152bab62-c5e3-483b-9266-32f097bbf410	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	2ec9ca75-4f99-43e9-816d-708c9a550838	1	40	t	510a55f8-b4a5-47e9-ac56-b60fc6ed8676	\N
+01f09e92-b740-49e9-b887-f7822fc503f5	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	510a55f8-b4a5-47e9-ac56-b60fc6ed8676	0	10	f	\N	\N
+10e284ec-4f29-45b3-a1e8-01bf119d4e9b	\N	reset-otp	83b6664d-539e-4bed-a376-685d50e40b98	510a55f8-b4a5-47e9-ac56-b60fc6ed8676	0	20	f	\N	\N
+bc381797-9576-4ebb-8411-52253b0390ec	\N	client-secret	83b6664d-539e-4bed-a376-685d50e40b98	05607ab5-8839-424c-b1e7-7f0ccad2063e	2	10	f	\N	\N
+3cb64e81-396a-4f34-bb57-2387e896b828	\N	client-jwt	83b6664d-539e-4bed-a376-685d50e40b98	05607ab5-8839-424c-b1e7-7f0ccad2063e	2	20	f	\N	\N
+dfbe9e6e-03d5-41a9-8bf6-2e28e37454ab	\N	client-secret-jwt	83b6664d-539e-4bed-a376-685d50e40b98	05607ab5-8839-424c-b1e7-7f0ccad2063e	2	30	f	\N	\N
+c2c09259-a806-4135-a469-bb7de1f07efc	\N	client-x509	83b6664d-539e-4bed-a376-685d50e40b98	05607ab5-8839-424c-b1e7-7f0ccad2063e	2	40	f	\N	\N
+ac428b7e-4896-4bf1-95f6-387be1cbb375	\N	idp-review-profile	83b6664d-539e-4bed-a376-685d50e40b98	668883be-9b51-42f6-9e35-cb35d7961852	0	10	f	\N	135d8612-fdf4-4acf-abf8-e25c0565ebf6
+8f52b416-52aa-4916-8e3b-12449d123839	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	668883be-9b51-42f6-9e35-cb35d7961852	0	20	t	677d2578-fe86-4de9-8a18-860f8d89d4f3	\N
+57428e27-0082-4f03-8782-0ecf4f543a50	\N	idp-create-user-if-unique	83b6664d-539e-4bed-a376-685d50e40b98	677d2578-fe86-4de9-8a18-860f8d89d4f3	2	10	f	\N	7805e560-dd03-4e34-a6ff-1784f53fecad
+697afa33-eaea-4463-97c4-ffda54428589	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	677d2578-fe86-4de9-8a18-860f8d89d4f3	2	20	t	a9376912-6f72-4749-a4e3-6ce74c0ec76a	\N
+3df54f1b-7504-4015-89c6-0ad6eb92ab1f	\N	idp-confirm-link	83b6664d-539e-4bed-a376-685d50e40b98	a9376912-6f72-4749-a4e3-6ce74c0ec76a	0	10	f	\N	\N
+1a764afa-43e4-4b92-b4ca-ce2e0259dff4	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	a9376912-6f72-4749-a4e3-6ce74c0ec76a	0	20	t	10e5cbf9-6d70-4671-8b7c-25a13f3b30b6	\N
+2a8616d9-54ee-4d9d-baeb-d225f18a060f	\N	idp-email-verification	83b6664d-539e-4bed-a376-685d50e40b98	10e5cbf9-6d70-4671-8b7c-25a13f3b30b6	2	10	f	\N	\N
+95d7af98-4f6e-46f8-9a72-59eb73a11d7d	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	10e5cbf9-6d70-4671-8b7c-25a13f3b30b6	2	20	t	9072b1a2-a2d2-426d-9fe7-bfb40b87cfab	\N
+1ff7fd3a-9674-4594-ac30-fb17f810472a	\N	idp-username-password-form	83b6664d-539e-4bed-a376-685d50e40b98	9072b1a2-a2d2-426d-9fe7-bfb40b87cfab	0	10	f	\N	\N
+2055c364-7cd0-4d2b-a864-9533b65de54a	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	9072b1a2-a2d2-426d-9fe7-bfb40b87cfab	1	20	t	ceed43c7-5d3f-4eb1-b878-2314aef46ebf	\N
+6c824e83-4393-4189-9ab7-a9669c2a6447	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	ceed43c7-5d3f-4eb1-b878-2314aef46ebf	0	10	f	\N	\N
+8cdd49f1-8d81-41dd-a2c6-71a6d18c7228	\N	auth-otp-form	83b6664d-539e-4bed-a376-685d50e40b98	ceed43c7-5d3f-4eb1-b878-2314aef46ebf	0	20	f	\N	\N
+527c470b-0d37-4b32-acb0-72429eef2c30	\N	\N	83b6664d-539e-4bed-a376-685d50e40b98	668883be-9b51-42f6-9e35-cb35d7961852	1	50	t	fcaef89a-b301-4a9d-86b6-f570c43d07ad	\N
+dfbffc05-1cc0-4da4-b6d7-ce6fa6c41113	\N	conditional-user-configured	83b6664d-539e-4bed-a376-685d50e40b98	fcaef89a-b301-4a9d-86b6-f570c43d07ad	0	10	f	\N	\N
+06ca24a6-8c06-4433-a22e-d7e836462940	\N	idp-add-organization-member	83b6664d-539e-4bed-a376-685d50e40b98	fcaef89a-b301-4a9d-86b6-f570c43d07ad	0	20	f	\N	\N
+ed334345-970e-4b9e-94e7-963e16d2ee92	\N	http-basic-authenticator	83b6664d-539e-4bed-a376-685d50e40b98	626d5f6d-04d2-4f35-8cfc-da5e65715166	0	10	f	\N	\N
+2cfac210-65d8-4031-954a-2ff575a3339f	\N	docker-http-basic-authenticator	83b6664d-539e-4bed-a376-685d50e40b98	08caf47c-2dda-42d5-a33d-3df1271e703c	0	10	f	\N	\N
 \.
 
 
@@ -1478,6 +1527,27 @@ ec5294da-8d2d-4fbe-80d4-f4c539342d0b	Verify Existing Account by Re-authenticatio
 cda71176-e968-432f-bd25-2a4f0e1b9390	First broker login - Conditional OTP	Flow to determine if the OTP is required for the authentication	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	basic-flow	f	t
 aa4bbf9d-8ae7-45fb-ab4c-afaf175ef4fb	saml ecp	SAML ECP Profile Authentication Flow	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	basic-flow	t	t
 9130db23-c271-4ae8-8461-d00c9acfb762	docker auth	Used by Docker clients to authenticate against the IDP	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	basic-flow	t	t
+801e570d-bc15-45e3-9f8e-afe9f8f28dec	browser	Browser based authentication	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+4c7e2a97-05a5-4499-99d5-b0fe14711095	forms	Username, password, otp and other auth forms.	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+936ccde4-b63d-4262-b8a6-af7d521dc3aa	Browser - Conditional OTP	Flow to determine if the OTP is required for the authentication	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+291b3c02-9178-4997-92a8-2c77b4a762da	Organization	\N	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+dc1e8d98-e26a-437c-91a3-f8ca8ed2dd59	Browser - Conditional Organization	Flow to determine if the organization identity-first login is to be used	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+d7b8234b-3d04-4263-ac07-79794e3fb8c0	direct grant	OpenID Connect Resource Owner Grant	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+5b2379d9-11fb-476f-8530-5a91ca18e364	Direct Grant - Conditional OTP	Flow to determine if the OTP is required for the authentication	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+8c356fe3-6843-440d-ac93-b4cc6352781f	registration	Registration flow	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+aa3e186d-9e97-41c0-a7f5-956fb754bdea	registration form	Registration form	83b6664d-539e-4bed-a376-685d50e40b98	form-flow	f	t
+2ec9ca75-4f99-43e9-816d-708c9a550838	reset credentials	Reset credentials for a user if they forgot their password or something	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+510a55f8-b4a5-47e9-ac56-b60fc6ed8676	Reset - Conditional OTP	Flow to determine if the OTP should be reset or not. Set to REQUIRED to force.	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+05607ab5-8839-424c-b1e7-7f0ccad2063e	clients	Base authentication for clients	83b6664d-539e-4bed-a376-685d50e40b98	client-flow	t	t
+668883be-9b51-42f6-9e35-cb35d7961852	first broker login	Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+677d2578-fe86-4de9-8a18-860f8d89d4f3	User creation or linking	Flow for the existing/non-existing user alternatives	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+a9376912-6f72-4749-a4e3-6ce74c0ec76a	Handle Existing Account	Handle what to do if there is existing account with same email/username like authenticated identity provider	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+10e5cbf9-6d70-4671-8b7c-25a13f3b30b6	Account verification options	Method with which to verity the existing account	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+9072b1a2-a2d2-426d-9fe7-bfb40b87cfab	Verify Existing Account by Re-authentication	Reauthentication of existing account	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+ceed43c7-5d3f-4eb1-b878-2314aef46ebf	First broker login - Conditional OTP	Flow to determine if the OTP is required for the authentication	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+fcaef89a-b301-4a9d-86b6-f570c43d07ad	First Broker Login - Conditional Organization	Flow to determine if the authenticator that adds organization members is to be used	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	f	t
+626d5f6d-04d2-4f35-8cfc-da5e65715166	saml ecp	SAML ECP Profile Authentication Flow	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
+08caf47c-2dda-42d5-a33d-3df1271e703c	docker auth	Used by Docker clients to authenticate against the IDP	83b6664d-539e-4bed-a376-685d50e40b98	basic-flow	t	t
 \.
 
 
@@ -1488,6 +1558,8 @@ aa4bbf9d-8ae7-45fb-ab4c-afaf175ef4fb	saml ecp	SAML ECP Profile Authentication Fl
 COPY public.authenticator_config (id, alias, realm_id) FROM stdin;
 415ea0e4-7817-4d4b-af4d-5b187eff0d35	review profile config	23677baa-69b5-4d4f-bed7-eb3c3fa0462b
 e006dd17-3679-41b1-b5fe-461297c4a58c	create unique user config	23677baa-69b5-4d4f-bed7-eb3c3fa0462b
+135d8612-fdf4-4acf-abf8-e25c0565ebf6	review profile config	83b6664d-539e-4bed-a376-685d50e40b98
+7805e560-dd03-4e34-a6ff-1784f53fecad	create unique user config	83b6664d-539e-4bed-a376-685d50e40b98
 \.
 
 
@@ -1498,6 +1570,8 @@ e006dd17-3679-41b1-b5fe-461297c4a58c	create unique user config	23677baa-69b5-4d4
 COPY public.authenticator_config_entry (authenticator_id, value, name) FROM stdin;
 415ea0e4-7817-4d4b-af4d-5b187eff0d35	missing	update.profile.on.first.login
 e006dd17-3679-41b1-b5fe-461297c4a58c	false	require.password.update.after.registration
+135d8612-fdf4-4acf-abf8-e25c0565ebf6	missing	update.profile.on.first.login
+7805e560-dd03-4e34-a6ff-1784f53fecad	false	require.password.update.after.registration
 \.
 
 
@@ -1520,6 +1594,15 @@ a84af477-3b7f-47f1-8d44-fe2abade00fd	t	f	master-realm	0	f	\N	\N	t	\N	f	23677baa-
 523b269e-73c1-4c0a-acaf-f85522220cce	t	f	broker	0	f	\N	\N	t	\N	f	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	openid-connect	0	f	f	${client_broker}	f	client-secret	\N	\N	\N	t	f	f	f
 8eeda11d-42fa-4c85-bb09-bd17511aa472	t	t	security-admin-console	0	t	\N	/admin/master/console/	f	\N	f	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	openid-connect	0	f	f	${client_security-admin-console}	f	client-secret	${authAdminUrl}	\N	\N	t	f	f	f
 7f2af595-47da-43b5-97c6-2ee9252dd8ba	t	t	admin-cli	0	t	\N	\N	f	\N	f	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	openid-connect	0	f	f	${client_admin-cli}	f	client-secret	\N	\N	\N	f	f	t	f
+b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	f	loci-realm-realm	0	f	\N	\N	t	\N	f	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N	0	f	f	loci-realm Realm	f	client-secret	\N	\N	\N	t	f	f	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	f	realm-management	0	f	\N	\N	t	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_realm-management}	f	client-secret	\N	\N	\N	t	f	f	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	f	account	0	t	\N	/realms/loci-realm/account/	f	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_account}	f	client-secret	${authBaseUrl}	\N	\N	t	f	f	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	t	f	account-console	0	t	\N	/realms/loci-realm/account/	f	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_account-console}	f	client-secret	${authBaseUrl}	\N	\N	t	f	f	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	t	f	broker	0	f	\N	\N	t	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_broker}	f	client-secret	\N	\N	\N	t	f	f	f
+ba4de397-daf8-404b-ad79-249e4d09a713	t	t	security-admin-console	0	t	\N	/admin/loci-realm/console/	f	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_security-admin-console}	f	client-secret	${authAdminUrl}	\N	\N	t	f	f	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	t	t	admin-cli	0	t	\N	\N	f	\N	f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	0	f	f	${client_admin-cli}	f	client-secret	\N	\N	\N	f	f	t	f
+e85deedd-b2fb-47d3-acef-508423a77f22	t	t	spring	0	t	\N		f		f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	-1	t	f		f	client-secret			\N	t	f	t	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	t	t	angular	0	t	\N		f		f	83b6664d-539e-4bed-a376-685d50e40b98	openid-connect	-1	t	f		f	client-secret			\N	t	t	t	f
 \.
 
 
@@ -1535,6 +1618,22 @@ COPY public.client_attributes (client_id, name, value) FROM stdin;
 8eeda11d-42fa-4c85-bb09-bd17511aa472	pkce.code.challenge.method	S256
 8eeda11d-42fa-4c85-bb09-bd17511aa472	client.use.lightweight.access.token.enabled	true
 7f2af595-47da-43b5-97c6-2ee9252dd8ba	client.use.lightweight.access.token.enabled	true
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	post.logout.redirect.uris	+
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	post.logout.redirect.uris	+
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	pkce.code.challenge.method	S256
+ba4de397-daf8-404b-ad79-249e4d09a713	post.logout.redirect.uris	+
+ba4de397-daf8-404b-ad79-249e4d09a713	pkce.code.challenge.method	S256
+ba4de397-daf8-404b-ad79-249e4d09a713	client.use.lightweight.access.token.enabled	true
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	client.use.lightweight.access.token.enabled	true
+e85deedd-b2fb-47d3-acef-508423a77f22	oauth2.device.authorization.grant.enabled	false
+e85deedd-b2fb-47d3-acef-508423a77f22	oidc.ciba.grant.enabled	false
+e85deedd-b2fb-47d3-acef-508423a77f22	backchannel.logout.session.required	true
+e85deedd-b2fb-47d3-acef-508423a77f22	backchannel.logout.revoke.offline.tokens	false
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	oauth2.device.authorization.grant.enabled	false
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	oidc.ciba.grant.enabled	false
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	post.logout.redirect.uris	http://localhost:4200/*##http://192.168.1.21:4200/*##http://localhost:4200/##http://192.168.1.21:4200/
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	backchannel.logout.session.required	true
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	backchannel.logout.revoke.offline.tokens	false
 \.
 
 
@@ -1580,6 +1679,19 @@ e69e3df6-a890-4fe9-a22c-2a822a588c7a	roles	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	
 7958aa4d-9c75-43aa-84ce-a35a83617363	acr	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	OpenID Connect scope for add acr (authentication context class reference) to the token	openid-connect
 a745363a-6438-44be-8fe2-387f167fc70d	basic	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	OpenID Connect scope for add all basic claims to the token	openid-connect
 a6dc6bd4-6b74-43d6-8f61-86abd29754d6	organization	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	Additional claims about the organization a subject belongs to	openid-connect
+b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	offline_access	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect built-in scope: offline_access	openid-connect
+2714f410-8ea1-4442-b110-09d56464c942	role_list	83b6664d-539e-4bed-a376-685d50e40b98	SAML role list	saml
+26d881ea-f02a-4da4-a770-096c22dcf2b6	saml_organization	83b6664d-539e-4bed-a376-685d50e40b98	Organization Membership	saml
+424886ac-3b5a-446c-a0f8-2d2cd6474e44	profile	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect built-in scope: profile	openid-connect
+1e15434a-7f6c-415b-bb60-f84f0edb53d7	email	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect built-in scope: email	openid-connect
+38509398-011e-46eb-9444-8719ee1ccbe9	address	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect built-in scope: address	openid-connect
+9749151c-c4bd-4925-b7f6-2e141385a4eb	phone	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect built-in scope: phone	openid-connect
+1343b2a3-ff3c-4588-a0e3-7372006e3cf9	roles	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect scope for add user roles to the access token	openid-connect
+ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	web-origins	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect scope for add allowed web origins to the access token	openid-connect
+2753e1d9-77a7-4059-8465-fa23a6b418c4	microprofile-jwt	83b6664d-539e-4bed-a376-685d50e40b98	Microprofile - JWT built-in scope	openid-connect
+b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	acr	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect scope for add acr (authentication context class reference) to the token	openid-connect
+ac70839b-f142-47ab-93cf-f21d06d1f546	basic	83b6664d-539e-4bed-a376-685d50e40b98	OpenID Connect scope for add all basic claims to the token	openid-connect
+d21bbe72-4cc0-4637-aaab-c6beafce7e57	organization	83b6664d-539e-4bed-a376-685d50e40b98	Additional claims about the organization a subject belongs to	openid-connect
 \.
 
 
@@ -1620,6 +1732,38 @@ a745363a-6438-44be-8fe2-387f167fc70d	false	include.in.token.scope
 a6dc6bd4-6b74-43d6-8f61-86abd29754d6	true	display.on.consent.screen
 a6dc6bd4-6b74-43d6-8f61-86abd29754d6	${organizationScopeConsentText}	consent.screen.text
 a6dc6bd4-6b74-43d6-8f61-86abd29754d6	true	include.in.token.scope
+b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	true	display.on.consent.screen
+b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	${offlineAccessScopeConsentText}	consent.screen.text
+2714f410-8ea1-4442-b110-09d56464c942	true	display.on.consent.screen
+2714f410-8ea1-4442-b110-09d56464c942	${samlRoleListScopeConsentText}	consent.screen.text
+26d881ea-f02a-4da4-a770-096c22dcf2b6	false	display.on.consent.screen
+424886ac-3b5a-446c-a0f8-2d2cd6474e44	true	display.on.consent.screen
+424886ac-3b5a-446c-a0f8-2d2cd6474e44	${profileScopeConsentText}	consent.screen.text
+424886ac-3b5a-446c-a0f8-2d2cd6474e44	true	include.in.token.scope
+1e15434a-7f6c-415b-bb60-f84f0edb53d7	true	display.on.consent.screen
+1e15434a-7f6c-415b-bb60-f84f0edb53d7	${emailScopeConsentText}	consent.screen.text
+1e15434a-7f6c-415b-bb60-f84f0edb53d7	true	include.in.token.scope
+38509398-011e-46eb-9444-8719ee1ccbe9	true	display.on.consent.screen
+38509398-011e-46eb-9444-8719ee1ccbe9	${addressScopeConsentText}	consent.screen.text
+38509398-011e-46eb-9444-8719ee1ccbe9	true	include.in.token.scope
+9749151c-c4bd-4925-b7f6-2e141385a4eb	true	display.on.consent.screen
+9749151c-c4bd-4925-b7f6-2e141385a4eb	${phoneScopeConsentText}	consent.screen.text
+9749151c-c4bd-4925-b7f6-2e141385a4eb	true	include.in.token.scope
+1343b2a3-ff3c-4588-a0e3-7372006e3cf9	true	display.on.consent.screen
+1343b2a3-ff3c-4588-a0e3-7372006e3cf9	${rolesScopeConsentText}	consent.screen.text
+1343b2a3-ff3c-4588-a0e3-7372006e3cf9	false	include.in.token.scope
+ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	false	display.on.consent.screen
+ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee		consent.screen.text
+ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	false	include.in.token.scope
+2753e1d9-77a7-4059-8465-fa23a6b418c4	false	display.on.consent.screen
+2753e1d9-77a7-4059-8465-fa23a6b418c4	true	include.in.token.scope
+b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	false	display.on.consent.screen
+b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	false	include.in.token.scope
+ac70839b-f142-47ab-93cf-f21d06d1f546	false	display.on.consent.screen
+ac70839b-f142-47ab-93cf-f21d06d1f546	false	include.in.token.scope
+d21bbe72-4cc0-4637-aaab-c6beafce7e57	true	display.on.consent.screen
+d21bbe72-4cc0-4637-aaab-c6beafce7e57	${organizationScopeConsentText}	consent.screen.text
+d21bbe72-4cc0-4637-aaab-c6beafce7e57	true	include.in.token.scope
 \.
 
 
@@ -1694,6 +1838,94 @@ a84af477-3b7f-47f1-8d44-fe2abade00fd	5eca7de0-b320-446f-a0f5-616d3a92a570	f
 8eeda11d-42fa-4c85-bb09-bd17511aa472	40061be1-04ff-4613-9339-059166efcc6b	f
 8eeda11d-42fa-4c85-bb09-bd17511aa472	d10a623c-f790-479d-9706-a2bd4b8c17e9	f
 8eeda11d-42fa-4c85-bb09-bd17511aa472	5eca7de0-b320-446f-a0f5-616d3a92a570	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	38509398-011e-46eb-9444-8719ee1ccbe9	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	38509398-011e-46eb-9444-8719ee1ccbe9	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	38509398-011e-46eb-9444-8719ee1ccbe9	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+85f5e1a2-8c1d-42ae-97dc-b1c02c6f3188	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	38509398-011e-46eb-9444-8719ee1ccbe9	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+81fb0324-8f89-4cb7-bc31-8af536e10b7e	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	38509398-011e-46eb-9444-8719ee1ccbe9	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+ba4de397-daf8-404b-ad79-249e4d09a713	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+ba4de397-daf8-404b-ad79-249e4d09a713	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+ba4de397-daf8-404b-ad79-249e4d09a713	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+ba4de397-daf8-404b-ad79-249e4d09a713	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+ba4de397-daf8-404b-ad79-249e4d09a713	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+ba4de397-daf8-404b-ad79-249e4d09a713	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+ba4de397-daf8-404b-ad79-249e4d09a713	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+ba4de397-daf8-404b-ad79-249e4d09a713	38509398-011e-46eb-9444-8719ee1ccbe9	f
+ba4de397-daf8-404b-ad79-249e4d09a713	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+ba4de397-daf8-404b-ad79-249e4d09a713	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+ba4de397-daf8-404b-ad79-249e4d09a713	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+e85deedd-b2fb-47d3-acef-508423a77f22	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+e85deedd-b2fb-47d3-acef-508423a77f22	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+e85deedd-b2fb-47d3-acef-508423a77f22	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+e85deedd-b2fb-47d3-acef-508423a77f22	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+e85deedd-b2fb-47d3-acef-508423a77f22	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+e85deedd-b2fb-47d3-acef-508423a77f22	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+e85deedd-b2fb-47d3-acef-508423a77f22	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+e85deedd-b2fb-47d3-acef-508423a77f22	38509398-011e-46eb-9444-8719ee1ccbe9	f
+e85deedd-b2fb-47d3-acef-508423a77f22	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+e85deedd-b2fb-47d3-acef-508423a77f22	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+e85deedd-b2fb-47d3-acef-508423a77f22	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	38509398-011e-46eb-9444-8719ee1ccbe9	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
 \.
 
 
@@ -1703,6 +1935,7 @@ a84af477-3b7f-47f1-8d44-fe2abade00fd	5eca7de0-b320-446f-a0f5-616d3a92a570	f
 
 COPY public.client_scope_role_mapping (scope_id, role_id) FROM stdin;
 5eca7de0-b320-446f-a0f5-616d3a92a570	29b42e5e-2d03-4b56-bf89-f9f05672540f
+b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	6d7b0d9a-0ac1-481e-aebb-8acd9d5c3e39
 \.
 
 
@@ -1724,6 +1957,18 @@ a62cdd75-13cd-4b07-bc3c-f26bba91907c	rsa-enc-generated	23677baa-69b5-4d4f-bed7-e
 38064f40-7908-4df6-b0d4-e005f4f98e6b	hmac-generated-hs512	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	hmac-generated	org.keycloak.keys.KeyProvider	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N
 0ac752b2-f15e-4572-b6f0-440c76d208a9	aes-generated	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	aes-generated	org.keycloak.keys.KeyProvider	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N
 0b10d0db-226a-4f4a-9261-2f6ad3420448	\N	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	declarative-user-profile	org.keycloak.userprofile.UserProfileProvider	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N
+501abdae-a433-4e54-985a-a9fdf84bf3b8	rsa-generated	83b6664d-539e-4bed-a376-685d50e40b98	rsa-generated	org.keycloak.keys.KeyProvider	83b6664d-539e-4bed-a376-685d50e40b98	\N
+1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	rsa-enc-generated	83b6664d-539e-4bed-a376-685d50e40b98	rsa-enc-generated	org.keycloak.keys.KeyProvider	83b6664d-539e-4bed-a376-685d50e40b98	\N
+82d74645-ff8e-460e-ab07-a44369c80932	hmac-generated-hs512	83b6664d-539e-4bed-a376-685d50e40b98	hmac-generated	org.keycloak.keys.KeyProvider	83b6664d-539e-4bed-a376-685d50e40b98	\N
+1f601b2d-3f3c-4ee1-93f5-cd33a0c3c6cc	aes-generated	83b6664d-539e-4bed-a376-685d50e40b98	aes-generated	org.keycloak.keys.KeyProvider	83b6664d-539e-4bed-a376-685d50e40b98	\N
+aa39d65d-762c-4690-9154-219710f831f1	Trusted Hosts	83b6664d-539e-4bed-a376-685d50e40b98	trusted-hosts	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+b709991f-e23a-4086-99fc-952d2e499280	Consent Required	83b6664d-539e-4bed-a376-685d50e40b98	consent-required	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+740dc5dc-5940-4e77-8ddb-dcfc6530d78c	Full Scope Disabled	83b6664d-539e-4bed-a376-685d50e40b98	scope	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+4dfd41fa-a9eb-4922-a0cf-d4f7a8ae24c1	Max Clients Limit	83b6664d-539e-4bed-a376-685d50e40b98	max-clients	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+6957a15d-2473-4793-90cf-bf7923e35fe2	Allowed Protocol Mapper Types	83b6664d-539e-4bed-a376-685d50e40b98	allowed-protocol-mappers	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+bf7bc4cc-455f-4d74-ac97-b854b8f126e8	Allowed Client Scopes	83b6664d-539e-4bed-a376-685d50e40b98	allowed-client-templates	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	anonymous
+f76d02eb-db36-4cc1-860e-363ac63254ab	Allowed Protocol Mapper Types	83b6664d-539e-4bed-a376-685d50e40b98	allowed-protocol-mappers	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	authenticated
+2feec9eb-9647-4299-86f6-bf7d63fe6ff0	Allowed Client Scopes	83b6664d-539e-4bed-a376-685d50e40b98	allowed-client-templates	org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy	83b6664d-539e-4bed-a376-685d50e40b98	authenticated
 \.
 
 
@@ -1770,6 +2015,43 @@ a87f3bed-e90a-41ea-a7e1-85edcbeb12cf	a62cdd75-13cd-4b07-bc3c-f26bba91907c	keyUse
 c565e923-b623-489e-ac7c-51327f9ee576	0ac752b2-f15e-4572-b6f0-440c76d208a9	kid	d57f2591-aa0b-4bd9-abed-046c709a6626
 be0d974b-d45a-456d-ac80-3e445eea2022	0ac752b2-f15e-4572-b6f0-440c76d208a9	secret	b4LWymEeh2-bRQX6Eu4i9A
 3a895e55-ccde-428e-bdbb-e1c51b1f1880	0ac752b2-f15e-4572-b6f0-440c76d208a9	priority	100
+c7e3202f-299e-4024-821e-74bc81d63506	1f601b2d-3f3c-4ee1-93f5-cd33a0c3c6cc	kid	3ed0052c-1007-4708-82c0-3497b75085c8
+8f4c9a06-67cb-4842-a473-c2e9e83aaf41	1f601b2d-3f3c-4ee1-93f5-cd33a0c3c6cc	secret	jGKBzJa7FSua3xfWVN9caQ
+ef321449-5004-40c4-a4fb-f9a9f94b4af1	1f601b2d-3f3c-4ee1-93f5-cd33a0c3c6cc	priority	100
+9919a93a-057f-4477-ac86-094f7fcab11e	82d74645-ff8e-460e-ab07-a44369c80932	priority	100
+aeb2cf65-1b37-4713-bb7e-e6368559bcab	82d74645-ff8e-460e-ab07-a44369c80932	algorithm	HS512
+cd36d782-b31b-4a8b-aeb0-7555f771208f	82d74645-ff8e-460e-ab07-a44369c80932	secret	mKtc1ZS1Zure5wtquXmZDQJiuhiDEWLpBWY2phgKVV27UO-Oga5WRLy8sRhbO_zKE7UHVZDOwZRroPWvhZD2lsJ1YSaSrZb0yf_9hRKthz4JcGYdOqDVI7w76zdxtHhq9dkkCqgAmOdj7iYiYu7oBBcwd6eWuaHtnIi_q_3j8fw
+9f1fed60-1e99-49ae-b817-3b79d573358b	82d74645-ff8e-460e-ab07-a44369c80932	kid	ebb575e0-6a98-447c-97e1-37c876a2e327
+ed51a12b-eed8-48cf-8e0d-30de8179af15	501abdae-a433-4e54-985a-a9fdf84bf3b8	keyUse	SIG
+c2fe9678-7489-464e-9e2f-e7604f339f46	501abdae-a433-4e54-985a-a9fdf84bf3b8	privateKey	MIIEoAIBAAKCAQEAurT5Qp6fpzYk5s0r5rvsltqBiyMI1fI5ag2XO6Un6gnbuhJMt84ylKEU0QlT844Wmp2+iWwwklGHz6j1NSsqFYXUyTDLXukpsLfFR5fzcetWJ3FNiwQGRuodRRHFh9pvh85gPkFSRvSI6iSqSrYNSjDClEpEjH5S9Mn8UgETFlsHrqsBQCLFGOxUzuUNEe7txAT7dkSGGxZKd+qyxZGFLxnn4PT6Pc82qN8f5ZS6zkKHjCk+zea6IcdLbpmnNnoThRrMdmDfZDHLiRKrX/wHbhy+dm+K5Z+qj+/+d6+G29PgXb7z8i06YEFyYllDlzUt8pW2+eCmzZjywJcmALwbJQIDAQABAoH/MTI09Wqj60VjL2N9sbFtbgt+FuwVI3/sradl2WC/kKw9jSzVtpFcrkvnACD45KjQZ9Pzp8OEC29R04v9nos6yu/EvvKdxMxm3rov0eA/pcJLOsW+ioodA/Vn5HykSOhkLuh7x0l0EPI1tG/be+2JI2jMiPzvbk1hR39jl5rjkqxWbxwtZw0W9zY37rR2GXwmHdFbYQgDXf73MeE6/K6bbQa6sxvSftyf/W0nTDpVPWtLtdbWb2R1zLWbwslz3rhgdkWGJ/1HakIqunHW6O5eoiG/x345aqp9zo7HuJVG5+tsLfG0zQcxvRxgWSuiMZ5MLz6gdqMBga9wQPDL9WWNAoGBAO8qyXzb136/Elncs8knoIQgdMREoAw0YIZWvQB3m3swN2G9WE2oZJm/ObEAlLlIuu/ngPna/N6MYcePqt5jL4I2sMts5SGF2nP68Ta0TQ+Lldk8jklqnO5OEKNmoQklRWcIa9yBrgWn0lE6y8cYm5fMqXN8P2+/Y5HoKUPtGL5DAoGBAMfY+wpH4mAZ9OYu53BIOQdjqVw/YxKFxNky+YGfuAB+Jy+qoivGVgPnwq+YBsfVmpoB+HEl+Chyj0DHwFueXkJ+8Wcoo39/1DZ2zhnSIRNQfDNOfcfamuz2wsmlChoy+TfqHvUftCrvHOQ7Hu7+fUTBt/X9xoy/KEj9xKQVnA53AoGAMYhWBHLvdYOTBGNuJLn9R4AFTuS7lOuAFjJ+oEslO2UoAykY0bSPaTwucZciNiF2/dqfXp/ZASpn0dHSXI6EN16mTOs3pTK4pI6TSHYdA5wwI7aj7VaUO9KVJZJKxb8fWZBn7lo5NVileUdJDunsx4qOialw5e7oaz5+1V+UYUsCgYBAnEHtPPhPIZUvphJlFrR5Uxs6G7QoFN9jaTuJUN3oKuD4ZC4yANlmQdOLeZcXnFNzXxe3XRMx4He39dyWwkivLuNU+qqBWg593UMczfari+XboJDBwEc+PTkUgCsX9UrlbOe9UBarmsq4bvS9R8GwLQEQoo9Cibq4fnLIqcPeWQKBgAfVN/KUA2Fmh3Sjv8T1vdbkVo5Qsgbe9TeLbduBNqL3GunExhuLVg5tgsIkDDbSA8RuWoHrSqbIsYiRcIH9yPn5X13NM/uir0UrLu963opWpN0b9lftUbeByyY2gAUq6l9bGWb0RWSCXIPeB6F4HAa8vM2h5WadRv+SWQ2Gu/YR
+fe3d30b4-8767-4916-af1f-44501d7ac57e	501abdae-a433-4e54-985a-a9fdf84bf3b8	priority	100
+df93de22-a15b-4b3b-bd96-813b7a5e69cb	501abdae-a433-4e54-985a-a9fdf84bf3b8	certificate	MIICozCCAYsCBgGaaGXjJjANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDDApsb2NpLXJlYWxtMB4XDTI1MTEwOTExMzMxOVoXDTM1MTEwOTExMzQ1OVowFTETMBEGA1UEAwwKbG9jaS1yZWFsbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALq0+UKen6c2JObNK+a77JbagYsjCNXyOWoNlzulJ+oJ27oSTLfOMpShFNEJU/OOFpqdvolsMJJRh8+o9TUrKhWF1Mkwy17pKbC3xUeX83HrVidxTYsEBkbqHUURxYfab4fOYD5BUkb0iOokqkq2DUowwpRKRIx+UvTJ/FIBExZbB66rAUAixRjsVM7lDRHu7cQE+3ZEhhsWSnfqssWRhS8Z5+D0+j3PNqjfH+WUus5Ch4wpPs3muiHHS26ZpzZ6E4UazHZg32Qxy4kSq1/8B24cvnZviuWfqo/v/nevhtvT4F2+8/ItOmBBcmJZQ5c1LfKVtvngps2Y8sCXJgC8GyUCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAjNmlykEGuC6D4Gd90FsdRSFnxyKHMfRv7mjBXhjm6uH3RnVx0IiXlb80n2mWJBfXaEV+z6OcmOii1dlSR3+QvsfxnmKUTu6OMD8hqKmAvcBrK87XWPU3VrU+1clnG/AvuhzTMfx+SyptkeyH9nGfbxec2Pk86dc4qJTr6y5qkv6kP9K5wHZPSo0qVxhnk81N+dLl+h9sxgZSY2LkH+WwcQXN36YUWxG7RUZYm9JCxw5utJCPILspDxqKLI4R6gxJ9uV/UBhhqAkaEP0qR2oKmOwxJVwCr4O2WPbU15P2L9h/69za69ipgxRDiSerDoNOvLq4C3O4hJ607ktYIHLzIw==
+4118b8c6-8689-4855-b339-148ef4de704a	1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	certificate	MIICozCCAYsCBgGaaGXlZzANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDDApsb2NpLXJlYWxtMB4XDTI1MTEwOTExMzMxOVoXDTM1MTEwOTExMzQ1OVowFTETMBEGA1UEAwwKbG9jaS1yZWFsbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANQKCIs2FpAGF4Nv3iZZT3nktpgcqcNnMdS6z7pG6wBazB7ypfgLCih6+eaDz+J/WR1jItDWZvaSHQV+o5ujmLJu+nAdRz1I2MsVPYsH9q4+ZBzgFUaJ/9QQQF/r92oF0KDEDOErJIvrZhc4WGVMjCS+OJ2W/VaOrdv6azofbkLiUrGjTEaYJgnFfD8DYyr+RvKZvXb1uCkgv7Ay8fVWGHvoKkw4S87vg4d4DKA/HzFZyMOXOGUslinG5MMIfMHFFUX2SfRrAvmXcOOKNcjYB0EhTiLyI5MMltcixTmziX+YOeXN6fZaruJ5U8HLqR5HRopldVoF9lz5zMbiuCzv9lMCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAkYztEr6baQvXYMCHk+ERJKvcAcPC+vJem/CbgAPvkVafToIUxnGOJbLU/MjZMqt2qLxwwfYtcucylE8PoqfjKhW7rImCJPQjezrPtoWoDPzEJ7JCxWoWTlpjSvlprf6zBTt+0YQ1by8OpMK+6WRvJtoNOqzzodpQ9DaqXWYxJegfU5F7bK9pVTyT3J46SIydmnX8Lfwsu+4j5W0kl91DuN1kxLb1294TogP0ERfTtCI+r8KFHGc+1SbizF1bCbpeT9VBWcfSBhyGh1UhgCsSPl9R+9xIRKPoIMmaGZ77pjJ/P7AFvu4LXa5DKgMcAsE0K84fIvC2Xa9phDjNN3zXiQ==
+e35704c3-684f-4bdd-97d0-85460bba10b4	1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	keyUse	ENC
+5c7fca2c-d7d5-4b3e-a827-5a08b4821e03	1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	algorithm	RSA-OAEP
+03812f8a-654c-4cf1-8abf-aaea561f86f3	1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	priority	100
+5afc4ce7-dcc2-41eb-a1a3-ab94bd13abb5	1d42272d-82a4-4f7b-aa8a-02e0a91d8c71	privateKey	MIIEpAIBAAKCAQEA1AoIizYWkAYXg2/eJllPeeS2mBypw2cx1LrPukbrAFrMHvKl+AsKKHr55oPP4n9ZHWMi0NZm9pIdBX6jm6OYsm76cB1HPUjYyxU9iwf2rj5kHOAVRon/1BBAX+v3agXQoMQM4Sski+tmFzhYZUyMJL44nZb9Vo6t2/prOh9uQuJSsaNMRpgmCcV8PwNjKv5G8pm9dvW4KSC/sDLx9VYYe+gqTDhLzu+Dh3gMoD8fMVnIw5c4ZSyWKcbkwwh8wcUVRfZJ9GsC+Zdw44o1yNgHQSFOIvIjkwyW1yLFObOJf5g55c3p9lqu4nlTwcupHkdGimV1WgX2XPnMxuK4LO/2UwIDAQABAoIBAGAzOyQZwovOT72ws9u3OmElnJgPrQ+70nZe2R78zOLIzwIdeaI7M/0gqh9k3xy2RVKZZzLTizxEF0mmZokW5JDT2+igx/Dsi3s75EOfNdJg+R/GpLBvrLNkOiiq0IH4KGq/983yum6Gurc/N4+h9pU2/k21MrQiIIwEpcBlgStzWd3TMlWmSy965bHkF/wET9RrIMR/SWIfgg7nm7lK+VGxVyJay15639EHd7x/rdp6LiBG2uIipZD+NA6WLuOZG86toDUcPas9Di9mkGm2EW3GAxaSz9T47CdJr5hcX7F5CqBn6tnbY5ssJnwi0HUF203Bc/6Z3wh7NGAyGxzMXxECgYEA/3WJ+vIU9K4JWgNFzfbz46rtCOlRgepCeYtoopfHBfkO/cxyK3/SBB1SUt5yWzp/sr6sADXl67932wuxtZozFBC+UKEUCDPK/Qs1TctG/KjS7mdgQvxXt6TpT9C+kTvyo8L9g+rdMrQ8Cs5qtajWaVv/ohMhqfWFk6Apn1p9kTECgYEA1Hz13YrVwyrkBGb0fjW2b09qS9FuLX6WDaR9WZ3GA9APTz4K+zYWtNFfUHwufhO4Z0zxxSlyaiwClRSuJFhFk4DgxB1mUv0wHtPppY8f0jKcnwS3JDL7K4DQ9T5suA21Zt9zUemrMwA+WM/TghTvXplHHtuUhv/fHYglx8QIvsMCgYEApwrOzN8bQNvEla1qKcH/vLF6Cce3WoI6MYwtQZSJuaggW2kihrswMyyRNkrq8CiSc+kmQ4T68WrkDsHY1G0eVVKVf9e0Z6CmbUy08EeqBXDHbMkAMw0atqUJQv22fvV6Ngc9CtO7DHq6gD51nI/olEBqKirkamR3kg666M6dKSECgYEAybvJgQeqYpx51mQYgypjhdITzN+MhszDkTg1ebt8n2oM3uK8cjur2wdcQoFjcncuf4RhlRoAciROX1M+8WqMw7l7qzVuTCPsZ5gxHul/AITkhWRoq4lrRKYLvIoDlcoOCxjh10bNLqJwjsjguYM+rsU+7GDz5idOoC7+D2ZiFxkCgYAns+C2iIbw4M1w3NSFeeVwVDzwSW0c45CNq8BqA1fKqjzS11zmrI5162e+zJI91uF32k1hbWAgrxZV0KuBS+NIhX0hf2nmiTMm3KrGSvx0MLwxX41qPHD9OMW35rzXdXV8scMHkFanJnqDzfTijvCRO3CTqxhnxr36ZEIsdJ7uAg==
+c82133b2-838c-4125-b8e4-d038164de5ad	bf7bc4cc-455f-4d74-ac97-b854b8f126e8	allow-default-scopes	true
+b97e22b9-71d5-4b59-99b4-38c7cbadcdf3	4dfd41fa-a9eb-4922-a0cf-d4f7a8ae24c1	max-clients	200
+8c482100-9bc2-4112-9ab4-e9a4be6b8791	2feec9eb-9647-4299-86f6-bf7d63fe6ff0	allow-default-scopes	true
+d24db4ca-ade2-4eda-81ec-8c114296d4af	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	oidc-usermodel-attribute-mapper
+a16abf3e-5f9f-41df-9da4-b8d8f9892901	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	saml-role-list-mapper
+8929aa3c-2ed0-4918-9e5e-a453dc7d15ad	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	oidc-usermodel-property-mapper
+9973f545-e4d9-4d1d-b674-f0de1e955c4b	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	saml-user-property-mapper
+0838fedc-4be4-45a3-b4c6-fe7fe5e62f1c	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	saml-user-attribute-mapper
+6640a4b8-7a50-4958-952e-98a338e817a8	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	oidc-full-name-mapper
+5de4b061-7505-44a5-8911-d882e0613e02	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	oidc-address-mapper
+ef25bef9-ce20-4abf-a02b-f9062b542e80	f76d02eb-db36-4cc1-860e-363ac63254ab	allowed-protocol-mapper-types	oidc-sha256-pairwise-sub-mapper
+29405e8d-fb1f-4cc9-9f03-883a3b1d3464	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	saml-user-attribute-mapper
+f1d6d12b-600a-4c6f-8274-a268cc04e620	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	oidc-usermodel-attribute-mapper
+7b53880b-30a8-422b-994b-1cadd71aab32	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	oidc-usermodel-property-mapper
+68be78c7-8be3-4df7-8938-782799fa7654	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	oidc-address-mapper
+18f0df2c-bce2-4d96-a845-77c8a4e963ef	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	saml-user-property-mapper
+0a4009a6-b9d4-4fca-b735-c29a757bbc98	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	oidc-full-name-mapper
+aacd3413-c502-4a1b-9446-4ef526a5b60e	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	saml-role-list-mapper
+0ff07028-6773-4dbb-b02d-6b506f047c79	6957a15d-2473-4793-90cf-bf7923e35fe2	allowed-protocol-mapper-types	oidc-sha256-pairwise-sub-mapper
+96bbb5ff-65d7-4a34-b934-4b74cd860888	aa39d65d-762c-4690-9154-219710f831f1	client-uris-must-match	true
+8ebe3aaf-2365-4f96-bae4-cca35e416638	aa39d65d-762c-4690-9154-219710f831f1	host-sending-registration-request-must-match	true
 \.
 
 
@@ -1806,6 +2088,55 @@ ad6b0545-1125-494a-86a2-1c4993c199e8	47982905-f5d3-49be-b956-d35a2f9c6a72
 db4ab77a-a58c-482b-b2ae-2090a009b1af	dca72013-fbc3-49f3-8a89-d70506667833
 821e4bb0-9d76-4771-bc20-8e9083ac457d	29b42e5e-2d03-4b56-bf89-f9f05672540f
 821e4bb0-9d76-4771-bc20-8e9083ac457d	9e63cdf7-de90-4650-9cba-c4b8231d41d1
+db4ab77a-a58c-482b-b2ae-2090a009b1af	97cdd578-f09a-469d-8fa9-07e5cfd0ddd6
+db4ab77a-a58c-482b-b2ae-2090a009b1af	3c351879-cdd9-4d7f-800e-ed0fa297e89a
+db4ab77a-a58c-482b-b2ae-2090a009b1af	c08d5146-f9ad-44a3-9045-3f124fbbc611
+db4ab77a-a58c-482b-b2ae-2090a009b1af	a2fcaf11-7f18-4bd4-aafe-600399ab4f6b
+db4ab77a-a58c-482b-b2ae-2090a009b1af	7afe2564-ae4e-4726-8a8c-325955c81051
+db4ab77a-a58c-482b-b2ae-2090a009b1af	826f2d89-3b22-4fd6-802a-5a0c3c43c5ce
+db4ab77a-a58c-482b-b2ae-2090a009b1af	cf2b4ef7-efa8-49f7-9e6d-62180e9cc8c2
+db4ab77a-a58c-482b-b2ae-2090a009b1af	ff96cf69-dca1-41e9-b091-b671981244b0
+db4ab77a-a58c-482b-b2ae-2090a009b1af	4094aab7-bb3d-4074-bf69-71d2983654d5
+db4ab77a-a58c-482b-b2ae-2090a009b1af	af1d6d17-e883-4741-b960-a206f0d4ddb0
+db4ab77a-a58c-482b-b2ae-2090a009b1af	b2dd0b70-fd7e-4aa1-bfd9-1e36bf241d3f
+db4ab77a-a58c-482b-b2ae-2090a009b1af	2819ea86-1181-4a6e-937e-b1d1e4c0ab8f
+db4ab77a-a58c-482b-b2ae-2090a009b1af	31712d53-52a5-4dc8-bc88-cd7a134c4112
+db4ab77a-a58c-482b-b2ae-2090a009b1af	91cb9c72-6c2c-46ab-a520-1d83d57b5534
+db4ab77a-a58c-482b-b2ae-2090a009b1af	7f5a11e9-64e8-4153-b2df-0b8d5fece0ce
+db4ab77a-a58c-482b-b2ae-2090a009b1af	30628cbf-9650-4d0d-9d53-20a855343a70
+db4ab77a-a58c-482b-b2ae-2090a009b1af	7a4a60fc-ad96-4636-9b4e-46f4f34246d8
+a2fcaf11-7f18-4bd4-aafe-600399ab4f6b	7f5a11e9-64e8-4153-b2df-0b8d5fece0ce
+c08d5146-f9ad-44a3-9045-3f124fbbc611	91cb9c72-6c2c-46ab-a520-1d83d57b5534
+c08d5146-f9ad-44a3-9045-3f124fbbc611	7a4a60fc-ad96-4636-9b4e-46f4f34246d8
+fd6368e9-9e26-469e-8d79-707f3c20354a	abfd79ad-9ca7-4f0b-b54b-78a9c1e9f28e
+fd6368e9-9e26-469e-8d79-707f3c20354a	8f94747b-5e4b-4d79-bf0c-cd4923506035
+fd6368e9-9e26-469e-8d79-707f3c20354a	4009714e-eefe-46d4-9b37-639a6edfa501
+fd6368e9-9e26-469e-8d79-707f3c20354a	221f3b69-a59e-4a34-a95a-71f10cef4e0a
+fd6368e9-9e26-469e-8d79-707f3c20354a	5160c2df-3ab3-465b-b113-a61e60faf3bf
+fd6368e9-9e26-469e-8d79-707f3c20354a	ae3061fa-e4e7-4bf4-a3af-ca8d12cdb57d
+fd6368e9-9e26-469e-8d79-707f3c20354a	4e989ddd-8be8-4533-bfde-cad630193577
+fd6368e9-9e26-469e-8d79-707f3c20354a	ffb45a5a-3d46-434b-910a-2894fae5d4d9
+fd6368e9-9e26-469e-8d79-707f3c20354a	808637e3-7023-4d84-a56a-4f51c7ec23c4
+fd6368e9-9e26-469e-8d79-707f3c20354a	b1939686-0827-4787-a141-9e7dd5fc1b82
+fd6368e9-9e26-469e-8d79-707f3c20354a	6bf59d64-e73b-44b6-93cc-75d66c644214
+fd6368e9-9e26-469e-8d79-707f3c20354a	fdf28825-1691-44e5-88c3-2c8c9a0aa41e
+fd6368e9-9e26-469e-8d79-707f3c20354a	dd7c767b-2b46-4089-a64a-97fd1456b645
+fd6368e9-9e26-469e-8d79-707f3c20354a	38244948-f337-4b8b-9c15-fdc672bc80f9
+fd6368e9-9e26-469e-8d79-707f3c20354a	0cf5be44-ba63-47c2-b752-662ef0a5885b
+fd6368e9-9e26-469e-8d79-707f3c20354a	995efc57-65a8-4262-9f91-7b9d83580c90
+fd6368e9-9e26-469e-8d79-707f3c20354a	7d52ab89-86c3-4b57-bab0-02bbe460212e
+221f3b69-a59e-4a34-a95a-71f10cef4e0a	0cf5be44-ba63-47c2-b752-662ef0a5885b
+4009714e-eefe-46d4-9b37-639a6edfa501	7d52ab89-86c3-4b57-bab0-02bbe460212e
+4009714e-eefe-46d4-9b37-639a6edfa501	38244948-f337-4b8b-9c15-fdc672bc80f9
+929392ee-0474-4ed0-a64e-9b0132025c91	f24cb736-a373-4bd6-a34a-ab059b81f98f
+929392ee-0474-4ed0-a64e-9b0132025c91	710ed846-759e-45bc-afa4-bb5ef183d08c
+710ed846-759e-45bc-afa4-bb5ef183d08c	4862f2b4-4e36-42cd-a524-6dddbb43e551
+2e0714ed-6fbf-47eb-ae88-59ce44d6ed3b	b39c73a7-84b1-40ff-9fd9-6f314c9ede7a
+db4ab77a-a58c-482b-b2ae-2090a009b1af	863aaaa1-fa1b-4882-8073-63dba9ff2a02
+fd6368e9-9e26-469e-8d79-707f3c20354a	a7120f7b-a46b-4f6a-9e97-0eea0f64174a
+929392ee-0474-4ed0-a64e-9b0132025c91	6d7b0d9a-0ac1-481e-aebb-8acd9d5c3e39
+929392ee-0474-4ed0-a64e-9b0132025c91	eb9be962-f203-49c6-9075-ce80642bf363
+929392ee-0474-4ed0-a64e-9b0132025c91	5df2f1e3-7508-4fbb-889f-c8b70f84ec3b
 \.
 
 
@@ -1815,6 +2146,7 @@ db4ab77a-a58c-482b-b2ae-2090a009b1af	dca72013-fbc3-49f3-8a89-d70506667833
 
 COPY public.credential (id, salt, type, user_id, created_date, user_label, secret_data, credential_data, priority) FROM stdin;
 e1fc3f13-1481-461e-b5f3-973924561353	\N	password	215946ae-82c4-499d-ab37-82f2e3f28b48	1762683268555	\N	{"value":"nPaSRG0lCJeLA/h5qUHA2WgofEmsDuqZasoFcg4VCgg=","salt":"/7FFThyiSrgYzNiEpfZGDA==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
+bd1fd5d7-621a-4c3a-85ac-49f063febfae	\N	password	be4129e1-7a3e-4788-a8b6-17cf25d31a86	1762689267814	My password	{"value":"zg4pwZLMSLfFnWGNuOXWlzvnGxDXgchFt4AL2aFZjiM=","salt":"4vQAbzC5FN6gJUuJFFsioQ==","additionalParameters":{}}	{"hashIterations":5,"algorithm":"argon2","additionalParameters":{"hashLength":["32"],"memory":["7168"],"type":["id"],"version":["1.3"],"parallelism":["1"]}}	10
 \.
 
 
@@ -1823,6 +2155,150 @@ e1fc3f13-1481-461e-b5f3-973924561353	\N	password	215946ae-82c4-499d-ab37-82f2e3f
 --
 
 COPY public.databasechangelog (id, author, filename, dateexecuted, orderexecuted, exectype, md5sum, description, comments, tag, liquibase, contexts, labels, deployment_id) FROM stdin;
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/jpa-changelog-1.0.0.Final.xml	2025-11-09 10:13:54.678575	1	EXECUTED	9:6f1016664e21e16d26517a4418f5e3df	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.29.1	\N	\N	2683232622
+1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/db2-jpa-changelog-1.0.0.Final.xml	2025-11-09 10:13:54.783449	2	MARK_RAN	9:828775b1596a07d1200ba1d49e5e3941	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.29.1	\N	\N	2683232622
+1.1.0.Beta1	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Beta1.xml	2025-11-09 10:13:55.015146	3	EXECUTED	9:5f090e44a7d595883c1fb61f4b41fd38	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=CLIENT_ATTRIBUTES; createTable tableName=CLIENT_SESSION_NOTE; createTable tableName=APP_NODE_REGISTRATIONS; addColumn table...		\N	4.29.1	\N	\N	2683232622
+1.1.0.Final	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Final.xml	2025-11-09 10:13:55.042186	4	EXECUTED	9:c07e577387a3d2c04d1adc9aaad8730e	renameColumn newColumnName=EVENT_TIME, oldColumnName=TIME, tableName=EVENT_ENTITY		\N	4.29.1	\N	\N	2683232622
+1.2.0.Beta1	psilva@redhat.com	META-INF/jpa-changelog-1.2.0.Beta1.xml	2025-11-09 10:13:55.49523	5	EXECUTED	9:b68ce996c655922dbcd2fe6b6ae72686	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.29.1	\N	\N	2683232622
+1.2.0.Beta1	psilva@redhat.com	META-INF/db2-jpa-changelog-1.2.0.Beta1.xml	2025-11-09 10:13:55.54129	6	MARK_RAN	9:543b5c9989f024fe35c6f6c5a97de88e	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=PROTOCOL_MAPPER; createTable tableName=PROTOCOL_MAPPER_CONFIG; createTable tableName=...		\N	4.29.1	\N	\N	2683232622
+1.2.0.RC1	bburke@redhat.com	META-INF/jpa-changelog-1.2.0.CR1.xml	2025-11-09 10:13:55.962255	7	EXECUTED	9:765afebbe21cf5bbca048e632df38336	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.29.1	\N	\N	2683232622
+1.2.0.RC1	bburke@redhat.com	META-INF/db2-jpa-changelog-1.2.0.CR1.xml	2025-11-09 10:13:55.998122	8	MARK_RAN	9:db4a145ba11a6fdaefb397f6dbf829a1	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=MIGRATION_MODEL; createTable tableName=IDENTITY_P...		\N	4.29.1	\N	\N	2683232622
+1.2.0.Final	keycloak	META-INF/jpa-changelog-1.2.0.Final.xml	2025-11-09 10:13:56.033586	9	EXECUTED	9:9d05c7be10cdb873f8bcb41bc3a8ab23	update tableName=CLIENT; update tableName=CLIENT; update tableName=CLIENT		\N	4.29.1	\N	\N	2683232622
+1.3.0	bburke@redhat.com	META-INF/jpa-changelog-1.3.0.xml	2025-11-09 10:13:56.496877	10	EXECUTED	9:18593702353128d53111f9b1ff0b82b8	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete tableName=USER_SESSION; createTable tableName=ADMI...		\N	4.29.1	\N	\N	2683232622
+1.4.0	bburke@redhat.com	META-INF/jpa-changelog-1.4.0.xml	2025-11-09 10:13:56.739859	11	EXECUTED	9:6122efe5f090e41a85c0f1c9e52cbb62	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.29.1	\N	\N	2683232622
+1.4.0	bburke@redhat.com	META-INF/db2-jpa-changelog-1.4.0.xml	2025-11-09 10:13:56.769819	12	MARK_RAN	9:e1ff28bf7568451453f844c5d54bb0b5	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.29.1	\N	\N	2683232622
+1.5.0	bburke@redhat.com	META-INF/jpa-changelog-1.5.0.xml	2025-11-09 10:13:56.887723	13	EXECUTED	9:7af32cd8957fbc069f796b61217483fd	delete tableName=CLIENT_SESSION_AUTH_STATUS; delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION_PROT_MAPPER; delete tableName=CLIENT_SESSION_NOTE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION_NOTE; delete table...		\N	4.29.1	\N	\N	2683232622
+1.6.1_from15	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2025-11-09 10:13:56.953005	14	EXECUTED	9:6005e15e84714cd83226bf7879f54190	addColumn tableName=REALM; addColumn tableName=KEYCLOAK_ROLE; addColumn tableName=CLIENT; createTable tableName=OFFLINE_USER_SESSION; createTable tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_US_SES_PK2, tableName=...		\N	4.29.1	\N	\N	2683232622
+1.6.1_from16-pre	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2025-11-09 10:13:56.960855	15	MARK_RAN	9:bf656f5a2b055d07f314431cae76f06c	delete tableName=OFFLINE_CLIENT_SESSION; delete tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+1.6.1_from16	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2025-11-09 10:13:56.976246	16	MARK_RAN	9:f8dadc9284440469dcf71e25ca6ab99b	dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_US_SES_PK, tableName=OFFLINE_USER_SESSION; dropPrimaryKey constraintName=CONSTRAINT_OFFLINE_CL_SES_PK, tableName=OFFLINE_CLIENT_SESSION; addColumn tableName=OFFLINE_USER_SESSION; update tableName=OF...		\N	4.29.1	\N	\N	2683232622
+1.6.1	mposolda@redhat.com	META-INF/jpa-changelog-1.6.1.xml	2025-11-09 10:13:56.991514	17	EXECUTED	9:d41d8cd98f00b204e9800998ecf8427e	empty		\N	4.29.1	\N	\N	2683232622
+1.7.0	bburke@redhat.com	META-INF/jpa-changelog-1.7.0.xml	2025-11-09 10:13:57.164351	18	EXECUTED	9:3368ff0be4c2855ee2dd9ca813b38d8e	createTable tableName=KEYCLOAK_GROUP; createTable tableName=GROUP_ROLE_MAPPING; createTable tableName=GROUP_ATTRIBUTE; createTable tableName=USER_GROUP_MEMBERSHIP; createTable tableName=REALM_DEFAULT_GROUPS; addColumn tableName=IDENTITY_PROVIDER; ...		\N	4.29.1	\N	\N	2683232622
+1.8.0	mposolda@redhat.com	META-INF/jpa-changelog-1.8.0.xml	2025-11-09 10:13:57.330373	19	EXECUTED	9:8ac2fb5dd030b24c0570a763ed75ed20	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.29.1	\N	\N	2683232622
+1.8.0-2	keycloak	META-INF/jpa-changelog-1.8.0.xml	2025-11-09 10:13:57.350743	20	EXECUTED	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.29.1	\N	\N	2683232622
+26.0.0-33201-org-redirect-url	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:16.446824	144	EXECUTED	9:4d0e22b0ac68ebe9794fa9cb752ea660	addColumn tableName=ORG		\N	4.29.1	\N	\N	2683232622
+1.8.0	mposolda@redhat.com	META-INF/db2-jpa-changelog-1.8.0.xml	2025-11-09 10:13:57.363968	21	MARK_RAN	9:831e82914316dc8a57dc09d755f23c51	addColumn tableName=IDENTITY_PROVIDER; createTable tableName=CLIENT_TEMPLATE; createTable tableName=CLIENT_TEMPLATE_ATTRIBUTES; createTable tableName=TEMPLATE_SCOPE_MAPPING; dropNotNullConstraint columnName=CLIENT_ID, tableName=PROTOCOL_MAPPER; ad...		\N	4.29.1	\N	\N	2683232622
+1.8.0-2	keycloak	META-INF/db2-jpa-changelog-1.8.0.xml	2025-11-09 10:13:57.374637	22	MARK_RAN	9:f91ddca9b19743db60e3057679810e6c	dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; update tableName=CREDENTIAL		\N	4.29.1	\N	\N	2683232622
+1.9.0	mposolda@redhat.com	META-INF/jpa-changelog-1.9.0.xml	2025-11-09 10:13:57.760646	23	EXECUTED	9:bc3d0f9e823a69dc21e23e94c7a94bb1	update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=REALM; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=REALM; update tableName=REALM; customChange; dr...		\N	4.29.1	\N	\N	2683232622
+1.9.1	keycloak	META-INF/jpa-changelog-1.9.1.xml	2025-11-09 10:13:57.783009	24	EXECUTED	9:c9999da42f543575ab790e76439a2679	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=PUBLIC_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.29.1	\N	\N	2683232622
+1.9.1	keycloak	META-INF/db2-jpa-changelog-1.9.1.xml	2025-11-09 10:13:57.788642	25	MARK_RAN	9:0d6c65c6f58732d81569e77b10ba301d	modifyDataType columnName=PRIVATE_KEY, tableName=REALM; modifyDataType columnName=CERTIFICATE, tableName=REALM		\N	4.29.1	\N	\N	2683232622
+1.9.2	keycloak	META-INF/jpa-changelog-1.9.2.xml	2025-11-09 10:13:59.782933	26	EXECUTED	9:fc576660fc016ae53d2d4778d84d86d0	createIndex indexName=IDX_USER_EMAIL, tableName=USER_ENTITY; createIndex indexName=IDX_USER_ROLE_MAPPING, tableName=USER_ROLE_MAPPING; createIndex indexName=IDX_USER_GROUP_MAPPING, tableName=USER_GROUP_MEMBERSHIP; createIndex indexName=IDX_USER_CO...		\N	4.29.1	\N	\N	2683232622
+authz-2.0.0	psilva@redhat.com	META-INF/jpa-changelog-authz-2.0.0.xml	2025-11-09 10:14:00.014645	27	EXECUTED	9:43ed6b0da89ff77206289e87eaa9c024	createTable tableName=RESOURCE_SERVER; addPrimaryKey constraintName=CONSTRAINT_FARS, tableName=RESOURCE_SERVER; addUniqueConstraint constraintName=UK_AU8TT6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER; createTable tableName=RESOURCE_SERVER_RESOU...		\N	4.29.1	\N	\N	2683232622
+authz-2.5.1	psilva@redhat.com	META-INF/jpa-changelog-authz-2.5.1.xml	2025-11-09 10:14:00.040881	28	EXECUTED	9:44bae577f551b3738740281eceb4ea70	update tableName=RESOURCE_SERVER_POLICY		\N	4.29.1	\N	\N	2683232622
+2.1.0-KEYCLOAK-5461	bburke@redhat.com	META-INF/jpa-changelog-2.1.0.xml	2025-11-09 10:14:00.233571	29	EXECUTED	9:bd88e1f833df0420b01e114533aee5e8	createTable tableName=BROKER_LINK; createTable tableName=FED_USER_ATTRIBUTE; createTable tableName=FED_USER_CONSENT; createTable tableName=FED_USER_CONSENT_ROLE; createTable tableName=FED_USER_CONSENT_PROT_MAPPER; createTable tableName=FED_USER_CR...		\N	4.29.1	\N	\N	2683232622
+2.2.0	bburke@redhat.com	META-INF/jpa-changelog-2.2.0.xml	2025-11-09 10:14:00.285881	30	EXECUTED	9:a7022af5267f019d020edfe316ef4371	addColumn tableName=ADMIN_EVENT_ENTITY; createTable tableName=CREDENTIAL_ATTRIBUTE; createTable tableName=FED_CREDENTIAL_ATTRIBUTE; modifyDataType columnName=VALUE, tableName=CREDENTIAL; addForeignKeyConstraint baseTableName=FED_CREDENTIAL_ATTRIBU...		\N	4.29.1	\N	\N	2683232622
+2.3.0	bburke@redhat.com	META-INF/jpa-changelog-2.3.0.xml	2025-11-09 10:14:00.363629	31	EXECUTED	9:fc155c394040654d6a79227e56f5e25a	createTable tableName=FEDERATED_USER; addPrimaryKey constraintName=CONSTR_FEDERATED_USER, tableName=FEDERATED_USER; dropDefaultValue columnName=TOTP, tableName=USER_ENTITY; dropColumn columnName=TOTP, tableName=USER_ENTITY; addColumn tableName=IDE...		\N	4.29.1	\N	\N	2683232622
+2.4.0	bburke@redhat.com	META-INF/jpa-changelog-2.4.0.xml	2025-11-09 10:14:00.383505	32	EXECUTED	9:eac4ffb2a14795e5dc7b426063e54d88	customChange		\N	4.29.1	\N	\N	2683232622
+2.5.0	bburke@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2025-11-09 10:14:00.402372	33	EXECUTED	9:54937c05672568c4c64fc9524c1e9462	customChange; modifyDataType columnName=USER_ID, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+2.5.0-unicode-oracle	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2025-11-09 10:14:00.410924	34	MARK_RAN	9:3a32bace77c84d7678d035a7f5a8084e	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.29.1	\N	\N	2683232622
+2.5.0-unicode-other-dbs	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2025-11-09 10:14:00.497293	35	EXECUTED	9:33d72168746f81f98ae3a1e8e0ca3554	modifyDataType columnName=DESCRIPTION, tableName=AUTHENTICATION_FLOW; modifyDataType columnName=DESCRIPTION, tableName=CLIENT_TEMPLATE; modifyDataType columnName=DESCRIPTION, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=DESCRIPTION,...		\N	4.29.1	\N	\N	2683232622
+2.5.0-duplicate-email-support	slawomir@dabek.name	META-INF/jpa-changelog-2.5.0.xml	2025-11-09 10:14:00.517128	36	EXECUTED	9:61b6d3d7a4c0e0024b0c839da283da0c	addColumn tableName=REALM		\N	4.29.1	\N	\N	2683232622
+2.5.0-unique-group-names	hmlnarik@redhat.com	META-INF/jpa-changelog-2.5.0.xml	2025-11-09 10:14:00.531815	37	EXECUTED	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.29.1	\N	\N	2683232622
+2.5.1	bburke@redhat.com	META-INF/jpa-changelog-2.5.1.xml	2025-11-09 10:14:00.545239	38	EXECUTED	9:a2b870802540cb3faa72098db5388af3	addColumn tableName=FED_USER_CONSENT		\N	4.29.1	\N	\N	2683232622
+3.0.0	bburke@redhat.com	META-INF/jpa-changelog-3.0.0.xml	2025-11-09 10:14:00.558437	39	EXECUTED	9:132a67499ba24bcc54fb5cbdcfe7e4c0	addColumn tableName=IDENTITY_PROVIDER		\N	4.29.1	\N	\N	2683232622
+3.2.0-fix	keycloak	META-INF/jpa-changelog-3.2.0.xml	2025-11-09 10:14:00.563265	40	MARK_RAN	9:938f894c032f5430f2b0fafb1a243462	addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS		\N	4.29.1	\N	\N	2683232622
+3.2.0-fix-with-keycloak-5416	keycloak	META-INF/jpa-changelog-3.2.0.xml	2025-11-09 10:14:00.570735	41	MARK_RAN	9:845c332ff1874dc5d35974b0babf3006	dropIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS; addNotNullConstraint columnName=REALM_ID, tableName=CLIENT_INITIAL_ACCESS; createIndex indexName=IDX_CLIENT_INIT_ACC_REALM, tableName=CLIENT_INITIAL_ACCESS		\N	4.29.1	\N	\N	2683232622
+3.2.0-fix-offline-sessions	hmlnarik	META-INF/jpa-changelog-3.2.0.xml	2025-11-09 10:14:00.590349	42	EXECUTED	9:fc86359c079781adc577c5a217e4d04c	customChange		\N	4.29.1	\N	\N	2683232622
+3.2.0-fixed	keycloak	META-INF/jpa-changelog-3.2.0.xml	2025-11-09 10:14:07.272203	43	EXECUTED	9:59a64800e3c0d09b825f8a3b444fa8f4	addColumn tableName=REALM; dropPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_PK2, tableName=OFFLINE_CLIENT_SESSION; dropColumn columnName=CLIENT_SESSION_ID, tableName=OFFLINE_CLIENT_SESSION; addPrimaryKey constraintName=CONSTRAINT_OFFL_CL_SES_P...		\N	4.29.1	\N	\N	2683232622
+3.3.0	keycloak	META-INF/jpa-changelog-3.3.0.xml	2025-11-09 10:14:07.289374	44	EXECUTED	9:d48d6da5c6ccf667807f633fe489ce88	addColumn tableName=USER_ENTITY		\N	4.29.1	\N	\N	2683232622
+authz-3.4.0.CR1-resource-server-pk-change-part1	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2025-11-09 10:14:07.306852	45	EXECUTED	9:dde36f7973e80d71fceee683bc5d2951	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_RESOURCE; addColumn tableName=RESOURCE_SERVER_SCOPE		\N	4.29.1	\N	\N	2683232622
+authz-3.4.0.CR1-resource-server-pk-change-part2-KEYCLOAK-6095	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2025-11-09 10:14:07.32113	46	EXECUTED	9:b855e9b0a406b34fa323235a0cf4f640	customChange		\N	4.29.1	\N	\N	2683232622
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2025-11-09 10:14:07.326375	47	MARK_RAN	9:51abbacd7b416c50c4421a8cabf7927e	dropIndex indexName=IDX_RES_SERV_POL_RES_SERV, tableName=RESOURCE_SERVER_POLICY; dropIndex indexName=IDX_RES_SRV_RES_RES_SRV, tableName=RESOURCE_SERVER_RESOURCE; dropIndex indexName=IDX_RES_SRV_SCOPE_RES_SRV, tableName=RESOURCE_SERVER_SCOPE		\N	4.29.1	\N	\N	2683232622
+authz-3.4.0.CR1-resource-server-pk-change-part3-fixed-nodropindex	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2025-11-09 10:14:07.780892	48	EXECUTED	9:bdc99e567b3398bac83263d375aad143	addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_POLICY; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, tableName=RESOURCE_SERVER_RESOURCE; addNotNullConstraint columnName=RESOURCE_SERVER_CLIENT_ID, ...		\N	4.29.1	\N	\N	2683232622
+authn-3.4.0.CR1-refresh-token-max-reuse	glavoie@gmail.com	META-INF/jpa-changelog-authz-3.4.0.CR1.xml	2025-11-09 10:14:07.800656	49	EXECUTED	9:d198654156881c46bfba39abd7769e69	addColumn tableName=REALM		\N	4.29.1	\N	\N	2683232622
+3.4.0	keycloak	META-INF/jpa-changelog-3.4.0.xml	2025-11-09 10:14:07.911875	50	EXECUTED	9:cfdd8736332ccdd72c5256ccb42335db	addPrimaryKey constraintName=CONSTRAINT_REALM_DEFAULT_ROLES, tableName=REALM_DEFAULT_ROLES; addPrimaryKey constraintName=CONSTRAINT_COMPOSITE_ROLE, tableName=COMPOSITE_ROLE; addPrimaryKey constraintName=CONSTR_REALM_DEFAULT_GROUPS, tableName=REALM...		\N	4.29.1	\N	\N	2683232622
+3.4.0-KEYCLOAK-5230	hmlnarik@redhat.com	META-INF/jpa-changelog-3.4.0.xml	2025-11-09 10:14:09.21105	51	EXECUTED	9:7c84de3d9bd84d7f077607c1a4dcb714	createIndex indexName=IDX_FU_ATTRIBUTE, tableName=FED_USER_ATTRIBUTE; createIndex indexName=IDX_FU_CONSENT, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CONSENT_RU, tableName=FED_USER_CONSENT; createIndex indexName=IDX_FU_CREDENTIAL, t...		\N	4.29.1	\N	\N	2683232622
+3.4.1	psilva@redhat.com	META-INF/jpa-changelog-3.4.1.xml	2025-11-09 10:14:09.219433	52	EXECUTED	9:5a6bb36cbefb6a9d6928452c0852af2d	modifyDataType columnName=VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+3.4.2	keycloak	META-INF/jpa-changelog-3.4.2.xml	2025-11-09 10:14:09.226442	53	EXECUTED	9:8f23e334dbc59f82e0a328373ca6ced0	update tableName=REALM		\N	4.29.1	\N	\N	2683232622
+3.4.2-KEYCLOAK-5172	mkanis@redhat.com	META-INF/jpa-changelog-3.4.2.xml	2025-11-09 10:14:09.234416	54	EXECUTED	9:9156214268f09d970cdf0e1564d866af	update tableName=CLIENT		\N	4.29.1	\N	\N	2683232622
+4.0.0-KEYCLOAK-6335	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2025-11-09 10:14:09.250173	55	EXECUTED	9:db806613b1ed154826c02610b7dbdf74	createTable tableName=CLIENT_AUTH_FLOW_BINDINGS; addPrimaryKey constraintName=C_CLI_FLOW_BIND, tableName=CLIENT_AUTH_FLOW_BINDINGS		\N	4.29.1	\N	\N	2683232622
+4.0.0-CLEANUP-UNUSED-TABLE	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2025-11-09 10:14:09.263125	56	EXECUTED	9:229a041fb72d5beac76bb94a5fa709de	dropTable tableName=CLIENT_IDENTITY_PROV_MAPPING		\N	4.29.1	\N	\N	2683232622
+4.0.0-KEYCLOAK-6228	bburke@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2025-11-09 10:14:09.416597	57	EXECUTED	9:079899dade9c1e683f26b2aa9ca6ff04	dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; dropNotNullConstraint columnName=CLIENT_ID, tableName=USER_CONSENT; addColumn tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHO...		\N	4.29.1	\N	\N	2683232622
+4.0.0-KEYCLOAK-5579-fixed	mposolda@redhat.com	META-INF/jpa-changelog-4.0.0.xml	2025-11-09 10:14:10.714887	58	EXECUTED	9:139b79bcbbfe903bb1c2d2a4dbf001d9	dropForeignKeyConstraint baseTableName=CLIENT_TEMPLATE_ATTRIBUTES, constraintName=FK_CL_TEMPL_ATTR_TEMPL; renameTable newTableName=CLIENT_SCOPE_ATTRIBUTES, oldTableName=CLIENT_TEMPLATE_ATTRIBUTES; renameColumn newColumnName=SCOPE_ID, oldColumnName...		\N	4.29.1	\N	\N	2683232622
+authz-4.0.0.CR1	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.CR1.xml	2025-11-09 10:14:10.771672	59	EXECUTED	9:b55738ad889860c625ba2bf483495a04	createTable tableName=RESOURCE_SERVER_PERM_TICKET; addPrimaryKey constraintName=CONSTRAINT_FAPMT, tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRHO213XCX4WNKOG82SSPMT...		\N	4.29.1	\N	\N	2683232622
+authz-4.0.0.Beta3	psilva@redhat.com	META-INF/jpa-changelog-authz-4.0.0.Beta3.xml	2025-11-09 10:14:10.789585	60	EXECUTED	9:e0057eac39aa8fc8e09ac6cfa4ae15fe	addColumn tableName=RESOURCE_SERVER_POLICY; addColumn tableName=RESOURCE_SERVER_PERM_TICKET; addForeignKeyConstraint baseTableName=RESOURCE_SERVER_PERM_TICKET, constraintName=FK_FRSRPO2128CX4WNKOG82SSRFY, referencedTableName=RESOURCE_SERVER_POLICY		\N	4.29.1	\N	\N	2683232622
+authz-4.2.0.Final	mhajas@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2025-11-09 10:14:10.816166	61	EXECUTED	9:42a33806f3a0443fe0e7feeec821326c	createTable tableName=RESOURCE_URIS; addForeignKeyConstraint baseTableName=RESOURCE_URIS, constraintName=FK_RESOURCE_SERVER_URIS, referencedTableName=RESOURCE_SERVER_RESOURCE; customChange; dropColumn columnName=URI, tableName=RESOURCE_SERVER_RESO...		\N	4.29.1	\N	\N	2683232622
+authz-4.2.0.Final-KEYCLOAK-9944	hmlnarik@redhat.com	META-INF/jpa-changelog-authz-4.2.0.Final.xml	2025-11-09 10:14:10.828011	62	EXECUTED	9:9968206fca46eecc1f51db9c024bfe56	addPrimaryKey constraintName=CONSTRAINT_RESOUR_URIS_PK, tableName=RESOURCE_URIS		\N	4.29.1	\N	\N	2683232622
+4.2.0-KEYCLOAK-6313	wadahiro@gmail.com	META-INF/jpa-changelog-4.2.0.xml	2025-11-09 10:14:10.837728	63	EXECUTED	9:92143a6daea0a3f3b8f598c97ce55c3d	addColumn tableName=REQUIRED_ACTION_PROVIDER		\N	4.29.1	\N	\N	2683232622
+4.3.0-KEYCLOAK-7984	wadahiro@gmail.com	META-INF/jpa-changelog-4.3.0.xml	2025-11-09 10:14:10.846272	64	EXECUTED	9:82bab26a27195d889fb0429003b18f40	update tableName=REQUIRED_ACTION_PROVIDER		\N	4.29.1	\N	\N	2683232622
+4.6.0-KEYCLOAK-7950	psilva@redhat.com	META-INF/jpa-changelog-4.6.0.xml	2025-11-09 10:14:10.856008	65	EXECUTED	9:e590c88ddc0b38b0ae4249bbfcb5abc3	update tableName=RESOURCE_SERVER_RESOURCE		\N	4.29.1	\N	\N	2683232622
+4.6.0-KEYCLOAK-8377	keycloak	META-INF/jpa-changelog-4.6.0.xml	2025-11-09 10:14:10.988409	66	EXECUTED	9:5c1f475536118dbdc38d5d7977950cc0	createTable tableName=ROLE_ATTRIBUTE; addPrimaryKey constraintName=CONSTRAINT_ROLE_ATTRIBUTE_PK, tableName=ROLE_ATTRIBUTE; addForeignKeyConstraint baseTableName=ROLE_ATTRIBUTE, constraintName=FK_ROLE_ATTRIBUTE_ID, referencedTableName=KEYCLOAK_ROLE...		\N	4.29.1	\N	\N	2683232622
+4.6.0-KEYCLOAK-8555	gideonray@gmail.com	META-INF/jpa-changelog-4.6.0.xml	2025-11-09 10:14:11.111859	67	EXECUTED	9:e7c9f5f9c4d67ccbbcc215440c718a17	createIndex indexName=IDX_COMPONENT_PROVIDER_TYPE, tableName=COMPONENT		\N	4.29.1	\N	\N	2683232622
+4.7.0-KEYCLOAK-1267	sguilhen@redhat.com	META-INF/jpa-changelog-4.7.0.xml	2025-11-09 10:14:11.125384	68	EXECUTED	9:88e0bfdda924690d6f4e430c53447dd5	addColumn tableName=REALM		\N	4.29.1	\N	\N	2683232622
+4.7.0-KEYCLOAK-7275	keycloak	META-INF/jpa-changelog-4.7.0.xml	2025-11-09 10:14:11.253468	69	EXECUTED	9:f53177f137e1c46b6a88c59ec1cb5218	renameColumn newColumnName=CREATED_ON, oldColumnName=LAST_SESSION_REFRESH, tableName=OFFLINE_USER_SESSION; addNotNullConstraint columnName=CREATED_ON, tableName=OFFLINE_USER_SESSION; addColumn tableName=OFFLINE_USER_SESSION; customChange; createIn...		\N	4.29.1	\N	\N	2683232622
+4.8.0-KEYCLOAK-8835	sguilhen@redhat.com	META-INF/jpa-changelog-4.8.0.xml	2025-11-09 10:14:11.267052	70	EXECUTED	9:a74d33da4dc42a37ec27121580d1459f	addNotNullConstraint columnName=SSO_MAX_LIFESPAN_REMEMBER_ME, tableName=REALM; addNotNullConstraint columnName=SSO_IDLE_TIMEOUT_REMEMBER_ME, tableName=REALM		\N	4.29.1	\N	\N	2683232622
+authz-7.0.0-KEYCLOAK-10443	psilva@redhat.com	META-INF/jpa-changelog-authz-7.0.0.xml	2025-11-09 10:14:11.278814	71	EXECUTED	9:fd4ade7b90c3b67fae0bfcfcb42dfb5f	addColumn tableName=RESOURCE_SERVER		\N	4.29.1	\N	\N	2683232622
+8.0.0-adding-credential-columns	keycloak	META-INF/jpa-changelog-8.0.0.xml	2025-11-09 10:14:11.304937	72	EXECUTED	9:aa072ad090bbba210d8f18781b8cebf4	addColumn tableName=CREDENTIAL; addColumn tableName=FED_USER_CREDENTIAL		\N	4.29.1	\N	\N	2683232622
+8.0.0-updating-credential-data-not-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2025-11-09 10:14:11.327144	73	EXECUTED	9:1ae6be29bab7c2aa376f6983b932be37	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.29.1	\N	\N	2683232622
+8.0.0-updating-credential-data-oracle-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2025-11-09 10:14:11.334395	74	MARK_RAN	9:14706f286953fc9a25286dbd8fb30d97	update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL; update tableName=FED_USER_CREDENTIAL		\N	4.29.1	\N	\N	2683232622
+8.0.0-credential-cleanup-fixed	keycloak	META-INF/jpa-changelog-8.0.0.xml	2025-11-09 10:14:11.391294	75	EXECUTED	9:2b9cc12779be32c5b40e2e67711a218b	dropDefaultValue columnName=COUNTER, tableName=CREDENTIAL; dropDefaultValue columnName=DIGITS, tableName=CREDENTIAL; dropDefaultValue columnName=PERIOD, tableName=CREDENTIAL; dropDefaultValue columnName=ALGORITHM, tableName=CREDENTIAL; dropColumn ...		\N	4.29.1	\N	\N	2683232622
+8.0.0-resource-tag-support	keycloak	META-INF/jpa-changelog-8.0.0.xml	2025-11-09 10:14:11.521871	76	EXECUTED	9:91fa186ce7a5af127a2d7a91ee083cc5	addColumn tableName=MIGRATION_MODEL; createIndex indexName=IDX_UPDATE_TIME, tableName=MIGRATION_MODEL		\N	4.29.1	\N	\N	2683232622
+9.0.0-always-display-client	keycloak	META-INF/jpa-changelog-9.0.0.xml	2025-11-09 10:14:11.533864	77	EXECUTED	9:6335e5c94e83a2639ccd68dd24e2e5ad	addColumn tableName=CLIENT		\N	4.29.1	\N	\N	2683232622
+9.0.0-drop-constraints-for-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2025-11-09 10:14:11.538557	78	MARK_RAN	9:6bdb5658951e028bfe16fa0a8228b530	dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5PMT, tableName=RESOURCE_SERVER_PERM_TICKET; dropUniqueConstraint constraintName=UK_FRSR6T700S9V50BU18WS5HA6, tableName=RESOURCE_SERVER_RESOURCE; dropPrimaryKey constraintName=CONSTRAINT_O...		\N	4.29.1	\N	\N	2683232622
+9.0.0-increase-column-size-federated-fk	keycloak	META-INF/jpa-changelog-9.0.0.xml	2025-11-09 10:14:11.592758	79	EXECUTED	9:d5bc15a64117ccad481ce8792d4c608f	modifyDataType columnName=CLIENT_ID, tableName=FED_USER_CONSENT; modifyDataType columnName=CLIENT_REALM_CONSTRAINT, tableName=KEYCLOAK_ROLE; modifyDataType columnName=OWNER, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=CLIENT_ID, ta...		\N	4.29.1	\N	\N	2683232622
+9.0.0-recreate-constraints-after-column-increase	keycloak	META-INF/jpa-changelog-9.0.0.xml	2025-11-09 10:14:11.597725	80	MARK_RAN	9:077cba51999515f4d3e7ad5619ab592c	addNotNullConstraint columnName=CLIENT_ID, tableName=OFFLINE_CLIENT_SESSION; addNotNullConstraint columnName=OWNER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNullConstraint columnName=REQUESTER, tableName=RESOURCE_SERVER_PERM_TICKET; addNotNull...		\N	4.29.1	\N	\N	2683232622
+9.0.1-add-index-to-client.client_id	keycloak	META-INF/jpa-changelog-9.0.1.xml	2025-11-09 10:14:11.74242	81	EXECUTED	9:be969f08a163bf47c6b9e9ead8ac2afb	createIndex indexName=IDX_CLIENT_ID, tableName=CLIENT		\N	4.29.1	\N	\N	2683232622
+9.0.1-KEYCLOAK-12579-drop-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2025-11-09 10:14:11.746478	82	MARK_RAN	9:6d3bb4408ba5a72f39bd8a0b301ec6e3	dropUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.29.1	\N	\N	2683232622
+9.0.1-KEYCLOAK-12579-add-not-null-constraint	keycloak	META-INF/jpa-changelog-9.0.1.xml	2025-11-09 10:14:11.763051	83	EXECUTED	9:966bda61e46bebf3cc39518fbed52fa7	addNotNullConstraint columnName=PARENT_GROUP, tableName=KEYCLOAK_GROUP		\N	4.29.1	\N	\N	2683232622
+9.0.1-KEYCLOAK-12579-recreate-constraints	keycloak	META-INF/jpa-changelog-9.0.1.xml	2025-11-09 10:14:11.76729	84	MARK_RAN	9:8dcac7bdf7378e7d823cdfddebf72fda	addUniqueConstraint constraintName=SIBLING_NAMES, tableName=KEYCLOAK_GROUP		\N	4.29.1	\N	\N	2683232622
+9.0.1-add-index-to-events	keycloak	META-INF/jpa-changelog-9.0.1.xml	2025-11-09 10:14:11.91268	85	EXECUTED	9:7d93d602352a30c0c317e6a609b56599	createIndex indexName=IDX_EVENT_TIME, tableName=EVENT_ENTITY		\N	4.29.1	\N	\N	2683232622
+map-remove-ri	keycloak	META-INF/jpa-changelog-11.0.0.xml	2025-11-09 10:14:11.928923	86	EXECUTED	9:71c5969e6cdd8d7b6f47cebc86d37627	dropForeignKeyConstraint baseTableName=REALM, constraintName=FK_TRAF444KK6QRKMS7N56AIWQ5Y; dropForeignKeyConstraint baseTableName=KEYCLOAK_ROLE, constraintName=FK_KJHO5LE2C0RAL09FL8CM9WFW9		\N	4.29.1	\N	\N	2683232622
+map-remove-ri	keycloak	META-INF/jpa-changelog-12.0.0.xml	2025-11-09 10:14:11.95569	87	EXECUTED	9:a9ba7d47f065f041b7da856a81762021	dropForeignKeyConstraint baseTableName=REALM_DEFAULT_GROUPS, constraintName=FK_DEF_GROUPS_GROUP; dropForeignKeyConstraint baseTableName=REALM_DEFAULT_ROLES, constraintName=FK_H4WPD7W4HSOOLNI3H0SW7BTJE; dropForeignKeyConstraint baseTableName=CLIENT...		\N	4.29.1	\N	\N	2683232622
+12.1.0-add-realm-localization-table	keycloak	META-INF/jpa-changelog-12.0.0.xml	2025-11-09 10:14:11.972937	88	EXECUTED	9:fffabce2bc01e1a8f5110d5278500065	createTable tableName=REALM_LOCALIZATIONS; addPrimaryKey tableName=REALM_LOCALIZATIONS		\N	4.29.1	\N	\N	2683232622
+default-roles	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:11.990137	89	EXECUTED	9:fa8a5b5445e3857f4b010bafb5009957	addColumn tableName=REALM; customChange		\N	4.29.1	\N	\N	2683232622
+default-roles-cleanup	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.010988	90	EXECUTED	9:67ac3241df9a8582d591c5ed87125f39	dropTable tableName=REALM_DEFAULT_ROLES; dropTable tableName=CLIENT_DEFAULT_ROLES		\N	4.29.1	\N	\N	2683232622
+13.0.0-KEYCLOAK-16844	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.134192	91	EXECUTED	9:ad1194d66c937e3ffc82386c050ba089	createIndex indexName=IDX_OFFLINE_USS_PRELOAD, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+map-remove-ri-13.0.0	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.159771	92	EXECUTED	9:d9be619d94af5a2f5d07b9f003543b91	dropForeignKeyConstraint baseTableName=DEFAULT_CLIENT_SCOPE, constraintName=FK_R_DEF_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SCOPE_CLIENT, constraintName=FK_C_CLI_SCOPE_SCOPE; dropForeignKeyConstraint baseTableName=CLIENT_SC...		\N	4.29.1	\N	\N	2683232622
+13.0.0-KEYCLOAK-17992-drop-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.1641	93	MARK_RAN	9:544d201116a0fcc5a5da0925fbbc3bde	dropPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CLSCOPE_CL, tableName=CLIENT_SCOPE_CLIENT; dropIndex indexName=IDX_CL_CLSCOPE, tableName=CLIENT_SCOPE_CLIENT		\N	4.29.1	\N	\N	2683232622
+13.0.0-increase-column-size-federated	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.184216	94	EXECUTED	9:43c0c1055b6761b4b3e89de76d612ccf	modifyDataType columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; modifyDataType columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT		\N	4.29.1	\N	\N	2683232622
+13.0.0-KEYCLOAK-17992-recreate-constraints	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.188993	95	MARK_RAN	9:8bd711fd0330f4fe980494ca43ab1139	addNotNullConstraint columnName=CLIENT_ID, tableName=CLIENT_SCOPE_CLIENT; addNotNullConstraint columnName=SCOPE_ID, tableName=CLIENT_SCOPE_CLIENT; addPrimaryKey constraintName=C_CLI_SCOPE_BIND, tableName=CLIENT_SCOPE_CLIENT; createIndex indexName=...		\N	4.29.1	\N	\N	2683232622
+json-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-13.0.0.xml	2025-11-09 10:14:12.207747	96	EXECUTED	9:e07d2bc0970c348bb06fb63b1f82ddbf	addColumn tableName=REALM_ATTRIBUTE; update tableName=REALM_ATTRIBUTE; dropColumn columnName=VALUE, tableName=REALM_ATTRIBUTE; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=REALM_ATTRIBUTE		\N	4.29.1	\N	\N	2683232622
+14.0.0-KEYCLOAK-11019	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.510458	97	EXECUTED	9:24fb8611e97f29989bea412aa38d12b7	createIndex indexName=IDX_OFFLINE_CSS_PRELOAD, tableName=OFFLINE_CLIENT_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USER, tableName=OFFLINE_USER_SESSION; createIndex indexName=IDX_OFFLINE_USS_BY_USERSESS, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+14.0.0-KEYCLOAK-18286	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.514302	98	MARK_RAN	9:259f89014ce2506ee84740cbf7163aa7	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+14.0.0-KEYCLOAK-18286-revert	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.542177	99	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+14.0.0-KEYCLOAK-18286-supported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.673999	100	EXECUTED	9:60ca84a0f8c94ec8c3504a5a3bc88ee8	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+14.0.0-KEYCLOAK-18286-unsupported-dbs	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.679051	101	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+KEYCLOAK-17267-add-index-to-user-attributes	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.849054	102	EXECUTED	9:0b305d8d1277f3a89a0a53a659ad274c	createIndex indexName=IDX_USER_ATTRIBUTE_NAME, tableName=USER_ATTRIBUTE		\N	4.29.1	\N	\N	2683232622
+KEYCLOAK-18146-add-saml-art-binding-identifier	keycloak	META-INF/jpa-changelog-14.0.0.xml	2025-11-09 10:14:12.862769	103	EXECUTED	9:2c374ad2cdfe20e2905a84c8fac48460	customChange		\N	4.29.1	\N	\N	2683232622
+15.0.0-KEYCLOAK-18467	keycloak	META-INF/jpa-changelog-15.0.0.xml	2025-11-09 10:14:12.885249	104	EXECUTED	9:47a760639ac597360a8219f5b768b4de	addColumn tableName=REALM_LOCALIZATIONS; update tableName=REALM_LOCALIZATIONS; dropColumn columnName=TEXTS, tableName=REALM_LOCALIZATIONS; renameColumn newColumnName=TEXTS, oldColumnName=TEXTS_NEW, tableName=REALM_LOCALIZATIONS; addNotNullConstrai...		\N	4.29.1	\N	\N	2683232622
+17.0.0-9562	keycloak	META-INF/jpa-changelog-17.0.0.xml	2025-11-09 10:14:13.062803	105	EXECUTED	9:a6272f0576727dd8cad2522335f5d99e	createIndex indexName=IDX_USER_SERVICE_ACCOUNT, tableName=USER_ENTITY		\N	4.29.1	\N	\N	2683232622
+18.0.0-10625-IDX_ADMIN_EVENT_TIME	keycloak	META-INF/jpa-changelog-18.0.0.xml	2025-11-09 10:14:13.227776	106	EXECUTED	9:015479dbd691d9cc8669282f4828c41d	createIndex indexName=IDX_ADMIN_EVENT_TIME, tableName=ADMIN_EVENT_ENTITY		\N	4.29.1	\N	\N	2683232622
+18.0.15-30992-index-consent	keycloak	META-INF/jpa-changelog-18.0.15.xml	2025-11-09 10:14:13.430668	107	EXECUTED	9:80071ede7a05604b1f4906f3bf3b00f0	createIndex indexName=IDX_USCONSENT_SCOPE_ID, tableName=USER_CONSENT_CLIENT_SCOPE		\N	4.29.1	\N	\N	2683232622
+19.0.0-10135	keycloak	META-INF/jpa-changelog-19.0.0.xml	2025-11-09 10:14:13.443759	108	EXECUTED	9:9518e495fdd22f78ad6425cc30630221	customChange		\N	4.29.1	\N	\N	2683232622
+20.0.0-12964-supported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2025-11-09 10:14:13.630907	109	EXECUTED	9:e5f243877199fd96bcc842f27a1656ac	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.29.1	\N	\N	2683232622
+20.0.0-12964-unsupported-dbs	keycloak	META-INF/jpa-changelog-20.0.0.xml	2025-11-09 10:14:13.635818	110	MARK_RAN	9:1a6fcaa85e20bdeae0a9ce49b41946a5	createIndex indexName=IDX_GROUP_ATT_BY_NAME_VALUE, tableName=GROUP_ATTRIBUTE		\N	4.29.1	\N	\N	2683232622
+client-attributes-string-accomodation-fixed	keycloak	META-INF/jpa-changelog-20.0.0.xml	2025-11-09 10:14:13.65854	111	EXECUTED	9:3f332e13e90739ed0c35b0b25b7822ca	addColumn tableName=CLIENT_ATTRIBUTES; update tableName=CLIENT_ATTRIBUTES; dropColumn columnName=VALUE, tableName=CLIENT_ATTRIBUTES; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+21.0.2-17277	keycloak	META-INF/jpa-changelog-21.0.2.xml	2025-11-09 10:14:13.672466	112	EXECUTED	9:7ee1f7a3fb8f5588f171fb9a6ab623c0	customChange		\N	4.29.1	\N	\N	2683232622
+21.1.0-19404	keycloak	META-INF/jpa-changelog-21.1.0.xml	2025-11-09 10:14:13.729552	113	EXECUTED	9:3d7e830b52f33676b9d64f7f2b2ea634	modifyDataType columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=LOGIC, tableName=RESOURCE_SERVER_POLICY; modifyDataType columnName=POLICY_ENFORCE_MODE, tableName=RESOURCE_SERVER		\N	4.29.1	\N	\N	2683232622
+21.1.0-19404-2	keycloak	META-INF/jpa-changelog-21.1.0.xml	2025-11-09 10:14:13.740445	114	MARK_RAN	9:627d032e3ef2c06c0e1f73d2ae25c26c	addColumn tableName=RESOURCE_SERVER_POLICY; update tableName=RESOURCE_SERVER_POLICY; dropColumn columnName=DECISION_STRATEGY, tableName=RESOURCE_SERVER_POLICY; renameColumn newColumnName=DECISION_STRATEGY, oldColumnName=DECISION_STRATEGY_NEW, tabl...		\N	4.29.1	\N	\N	2683232622
+22.0.0-17484-updated	keycloak	META-INF/jpa-changelog-22.0.0.xml	2025-11-09 10:14:13.76294	115	EXECUTED	9:90af0bfd30cafc17b9f4d6eccd92b8b3	customChange		\N	4.29.1	\N	\N	2683232622
+22.0.5-24031	keycloak	META-INF/jpa-changelog-22.0.0.xml	2025-11-09 10:14:13.770201	116	MARK_RAN	9:a60d2d7b315ec2d3eba9e2f145f9df28	customChange		\N	4.29.1	\N	\N	2683232622
+23.0.0-12062	keycloak	META-INF/jpa-changelog-23.0.0.xml	2025-11-09 10:14:13.810945	117	EXECUTED	9:2168fbe728fec46ae9baf15bf80927b8	addColumn tableName=COMPONENT_CONFIG; update tableName=COMPONENT_CONFIG; dropColumn columnName=VALUE, tableName=COMPONENT_CONFIG; renameColumn newColumnName=VALUE, oldColumnName=VALUE_NEW, tableName=COMPONENT_CONFIG		\N	4.29.1	\N	\N	2683232622
+23.0.0-17258	keycloak	META-INF/jpa-changelog-23.0.0.xml	2025-11-09 10:14:13.834159	118	EXECUTED	9:36506d679a83bbfda85a27ea1864dca8	addColumn tableName=EVENT_ENTITY		\N	4.29.1	\N	\N	2683232622
+24.0.0-9758	keycloak	META-INF/jpa-changelog-24.0.0.xml	2025-11-09 10:14:14.678453	119	EXECUTED	9:502c557a5189f600f0f445a9b49ebbce	addColumn tableName=USER_ATTRIBUTE; addColumn tableName=FED_USER_ATTRIBUTE; createIndex indexName=USER_ATTR_LONG_VALUES, tableName=USER_ATTRIBUTE; createIndex indexName=FED_USER_ATTR_LONG_VALUES, tableName=FED_USER_ATTRIBUTE; createIndex indexName...		\N	4.29.1	\N	\N	2683232622
+24.0.0-9758-2	keycloak	META-INF/jpa-changelog-24.0.0.xml	2025-11-09 10:14:14.689513	120	EXECUTED	9:bf0fdee10afdf597a987adbf291db7b2	customChange		\N	4.29.1	\N	\N	2683232622
+24.0.0-26618-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.0.xml	2025-11-09 10:14:14.705337	121	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+24.0.0-26618-reindex	keycloak	META-INF/jpa-changelog-24.0.0.xml	2025-11-09 10:14:14.915067	122	EXECUTED	9:08707c0f0db1cef6b352db03a60edc7f	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+24.0.2-27228	keycloak	META-INF/jpa-changelog-24.0.2.xml	2025-11-09 10:14:14.928348	123	EXECUTED	9:eaee11f6b8aa25d2cc6a84fb86fc6238	customChange		\N	4.29.1	\N	\N	2683232622
+24.0.2-27967-drop-index-if-present	keycloak	META-INF/jpa-changelog-24.0.2.xml	2025-11-09 10:14:14.933741	124	MARK_RAN	9:04baaf56c116ed19951cbc2cca584022	dropIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+24.0.2-27967-reindex	keycloak	META-INF/jpa-changelog-24.0.2.xml	2025-11-09 10:14:14.941562	125	MARK_RAN	9:d3d977031d431db16e2c181ce49d73e9	createIndex indexName=IDX_CLIENT_ATT_BY_NAME_VALUE, tableName=CLIENT_ATTRIBUTES		\N	4.29.1	\N	\N	2683232622
+25.0.0-28265-tables	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:14.963497	126	EXECUTED	9:deda2df035df23388af95bbd36c17cef	addColumn tableName=OFFLINE_USER_SESSION; addColumn tableName=OFFLINE_CLIENT_SESSION		\N	4.29.1	\N	\N	2683232622
+25.0.0-28265-index-creation	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.132144	127	EXECUTED	9:3e96709818458ae49f3c679ae58d263a	createIndex indexName=IDX_OFFLINE_USS_BY_LAST_SESSION_REFRESH, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+25.0.0-28265-index-cleanup	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.152733	128	EXECUTED	9:8c0cfa341a0474385b324f5c4b2dfcc1	dropIndex indexName=IDX_OFFLINE_USS_CREATEDON, tableName=OFFLINE_USER_SESSION; dropIndex indexName=IDX_OFFLINE_USS_PRELOAD, tableName=OFFLINE_USER_SESSION; dropIndex indexName=IDX_OFFLINE_USS_BY_USERSESS, tableName=OFFLINE_USER_SESSION; dropIndex ...		\N	4.29.1	\N	\N	2683232622
+25.0.0-28265-index-2-mysql	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.159849	129	MARK_RAN	9:b7ef76036d3126bb83c2423bf4d449d6	createIndex indexName=IDX_OFFLINE_USS_BY_BROKER_SESSION_ID, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+25.0.0-28265-index-2-not-mysql	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.339324	130	EXECUTED	9:23396cf51ab8bc1ae6f0cac7f9f6fcf7	createIndex indexName=IDX_OFFLINE_USS_BY_BROKER_SESSION_ID, tableName=OFFLINE_USER_SESSION		\N	4.29.1	\N	\N	2683232622
+25.0.0-org	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.374924	131	EXECUTED	9:5c859965c2c9b9c72136c360649af157	createTable tableName=ORG; addUniqueConstraint constraintName=UK_ORG_NAME, tableName=ORG; addUniqueConstraint constraintName=UK_ORG_GROUP, tableName=ORG; createTable tableName=ORG_DOMAIN		\N	4.29.1	\N	\N	2683232622
+unique-consentuser	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.402631	132	EXECUTED	9:5857626a2ea8767e9a6c66bf3a2cb32f	customChange; dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_LOCAL_CONSENT, tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_EXTERNAL_CONSENT, tableName=...		\N	4.29.1	\N	\N	2683232622
+unique-consentuser-mysql	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.409704	133	MARK_RAN	9:b79478aad5adaa1bc428e31563f55e8e	customChange; dropUniqueConstraint constraintName=UK_JKUWUVD56ONTGSUHOGM8UEWRT, tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_LOCAL_CONSENT, tableName=USER_CONSENT; addUniqueConstraint constraintName=UK_EXTERNAL_CONSENT, tableName=...		\N	4.29.1	\N	\N	2683232622
+25.0.0-28861-index-creation	keycloak	META-INF/jpa-changelog-25.0.0.xml	2025-11-09 10:14:15.758504	134	EXECUTED	9:b9acb58ac958d9ada0fe12a5d4794ab1	createIndex indexName=IDX_PERM_TICKET_REQUESTER, tableName=RESOURCE_SERVER_PERM_TICKET; createIndex indexName=IDX_PERM_TICKET_OWNER, tableName=RESOURCE_SERVER_PERM_TICKET		\N	4.29.1	\N	\N	2683232622
+26.0.0-org-alias	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:15.780637	135	EXECUTED	9:6ef7d63e4412b3c2d66ed179159886a4	addColumn tableName=ORG; update tableName=ORG; addNotNullConstraint columnName=ALIAS, tableName=ORG; addUniqueConstraint constraintName=UK_ORG_ALIAS, tableName=ORG		\N	4.29.1	\N	\N	2683232622
+26.0.0-org-group	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:15.805674	136	EXECUTED	9:da8e8087d80ef2ace4f89d8c5b9ca223	addColumn tableName=KEYCLOAK_GROUP; update tableName=KEYCLOAK_GROUP; addNotNullConstraint columnName=TYPE, tableName=KEYCLOAK_GROUP; customChange		\N	4.29.1	\N	\N	2683232622
+26.0.0-org-indexes	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:15.939653	137	EXECUTED	9:79b05dcd610a8c7f25ec05135eec0857	createIndex indexName=IDX_ORG_DOMAIN_ORG_ID, tableName=ORG_DOMAIN		\N	4.29.1	\N	\N	2683232622
+26.0.0-org-group-membership	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:15.956386	138	EXECUTED	9:a6ace2ce583a421d89b01ba2a28dc2d4	addColumn tableName=USER_GROUP_MEMBERSHIP; update tableName=USER_GROUP_MEMBERSHIP; addNotNullConstraint columnName=MEMBERSHIP_TYPE, tableName=USER_GROUP_MEMBERSHIP		\N	4.29.1	\N	\N	2683232622
+31296-persist-revoked-access-tokens	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:15.972712	139	EXECUTED	9:64ef94489d42a358e8304b0e245f0ed4	createTable tableName=REVOKED_TOKEN; addPrimaryKey constraintName=CONSTRAINT_RT, tableName=REVOKED_TOKEN		\N	4.29.1	\N	\N	2683232622
+31725-index-persist-revoked-access-tokens	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:16.107026	140	EXECUTED	9:b994246ec2bf7c94da881e1d28782c7b	createIndex indexName=IDX_REV_TOKEN_ON_EXPIRE, tableName=REVOKED_TOKEN		\N	4.29.1	\N	\N	2683232622
+26.0.0-idps-for-login	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:16.393556	141	EXECUTED	9:51f5fffadf986983d4bd59582c6c1604	addColumn tableName=IDENTITY_PROVIDER; createIndex indexName=IDX_IDP_REALM_ORG, tableName=IDENTITY_PROVIDER; createIndex indexName=IDX_IDP_FOR_LOGIN, tableName=IDENTITY_PROVIDER; customChange		\N	4.29.1	\N	\N	2683232622
+26.0.0-32583-drop-redundant-index-on-client-session	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:16.402422	142	EXECUTED	9:24972d83bf27317a055d234187bb4af9	dropIndex indexName=IDX_US_SESS_ID_ON_CL_SESS, tableName=OFFLINE_CLIENT_SESSION		\N	4.29.1	\N	\N	2683232622
+26.0.0.32582-remove-tables-user-session-user-session-note-and-client-session	keycloak	META-INF/jpa-changelog-26.0.0.xml	2025-11-09 10:14:16.435938	143	EXECUTED	9:febdc0f47f2ed241c59e60f58c3ceea5	dropTable tableName=CLIENT_SESSION_ROLE; dropTable tableName=CLIENT_SESSION_NOTE; dropTable tableName=CLIENT_SESSION_PROT_MAPPER; dropTable tableName=CLIENT_SESSION_AUTH_STATUS; dropTable tableName=CLIENT_USER_SESSION_NOTE; dropTable tableName=CLI...		\N	4.29.1	\N	\N	2683232622
 1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/jpa-changelog-1.0.0.Final.xml	2025-11-09 10:13:54.678575	1	EXECUTED	9:6f1016664e21e16d26517a4418f5e3df	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.29.1	\N	\N	2683232622
 1.0.0.Final-KEYCLOAK-5461	sthorger@redhat.com	META-INF/db2-jpa-changelog-1.0.0.Final.xml	2025-11-09 10:13:54.783449	2	MARK_RAN	9:828775b1596a07d1200ba1d49e5e3941	createTable tableName=APPLICATION_DEFAULT_ROLES; createTable tableName=CLIENT; createTable tableName=CLIENT_SESSION; createTable tableName=CLIENT_SESSION_ROLE; createTable tableName=COMPOSITE_ROLE; createTable tableName=CREDENTIAL; createTable tab...		\N	4.29.1	\N	\N	2683232622
 1.1.0.Beta1	sthorger@redhat.com	META-INF/jpa-changelog-1.1.0.Beta1.xml	2025-11-09 10:13:55.015146	3	EXECUTED	9:5f090e44a7d595883c1fb61f4b41fd38	delete tableName=CLIENT_SESSION_ROLE; delete tableName=CLIENT_SESSION; delete tableName=USER_SESSION; createTable tableName=CLIENT_ATTRIBUTES; createTable tableName=CLIENT_SESSION_NOTE; createTable tableName=APP_NODE_REGISTRATIONS; addColumn table...		\N	4.29.1	\N	\N	2683232622
@@ -1998,6 +2474,19 @@ COPY public.default_client_scope (realm_id, scope_id, default_scope) FROM stdin;
 23677baa-69b5-4d4f-bed7-eb3c3fa0462b	7958aa4d-9c75-43aa-84ce-a35a83617363	t
 23677baa-69b5-4d4f-bed7-eb3c3fa0462b	a745363a-6438-44be-8fe2-387f167fc70d	t
 23677baa-69b5-4d4f-bed7-eb3c3fa0462b	a6dc6bd4-6b74-43d6-8f61-86abd29754d6	f
+83b6664d-539e-4bed-a376-685d50e40b98	b7f3f02b-6bcb-4ed0-8d23-9fcf556e2243	f
+83b6664d-539e-4bed-a376-685d50e40b98	2714f410-8ea1-4442-b110-09d56464c942	t
+83b6664d-539e-4bed-a376-685d50e40b98	26d881ea-f02a-4da4-a770-096c22dcf2b6	t
+83b6664d-539e-4bed-a376-685d50e40b98	424886ac-3b5a-446c-a0f8-2d2cd6474e44	t
+83b6664d-539e-4bed-a376-685d50e40b98	1e15434a-7f6c-415b-bb60-f84f0edb53d7	t
+83b6664d-539e-4bed-a376-685d50e40b98	38509398-011e-46eb-9444-8719ee1ccbe9	f
+83b6664d-539e-4bed-a376-685d50e40b98	9749151c-c4bd-4925-b7f6-2e141385a4eb	f
+83b6664d-539e-4bed-a376-685d50e40b98	1343b2a3-ff3c-4588-a0e3-7372006e3cf9	t
+83b6664d-539e-4bed-a376-685d50e40b98	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee	t
+83b6664d-539e-4bed-a376-685d50e40b98	2753e1d9-77a7-4059-8465-fa23a6b418c4	f
+83b6664d-539e-4bed-a376-685d50e40b98	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc	t
+83b6664d-539e-4bed-a376-685d50e40b98	ac70839b-f142-47ab-93cf-f21d06d1f546	t
+83b6664d-539e-4bed-a376-685d50e40b98	d21bbe72-4cc0-4637-aaab-c6beafce7e57	f
 \.
 
 
@@ -2174,6 +2663,56 @@ ad6b0545-1125-494a-86a2-1c4993c199e8	917b4f65-b74a-4d60-9b9f-f264bc45e4ca	t	${ro
 dca72013-fbc3-49f3-8a89-d70506667833	a84af477-3b7f-47f1-8d44-fe2abade00fd	t	${role_impersonation}	impersonation	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	a84af477-3b7f-47f1-8d44-fe2abade00fd	\N
 29b42e5e-2d03-4b56-bf89-f9f05672540f	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	f	${role_offline-access}	offline_access	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N	\N
 9e63cdf7-de90-4650-9cba-c4b8231d41d1	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	f	${role_uma_authorization}	uma_authorization	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	\N	\N
+929392ee-0474-4ed0-a64e-9b0132025c91	83b6664d-539e-4bed-a376-685d50e40b98	f	${role_default-roles}	default-roles-loci-realm	83b6664d-539e-4bed-a376-685d50e40b98	\N	\N
+97cdd578-f09a-469d-8fa9-07e5cfd0ddd6	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_create-client}	create-client	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+3c351879-cdd9-4d7f-800e-ed0fa297e89a	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-realm}	view-realm	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+c08d5146-f9ad-44a3-9045-3f124fbbc611	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-users}	view-users	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+a2fcaf11-7f18-4bd4-aafe-600399ab4f6b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-clients}	view-clients	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+7afe2564-ae4e-4726-8a8c-325955c81051	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-events}	view-events	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+826f2d89-3b22-4fd6-802a-5a0c3c43c5ce	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-identity-providers}	view-identity-providers	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+cf2b4ef7-efa8-49f7-9e6d-62180e9cc8c2	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_view-authorization}	view-authorization	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+ff96cf69-dca1-41e9-b091-b671981244b0	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-realm}	manage-realm	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+4094aab7-bb3d-4074-bf69-71d2983654d5	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-users}	manage-users	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+af1d6d17-e883-4741-b960-a206f0d4ddb0	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-clients}	manage-clients	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+b2dd0b70-fd7e-4aa1-bfd9-1e36bf241d3f	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-events}	manage-events	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+2819ea86-1181-4a6e-937e-b1d1e4c0ab8f	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-identity-providers}	manage-identity-providers	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+31712d53-52a5-4dc8-bc88-cd7a134c4112	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_manage-authorization}	manage-authorization	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+91cb9c72-6c2c-46ab-a520-1d83d57b5534	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_query-users}	query-users	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+7f5a11e9-64e8-4153-b2df-0b8d5fece0ce	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_query-clients}	query-clients	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+30628cbf-9650-4d0d-9d53-20a855343a70	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_query-realms}	query-realms	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+7a4a60fc-ad96-4636-9b4e-46f4f34246d8	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_query-groups}	query-groups	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+fd6368e9-9e26-469e-8d79-707f3c20354a	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_realm-admin}	realm-admin	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+abfd79ad-9ca7-4f0b-b54b-78a9c1e9f28e	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_create-client}	create-client	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+8f94747b-5e4b-4d79-bf0c-cd4923506035	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-realm}	view-realm	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+4009714e-eefe-46d4-9b37-639a6edfa501	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-users}	view-users	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+221f3b69-a59e-4a34-a95a-71f10cef4e0a	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-clients}	view-clients	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+5160c2df-3ab3-465b-b113-a61e60faf3bf	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-events}	view-events	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+ae3061fa-e4e7-4bf4-a3af-ca8d12cdb57d	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-identity-providers}	view-identity-providers	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+4e989ddd-8be8-4533-bfde-cad630193577	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_view-authorization}	view-authorization	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+ffb45a5a-3d46-434b-910a-2894fae5d4d9	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-realm}	manage-realm	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+808637e3-7023-4d84-a56a-4f51c7ec23c4	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-users}	manage-users	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+b1939686-0827-4787-a141-9e7dd5fc1b82	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-clients}	manage-clients	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+6bf59d64-e73b-44b6-93cc-75d66c644214	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-events}	manage-events	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+fdf28825-1691-44e5-88c3-2c8c9a0aa41e	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-identity-providers}	manage-identity-providers	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+dd7c767b-2b46-4089-a64a-97fd1456b645	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_manage-authorization}	manage-authorization	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+38244948-f337-4b8b-9c15-fdc672bc80f9	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_query-users}	query-users	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+0cf5be44-ba63-47c2-b752-662ef0a5885b	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_query-clients}	query-clients	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+995efc57-65a8-4262-9f91-7b9d83580c90	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_query-realms}	query-realms	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+7d52ab89-86c3-4b57-bab0-02bbe460212e	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_query-groups}	query-groups	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+f24cb736-a373-4bd6-a34a-ab059b81f98f	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_view-profile}	view-profile	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+710ed846-759e-45bc-afa4-bb5ef183d08c	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_manage-account}	manage-account	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+4862f2b4-4e36-42cd-a524-6dddbb43e551	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_manage-account-links}	manage-account-links	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+43ca2f26-9aa7-47d7-8773-c808b2435278	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_view-applications}	view-applications	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+b39c73a7-84b1-40ff-9fd9-6f314c9ede7a	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_view-consent}	view-consent	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+2e0714ed-6fbf-47eb-ae88-59ce44d6ed3b	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_manage-consent}	manage-consent	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+cd9c2212-1347-472e-8e9f-20be2bfc2ec2	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_view-groups}	view-groups	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+50118dde-4418-4aad-aceb-8c7b45903b0b	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	t	${role_delete-account}	delete-account	83b6664d-539e-4bed-a376-685d50e40b98	cb847cf7-5d97-441b-b7dd-a6f1a47689a2	\N
+863aaaa1-fa1b-4882-8073-63dba9ff2a02	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	t	${role_impersonation}	impersonation	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	\N
+a7120f7b-a46b-4f6a-9e97-0eea0f64174a	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	t	${role_impersonation}	impersonation	83b6664d-539e-4bed-a376-685d50e40b98	1b01f7e0-ad45-4cd7-8adb-119a1d9316bb	\N
+ab8a75b3-f452-4310-9885-40c2c6c74704	81fb0324-8f89-4cb7-bc31-8af536e10b7e	t	${role_read-token}	read-token	83b6664d-539e-4bed-a376-685d50e40b98	81fb0324-8f89-4cb7-bc31-8af536e10b7e	\N
+6d7b0d9a-0ac1-481e-aebb-8acd9d5c3e39	83b6664d-539e-4bed-a376-685d50e40b98	f	${role_offline-access}	offline_access	83b6664d-539e-4bed-a376-685d50e40b98	\N	\N
+eb9be962-f203-49c6-9075-ce80642bf363	83b6664d-539e-4bed-a376-685d50e40b98	f	${role_uma_authorization}	uma_authorization	83b6664d-539e-4bed-a376-685d50e40b98	\N	\N
+5df2f1e3-7508-4fbb-889f-c8b70f84ec3b	83b6664d-539e-4bed-a376-685d50e40b98	f		user	83b6664d-539e-4bed-a376-685d50e40b98	\N	\N
 \.
 
 
@@ -2191,7 +2730,9 @@ qamxe	26.0.0	1762683258
 --
 
 COPY public.offline_client_session (user_session_id, client_id, offline_flag, "timestamp", data, client_storage_provider, external_client_id, version) FROM stdin;
-37c8b238-1d91-498b-ac22-05bcf4f0bae6	8eeda11d-42fa-4c85-bb09-bd17511aa472	0	1762683696	{"authMethod":"openid-connect","redirectUri":"http://localhost:9090/admin/master/console/","notes":{"clientId":"8eeda11d-42fa-4c85-bb09-bd17511aa472","iss":"http://localhost:9090/realms/master","startedAt":"1762683693","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"e4100de3-9004-4875-9157-3049e5b2c3c4","response_mode":"query","scope":"openid","userSessionStartedAt":"1762683692","redirect_uri":"http://localhost:9090/admin/master/console/","state":"e5d400cd-30f5-4ab3-a27c-e7b651741971","code_challenge":"nWnrwh8M-M1wCS2BSuNnPY2njcMbWeEgsNs4nS7OApw"}}	local	local	1
+531a1463-dc50-4652-b3d7-c88f7dc26b60	8eeda11d-42fa-4c85-bb09-bd17511aa472	0	1762689267	{"authMethod":"openid-connect","redirectUri":"http://localhost:9090/admin/master/console/","notes":{"clientId":"8eeda11d-42fa-4c85-bb09-bd17511aa472","iss":"http://localhost:9090/realms/master","startedAt":"1762687985","response_type":"code","level-of-authentication":"-1","code_challenge_method":"S256","nonce":"624c1005-0c1c-43ab-b077-2e3eb199a4dd","response_mode":"query","scope":"openid","userSessionStartedAt":"1762687984","redirect_uri":"http://localhost:9090/admin/master/console/","state":"fb878810-806b-4178-a57f-d81f4483e6cd","code_challenge":"x-vBvA1bcuzYDOypO_slg_JrRjOB4u93Uptn2nCNTQc"}}	local	local	12
+2e55fd33-4004-47e6-9fcb-7574f3f855e0	e85deedd-b2fb-47d3-acef-508423a77f22	0	1762689349	{"authMethod":"openid-connect","notes":{"clientId":"e85deedd-b2fb-47d3-acef-508423a77f22","userSessionStartedAt":"1762689348","iss":"http://127.0.0.1:9090/realms/loci-realm","startedAt":"1762689348","level-of-authentication":"-1"}}	local	local	0
+6f9264e4-4d1e-4b1a-9eff-caccb45bd88a	e85deedd-b2fb-47d3-acef-508423a77f22	0	1762689361	{"authMethod":"openid-connect","notes":{"clientId":"e85deedd-b2fb-47d3-acef-508423a77f22","userSessionStartedAt":"1762689361","iss":"http://127.0.0.1:9090/realms/loci-realm","startedAt":"1762689361","level-of-authentication":"-1"}}	local	local	0
 \.
 
 
@@ -2200,7 +2741,9 @@ COPY public.offline_client_session (user_session_id, client_id, offline_flag, "t
 --
 
 COPY public.offline_user_session (user_session_id, user_id, realm_id, created_on, offline_flag, data, last_session_refresh, broker_session_id, version) FROM stdin;
-37c8b238-1d91-498b-ac22-05bcf4f0bae6	215946ae-82c4-499d-ab37-82f2e3f28b48	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	1762683692	0	{"ipAddress":"172.22.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMjIuMC4xIiwib3MiOiJMaW51eCIsIm9zVmVyc2lvbiI6IlVua25vd24iLCJicm93c2VyIjoiRmlyZWZveC8xNDMuMCIsImRldmljZSI6Ik90aGVyIiwibGFzdEFjY2VzcyI6MCwibW9iaWxlIjpmYWxzZX0=","AUTH_TIME":"1762683693","authenticators-completed":"{\\"cecf6950-4288-45ac-bc28-768e2455c72b\\":1762683692}"},"state":"LOGGED_IN"}	1762683696	\N	1
+531a1463-dc50-4652-b3d7-c88f7dc26b60	215946ae-82c4-499d-ab37-82f2e3f28b48	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	1762687984	0	{"ipAddress":"172.22.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMjIuMC4xIiwib3MiOiJMaW51eCIsIm9zVmVyc2lvbiI6IlVua25vd24iLCJicm93c2VyIjoiRmlyZWZveC8xNDMuMCIsImRldmljZSI6Ik90aGVyIiwibGFzdEFjY2VzcyI6MCwibW9iaWxlIjpmYWxzZX0=","AUTH_TIME":"1762687985","authenticators-completed":"{\\"cecf6950-4288-45ac-bc28-768e2455c72b\\":1762687984}"},"state":"LOGGED_IN"}	1762689267	\N	12
+2e55fd33-4004-47e6-9fcb-7574f3f855e0	be4129e1-7a3e-4788-a8b6-17cf25d31a86	83b6664d-539e-4bed-a376-685d50e40b98	1762689348	0	{"ipAddress":"172.22.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMjIuMC4xIiwib3MiOiJPdGhlciIsIm9zVmVyc2lvbiI6IlVua25vd24iLCJicm93c2VyIjoiY3VybC84LjE2LjAiLCJkZXZpY2UiOiJPdGhlciIsImxhc3RBY2Nlc3MiOjAsIm1vYmlsZSI6ZmFsc2V9","authenticators-completed":"{\\"63b7f7fd-ca02-4f55-b491-d6261eeeb2b4\\":1762689348,\\"9dbdd003-a6d6-4efd-b2c0-7783c3102b80\\":1762689348}"},"state":"LOGGED_IN"}	1762689349	\N	0
+6f9264e4-4d1e-4b1a-9eff-caccb45bd88a	be4129e1-7a3e-4788-a8b6-17cf25d31a86	83b6664d-539e-4bed-a376-685d50e40b98	1762689361	0	{"ipAddress":"172.22.0.1","authMethod":"openid-connect","rememberMe":false,"started":0,"notes":{"KC_DEVICE_NOTE":"eyJpcEFkZHJlc3MiOiIxNzIuMjIuMC4xIiwib3MiOiJPdGhlciIsIm9zVmVyc2lvbiI6IlVua25vd24iLCJicm93c2VyIjoiY3VybC84LjE2LjAiLCJkZXZpY2UiOiJPdGhlciIsImxhc3RBY2Nlc3MiOjAsIm1vYmlsZSI6ZmFsc2V9","authenticators-completed":"{\\"63b7f7fd-ca02-4f55-b491-d6261eeeb2b4\\":1762689360,\\"9dbdd003-a6d6-4efd-b2c0-7783c3102b80\\":1762689361}"},"state":"LOGGED_IN"}	1762689361	\N	0
 \.
 
 
@@ -2266,6 +2809,39 @@ d4dd1deb-31a0-471a-88ee-22f10afa6a13	upn	openid-connect	oidc-usermodel-attribute
 f03ec11b-0c37-4ab3-9504-d5cf28777378	auth_time	openid-connect	oidc-usersessionmodel-note-mapper	\N	a745363a-6438-44be-8fe2-387f167fc70d
 dfb344a1-fd17-4785-846a-0260d9fa7f2e	sub	openid-connect	oidc-sub-mapper	\N	a745363a-6438-44be-8fe2-387f167fc70d
 ed12b37e-3ad0-4709-838b-1bf9ecf49375	organization	openid-connect	oidc-organization-membership-mapper	\N	a6dc6bd4-6b74-43d6-8f61-86abd29754d6
+b122ad6e-56bc-4dd3-b59a-22bd944e8cb0	audience resolve	openid-connect	oidc-audience-resolve-mapper	1512bb33-3ef4-4dad-af1f-47081a2a75dc	\N
+58e945c2-28cf-4f53-8add-aed444f92a27	role list	saml	saml-role-list-mapper	\N	2714f410-8ea1-4442-b110-09d56464c942
+153fa251-cd25-48f4-9bcf-c6909d808765	organization	saml	saml-organization-membership-mapper	\N	26d881ea-f02a-4da4-a770-096c22dcf2b6
+80592ea1-cf85-4beb-9021-ed452c7bd293	full name	openid-connect	oidc-full-name-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+46ece9ad-d834-417f-b776-c57aeab5cd07	family name	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+b1d9a82a-d1c2-4200-b351-e53021527707	given name	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	middle name	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+deb37ced-49bd-4237-b3ab-65fc416ad14f	nickname	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+5dde0842-f155-4f2b-9e61-b3967ae0a857	username	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+258a5ec2-f843-4c10-906d-a6503d3980fb	profile	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	picture	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	website	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	gender	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	birthdate	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	zoneinfo	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	locale	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+b605f71d-5400-4282-a700-b288d5d7eb14	updated at	openid-connect	oidc-usermodel-attribute-mapper	\N	424886ac-3b5a-446c-a0f8-2d2cd6474e44
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	email	openid-connect	oidc-usermodel-attribute-mapper	\N	1e15434a-7f6c-415b-bb60-f84f0edb53d7
+8813051b-d5db-4a74-82e3-440d85bd6d1f	email verified	openid-connect	oidc-usermodel-property-mapper	\N	1e15434a-7f6c-415b-bb60-f84f0edb53d7
+889dd164-8ceb-4f81-ba6e-c407504a095b	address	openid-connect	oidc-address-mapper	\N	38509398-011e-46eb-9444-8719ee1ccbe9
+435c261a-73d4-47e1-a692-0ebd814c2127	phone number	openid-connect	oidc-usermodel-attribute-mapper	\N	9749151c-c4bd-4925-b7f6-2e141385a4eb
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	phone number verified	openid-connect	oidc-usermodel-attribute-mapper	\N	9749151c-c4bd-4925-b7f6-2e141385a4eb
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	realm roles	openid-connect	oidc-usermodel-realm-role-mapper	\N	1343b2a3-ff3c-4588-a0e3-7372006e3cf9
+6330cb1c-d510-4162-aa76-14fee2a149b9	client roles	openid-connect	oidc-usermodel-client-role-mapper	\N	1343b2a3-ff3c-4588-a0e3-7372006e3cf9
+f57565ee-061d-45dd-ae51-83f3a62959ab	audience resolve	openid-connect	oidc-audience-resolve-mapper	\N	1343b2a3-ff3c-4588-a0e3-7372006e3cf9
+acd8cbcc-451d-435a-8c40-dc45ea11930f	allowed web origins	openid-connect	oidc-allowed-origins-mapper	\N	ea76ec75-71a8-42a6-bdfd-dfcca0fc7aee
+e136e954-04d6-4224-bdb0-336990f7b794	upn	openid-connect	oidc-usermodel-attribute-mapper	\N	2753e1d9-77a7-4059-8465-fa23a6b418c4
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	groups	openid-connect	oidc-usermodel-realm-role-mapper	\N	2753e1d9-77a7-4059-8465-fa23a6b418c4
+24baf309-3ddf-4d72-bbb9-6cf1b5f23312	acr loa level	openid-connect	oidc-acr-mapper	\N	b1cd614d-0091-4d4e-a2fa-28b3d76ae2bc
+2caf2e3b-868c-48c5-a684-532529b920ed	auth_time	openid-connect	oidc-usersessionmodel-note-mapper	\N	ac70839b-f142-47ab-93cf-f21d06d1f546
+f01993e4-4569-476a-927b-c5586ca133e4	sub	openid-connect	oidc-sub-mapper	\N	ac70839b-f142-47ab-93cf-f21d06d1f546
+99eee510-c44b-4d69-90d8-66de184021af	organization	openid-connect	oidc-organization-membership-mapper	\N	d21bbe72-4cc0-4637-aaab-c6beafce7e57
+fede70dd-d1c5-4408-a082-a5f0364195d6	locale	openid-connect	oidc-usermodel-attribute-mapper	ba4de397-daf8-404b-ad79-249e4d09a713	\N
 \.
 
 
@@ -2464,6 +3040,196 @@ ed12b37e-3ad0-4709-838b-1bf9ecf49375	true	id.token.claim
 ed12b37e-3ad0-4709-838b-1bf9ecf49375	true	access.token.claim
 ed12b37e-3ad0-4709-838b-1bf9ecf49375	organization	claim.name
 ed12b37e-3ad0-4709-838b-1bf9ecf49375	String	jsonType.label
+58e945c2-28cf-4f53-8add-aed444f92a27	false	single
+58e945c2-28cf-4f53-8add-aed444f92a27	Basic	attribute.nameformat
+58e945c2-28cf-4f53-8add-aed444f92a27	Role	attribute.name
+258a5ec2-f843-4c10-906d-a6503d3980fb	true	introspection.token.claim
+258a5ec2-f843-4c10-906d-a6503d3980fb	true	userinfo.token.claim
+258a5ec2-f843-4c10-906d-a6503d3980fb	profile	user.attribute
+258a5ec2-f843-4c10-906d-a6503d3980fb	true	id.token.claim
+258a5ec2-f843-4c10-906d-a6503d3980fb	true	access.token.claim
+258a5ec2-f843-4c10-906d-a6503d3980fb	profile	claim.name
+258a5ec2-f843-4c10-906d-a6503d3980fb	String	jsonType.label
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	true	introspection.token.claim
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	true	userinfo.token.claim
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	gender	user.attribute
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	true	id.token.claim
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	true	access.token.claim
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	gender	claim.name
+391d2d4b-263f-4a6b-9a3d-593c2aee3556	String	jsonType.label
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	true	introspection.token.claim
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	true	userinfo.token.claim
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	birthdate	user.attribute
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	true	id.token.claim
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	true	access.token.claim
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	birthdate	claim.name
+3d6eeab9-d603-4896-9ed4-69b41a007b4e	String	jsonType.label
+46ece9ad-d834-417f-b776-c57aeab5cd07	true	introspection.token.claim
+46ece9ad-d834-417f-b776-c57aeab5cd07	true	userinfo.token.claim
+46ece9ad-d834-417f-b776-c57aeab5cd07	lastName	user.attribute
+46ece9ad-d834-417f-b776-c57aeab5cd07	true	id.token.claim
+46ece9ad-d834-417f-b776-c57aeab5cd07	true	access.token.claim
+46ece9ad-d834-417f-b776-c57aeab5cd07	family_name	claim.name
+46ece9ad-d834-417f-b776-c57aeab5cd07	String	jsonType.label
+5dde0842-f155-4f2b-9e61-b3967ae0a857	true	introspection.token.claim
+5dde0842-f155-4f2b-9e61-b3967ae0a857	true	userinfo.token.claim
+5dde0842-f155-4f2b-9e61-b3967ae0a857	username	user.attribute
+5dde0842-f155-4f2b-9e61-b3967ae0a857	true	id.token.claim
+5dde0842-f155-4f2b-9e61-b3967ae0a857	true	access.token.claim
+5dde0842-f155-4f2b-9e61-b3967ae0a857	preferred_username	claim.name
+5dde0842-f155-4f2b-9e61-b3967ae0a857	String	jsonType.label
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	true	introspection.token.claim
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	true	userinfo.token.claim
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	middleName	user.attribute
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	true	id.token.claim
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	true	access.token.claim
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	middle_name	claim.name
+7e7a6a27-bcf1-4cdc-8668-149916b2169b	String	jsonType.label
+80592ea1-cf85-4beb-9021-ed452c7bd293	true	introspection.token.claim
+80592ea1-cf85-4beb-9021-ed452c7bd293	true	userinfo.token.claim
+80592ea1-cf85-4beb-9021-ed452c7bd293	true	id.token.claim
+80592ea1-cf85-4beb-9021-ed452c7bd293	true	access.token.claim
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	true	introspection.token.claim
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	true	userinfo.token.claim
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	picture	user.attribute
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	true	id.token.claim
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	true	access.token.claim
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	picture	claim.name
+92baff2a-9f19-4614-a5a8-5dd0c4e24c39	String	jsonType.label
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	true	introspection.token.claim
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	true	userinfo.token.claim
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	website	user.attribute
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	true	id.token.claim
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	true	access.token.claim
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	website	claim.name
+a51f9041-9d8d-498a-b62b-a5c4e24141b6	String	jsonType.label
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	true	introspection.token.claim
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	true	userinfo.token.claim
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	zoneinfo	user.attribute
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	true	id.token.claim
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	true	access.token.claim
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	zoneinfo	claim.name
+afc27d87-0a4a-4d6c-b8cb-59b80d0aca7d	String	jsonType.label
+b1d9a82a-d1c2-4200-b351-e53021527707	true	introspection.token.claim
+b1d9a82a-d1c2-4200-b351-e53021527707	true	userinfo.token.claim
+b1d9a82a-d1c2-4200-b351-e53021527707	firstName	user.attribute
+b1d9a82a-d1c2-4200-b351-e53021527707	true	id.token.claim
+b1d9a82a-d1c2-4200-b351-e53021527707	true	access.token.claim
+b1d9a82a-d1c2-4200-b351-e53021527707	given_name	claim.name
+b1d9a82a-d1c2-4200-b351-e53021527707	String	jsonType.label
+b605f71d-5400-4282-a700-b288d5d7eb14	true	introspection.token.claim
+b605f71d-5400-4282-a700-b288d5d7eb14	true	userinfo.token.claim
+b605f71d-5400-4282-a700-b288d5d7eb14	updatedAt	user.attribute
+b605f71d-5400-4282-a700-b288d5d7eb14	true	id.token.claim
+b605f71d-5400-4282-a700-b288d5d7eb14	true	access.token.claim
+b605f71d-5400-4282-a700-b288d5d7eb14	updated_at	claim.name
+b605f71d-5400-4282-a700-b288d5d7eb14	long	jsonType.label
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	true	introspection.token.claim
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	true	userinfo.token.claim
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	locale	user.attribute
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	true	id.token.claim
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	true	access.token.claim
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	locale	claim.name
+b8ca6d7d-1b82-4ae5-b158-3b61a3874813	String	jsonType.label
+deb37ced-49bd-4237-b3ab-65fc416ad14f	true	introspection.token.claim
+deb37ced-49bd-4237-b3ab-65fc416ad14f	true	userinfo.token.claim
+deb37ced-49bd-4237-b3ab-65fc416ad14f	nickname	user.attribute
+deb37ced-49bd-4237-b3ab-65fc416ad14f	true	id.token.claim
+deb37ced-49bd-4237-b3ab-65fc416ad14f	true	access.token.claim
+deb37ced-49bd-4237-b3ab-65fc416ad14f	nickname	claim.name
+deb37ced-49bd-4237-b3ab-65fc416ad14f	String	jsonType.label
+8813051b-d5db-4a74-82e3-440d85bd6d1f	true	introspection.token.claim
+8813051b-d5db-4a74-82e3-440d85bd6d1f	true	userinfo.token.claim
+8813051b-d5db-4a74-82e3-440d85bd6d1f	emailVerified	user.attribute
+8813051b-d5db-4a74-82e3-440d85bd6d1f	true	id.token.claim
+8813051b-d5db-4a74-82e3-440d85bd6d1f	true	access.token.claim
+8813051b-d5db-4a74-82e3-440d85bd6d1f	email_verified	claim.name
+8813051b-d5db-4a74-82e3-440d85bd6d1f	boolean	jsonType.label
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	true	introspection.token.claim
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	true	userinfo.token.claim
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	email	user.attribute
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	true	id.token.claim
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	true	access.token.claim
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	email	claim.name
+ae9358a3-2b41-4860-87e3-d24dd15d5d71	String	jsonType.label
+889dd164-8ceb-4f81-ba6e-c407504a095b	formatted	user.attribute.formatted
+889dd164-8ceb-4f81-ba6e-c407504a095b	country	user.attribute.country
+889dd164-8ceb-4f81-ba6e-c407504a095b	true	introspection.token.claim
+889dd164-8ceb-4f81-ba6e-c407504a095b	postal_code	user.attribute.postal_code
+889dd164-8ceb-4f81-ba6e-c407504a095b	true	userinfo.token.claim
+889dd164-8ceb-4f81-ba6e-c407504a095b	street	user.attribute.street
+889dd164-8ceb-4f81-ba6e-c407504a095b	true	id.token.claim
+889dd164-8ceb-4f81-ba6e-c407504a095b	region	user.attribute.region
+889dd164-8ceb-4f81-ba6e-c407504a095b	true	access.token.claim
+889dd164-8ceb-4f81-ba6e-c407504a095b	locality	user.attribute.locality
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	true	introspection.token.claim
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	true	userinfo.token.claim
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	phoneNumberVerified	user.attribute
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	true	id.token.claim
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	true	access.token.claim
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	phone_number_verified	claim.name
+0a7b1fe6-0cd1-4df4-8651-5157a202e9e8	boolean	jsonType.label
+435c261a-73d4-47e1-a692-0ebd814c2127	true	introspection.token.claim
+435c261a-73d4-47e1-a692-0ebd814c2127	true	userinfo.token.claim
+435c261a-73d4-47e1-a692-0ebd814c2127	phoneNumber	user.attribute
+435c261a-73d4-47e1-a692-0ebd814c2127	true	id.token.claim
+435c261a-73d4-47e1-a692-0ebd814c2127	true	access.token.claim
+435c261a-73d4-47e1-a692-0ebd814c2127	phone_number	claim.name
+435c261a-73d4-47e1-a692-0ebd814c2127	String	jsonType.label
+6330cb1c-d510-4162-aa76-14fee2a149b9	true	introspection.token.claim
+6330cb1c-d510-4162-aa76-14fee2a149b9	true	multivalued
+6330cb1c-d510-4162-aa76-14fee2a149b9	foo	user.attribute
+6330cb1c-d510-4162-aa76-14fee2a149b9	true	access.token.claim
+6330cb1c-d510-4162-aa76-14fee2a149b9	resource_access.${client_id}.roles	claim.name
+6330cb1c-d510-4162-aa76-14fee2a149b9	String	jsonType.label
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	true	introspection.token.claim
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	true	multivalued
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	foo	user.attribute
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	true	access.token.claim
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	realm_access.roles	claim.name
+8e4d50f6-3d11-45c7-bd5e-99bcc95ea419	String	jsonType.label
+f57565ee-061d-45dd-ae51-83f3a62959ab	true	introspection.token.claim
+f57565ee-061d-45dd-ae51-83f3a62959ab	true	access.token.claim
+acd8cbcc-451d-435a-8c40-dc45ea11930f	true	introspection.token.claim
+acd8cbcc-451d-435a-8c40-dc45ea11930f	true	access.token.claim
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	true	introspection.token.claim
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	true	multivalued
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	foo	user.attribute
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	true	id.token.claim
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	true	access.token.claim
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	groups	claim.name
+a5f42024-b607-4292-b1d6-a9d4191bb4e8	String	jsonType.label
+e136e954-04d6-4224-bdb0-336990f7b794	true	introspection.token.claim
+e136e954-04d6-4224-bdb0-336990f7b794	true	userinfo.token.claim
+e136e954-04d6-4224-bdb0-336990f7b794	username	user.attribute
+e136e954-04d6-4224-bdb0-336990f7b794	true	id.token.claim
+e136e954-04d6-4224-bdb0-336990f7b794	true	access.token.claim
+e136e954-04d6-4224-bdb0-336990f7b794	upn	claim.name
+e136e954-04d6-4224-bdb0-336990f7b794	String	jsonType.label
+24baf309-3ddf-4d72-bbb9-6cf1b5f23312	true	introspection.token.claim
+24baf309-3ddf-4d72-bbb9-6cf1b5f23312	true	id.token.claim
+24baf309-3ddf-4d72-bbb9-6cf1b5f23312	true	access.token.claim
+2caf2e3b-868c-48c5-a684-532529b920ed	AUTH_TIME	user.session.note
+2caf2e3b-868c-48c5-a684-532529b920ed	true	introspection.token.claim
+2caf2e3b-868c-48c5-a684-532529b920ed	true	id.token.claim
+2caf2e3b-868c-48c5-a684-532529b920ed	true	access.token.claim
+2caf2e3b-868c-48c5-a684-532529b920ed	auth_time	claim.name
+2caf2e3b-868c-48c5-a684-532529b920ed	long	jsonType.label
+f01993e4-4569-476a-927b-c5586ca133e4	true	introspection.token.claim
+f01993e4-4569-476a-927b-c5586ca133e4	true	access.token.claim
+99eee510-c44b-4d69-90d8-66de184021af	true	introspection.token.claim
+99eee510-c44b-4d69-90d8-66de184021af	true	multivalued
+99eee510-c44b-4d69-90d8-66de184021af	true	id.token.claim
+99eee510-c44b-4d69-90d8-66de184021af	true	access.token.claim
+99eee510-c44b-4d69-90d8-66de184021af	organization	claim.name
+99eee510-c44b-4d69-90d8-66de184021af	String	jsonType.label
+fede70dd-d1c5-4408-a082-a5f0364195d6	true	introspection.token.claim
+fede70dd-d1c5-4408-a082-a5f0364195d6	true	userinfo.token.claim
+fede70dd-d1c5-4408-a082-a5f0364195d6	locale	user.attribute
+fede70dd-d1c5-4408-a082-a5f0364195d6	true	id.token.claim
+fede70dd-d1c5-4408-a082-a5f0364195d6	true	access.token.claim
+fede70dd-d1c5-4408-a082-a5f0364195d6	locale	claim.name
+fede70dd-d1c5-4408-a082-a5f0364195d6	String	jsonType.label
 \.
 
 
@@ -2472,6 +3238,7 @@ ed12b37e-3ad0-4709-838b-1bf9ecf49375	String	jsonType.label
 --
 
 COPY public.realm (id, access_code_lifespan, user_action_lifespan, access_token_lifespan, account_theme, admin_theme, email_theme, enabled, events_enabled, events_expiration, login_theme, name, not_before, password_policy, registration_allowed, remember_me, reset_password_allowed, social, ssl_required, sso_idle_timeout, sso_max_lifespan, update_profile_on_soc_login, verify_email, master_admin_client, login_lifespan, internationalization_enabled, default_locale, reg_email_as_username, admin_events_enabled, admin_events_details_enabled, edit_username_allowed, otp_policy_counter, otp_policy_window, otp_policy_period, otp_policy_digits, otp_policy_alg, otp_policy_type, browser_flow, registration_flow, direct_grant_flow, reset_credentials_flow, client_auth_flow, offline_session_idle_timeout, revoke_refresh_token, access_token_life_implicit, login_with_email_allowed, duplicate_emails_allowed, docker_auth_flow, refresh_token_max_reuse, allow_user_managed_access, sso_max_lifespan_remember_me, sso_idle_timeout_remember_me, default_role) FROM stdin;
+83b6664d-539e-4bed-a376-685d50e40b98	60	300	300	\N	\N	\N	t	f	0	\N	loci-realm	0	\N	f	f	f	f	EXTERNAL	1800	36000	f	f	b9cdf971-5d49-40d1-98a6-bbf1aa87f7ad	1800	f	\N	t	f	f	f	0	1	30	6	HmacSHA1	totp	801e570d-bc15-45e3-9f8e-afe9f8f28dec	8c356fe3-6843-440d-ac93-b4cc6352781f	d7b8234b-3d04-4263-ac07-79794e3fb8c0	2ec9ca75-4f99-43e9-816d-708c9a550838	05607ab5-8839-424c-b1e7-7f0ccad2063e	2592000	f	900	t	f	08caf47c-2dda-42d5-a33d-3df1271e703c	0	f	0	0	929392ee-0474-4ed0-a64e-9b0132025c91
 23677baa-69b5-4d4f-bed7-eb3c3fa0462b	60	300	60	\N	\N	\N	t	f	0	\N	master	0	\N	f	f	f	f	EXTERNAL	1800	36000	f	f	a84af477-3b7f-47f1-8d44-fe2abade00fd	1800	f	\N	f	f	f	f	0	1	30	6	HmacSHA1	totp	753c8b48-ba3e-42b3-bbf0-38ec8165eba7	0cfa8ad1-b2ac-457a-8603-8fae929732b5	a5766eca-1b36-4d33-9346-435533b7b8dd	09add935-4514-42c3-86c3-7062f5dc3e39	cd82d74c-695c-4256-b7fb-1caf60a35be1	2592000	f	900	t	f	9130db23-c271-4ae8-8461-d00c9acfb762	0	f	0	0	821e4bb0-9d76-4771-bc20-8e9083ac457d
 \.
 
@@ -2505,6 +3272,62 @@ displayNameHtml	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	<div class="kc-logo-text"><
 defaultSignatureAlgorithm	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	RS256
 offlineSessionMaxLifespanEnabled	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	false
 offlineSessionMaxLifespan	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	5184000
+bruteForceProtected	83b6664d-539e-4bed-a376-685d50e40b98	false
+permanentLockout	83b6664d-539e-4bed-a376-685d50e40b98	false
+maxTemporaryLockouts	83b6664d-539e-4bed-a376-685d50e40b98	0
+maxFailureWaitSeconds	83b6664d-539e-4bed-a376-685d50e40b98	900
+minimumQuickLoginWaitSeconds	83b6664d-539e-4bed-a376-685d50e40b98	60
+waitIncrementSeconds	83b6664d-539e-4bed-a376-685d50e40b98	60
+quickLoginCheckMilliSeconds	83b6664d-539e-4bed-a376-685d50e40b98	1000
+maxDeltaTimeSeconds	83b6664d-539e-4bed-a376-685d50e40b98	43200
+failureFactor	83b6664d-539e-4bed-a376-685d50e40b98	30
+realmReusableOtpCode	83b6664d-539e-4bed-a376-685d50e40b98	false
+defaultSignatureAlgorithm	83b6664d-539e-4bed-a376-685d50e40b98	RS256
+offlineSessionMaxLifespanEnabled	83b6664d-539e-4bed-a376-685d50e40b98	false
+offlineSessionMaxLifespan	83b6664d-539e-4bed-a376-685d50e40b98	5184000
+actionTokenGeneratedByAdminLifespan	83b6664d-539e-4bed-a376-685d50e40b98	43200
+actionTokenGeneratedByUserLifespan	83b6664d-539e-4bed-a376-685d50e40b98	300
+oauth2DeviceCodeLifespan	83b6664d-539e-4bed-a376-685d50e40b98	600
+oauth2DevicePollingInterval	83b6664d-539e-4bed-a376-685d50e40b98	5
+webAuthnPolicyRpEntityName	83b6664d-539e-4bed-a376-685d50e40b98	keycloak
+webAuthnPolicySignatureAlgorithms	83b6664d-539e-4bed-a376-685d50e40b98	ES256,RS256
+webAuthnPolicyRpId	83b6664d-539e-4bed-a376-685d50e40b98	
+webAuthnPolicyAttestationConveyancePreference	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyAuthenticatorAttachment	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyRequireResidentKey	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyUserVerificationRequirement	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyCreateTimeout	83b6664d-539e-4bed-a376-685d50e40b98	0
+webAuthnPolicyAvoidSameAuthenticatorRegister	83b6664d-539e-4bed-a376-685d50e40b98	false
+webAuthnPolicyRpEntityNamePasswordless	83b6664d-539e-4bed-a376-685d50e40b98	keycloak
+webAuthnPolicySignatureAlgorithmsPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	ES256,RS256
+webAuthnPolicyRpIdPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	
+webAuthnPolicyAttestationConveyancePreferencePasswordless	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyAuthenticatorAttachmentPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyRequireResidentKeyPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyUserVerificationRequirementPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	not specified
+webAuthnPolicyCreateTimeoutPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	0
+webAuthnPolicyAvoidSameAuthenticatorRegisterPasswordless	83b6664d-539e-4bed-a376-685d50e40b98	false
+cibaBackchannelTokenDeliveryMode	83b6664d-539e-4bed-a376-685d50e40b98	poll
+cibaExpiresIn	83b6664d-539e-4bed-a376-685d50e40b98	120
+cibaInterval	83b6664d-539e-4bed-a376-685d50e40b98	5
+cibaAuthRequestedUserHint	83b6664d-539e-4bed-a376-685d50e40b98	login_hint
+parRequestUriLifespan	83b6664d-539e-4bed-a376-685d50e40b98	60
+firstBrokerLoginFlowId	83b6664d-539e-4bed-a376-685d50e40b98	668883be-9b51-42f6-9e35-cb35d7961852
+client-policies.profiles	83b6664d-539e-4bed-a376-685d50e40b98	{"profiles":[]}
+client-policies.policies	83b6664d-539e-4bed-a376-685d50e40b98	{"policies":[]}
+organizationsEnabled	83b6664d-539e-4bed-a376-685d50e40b98	false
+clientSessionIdleTimeout	83b6664d-539e-4bed-a376-685d50e40b98	0
+clientSessionMaxLifespan	83b6664d-539e-4bed-a376-685d50e40b98	0
+clientOfflineSessionIdleTimeout	83b6664d-539e-4bed-a376-685d50e40b98	0
+clientOfflineSessionMaxLifespan	83b6664d-539e-4bed-a376-685d50e40b98	0
+_browser_header.contentSecurityPolicyReportOnly	83b6664d-539e-4bed-a376-685d50e40b98	
+_browser_header.xContentTypeOptions	83b6664d-539e-4bed-a376-685d50e40b98	nosniff
+_browser_header.referrerPolicy	83b6664d-539e-4bed-a376-685d50e40b98	no-referrer
+_browser_header.xRobotsTag	83b6664d-539e-4bed-a376-685d50e40b98	none
+_browser_header.xFrameOptions	83b6664d-539e-4bed-a376-685d50e40b98	SAMEORIGIN
+_browser_header.contentSecurityPolicy	83b6664d-539e-4bed-a376-685d50e40b98	frame-src 'self'; frame-ancestors 'self'; object-src 'none';
+_browser_header.xXSSProtection	83b6664d-539e-4bed-a376-685d50e40b98	1; mode=block
+_browser_header.strictTransportSecurity	83b6664d-539e-4bed-a376-685d50e40b98	max-age=31536000; includeSubDomains
 \.
 
 
@@ -2530,6 +3353,7 @@ COPY public.realm_enabled_event_types (realm_id, value) FROM stdin;
 
 COPY public.realm_events_listeners (realm_id, value) FROM stdin;
 23677baa-69b5-4d4f-bed7-eb3c3fa0462b	jboss-logging
+83b6664d-539e-4bed-a376-685d50e40b98	jboss-logging
 \.
 
 
@@ -2547,6 +3371,7 @@ COPY public.realm_localizations (realm_id, locale, texts) FROM stdin;
 
 COPY public.realm_required_credential (type, form_label, input, secret, realm_id) FROM stdin;
 password	password	t	t	23677baa-69b5-4d4f-bed7-eb3c3fa0462b
+password	password	t	t	83b6664d-539e-4bed-a376-685d50e40b98
 \.
 
 
@@ -2574,6 +3399,14 @@ COPY public.redirect_uris (client_id, value) FROM stdin;
 917b4f65-b74a-4d60-9b9f-f264bc45e4ca	/realms/master/account/*
 9f185538-da56-4880-be80-f0cc3bfcd3cd	/realms/master/account/*
 8eeda11d-42fa-4c85-bb09-bd17511aa472	/admin/master/console/*
+cb847cf7-5d97-441b-b7dd-a6f1a47689a2	/realms/loci-realm/account/*
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	/realms/loci-realm/account/*
+ba4de397-daf8-404b-ad79-249e4d09a713	/admin/loci-realm/console/*
+e85deedd-b2fb-47d3-acef-508423a77f22	http://localhost:8080/*
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	http://192.168.1.21:4200/*
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	http://localhost:4200/*
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	http://192.168.1.21:4200/
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	http://localhost:4200/
 \.
 
 
@@ -2601,6 +3434,17 @@ COPY public.required_action_provider (id, alias, name, realm_id, enabled, defaul
 262dbcd8-9d9b-4af1-a85c-ce5808510b3e	webauthn-register	Webauthn Register	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	t	f	webauthn-register	70
 0e956367-0fb1-4e2b-a963-3499cd0a778b	webauthn-register-passwordless	Webauthn Register Passwordless	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	t	f	webauthn-register-passwordless	80
 1aa5c2d2-b7de-41a0-8e00-625bef5ef362	VERIFY_PROFILE	Verify Profile	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	t	f	VERIFY_PROFILE	90
+355ae509-2982-461f-ad49-4e7449f86e2a	VERIFY_EMAIL	Verify Email	83b6664d-539e-4bed-a376-685d50e40b98	t	f	VERIFY_EMAIL	50
+c4b9a15b-1c1d-4b39-983c-f0eb96e38b7f	UPDATE_PROFILE	Update Profile	83b6664d-539e-4bed-a376-685d50e40b98	t	f	UPDATE_PROFILE	40
+fa9b113a-9d37-4105-bcbf-c1d75231e0f5	CONFIGURE_TOTP	Configure OTP	83b6664d-539e-4bed-a376-685d50e40b98	t	f	CONFIGURE_TOTP	10
+678bad11-cbb5-46d7-80d4-705b1ed718b2	UPDATE_PASSWORD	Update Password	83b6664d-539e-4bed-a376-685d50e40b98	t	f	UPDATE_PASSWORD	30
+c62852d8-92e9-4f6a-9268-ae872545330c	TERMS_AND_CONDITIONS	Terms and Conditions	83b6664d-539e-4bed-a376-685d50e40b98	f	f	TERMS_AND_CONDITIONS	20
+1861cd23-dec9-41fc-b7fc-b9bd44a66c67	delete_account	Delete Account	83b6664d-539e-4bed-a376-685d50e40b98	f	f	delete_account	60
+d56106c5-83d8-4915-8c15-201079f6c847	delete_credential	Delete Credential	83b6664d-539e-4bed-a376-685d50e40b98	t	f	delete_credential	100
+71a3e751-e446-4b0c-8334-7f18e743dc01	update_user_locale	Update User Locale	83b6664d-539e-4bed-a376-685d50e40b98	t	f	update_user_locale	1000
+3487d0e9-89c8-4feb-ac0e-a57ae5f4e831	webauthn-register	Webauthn Register	83b6664d-539e-4bed-a376-685d50e40b98	t	f	webauthn-register	70
+37fcb0b0-2337-4780-9b2d-2e40b75370f7	webauthn-register-passwordless	Webauthn Register Passwordless	83b6664d-539e-4bed-a376-685d50e40b98	t	f	webauthn-register-passwordless	80
+58c53596-000b-4a36-9537-5b30905b44c1	VERIFY_PROFILE	Verify Profile	83b6664d-539e-4bed-a376-685d50e40b98	t	f	VERIFY_PROFILE	90
 \.
 
 
@@ -2699,6 +3543,8 @@ COPY public.role_attribute (id, role_id, name, value) FROM stdin;
 COPY public.scope_mapping (client_id, role_id) FROM stdin;
 9f185538-da56-4880-be80-f0cc3bfcd3cd	1a2b2e24-4a09-44f4-8617-d656a46178ad
 9f185538-da56-4880-be80-f0cc3bfcd3cd	1951d5d4-dc58-41c4-846b-6e76438d3543
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	cd9c2212-1347-472e-8e9f-20be2bfc2ec2
+1512bb33-3ef4-4dad-af1f-47081a2a75dc	710ed846-759e-45bc-afa4-bb5ef183d08c
 \.
 
 
@@ -2741,6 +3587,7 @@ COPY public.user_consent_client_scope (user_consent_id, scope_id) FROM stdin;
 
 COPY public.user_entity (id, email, email_constraint, email_verified, enabled, federation_link, first_name, last_name, realm_id, username, created_timestamp, service_account_client_link, not_before) FROM stdin;
 215946ae-82c4-499d-ab37-82f2e3f28b48	\N	c62da5eb-af6e-4442-8dd6-139fb25e1d28	f	t	\N	\N	\N	23677baa-69b5-4d4f-bed7-eb3c3fa0462b	admin	1762683267829	\N	0
+be4129e1-7a3e-4788-a8b6-17cf25d31a86	testuser1@gmail.com	testuser1@gmail.com	t	t	\N	John	Smith	83b6664d-539e-4bed-a376-685d50e40b98	testuser1@gmail.com	1762689192805	\N	0
 \.
 
 
@@ -2799,6 +3646,7 @@ COPY public.user_required_action (user_id, required_action) FROM stdin;
 COPY public.user_role_mapping (role_id, user_id) FROM stdin;
 821e4bb0-9d76-4771-bc20-8e9083ac457d	215946ae-82c4-499d-ab37-82f2e3f28b48
 db4ab77a-a58c-482b-b2ae-2090a009b1af	215946ae-82c4-499d-ab37-82f2e3f28b48
+929392ee-0474-4ed0-a64e-9b0132025c91	be4129e1-7a3e-4788-a8b6-17cf25d31a86
 \.
 
 
@@ -2816,6 +3664,9 @@ COPY public.username_login_failure (realm_id, username, failed_login_not_before,
 
 COPY public.web_origins (client_id, value) FROM stdin;
 8eeda11d-42fa-4c85-bb09-bd17511aa472	+
+ba4de397-daf8-404b-ad79-249e4d09a713	+
+e85deedd-b2fb-47d3-acef-508423a77f22	http://localhost:8080
+1946f9ea-72fe-4697-bf83-3dec92a8f8ee	*
 \.
 
 

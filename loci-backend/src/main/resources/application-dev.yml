@@ -14,7 +14,7 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/loci
+    url: jdbc:postgresql://localhost:5432/locidb
     username: admin
     password: admin
     hikari:
@@ -70,6 +70,6 @@ management:
 
 
 flyway:
-  url: jdbc:mysql://localhost:5432/loci
+  url: jdbc:mysql://localhost:5432/locidb
   user: admin
   password: admin
