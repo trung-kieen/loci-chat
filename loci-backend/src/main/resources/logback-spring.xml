@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Include defaults từ Spring Boot -->
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <!-- Appender cho Console với JSON -->
-    <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <!-- Providers: Các trường JSON cần include -->
-            <providers>
-                <timestamp />  <!-- Timestamp -->
-                <message />    <!-- Message log -->
-                <logger />     <!-- Logger name -->
-                <logLevel />   <!-- Level (INFO, ERROR,...) -->
-                <threadName /> <!-- Thread name -->
-                <mdc />        <!-- MDC values (nếu có) -->
-                <s />  <!-- Log arguments -->
-                <stackTrace /> <!-- Stacktrace nếu có lỗi -->
-            </providers>
-            <!-- Tùy chọn: Pretty print cho dev -->
-            <springProfile name="dev">
-                <prettyPrint>true</prettyPrint>
-            </springProfile>
-        </encoder>
+    <!-- 1.  A single console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- switch encoder per profile -->
+        <springProfile name="dev">
+            <!-- plain text, coloured, debug level -->
+            <encoder>
+                <pattern>%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint}
+                         %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </springProfile>
+
+        <springProfile name="!dev">
+            <!-- JSON for prod -->
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </springProfile>
     </appender>
 
-    <!-- Profile-specific: JSON cho production, plain cho dev -->
+    <!-- 2.  Root logger -->
     <springProfile name="dev">
         <root level="DEBUG">
-            <appender-ref ref="CONSOLE" />  <!-- Sử dụng default console nếu cần -->
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
-    <springProfile name="!dev">  <!-- Production/default: JSON -->
+    <springProfile name="!dev">
         <root level="INFO">
-            <appender-ref ref="CONSOLE_JSON" />
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 </configuration>

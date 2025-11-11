@@ -1,8 +1,8 @@
 pipeline {
     agent {
       docker {
-        image 'node:18-alpine'
-        args '-v /app/node_modules -w loci-frontend'
+        image 'node:22-alpine'
+        args '-v /app/node_modules'
       }
     }
     // agent { label 'node18' } // docker agent
@@ -14,84 +14,84 @@ pipeline {
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
-        timeout(time: 10, unit:MINUTES)
+        timeout(time: 10, unit: 'MINUTES')
     }
 
-  stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://gitlab.com/loci-project/loci',
-                    credentialsId: 'gitlab-loci'  // gitlab-token
-            }
+    stages {
+      stage('Checkout') {
+          steps {
+              git branch: 'main',
+                  url: 'https://gitlab.com/loci-project/loci',
+                  credentialsId: 'gitlab-loci'  // gitlab-token
+          }
+      }
+      stage('Install dependencies') {
+        steps {
+          dir('loci-frontend') {
+            sh 'npm ci'
+          }
         }
-  stage('Install dependencies') {
-    steps {
-      dir('loci-frontend') {
-        sh 'npm ci'
       }
-    }
-  }
 
-  stage('Lint') {
-    steps {
-      dir('loci-frontend') {
-        sh 'npm run lint'
+      stage('Lint') {
+        steps {
+          dir('loci-frontend') {
+            sh 'npm run lint'
+          }
+        }
       }
-    }
-  }
 
-  // TODO: add chrome for karma unit test
-  // stage('Unit Test') {
-  //   steps {
-  //     dir('frontend') {
-  //       // sh 'npm run test:ci'
-  //       sh 'npm run test'
-  //     }
-  //   }
-  //   post {
-  //     always {
-  //       publishHTML([
-  //         allowMissing: false,
-  //         alwaysLinkToLastBuild: true,
-  //         keepAll: true,
-  //         reportDir: 'loci-frontend/coverage',
-  //         reportFiles: 'index.html',
-  //         reportName: 'Coverage Report'
-  //       ])
-  //     }
-  //   }
-  // }
+      // TODO: add chrome for karma unit test
+      // stage('Unit Test') {
+      //   steps {
+      //     dir('frontend') {
+      //       // sh 'npm run test:ci'
+      //       sh 'npm run test'
+      //     }
+      //   }
+      //   post {
+      //     always {
+      //       publishHTML([
+      //         allowMissing: false,
+      //         alwaysLinkToLastBuild: true,
+      //         keepAll: true,
+      //         reportDir: 'loci-frontend/coverage',
+      //         reportFiles: 'index.html',
+      //         reportName: 'Coverage Report'
+      //       ])
+      //     }
+      //   }
+      // }
 
-  stage('Build') {
-    steps {
-      dir('loci-frontend') {
-        sh 'npm run build'       // angular.json
-        // or force prod:  sh 'npm run build -- --configuration=production'
+      stage('Build') {
+        steps {
+          dir('loci-frontend') {
+            sh 'npm run build'       // angular.json
+            // or force prod:  sh 'npm run build -- --configuration=production'
+          }
+        }
       }
-    }
-  }
- // stage('Docker build & push') {
- //  steps {
- //    script {
- //      def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
- //      def image = "your-dockerhub/loci-frontend:${shortCommit}"
- //      docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
- //        def app = docker.build("${image}", "./loci")
- //        app.push()
- //        app.push("latest")
- //      }
- //    }
- //  }
-// }
+      // stage('Docker build & push') {
+      //  steps {
+      //    script {
+      //      def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+      //      def image = "your-dockerhub/loci-frontend:${shortCommit}"
+      //      docker.withRegistry('https://registry.hub.docker.com', 'docker-registry-credentials') {
+      //        def app = docker.build("${image}", "./loci")
+      //        app.push()
+      //        app.push("latest")
+      //      }
+      //    }
+      //  }
+      // }
 
-    // post {
-    //     success {
-    //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'success'
-    //     }
-    //     failure {
-    //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'failed'
-    //     }
-    // }
-}
+      // post {
+      //     success {
+      //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'success'
+      //     }
+      //     failure {
+      //         updateGitlabCommitStatus name: 'jenkins-frontend', state: 'failed'
+      //     }
+      // }
+    }
 }

@@ -1,0 +1,31 @@
+spring:
+  flyway:
+    enabled: false
+  # datasource:
+    # url: jdbc:postgresql://localhost:5432/locidb
+    # username: admin
+    # password: admin
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    hikari:
+      poolName: Hikari
+      # Require to specify commit use like @Transactional
+      # auto-commit: false
+    type: com.zaxxer.hikari.HikariDataSource
+  security:
+    oauth2:
+      resourceserver:
+        jwt.issuer-uri: http://localhost:9090/realms/loci-realm
+  threads:
+    virtual:
+      enabled: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+server:
+  servlet:
+    context-path: /api

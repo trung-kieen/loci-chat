@@ -7,12 +7,6 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
 
-  threads:
-    virtual:
-      enabled: true
-
-
-
   datasource:
     url: jdbc:postgresql://localhost:5432/locidb
     username: admin
@@ -28,21 +22,12 @@ spring:
 
 
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt.issuer-uri: http://localhost:9090/realms/loci-realm
 
   devtools:
     restart:
-      enabled: false
-    livereload:
-      enabled: false
-  servlet:
-    multipart:
       enabled: true
-      max-file-size: 100MB
-      max-request-size: 100MB
+    livereload:
+      enabled: true
 
 
 
@@ -65,11 +50,35 @@ management:
 
     web:
       exposure:
-        include: "*"
+        # Access /actuator/metrics or /actuator/prometheus
+        # include: "*"
+        include: health,info,metrics,prometheus
+
         exclude: env,beans
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: loci-app  # tag for app-server metrics
 
 
 flyway:
   url: jdbc:mysql://localhost:5432/locidb
   user: admin
   password: admin
+
+
+
+
+
+# logging:
+#   structured:
+#     json:
+#       enabled: true
+#       format: logstash  # Or 'ecs' for Elastic Common Schema
+#       stacktrace:
+#         root: first
+#         max-length: 1024
+#         include-common-frames: true
+#         include-hashes: true
