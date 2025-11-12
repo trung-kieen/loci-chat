@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { MatFormField, MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +13,10 @@ import { MatFormField, MatInput, MatInputModule, MatLabel } from '@angular/mater
 export class App {
 
   protected title = 'loci-frontend';
+  private user =  {
+    avatar: "assets/avatar1.svg",
+    name : "kai"
+  }
   private authService = inject(AuthService);
   public logout() {
     this.authService.logout();

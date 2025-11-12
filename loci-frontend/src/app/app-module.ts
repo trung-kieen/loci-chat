@@ -32,11 +32,13 @@ import { initializeKeycloak } from '../utils/app-init';
 import { ErrorHandlerService } from './service/error-handler.service';
 import { HttpErrorInterceptor } from '../core/middleware/http-error.interceptor';
 import { provideRouter } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
     AppRoutingModule,
     BrowserModule,
+    SharedModule,
     FormsModule,
     HttpClientModule,
     KeycloakAngularModule,
