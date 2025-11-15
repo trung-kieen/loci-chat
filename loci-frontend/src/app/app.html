@@ -1,10 +1,9 @@
-<!-- <button routerLink="/user-info">Request UserInfo</button> -->
-<!-- <button (click)="logout()">logout</button> -->
-
 <div>
 
-  <app-other-profile></app-other-profile>
+  <div class="inline underline cursor-pointer" routerLink="/user-info">Personal page</div>
+  <div class="btn" (click)="logout()">Logout</div>
+  <!-- <app-other-profile></app-other-profile> -->
   <!-- <app-demo></app-demo> -->
+  <router-outlet></router-outlet>
 
 </div>
-<router-outlet></router-outlet>

@@ -15,7 +15,13 @@ export function initializeKeycloak(keycloak: KeycloakService) {
         // onLoad: 'check-sso',
         checkLoginIframe: true,
       },
+      // initOptions: {
+      //   onLoad: 'check-sso',
+      //   silentCheckSsoRedirectUri:
+      //     window.location.origin + '/assets/silent-check-sso.html',
+      // },
       loadUserProfileAtStartUp: true,
       bearerExcludedUrls: ['/assets'],
     });
 }
+

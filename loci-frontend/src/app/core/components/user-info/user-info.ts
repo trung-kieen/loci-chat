@@ -8,22 +8,43 @@ import { AuthService } from '../../auth/auth.service';
   styleUrl: './user-info.css',
 })
 export class UserInfo implements OnInit {
-  message = 'N/A';
+  username = 'N/A';
 
   private authService = inject(AuthService);
   private webApiService = inject(WebApiService);
-  // private httpClient = inject(HttpClient);
+
+
+
   async ngOnInit() {
-    this.message = await this.authService.getUsername();
-    console.log(this.message);
+    this.username = await this.authService.getUsername();
+    console.log(this.username);
 
     this.webApiService.getUserInfo().subscribe({
+
       next: (data) => {
-        this.message = data.content;
+        console.log(data);
+        this.username = data.content;
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+
+
+
+  async getUsername() {
+    console.log("Call get username");
+    this.webApiService.getUserInfo().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.username = data.content;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
   }
 }

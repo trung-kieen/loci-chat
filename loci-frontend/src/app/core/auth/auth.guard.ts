@@ -6,18 +6,10 @@ import {
 } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthGuard extends KeycloakAuthGuard {
   protected override readonly router: Router;
   protected readonly keycloak: KeycloakService;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  // constructor(...args: unknown[]);
-
-  // private override router = inject(Router);
-  // protected readonly keycloak = inject
 
   constructor() {
     const router = inject(Router);

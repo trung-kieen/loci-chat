@@ -7,14 +7,13 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { KeycloakService } from 'keycloak-angular';
 import { environment } from '../environments/environments';
-import { initializeKeycloak } from './core/auth/keycloak/keycloak.init';
+// import { initializeKeycloak } from './core/auth/keycloak/keycloak.init';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { provideKeycloak } from './core/auth/keycloak/keycloak.provider';
+// import { provideKeycloakAngular } from './core/auth/keycloak/keycloak.provider';
 
 // TOOD: legacy for standalone app component
 export const appConfig: ApplicationConfig = {
@@ -23,18 +22,18 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
-    provideKeycloak({
-      config: {
-        url: environment.keycloak.issuer,
-        realm: environment.keycloak.realm,
-        clientId: environment.keycloak.clientId,
-      },
-    }),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
+    // provideKeycloakAngular({
+    //   config: {
+    //     url: environment.keycloak.issuer,
+    //     realm: environment.keycloak.realm,
+    //     clientId: environment.keycloak.clientId,
+    //   },
+    // }),
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService],
+    // },
   ],
 };

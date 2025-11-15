@@ -1,12 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-// import Keycloak  from 'keycloak-js';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
-  // private keycloakService = inject(Keycloak);
   private keycloakService = inject(KeycloakService);
 
  public  async getUsername(): Promise<string> {
