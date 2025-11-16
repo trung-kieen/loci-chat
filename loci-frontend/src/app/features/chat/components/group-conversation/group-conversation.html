@@ -1,0 +1,226 @@
+<header id="header" class="fixed top-0 left-0 right-0 bg-white border-b border-neutral-200 h-16 flex items-center justify-between px-4 z-50">
+  <div class="flex items-center space-x-3">
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-arrow-left text-neutral-600"></i>
+    </button>
+    <div class="w-10 h-10 bg-neutral-400 rounded-full flex items-center justify-center">
+      <i class="fa-solid fa-users text-white text-sm"></i>
+    </div>
+    <div class="flex flex-col">
+      <h2 class="text-neutral-900">Product Team</h2>
+      <span class="text-sm text-neutral-500">5 online</span>
+    </div>
+  </div>
+  <div class="flex items-center space-x-2">
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-magnifying-glass text-neutral-600"></i>
+    </button>
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-circle-info text-neutral-600"></i>
+    </button>
+  </div>
+</header>
+
+<div id="pinned-message-bar" class="fixed top-16 left-0 right-0 bg-neutral-50 border-b border-neutral-200 px-4 py-3 z-40">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <i class="fa-solid fa-thumbtack text-neutral-600"></i>
+      <div class="flex items-center space-x-2">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=123" alt="Avatar" class="w-6 h-6 rounded-full">
+        <span class="text-sm text-neutral-900">Sarah Admin:</span>
+        <span class="text-sm text-neutral-700">Welcome everyone! Please check the project guidelines...</span>
+      </div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button class="text-sm text-neutral-600 hover:text-neutral-800">Go to message</button>
+      <button class="p-1 hover:bg-neutral-100 rounded">
+        <i class="fa-solid fa-xmark text-neutral-600"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main id="main-chat" class="pt-28 pb-24 px-4 h-[800px] overflow-y-auto">
+  <div id="message-area" class="space-y-4">
+    <div class="flex items-start space-x-3">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Avatar" class="w-8 h-8 rounded-full">
+      <div class="flex-1">
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="text-neutral-900">John Doe</span>
+          <span class="px-2 py-1 bg-neutral-100 text-neutral-800 text-xs rounded-full">Admin</span>
+          <span class="text-xs text-neutral-500">2:38 PM</span>
+        </div>
+        <div class="bg-neutral-100 rounded-lg p-3 max-w-md">
+          <p class="text-neutral-900">Hey everyone! Let's discuss the new feature requirements for the upcoming sprint.</p>
+        </div>
+        <div class="flex items-center space-x-2 mt-2">
+          <div class="flex items-center space-x-1">
+            <span class="text-sm">❤️</span>
+            <span class="text-xs text-neutral-500">3</span>
+          </div>
+          <div class="flex items-center space-x-1">
+            <span class="text-sm">👍</span>
+            <span class="text-xs text-neutral-500">2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-start space-x-3">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=789" alt="Avatar" class="w-8 h-8 rounded-full">
+      <div class="flex-1">
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="text-neutral-900">Emily Chen</span>
+          <span class="text-xs text-neutral-500">2:40 PM</span>
+        </div>
+        <div class="bg-neutral-50 border-l-4 border-neutral-400 p-2 mb-2 rounded">
+          <div class="flex items-center space-x-2 text-sm text-neutral-600">
+            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=456" alt="Avatar" class="w-4 h-4 rounded-full">
+            <span>John Doe</span>
+            <span>Hey everyone! Let's discuss the new...</span>
+          </div>
+        </div>
+        <div class="bg-neutral-100 rounded-lg p-3 max-w-md">
+          <p class="text-neutral-900">Great idea! I've prepared some mockups we can review. Should I share them here?</p>
+        </div>
+        <div class="flex items-center justify-between mt-1">
+          <span class="text-xs text-neutral-500">Edited</span>
+          <i class="fa-solid fa-check-double text-neutral-500 text-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-start space-x-3">
+      <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=321" alt="Avatar" class="w-8 h-8 rounded-full">
+      <div class="flex-1">
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="text-neutral-900">Mike Johnson</span>
+          <span class="text-xs text-neutral-500">2:42 PM</span>
+        </div>
+        <div class="bg-neutral-100 rounded-lg p-3 max-w-md">
+          <div class="flex items-center space-x-2 mb-2">
+            <div class="w-12 h-12 bg-neutral-300 rounded flex items-center justify-center">
+              <i class="fa-solid fa-file-pdf text-neutral-600"></i>
+            </div>
+            <div>
+              <p class="text-sm text-neutral-900">requirements.pdf</p>
+              <p class="text-xs text-neutral-500">2.3 MB</p>
+            </div>
+          </div>
+          <p class="text-neutral-900">Here are the detailed requirements we discussed last week.</p>
+        </div>
+        <i class="fa-solid fa-check text-neutral-400 text-xs mt-1"></i>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <span class="text-sm text-neutral-500 italic">Sarah Admin, Mike Johnson are typing...</span>
+    </div>
+  </div>
+</main>
+
+<div id="search-bar" class="fixed top-28 left-0 right-0 bg-white border-b border-neutral-200 px-4 py-3 hidden z-30">
+  <div class="flex items-center space-x-3">
+    <div class="flex-1 relative">
+      <input type="text" placeholder="Search messages..." class="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+    </div>
+    <select class="border border-neutral-300 rounded-lg px-3 py-2 text-sm">
+      <option>All messages</option>
+      <option>From John Doe</option>
+      <option>Media only</option>
+      <option>Files only</option>
+    </select>
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-xmark text-neutral-600"></i>
+    </button>
+  </div>
+</div>
+
+<footer id="footer" class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 p-4 z-40">
+  <div id="reply-preview" class="mb-3 p-3 bg-neutral-50 border-l-4 border-neutral-400 rounded hidden">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2 text-sm">
+        <i class="fa-solid fa-reply text-neutral-600"></i>
+        <span class="text-neutral-900">Replying to John Doe</span>
+        <span class="text-neutral-600">Hey everyone! Let's discuss...</span>
+      </div>
+      <button class="p-1 hover:bg-neutral-100 rounded">
+        <i class="fa-solid fa-xmark text-neutral-600"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="file-preview" class="mb-3 hidden">
+    <div class="flex items-center space-x-3 p-3 bg-neutral-50 rounded-lg">
+      <div class="w-12 h-12 bg-neutral-300 rounded flex items-center justify-center">
+        <i class="fa-solid fa-image text-neutral-600"></i>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm text-neutral-900">screenshot.png</p>
+        <p class="text-xs text-neutral-500">1.2 MB</p>
+      </div>
+      <button class="p-2 hover:bg-neutral-200 rounded">
+        <i class="fa-solid fa-xmark text-neutral-600"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex items-end space-x-3">
+    <button class="p-3 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-paperclip text-neutral-600"></i>
+    </button>
+    <div class="flex-1">
+      <textarea placeholder="Type a message..." rows="1" class="w-full resize-none border border-neutral-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-500 max-h-32"></textarea>
+      <div class="flex items-center space-x-2 mt-2">
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">
+          <i class="fa-solid fa-bold"></i>
+        </button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">
+          <i class="fa-solid fa-italic"></i>
+        </button>
+        <button class="text-sm text-neutral-600 hover:text-neutral-800">
+          <i class="fa-solid fa-code"></i>
+        </button>
+      </div>
+    </div>
+    <button class="bg-neutral-600 hover:bg-neutral-700 text-white p-3 rounded-lg">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+</footer>
+
+<div id="reactions-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg text-neutral-900">Add Reaction</h3>
+      <button class="p-2 hover:bg-neutral-100 rounded-lg">
+        <i class="fa-solid fa-xmark text-neutral-600"></i>
+      </button>
+    </div>
+    <div class="mb-4">
+      <input type="text" placeholder="Search emojis..." class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
+    </div>
+    <div class="grid grid-cols-8 gap-2">
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">❤️</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">😂</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">👍</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">😮</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">😢</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">😡</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">🎉</button>
+      <button class="p-2 hover:bg-neutral-100 rounded text-2xl">🔥</button>
+    </div>
+  </div>
+</div>
+
+<div id="error-card" class="fixed top-32 left-4 right-4 bg-neutral-50 border border-neutral-200 rounded-lg p-4 hidden z-30">
+  <div class="flex items-center space-x-3">
+    <i class="fa-solid fa-triangle-exclamation text-neutral-600"></i>
+    <div class="flex-1">
+      <p class="text-sm text-neutral-800">Unable to send message</p>
+      <p class="text-sm text-neutral-600">Only admins can send messages in this group</p>
+    </div>
+    <button class="text-sm text-neutral-600 hover:text-neutral-800">Retry</button>
+  </div>
+</div>

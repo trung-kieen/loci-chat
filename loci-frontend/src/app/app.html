@@ -1,9 +1,30 @@
-<div>
+<!-- Global layout wrapper -->
+<div class="layout">
 
-  <div class="inline underline cursor-pointer" routerLink="/user-info">Personal page</div>
-  <div class="btn" (click)="logout()">Logout</div>
-  <!-- <app-other-profile></app-other-profile> -->
+  <header class="header">
+    <h1>Loci</h1>
+
+    <nav>
+      <a routerLink="/chat">Chat</a>
+      <a routerLink="/user/me">My Profile</a>
+      <a routerLink="/contact">Contacts</a>
+      <a routerLink="/notification">Notifications</a>
+    </nav>
+  </header>
+
+  <aside class="sidebar">
+    <!-- menu items -->
+  </aside>
+
+  <!-- Main content area -->
+  <main class="content">
   <!-- <app-demo></app-demo> -->
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer  -->
+  <footer class="footer">
+    trung-kieen © 2025
+  </footer>
 
 </div>
