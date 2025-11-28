@@ -24,4 +24,7 @@ public class PublicProfile {
   private UserImageUrl imageUrl;
   private Instant createdDate;
 
+
+
+
 }

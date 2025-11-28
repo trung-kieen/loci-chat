@@ -20,15 +20,21 @@ import lombok.NoArgsConstructor;
 public class RestPublicProfile {
 
   private String publicId;
-  private String fullname;
   private String username;
+  private String fullname;
   private String emailAddress;
   private String memberSince;
   private Instant createdAt;
   private String profilePictureUrl;
-  // TODO: list
-  // private Object recentActivities;
-  private String friendConnectionStatus; // not_connected, friend_request_sent, friend_request_received, friend,
+
+
+  // TODO: Implement other profile details
+  //   lastActive: Date;
+  // mutualFriendCount: number;
+  // connectionStatus: ConnectionStatus;
+  // showEmail: boolean;
+  // showLastOnline: boolean;
+  // recentActivity: RecentActivity[];
                                          // unfriended, blocked, not_determined aka guest
 
 

@@ -19,7 +19,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 /**
- * Rest error handle => Use as primary
+ * Hanler error as the ProblemDetail object
  */
 @ControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE - 1000)
@@ -28,6 +28,9 @@ class BeanValidationErrorsHandler {
   private static final String ERRORS = "errors";
   private static final Logger log = LoggerFactory.getLogger(BeanValidationErrorsHandler.class);
 
+  /**
+   * Build problem details error follow the RFC 7807 convention
+   */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   ProblemDetail handleMethodArgumentNotValid(MethodArgumentNotValidException exception) {
     ProblemDetail problem = buildProblemDetail();
@@ -47,6 +50,9 @@ class BeanValidationErrorsHandler {
       .collect(Collectors.toUnmodifiableMap(FieldError::getField, FieldError::getDefaultMessage));
   }
 
+  /**
+   * Validation fails on service-layer method parameters
+   */
   @ExceptionHandler(ConstraintViolationException.class)
   ProblemDetail handleConstraintViolationException(ConstraintViolationException exception) {
     ProblemDetail problem = buildProblemDetail();

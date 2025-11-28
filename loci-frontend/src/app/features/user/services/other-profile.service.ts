@@ -1,15 +1,17 @@
-import { Injectable, signal } from '@angular/core';
-import { ConnectionStatus, UserProfile } from '../models/other-profile.model';
-
+import { inject, Injectable, signal } from '@angular/core';
+import { ConnectionStatus, PublicProfile } from '../models/other-profile.model';
+import { WebApiService } from '../../../api/web-api.service';
+import { firstValueFrom, lastValueFrom, Observable, of } from 'rxjs';
 @Injectable()
 export class OtherProfileService {
+  private apiService = inject(WebApiService);
   // Mock data stored in signal
-  private mockProfile = signal<UserProfile>({
-    userId: 'user-7891',
+  private mockProfile = signal<PublicProfile>({
+    publicId: 'user-7891',
     username: 'emilydavis',
-    fullName: 'Emily Davis',
-    email: 'emily.davis@company.com',
-    avatar: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891',
+    fullname: 'Emily Davis',
+    emailAddress: 'emily.davis@company.com',
+    profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891',
     createdAt: new Date('2025-03-15'),
     lastActive: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
     mutualFriendCount: 12,
@@ -39,13 +41,13 @@ export class OtherProfileService {
   });
 
   // Additional mock profiles for testing different states
-  private mockProfiles: Record<string, UserProfile> = {
+  private mockProfiles: Record<string, PublicProfile> = {
     'friend': {
-      userId: 'user-1234',
+      publicId: 'user-1234',
       username: 'johnsmith',
-      fullName: 'John Smith',
-      email: 'john.smith@company.com',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234',
+      fullname: 'John Smith',
+      emailAddress: 'john.smith@company.com',
+      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234',
       createdAt: new Date('2024-11-20'),
       lastActive: new Date(Date.now() - 30 * 60 * 1000),
       mutualFriendCount: 8,
@@ -62,11 +64,11 @@ export class OtherProfileService {
       ]
     },
     'request_sent': {
-      userId: 'user-5678',
+      publicId: 'user-5678',
       username: 'sarahjones',
-      fullName: 'Sarah Jones',
-      email: 'sarah.jones@company.com',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678',
+      fullname: 'Sarah Jones',
+      emailAddress: 'sarah.jones@company.com',
+      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678',
       createdAt: new Date('2025-01-10'),
       lastActive: new Date(Date.now() - 2 * 60 * 60 * 1000),
       mutualFriendCount: 5,
@@ -76,11 +78,11 @@ export class OtherProfileService {
       recentActivity: []
     },
     'request_received': {
-      userId: 'user-9012',
+      publicId: 'user-9012',
       username: 'mikebrown',
-      fullName: 'Mike Brown',
-      email: 'mike.brown@company.com',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9012',
+      fullname: 'Mike Brown',
+      emailAddress: 'mike.brown@company.com',
+      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9012',
       createdAt: new Date('2024-12-05'),
       lastActive: new Date(Date.now() - 15 * 60 * 1000),
       mutualFriendCount: 15,
@@ -97,10 +99,10 @@ export class OtherProfileService {
       ]
     },
     'blocked': {
-      userId: 'user-3456',
+      publicId: 'user-3456',
       username: 'spamuser',
-      fullName: 'Blocked User',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=3456',
+      fullname: 'Blocked User',
+      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=3456',
       createdAt: new Date('2024-10-01'),
       lastActive: new Date(Date.now() - 48 * 60 * 60 * 1000),
       mutualFriendCount: 0,
@@ -116,28 +118,26 @@ export class OtherProfileService {
    * @param userId Optional user ID to fetch specific profile state
    * @returns UserProfile object
    */
-  getOtherProfile(userId?: string): UserProfile {
-    // If userId provided and exists in mock profiles, return that
-    if (userId && this.mockProfiles[userId]) {
-      return this.mockProfiles[userId];
-    }
+  getOtherProfile(userId: string): Observable<PublicProfile> {
 
-    // Otherwise return default mock profile
-    return this.mockProfile();
+    return this.loadProfile(userId);
+
+
+    // // If userId provided and exists in mock profiles, return that
+    // if (userId && this.mockProfiles[userId]) {
+    //   return of(this.mockProfiles[userId]);
+    // }
+
+    // // Otherwise return default mock profile
+    // return of(this.mockProfile()); // use of function in the rxjs
   }
 
-  /**
-   * Get readonly signal of current profile
-   */
   get profile() {
     return this.mockProfile.asReadonly();
   }
 
-  /**
-   * Update connection status (for testing UI states)
-   * In real implementation, this would call API
-   */
   updateConnectionStatus(userId: string, status: ConnectionStatus): void {
+    // TODO: API call
     this.mockProfile.update(profile => ({
       ...profile,
       connectionStatus: status
@@ -147,7 +147,7 @@ export class OtherProfileService {
   /**
    * Get all mock profile variants for testing
    */
-  getMockProfileVariants(): Record<string, UserProfile> {
+  getMockProfileVariants(): Record<string, PublicProfile> {
     return this.mockProfiles;
   }
 
@@ -155,17 +155,13 @@ export class OtherProfileService {
    * Load profile by user ID (simulates API call)
    * Returns a Promise for async operations
    */
-  async loadProfile(userId: string): Promise<UserProfile> {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Simulate API call
-    const profile = this.getOtherProfile(userId);
+  loadProfile(userId: string): Observable<PublicProfile> {
+    return this.apiService.get<PublicProfile>("/users/" + userId);
 
     // Could throw error for testing error states
     // throw new Error('User not found');
 
-    return profile;
+    // return profile;
   }
 
   /**

@@ -15,12 +15,12 @@ export interface RecentActivity {
   timestamp: Date;
 }
 
-export interface UserProfile {
-  userId: string;
+export interface PublicProfile {
+  publicId: string;
   username: string;
-  fullName: string;
-  email?: string;
-  avatar: string;
+  fullname: string;
+  emailAddress?: string;
+  profilePictureUrl: string;
   createdAt: Date;
   lastActive: Date;
   mutualFriendCount: number;
@@ -30,7 +30,7 @@ export interface UserProfile {
   recentActivity: RecentActivity[];
 }
 
-export interface MyProfile extends UserProfile {
+export interface MyProfile extends PublicProfile {
   // Additional fields specific to current user's profile
   bio?: string;
   phoneNumber?: string;

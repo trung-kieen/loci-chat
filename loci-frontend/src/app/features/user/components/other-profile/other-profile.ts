@@ -2,8 +2,11 @@ import { Component, signal, computed, inject, OnInit, ChangeDetectionStrategy } 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { OtherProfileService } from '../../services/other-profile.service';
-import { ConnectionStatus, UserProfile } from '../../models/other-profile.model';
+import { ConnectionStatus, PublicProfile } from '../../models/other-profile.model';
 
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ProblemDetail } from '../../../../core/error-handler/problem-detail';
 @Component({
   selector: 'app-other-profile',
   standalone: true,
@@ -15,9 +18,11 @@ import { ConnectionStatus, UserProfile } from '../../models/other-profile.model'
 export class OtherProfile implements OnInit {
   private profileService = inject(OtherProfileService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private profileId: string | null = null;
 
   // State signals
-  profile = signal<UserProfile | null>(null);
+  profile = signal<PublicProfile | null>(null);
   isLoading = signal<boolean>(true);
   error = signal<string | null>(null);
 
@@ -68,7 +73,7 @@ export class OtherProfile implements OnInit {
 
   canBlock = computed(() => {
     return this.profile()?.connectionStatus !== 'blocked' &&
-           this.profile()?.connectionStatus !== 'blocked_by';
+      this.profile()?.connectionStatus !== 'blocked_by';
   });
 
   isBlocked = computed(() => {
@@ -82,25 +87,45 @@ export class OtherProfile implements OnInit {
     return new Date(lastActive) > fiveMinutesAgo;
   });
 
+  constructor() {
+    const userId = this.route.snapshot.paramMap.get('id')
+    if (userId == null) {
+      this.router.navigate(["/not-found"]);
+      return;
+    }
+    this.profileId = userId;
+
+  }
   ngOnInit(): void {
+    this.profileId = this.route.snapshot.paramMap.get('id');
+    console.log("Receive profile id " + this.profileId);
+    if (this.profileId == null) {
+      this.router.navigate(['/not-found']);
+      return;
+    }
     this.loadProfile();
+
   }
 
   public loadProfile(): void {
+    if (this.profileId == null){
+      return ;
+    }
     this.isLoading.set(true);
     this.error.set(null);
 
-    // Simulate API call delay
-    setTimeout(() => {
-      try {
-        const mockProfile = this.profileService.getOtherProfile();
-        this.profile.set(mockProfile);
-        this.isLoading.set(false);
-      } catch (err) {
-        this.error.set('Failed to load user profile');
-        this.isLoading.set(false);
-      }
-    }, 500);
+    this.profileService.getOtherProfile(this.profileId).subscribe({
+      next: (p) => {
+        this.profile.set(p);
+        this.isLoading.set(false)
+      },
+      error: (err: HttpErrorResponse) =>  {
+        const problem = err.error as ProblemDetail
+        this.error.set(problem.detail)
+        this.isLoading.set(false)
+      },
+      complete: () => this.isLoading.set(false)
+    })
   }
 
   onBack(): void {
@@ -117,7 +142,7 @@ export class OtherProfile implements OnInit {
     );
 
     // TODO: Call API to send friend request
-    console.log('Sending friend request to:', currentProfile.userId);
+    console.log('Sending friend request to:', currentProfile.publicId);
   }
 
   onAcceptRequest(): void {
@@ -129,7 +154,7 @@ export class OtherProfile implements OnInit {
     );
 
     // TODO: Call API to accept friend request
-    console.log('Accepting friend request from:', currentProfile.userId);
+    console.log('Accepting friend request from:', currentProfile.publicId);
   }
 
   onMessage(): void {
@@ -137,14 +162,14 @@ export class OtherProfile implements OnInit {
     if (!currentProfile) return;
 
     // Navigate to conversation
-    this.router.navigate(['/conversations', currentProfile.userId]);
+    this.router.navigate(['/conversations', currentProfile.publicId]);
   }
 
   onBlock(): void {
     const currentProfile = this.profile();
     if (!currentProfile) return;
 
-    const confirmBlock = confirm(`Are you sure you want to block ${currentProfile.fullName}?`);
+    const confirmBlock = confirm(`Are you sure you want to block ${currentProfile.fullname}?`);
     if (!confirmBlock) return;
 
     this.profile.update(profile =>
@@ -152,7 +177,7 @@ export class OtherProfile implements OnInit {
     );
 
     // TODO: Call API to block user
-    console.log('Blocking user:', currentProfile.userId);
+    console.log('Blocking user:', currentProfile.publicId);
   }
 
   onUnblock(): void {
@@ -164,7 +189,7 @@ export class OtherProfile implements OnInit {
     );
 
     // TODO: Call API to unblock user
-    console.log('Unblocking user:', currentProfile.userId);
+    console.log('Unblocking user:', currentProfile.publicId);
   }
 
   onReport(): void {
@@ -172,7 +197,7 @@ export class OtherProfile implements OnInit {
     if (!currentProfile) return;
 
     // TODO: Open report modal/dialog
-    console.log('Reporting user:', currentProfile.userId);
+    console.log('Reporting user:', currentProfile.publicId);
     alert('Report functionality will be implemented');
   }
 
