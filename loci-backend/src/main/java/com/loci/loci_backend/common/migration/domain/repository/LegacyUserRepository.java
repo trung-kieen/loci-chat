@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.user.domain.repository;
+package com.loci.loci_backend.common.migration.domain.repository;
 
 import java.util.List;
 

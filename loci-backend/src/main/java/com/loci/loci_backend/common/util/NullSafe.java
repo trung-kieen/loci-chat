@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.validation.infrastructure;
+package com.loci.loci_backend.common.util;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -8,9 +8,9 @@ import java.util.function.Supplier;
 /**
  * null-safe population of a builder.
  */
-public final class EntityMapper {
+public final class NullSafe {
 
-  private EntityMapper() {
+  private NullSafe() {
   }
 
   public static <T> void applyIfPresent(Supplier<T> supplier, Consumer<T> consumer) {

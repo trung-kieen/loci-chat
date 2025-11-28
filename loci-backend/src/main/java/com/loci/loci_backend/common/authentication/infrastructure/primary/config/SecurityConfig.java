@@ -1,5 +1,7 @@
-package com.loci.loci_backend.common.authentication.infrastructure.primary;
+package com.loci.loci_backend.common.authentication.infrastructure.primary.config;
 
+import com.loci.loci_backend.common.authentication.infrastructure.primary.entrypoint.AuthenticationEntryPointImpl;
+import com.loci.loci_backend.common.authentication.infrastructure.primary.entrypoint.AuthorizationEntryPointImpl;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.filter.JwtUserSyncFilter;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.keycloak.KeycloakJwtTokenConverter;
 
@@ -23,6 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityConfig {
+  private final AuthenticationEntryPointImpl authenticationEntryPoint;
+  private final AuthorizationEntryPointImpl  accessDeniedHandler;
+
+
 
   /**
    * Map Keycloak roles (REALM and CLIENT level) to get them all
@@ -54,25 +60,24 @@ public class SecurityConfig {
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http.csrf(c -> c.disable());
     http.cors(Customizer.withDefaults());
-    http.anonymous().disable();
+    http.anonymous(c -> c.disable());
 
     http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
     http.authorizeHttpRequests(
         request -> request
-            .requestMatchers("/actuator/**").permitAll()
-            .requestMatchers("/ws/**").permitAll() // Allow the socket endpoint
-            .requestMatchers("/ws").permitAll() // Allow the socket endpoint
-            .requestMatchers("/api/v1/ws/**", "/api/v1/ws").permitAll() // Allow the socket endpoint
-            .requestMatchers("/swagger-ui/index.html").permitAll()
-            .requestMatchers("/swagger-ui/**").permitAll()
-            .requestMatchers("/api-docs/**").permitAll()
+            .requestMatchers(SecurityWhitelist.PATTERNS).permitAll()
             .anyRequest().hasRole("user")
 
     );
 
+    http.exceptionHandling(c -> {
+      c.authenticationEntryPoint(authenticationEntryPoint);
+      c.accessDeniedHandler(accessDeniedHandler);
+    });
+
     http.oauth2ResourceServer(
-        t -> t.jwt().jwtAuthenticationConverter(jwtAuthenticationConverterForKeycloak()));
+        t -> t.jwt(j -> j.jwtAuthenticationConverter(jwtAuthenticationConverterForKeycloak())));
     http.addFilterAfter(jwtAuthUserFilterBean(), SwitchUserFilter.class);
 
     return http.build();

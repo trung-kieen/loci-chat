@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.user.domain.aggregate;
+package com.loci.loci_backend.common.migration.domain.aggregate;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;

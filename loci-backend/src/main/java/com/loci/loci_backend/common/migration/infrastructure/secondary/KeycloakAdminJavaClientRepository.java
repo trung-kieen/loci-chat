@@ -1,13 +1,13 @@
-package com.loci.loci_backend.common.user.infrastructure.secondary.repository;
+package com.loci.loci_backend.common.migration.infrastructure.secondary;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.keycloak.KeycloakProperties;
-import com.loci.loci_backend.common.user.domain.aggregate.KeycloakUser;
-import com.loci.loci_backend.common.user.domain.repository.KeycloakAdminRepository;
-import com.loci.loci_backend.common.user.infrastructure.secondary.exceptions.KeycloakMigrateException;
+import com.loci.loci_backend.common.migration.application.KeycloakMigrateException;
+import com.loci.loci_backend.common.migration.domain.aggregate.KeycloakUser;
+import com.loci.loci_backend.common.migration.domain.repository.KeycloakAdminRepository;
 import com.loci.loci_backend.core.user.infrastructure.primary.resource.UserResource;
 
 import org.keycloak.OAuth2Constants;
@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 import jakarta.ws.rs.core.Response;
 
 @Service
-public class KeycloakJavaClientAdminRepository implements KeycloakAdminRepository {
+public class KeycloakAdminJavaClientRepository implements KeycloakAdminRepository {
 
   private final Keycloak keycloak;
   private final KeycloakProperties properties;
 
-  public KeycloakJavaClientAdminRepository(KeycloakProperties properties) {
+  public KeycloakAdminJavaClientRepository(KeycloakProperties properties) {
     this.properties = properties;
     this.keycloak = KeycloakBuilder.builder()
         .serverUrl(properties.getAuthServerUrl())
@@ -91,7 +91,8 @@ public class KeycloakJavaClientAdminRepository implements KeycloakAdminRepositor
     RealmResource realmResource = keycloak.realm(properties.getRealm());
     UsersResource usersResource = realmResource.users();
     for (UserRepresentation user : usersResource.list()) {
-      usersResource.delete(user.getId());
+      Response rs = usersResource.delete(user.getId());
+      rs.close();
     }
 
   }

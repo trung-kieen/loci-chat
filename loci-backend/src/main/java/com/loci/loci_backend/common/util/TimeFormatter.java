@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.time.infrastructure;
+package com.loci.loci_backend.common.util;
 
 import java.time.Instant;
 import java.util.Date;

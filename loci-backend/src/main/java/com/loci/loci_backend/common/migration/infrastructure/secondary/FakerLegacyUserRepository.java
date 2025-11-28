@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.user.infrastructure.secondary.repository;
+package com.loci.loci_backend.common.migration.infrastructure.secondary;
 
 import java.time.Instant;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.github.javafaker.Faker;
+import com.loci.loci_backend.common.migration.domain.repository.LegacyUserRepository;
 import com.loci.loci_backend.common.user.domain.aggregate.Authority;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
-import com.loci.loci_backend.common.user.domain.repository.LegacyUserRepository;
 import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;

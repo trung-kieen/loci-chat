@@ -33,3 +33,4 @@ build/
 .vscode/
 postges-data/
 .idea/
+loci.log

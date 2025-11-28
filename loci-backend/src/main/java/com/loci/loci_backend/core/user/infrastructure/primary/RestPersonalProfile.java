@@ -1,7 +1,7 @@
 package com.loci.loci_backend.core.user.infrastructure.primary;
 
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.validation.infrastructure.EntityMapper;
+import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.user.domain.profile.aggregate.PersonalProfile;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class RestPersonalProfile {
         .emailAddress(personalProfile.getEmail().value())
         .profilePictureUrl(
             personalProfile.getImageUrl().valueOrDefault())
-        .privacy(EntityMapper.getIfPresent(personalProfile.getPrivacySetting(), (p) -> RestProfilePrivacy.from(p)))
+        .privacy(NullSafe.getIfPresent(personalProfile.getPrivacySetting(), (p) -> RestProfilePrivacy.from(p)))
         .build();
   }
 }

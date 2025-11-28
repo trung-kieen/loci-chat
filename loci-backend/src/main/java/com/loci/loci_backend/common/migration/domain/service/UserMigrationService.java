@@ -1,17 +1,17 @@
-package com.loci.loci_backend.common.user.domain.service;
+package com.loci.loci_backend.common.migration.domain.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.loci.loci_backend.common.user.domain.aggregate.KeycloakUser;
-import com.loci.loci_backend.common.user.domain.aggregate.MigrationResult;
+import com.loci.loci_backend.common.migration.domain.aggregate.KeycloakUser;
+import com.loci.loci_backend.common.migration.domain.aggregate.MigrationResult;
+import com.loci.loci_backend.common.migration.domain.repository.KeycloakAdminRepository;
+import com.loci.loci_backend.common.migration.domain.repository.LegacyUserRepository;
+import com.loci.loci_backend.common.migration.domain.vo.MigrationError;
+import com.loci.loci_backend.common.migration.domain.vo.MigrationResultState;
+import com.loci.loci_backend.common.migration.domain.vo.TotalMigrationFail;
+import com.loci.loci_backend.common.migration.domain.vo.TotalMigrationUser;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
-import com.loci.loci_backend.common.user.domain.repository.KeycloakAdminRepository;
-import com.loci.loci_backend.common.user.domain.repository.LegacyUserRepository;
-import com.loci.loci_backend.common.user.domain.vo.migration.MigrationError;
-import com.loci.loci_backend.common.user.domain.vo.migration.MigrationResultState;
-import com.loci.loci_backend.common.user.domain.vo.migration.TotalMigrationFail;
-import com.loci.loci_backend.common.user.domain.vo.migration.TotalMigrationUser;
 import com.loci.loci_backend.core.user.domain.profile.service.UserAggregateMapper;
 
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.loci.loci_backend.core.user.infrastructure.primary;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.loci.loci_backend.common.validation.infrastructure.EntityMapper;
+import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.user.domain.profile.aggregate.PrivacySetting;
 import com.loci.loci_backend.core.user.domain.profile.vo.ProfileVisibility;
 import com.loci.loci_backend.core.user.domain.profile.vo.UserFriendRequestSetting;
@@ -32,9 +32,9 @@ public class RestProfilePrivacy {
 
   public static RestProfilePrivacy of(PrivacySetting settings) {
     return RestProfilePrivacy.builder()
-        .profileVisibility(EntityMapper.getIfPresent(settings.getProfileVisibility(), (s) -> s.value()))
-        .friendRequests(EntityMapper.getIfPresent(settings.getFriendRequestSetting(), (s) -> s.value().value()))
-        .lastSeenSetting(EntityMapper.getIfPresent(settings.getLastSeenSetting(), (s) -> s.value().value()))
+        .profileVisibility(NullSafe.getIfPresent(settings.getProfileVisibility(), (s) -> s.value()))
+        .friendRequests(NullSafe.getIfPresent(settings.getFriendRequestSetting(), (s) -> s.value().value()))
+        .lastSeenSetting(NullSafe.getIfPresent(settings.getLastSeenSetting(), (s) -> s.value().value()))
         .build();
   }
 

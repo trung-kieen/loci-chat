@@ -1,7 +1,7 @@
-package com.loci.loci_backend.common.user.infrastructure.primary;
+package com.loci.loci_backend.common.migration.infrastructure.primary;
 
-import com.loci.loci_backend.common.user.domain.aggregate.MigrationResult;
-import com.loci.loci_backend.core.user.application.UserApplicationService;
+import com.loci.loci_backend.common.migration.application.UserMigrationApplicationService;
+import com.loci.loci_backend.common.migration.domain.aggregate.MigrationResult;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserMigrationShellCommand {
 
-  private final UserApplicationService applicationService;
+  private final UserMigrationApplicationService applicationService;
 
   @ShellMethod(key = "migrate-users", value = "Migrate users from legacy system to Keycloak")
   public String migrateUsers(@ShellOption(defaultValue = "100") int count) {

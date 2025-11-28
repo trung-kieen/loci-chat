@@ -8,7 +8,7 @@ import com.loci.loci_backend.common.user.domain.aggregate.Authority;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
-import com.loci.loci_backend.common.validation.infrastructure.EntityMapper;
+import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.user.domain.profile.vo.FriendRequestSettingEnum;
 import com.loci.loci_backend.core.user.domain.profile.vo.ProfileVisibility;
 import com.loci.loci_backend.core.user.domain.profile.vo.UserFriendRequestSetting;

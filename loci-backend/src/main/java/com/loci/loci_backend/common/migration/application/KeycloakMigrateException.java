@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.user.infrastructure.secondary.exceptions;
+package com.loci.loci_backend.common.migration.application;
 
 public class KeycloakMigrateException extends RuntimeException {
 

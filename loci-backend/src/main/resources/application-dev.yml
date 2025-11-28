@@ -76,26 +76,33 @@ flyway:
   password: admin
 
 
+shell:
+  interactive:
+    enabled: true
 
 logging:
+  com.loci.loci_backend: TRACE
   level:
     root: INFO
-
     org:
       hibernate:
-        SQL: DEBUG
+        SQL: INFO  # DEBUG
       type:
         descriptor:
           sql:
-            BasicBinder: DEBUG
+            BasicBinder: INFO # DEBUG
       springframework:
-        messaging: DEBUG
+        messaging: INFO  # DEBUG
+
         web:
+          authentication: TRACE
+          FilterChainProxy: TRACE
           socket: TRACE
           filter:
             CommonsRequestLoggingFilter: DEBUG
-        security: DEBUG
-
+        security:
+          authentication: TRACE
+          oauth2: TRACE
 keycloak:
   auth-server-url: http://localhost:8080
   # realm: your-target-realm          # Realm where users will be migrated

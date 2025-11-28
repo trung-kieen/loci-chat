@@ -1,10 +1,10 @@
 package com.loci.loci_backend.core.user.domain.profile.vo;
 
-import com.loci.loci_backend.common.validation.infrastructure.EntityMapper;
+import com.loci.loci_backend.common.util.NullSafe;
 
 public record UserLastSeenSetting(LastSeenSettingEnum value) {
   public static UserLastSeenSetting of(String value) {
-    return EntityMapper.getIfPresent(value, (v) -> new UserLastSeenSetting(LastSeenSettingEnum.of(v)));
+    return NullSafe.getIfPresent(value, (v) -> new UserLastSeenSetting(LastSeenSettingEnum.of(v)));
   }
 
   public static UserLastSeenSetting ofDefault() {

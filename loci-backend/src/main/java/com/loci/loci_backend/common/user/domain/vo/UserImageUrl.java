@@ -37,11 +37,15 @@ public record UserImageUrl(String value) {
   }
 
   public static UserImageUrl random(){
-    return randomPhotorealistic();
-    // return randomCartoonStyle();
+    // return randomPhotorealistic();
+    return randomCartoonStyle();
   }
   public static UserImageUrl randomCartoonStyle() {
-    String url = "https://avatar.iran.liara.run/public";
+    // String url = "https://avatar.iran.liara.run/public";
+
+    Random random = new Random();
+    int id = random.nextInt(1000);
+    String url = String.format("https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=%d", id);
     return new UserImageUrl(url);
   }
 

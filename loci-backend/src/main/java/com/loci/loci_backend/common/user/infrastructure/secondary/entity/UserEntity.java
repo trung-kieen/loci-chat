@@ -13,7 +13,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
-import com.loci.loci_backend.common.validation.infrastructure.EntityMapper;
+import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.user.domain.profile.aggregate.Fullname;
 import com.loci.loci_backend.core.user.domain.profile.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.user.domain.profile.aggregate.PersonalProfileChanges;
@@ -170,9 +170,9 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   public static UserEntity from(PersonalProfile profile) {
     UserEntityBuilder userEntityBuilder = UserEntity.builder();
 
-    EntityMapper.applyIfPresent(profile::getImageUrl, i -> userEntityBuilder.imageURL(i.value()));
+    NullSafe.applyIfPresent(profile::getImageUrl, i -> userEntityBuilder.imageURL(i.value()));
 
-    EntityMapper.applyIfPresent(profile::getUserPublicId, i -> userEntityBuilder.publicId(i.value()));
+    NullSafe.applyIfPresent(profile::getUserPublicId, i -> userEntityBuilder.publicId(i.value()));
 
     return userEntityBuilder
         .authorities(AuthorityEntity.from(profile.getAuthorities()))
@@ -188,17 +188,17 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   }
 
   public void applyChanges(PersonalProfileChanges changes) {
-    EntityMapper.applyIfPresent(changes::getFullname, fullname -> {
-      EntityMapper.applyIfPresent(fullname::getFirstname, fn -> this.firstname = fn.value());
-      EntityMapper.applyIfPresent(fullname::getLastname, ln -> this.lastname = ln.value());
+    NullSafe.applyIfPresent(changes::getFullname, fullname -> {
+      NullSafe.applyIfPresent(fullname::getFirstname, fn -> this.firstname = fn.value());
+      NullSafe.applyIfPresent(fullname::getLastname, ln -> this.lastname = ln.value());
     });
 
-    EntityMapper.applyIfPresent(changes::getImageUrl, iu -> this.imageURL = iu.value());
+    NullSafe.applyIfPresent(changes::getImageUrl, iu -> this.imageURL = iu.value());
 
-    EntityMapper.applyIfPresent(changes::getPrivacySetting, ps -> {
-      EntityMapper.applyIfPresent(ps::getLastSeenSetting, lss -> this.lastSeenSetting = lss.value());
-      EntityMapper.applyIfPresent(ps::getFriendRequestSetting, frs -> this.friendRequestSetting = frs.value());
-      EntityMapper.applyIfPresent(ps::getProfileVisibility, pv -> this.profileVisibility = pv.value());
+    NullSafe.applyIfPresent(changes::getPrivacySetting, ps -> {
+      NullSafe.applyIfPresent(ps::getLastSeenSetting, lss -> this.lastSeenSetting = lss.value());
+      NullSafe.applyIfPresent(ps::getFriendRequestSetting, frs -> this.friendRequestSetting = frs.value());
+      NullSafe.applyIfPresent(ps::getProfileVisibility, pv -> this.profileVisibility = pv.value());
     });
   }
 
@@ -210,14 +210,14 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
         .lastname(user.getLastname().value())
         .lastSeen(user.getLastSeen())
         .id(user.getDbId());
-    EntityMapper.applyIfPresent(user::getPrivacySetting, ps -> {
-      EntityMapper.applyIfPresent(ps::getLastSeenSetting, lss -> builder.lastSeenSetting(lss.value()));
-      EntityMapper.applyIfPresent(ps::getFriendRequestSetting, frs -> builder.friendRequestSetting(frs.value()));
-      EntityMapper.applyIfPresent(ps::getProfileVisibility, pv -> builder.profileVisibility(pv.value()));
+    NullSafe.applyIfPresent(user::getPrivacySetting, ps -> {
+      NullSafe.applyIfPresent(ps::getLastSeenSetting, lss -> builder.lastSeenSetting(lss.value()));
+      NullSafe.applyIfPresent(ps::getFriendRequestSetting, frs -> builder.friendRequestSetting(frs.value()));
+      NullSafe.applyIfPresent(ps::getProfileVisibility, pv -> builder.profileVisibility(pv.value()));
     });
 
-    EntityMapper.applyIfPresent(user::getImageUrl, iu -> builder.imageURL(iu.value()));
-    EntityMapper.applyIfPresent(user::getUserPublicId, upi -> builder.publicId(upi.value()));
+    NullSafe.applyIfPresent(user::getImageUrl, iu -> builder.imageURL(iu.value()));
+    NullSafe.applyIfPresent(user::getUserPublicId, upi -> builder.publicId(upi.value()));
 
     // EntityMapper.applyIfPresent(user::getUserAddress, addr -> {
     // builder.addressCity(addr.city());

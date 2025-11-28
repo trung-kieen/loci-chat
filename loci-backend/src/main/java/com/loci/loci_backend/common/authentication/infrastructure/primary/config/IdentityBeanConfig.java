@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.authentication.infrastructure.primary;
+package com.loci.loci_backend.common.authentication.infrastructure.primary.config;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.authentication.infrastructure.secondary.repository.RestIdentityRepository;

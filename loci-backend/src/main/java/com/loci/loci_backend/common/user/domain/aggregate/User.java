@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
@@ -51,23 +50,6 @@ public class User {
 
   private PrivacySetting privacySetting;
 
-  // public User(UserLastname lastname, UserFirstname firstname, UserEmail email,
-  // UserPublicId userPublicId,
-  // UserImageUrl imageUrl, Instant lastModifiedDate, Instant createdDate,
-  // Set<Authority> authorities, Long dbId,
-  // UserAddress userAddress, Instant lastSeen) {
-  // this.lastname = lastname;
-  // this.firstname = firstname;
-  // this.email = email;
-  // this.userPublicId = userPublicId;
-  // this.imageUrl = imageUrl;
-  // this.lastModifiedDate = lastModifiedDate;
-  // this.createdDate = createdDate;
-  // this.authorities = authorities;
-  // this.dbId = dbId;
-  // this.userAddress = userAddress;
-  // this.lastSeen = lastSeen;
-  // }
 
   private void assertMandatoryFields() {
     Assert.notNull("lastname", lastname);
@@ -101,23 +83,6 @@ public class User {
 
   public static User fromTokenAttributes(Map<String, Object> attributes, Collection<String> rolesFromAccessToken) {
 
-    // TODO: Check the old sync method attribute and new attribute name
-
-    // String firstname =
-    // String.valueOf(token.getTokenAttributes().get("given_name"));
-    // String lastname =
-    // String.valueOf(token.getTokenAttributes().get("family_name"));
-    // String email = String.valueOf(token.getTokenAttributes().get("email"));
-    // UserEntity.Gender gender = token.getTokenAttributes().get("gender") == null ?
-    // null :
-    // UserEntity.Gender.valueOf(String.valueOf(token.getTokenAttributes().get("gender")).toUpperCase());
-
-    // UserEntity user = UserEntity.builder()
-    // .firstname(firstname)
-    // .lastname(lastname)
-    // .email(email)
-    // .gender(gender)
-    // .build();
 
     UserBuilder userBuilder = User.builder();
 

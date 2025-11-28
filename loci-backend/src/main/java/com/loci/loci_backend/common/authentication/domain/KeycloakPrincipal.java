@@ -36,6 +36,7 @@ public class KeycloakPrincipal {
     String email = tokenAttrributes.get("email").toString();
     return KeycloakPrincipal.builder()
         .userId(new KeycloakUserId(email))
+
         .userEmail(new UserEmail(email))
         // .username(new Username(firstname + ' ' + lastname))
         .username(new Username(email))
