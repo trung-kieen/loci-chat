@@ -34,3 +34,5 @@ build/
 postges-data/
 .idea/
 loci.log
+
+logs/**.log
