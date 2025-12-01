@@ -23,27 +23,28 @@ import lombok.NoArgsConstructor;
 @Data
 public class PersonalProfile {
 
-  private Fullname fullname;
+  private Long dbId;
+
+  private UserPublicId userPublicId;
 
   private UserEmail email;
 
   private Username username;
 
-  private UserPublicId userPublicId;
+  private Fullname fullname;
+
 
   private UserImageUrl imageUrl;
 
-  private Instant lastModifiedDate;
-
   private Instant createdDate;
 
-  private Set<Authority> authorities;
+  private Instant lastModifiedDate;
 
-  private Long dbId;
-
-  private Instant lastSeen;
+  private Instant lastActive;
 
   private PrivacySetting privacySetting;
+
+  private Set<Authority> authorities;
 
   public void apply(PersonalProfileChanges profileChages) {
     if (profileChages.getFullname() != null) {

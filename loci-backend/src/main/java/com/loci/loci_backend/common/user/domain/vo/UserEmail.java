@@ -1,12 +1,13 @@
 package com.loci.loci_backend.common.user.domain.vo;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
+import com.loci.loci_backend.common.util.ValueObject;
 import com.loci.loci_backend.common.validation.domain.Assert;
 
 /**
  * UserEmail
  */
-public record UserEmail(String value) {
+public record UserEmail(String value) implements ValueObject<String> {
   public UserEmail {
     Assert.field("email", value).notBlank().maxLength(255);
   }

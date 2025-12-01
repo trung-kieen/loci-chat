@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
-import com.loci.loci_backend.common.user.domain.vo.UserAddress;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
@@ -26,42 +25,42 @@ import lombok.Data;
 @Data
 public class User {
 
-  private UserLastname lastname;
-
-  private UserFirstname firstname;
-
-  private UserEmail email;
-
   private UserPublicId userPublicId;
-
-  private UserImageUrl imageUrl;
-
-  private Instant lastModifiedDate;
-
-  private Instant createdDate;
-
-  private Set<Authority> authorities;
 
   private Long dbId;
 
-  private UserAddress userAddress;
+  private UserEmail email;
 
-  private Instant lastSeen;
+  private UserFirstname firstname;
+
+  private UserLastname lastname;
+
+  private Username username;
+
+  private UserImageUrl profilePicture;
+
+  private Instant createdDate;
+
+  private Instant lastModifiedDate;
+
+  private Instant lastActive;
 
   private PrivacySetting privacySetting;
 
+  private Set<Authority> authorities;
 
-  private void assertMandatoryFields() {
+  public void assertMandatoryFields() {
+    Assert.notNull("email", email);
     Assert.notNull("lastname", lastname);
     Assert.notNull("firstname", firstname);
-    Assert.notNull("email", email);
+    Assert.notNull("username", username);
     Assert.notNull("authorities", authorities);
   }
 
   public void updateFromUser(User user) {
     if (user != null) {
       this.email = user.email;
-      this.imageUrl = user.imageUrl;
+      this.profilePicture = user.profilePicture;
       this.firstname = user.firstname;
       this.lastname = user.lastname;
       this.firstname = user.firstname;
@@ -83,30 +82,35 @@ public class User {
 
   public static User fromTokenAttributes(Map<String, Object> attributes, Collection<String> rolesFromAccessToken) {
 
-
     UserBuilder userBuilder = User.builder();
 
     if (attributes.containsKey("email")) {
       userBuilder.email(new UserEmail(attributes.get("email").toString()));
     }
 
-    if (attributes.containsKey("given_name")) {
-      userBuilder.lastname(new UserLastname(attributes.get("given_name").toString()));
-    }
-
     if (attributes.containsKey("family_name")) {
       userBuilder.firstname(new UserFirstname(attributes.get("family_name").toString()));
     }
 
+    if (attributes.containsKey("given_name")) {
+      userBuilder.lastname(new UserLastname(attributes.get("given_name").toString()));
+    }
+
     if (attributes.containsKey("picture")) {
-      userBuilder.imageUrl(new UserImageUrl(attributes.get("picture").toString()));
+      userBuilder.profilePicture(new UserImageUrl(attributes.get("picture").toString()));
+    }
+
+
+    if (attributes.containsKey("preferred_username")) {
+      Username username = new Username(attributes.get("preferred_username").toString());
+      userBuilder.username(username);
     }
 
     if (attributes.containsKey("last_signed_in")) {
-      userBuilder.lastSeen(
+      userBuilder.lastActive(
           Instant.parse(attributes.get("last_signed_in").toString()));
     } else {
-      userBuilder.lastSeen(Instant.now());
+      userBuilder.lastActive(Instant.now());
     }
 
     Set<Authority> authorities = rolesFromAccessToken.stream()
@@ -121,6 +125,6 @@ public class User {
   }
 
   public Username getUsername() {
-    return new Username(email.value());
+    return username;
   }
 }

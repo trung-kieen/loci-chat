@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class SimpleUserAggregateMapper implements UserAggregateMapper {
-  private final ModelMapper mapper;
 
   @Override
   public PersonalProfileChanges extractChanges(PersonalProfile currentProfile) {

@@ -7,10 +7,8 @@ import com.loci.loci_backend.common.websocket.domain.vo.BearerToken;
 
 import org.jilt.Builder;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class JWSAuthentication extends AbstractAuthenticationToken implements Authentication {
+public class JWSAuthentication extends AbstractAuthenticationToken { // implements Authentication
   private BearerToken bearerToken;
   private KeycloakPrincipal keycloakPrincipal;
   private static final long serialVersionUID = 1L;

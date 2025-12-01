@@ -1,12 +1,6 @@
 package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
-import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.util.NullSafe;
-import com.loci.loci_backend.core.identity.domain.aggregate.Fullname;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

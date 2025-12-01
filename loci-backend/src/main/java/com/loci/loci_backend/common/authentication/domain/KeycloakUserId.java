@@ -1,4 +1,6 @@
 package com.loci.loci_backend.common.authentication.domain;
 
-public record KeycloakUserId(String value) {
+import com.loci.loci_backend.common.util.ValueObject;
+
+public record KeycloakUserId(String value) implements ValueObject<String> {
 }

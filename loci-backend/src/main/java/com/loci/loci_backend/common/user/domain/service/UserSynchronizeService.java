@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
 public class UserSynchronizeService {
 
@@ -25,15 +27,18 @@ public class UserSynchronizeService {
   @Transactional(readOnly = false)
   public void syncUser(User user) {
     if (user == null) {
-      throw new EntityNotFoundException("Error while user sync");
+      throw new EntityNotFoundException("Error while user sync not accept null user from Oauth2 Provider");
     }
+    log.debug("Receive user from oauth2 provider {}", user);
 
     User finalUser = user;
     Optional<User> dbUser = userRepository.getByUsername(user.getUsername());
 
     if (dbUser.isPresent()) {
       finalUser = dbUser.get();
+      log.debug("Found user from database {}", dbUser.get());
       finalUser.updateFromUser(user);
+      log.debug("Database user had updated {}", finalUser);
     } else {
 
       // Confirm the authority is exist in database and save them consistently

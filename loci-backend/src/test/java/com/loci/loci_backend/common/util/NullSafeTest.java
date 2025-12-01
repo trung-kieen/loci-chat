@@ -1,0 +1,68 @@
+package com.loci.loci_backend.common.util;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+public class NullSafeTest {
+
+  private final String value = "Hello";
+
+  /**
+   * Given: UserFirstName.class, "Hello"
+   * Expect: .value().equals("Hello")
+   */
+  @Test
+  @DisplayName("Should create value object record if value is present")
+  public void testConstructAValidValueObject() throws Exception {
+    var instance = NullSafe.constructOrNull(UserFirstname.class, value);
+
+    var normalConstruct = new UserFirstname(value);
+
+    assertEquals(instance, normalConstruct);
+  }
+
+  /**
+   * Given: null, "Hello"
+   * Expect: throw an Exception
+   */
+
+  @Test
+  @DisplayName("Should throw if not provide class")
+  public void testThrowIfConstructNullClass() throws Exception {
+    assertThrows(IllegalArgumentException.class, () -> {
+      NullSafe.constructOrNull(null, value);
+    });
+
+  }
+
+  /**
+   * Given: UserFirstName.class, null
+   * Expect: null
+   */
+
+  @Test
+  public void testNullIfNotPresentValue() throws Exception {
+
+    var instance = NullSafe.constructOrNull(UserFirstname.class, null);
+    assertEquals(instance, null);
+
+  }
+
+  /**
+   * Given: UserFirstName.class, 123 // Wrong type in constructor
+   * Expect: throw an Exception
+   */
+
+  // @Test
+  // public void testThrowIfProvideInvalidConstructorArguemnt() throws Exception {
+  //
+  //   assertThrows(Exception.class, () -> {
+  //     NullSafe.constructOrNull(UserFirstname.class, 123);  // Expect String  for constructor
+  //   });
+  // }
+}

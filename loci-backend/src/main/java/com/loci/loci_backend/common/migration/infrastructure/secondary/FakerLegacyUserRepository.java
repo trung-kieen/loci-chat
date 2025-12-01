@@ -2,7 +2,6 @@ package com.loci.loci_backend.common.migration.infrastructure.secondary;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,13 +16,13 @@ import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class FakerLegacyUserRepository implements LegacyUserRepository {
 
   private final Faker faker = new Faker();
-  private final Random random = new Random();
 
   @Override
   public List<User> fetchUsers(int limit) {
@@ -40,7 +39,7 @@ public class FakerLegacyUserRepository implements LegacyUserRepository {
         .firstname(new UserFirstname(faker.name().firstName()))
         .email(new UserEmail(faker.internet().emailAddress()))
         .userPublicId(UserPublicId.random())
-        .imageUrl(UserImageUrl.random())
+        .profilePicture(UserImageUrl.random())
         .lastModifiedDate(Instant.now())
         .createdDate(Instant.now())
         .authorities(userAuthorities)

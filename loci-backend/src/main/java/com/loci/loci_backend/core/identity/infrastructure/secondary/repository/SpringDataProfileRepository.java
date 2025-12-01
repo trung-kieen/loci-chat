@@ -12,7 +12,6 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 import com.loci.loci_backend.core.identity.domain.repository.ProfileRepository;
-import com.loci.loci_backend.core.identity.domain.service.UserAggregateMapper;
 
 import org.springframework.stereotype.Service;
 
@@ -23,11 +22,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SpringDataProfileRepository implements ProfileRepository {
   private final JpaUserRepository userRepository;
-  private final UserAggregateMapper userMapper;
   private final UserEntityMapper userEntityMapper;
 
   private Optional<UserEntity> findByUsernameOpt(Username username) {
-    return userRepository.findByEmail(username.username());
+    return userRepository.findByUsername(username.username());
   }
 
   @Override

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import com.github.javafaker.service.RandomService;
+import com.loci.loci_backend.common.util.ValueObject;
 import com.loci.loci_backend.common.validation.domain.Assert;
 
 import io.micrometer.common.util.StringUtils;
@@ -11,7 +12,7 @@ import io.micrometer.common.util.StringUtils;
 /**
  * UserImageUrl
  */
-public record UserImageUrl(String value) {
+public record UserImageUrl(String value) implements ValueObject<String> {
   public UserImageUrl {
     Assert.field("imageUrl", value).maxLength(1000);
   }

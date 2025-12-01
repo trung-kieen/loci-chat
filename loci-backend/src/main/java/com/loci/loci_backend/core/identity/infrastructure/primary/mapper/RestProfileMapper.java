@@ -25,10 +25,10 @@ public class RestProfileMapper {
 
   public RestPersonalProfile from(PersonalProfile personalProfile) {
     return RestPersonalProfile.builder()
+        .emailAddress(personalProfile.getEmail().value())
         .firstname(personalProfile.getFullname().getFirstname().value())
         .lastname(personalProfile.getFullname().getLastname().value())
-        .username(personalProfile.getUsername().get())
-        .emailAddress(personalProfile.getEmail().value())
+        .username(personalProfile.getUsername().value())
         .profilePictureUrl(
             personalProfile.getImageUrl().valueOrDefault())
         .privacy(NullSafe.getIfPresent(personalProfile.getPrivacySetting(), (p) -> RestProfilePrivacy.from(p)))
@@ -41,29 +41,24 @@ public class RestProfileMapper {
 
   public PersonalProfileChanges toDomain(RestPersonalProfilePatch patch) {
     var builder = PersonalProfileChanges.builder();
-    UserFirstname firstname = NullSafe.getIfPresent(patch.getFirstname(), (f) -> new UserFirstname(f));
-    UserLastname lastname = NullSafe.getIfPresent(patch.getFirstname(), (l) -> new UserLastname(l));
-
+    UserFirstname firstname = NullSafe.constructOrNull(UserFirstname.class, patch.getFirstname());
+    UserLastname lastname = NullSafe.constructOrNull(UserLastname.class, patch.getLastname());
     builder.fullname(Fullname.from(firstname, lastname));
-    // .username(new Username(patch.username))
-    // .email(new UserEmail(patch.emailAddress))
-    builder.imageUrl(NullSafe.getIfPresent(patch.getProfilePictureUrl(), (p) -> new UserImageUrl(p)));
+    builder.imageUrl(NullSafe.constructOrNull(UserImageUrl.class, patch.getProfilePictureUrl()));
     builder.privacySetting(NullSafe.getIfPresent(patch.getPrivacy(), p -> RestProfilePrivacy.toDomain(p)));
     return builder.build();
   }
 
-
-
   public RestPublicProfile from(PublicProfile profile) {
     return RestPublicProfile.builder()
         .publicId(profile.getPublicId().value().toString())
+        .emailAddress(profile.getEmail().value())
         .fullname(profile.getFullname().value())
         .username(profile.getUsername().get())
-        .emailAddress(profile.getEmail().value())
-        .createdAt(profile.getCreatedDate())
-        .memberSince(TimeFormatter.timeAgo(profile.getCreatedDate()))
         .profilePictureUrl(
             profile.getImageUrl().valueOrDefault())
+        .createdAt(profile.getCreatedDate())
+        .memberSince(TimeFormatter.timeAgo(profile.getCreatedDate()))
         .build();
   }
 }

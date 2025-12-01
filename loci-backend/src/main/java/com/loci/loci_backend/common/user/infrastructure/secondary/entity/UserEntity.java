@@ -5,27 +5,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
-import com.loci.loci_backend.common.user.domain.aggregate.User;
-import com.loci.loci_backend.common.user.domain.vo.UserEmail;
-import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
-import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
 import com.loci.loci_backend.common.util.NullSafe;
-import com.loci.loci_backend.core.identity.domain.aggregate.Fullname;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
-import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 import com.loci.loci_backend.core.identity.domain.vo.FriendRequestSettingEnum;
 import com.loci.loci_backend.core.identity.domain.vo.LastSeenSettingEnum;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
-
-import org.springframework.data.domain.Page;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,6 +28,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -61,23 +50,30 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "id")
   private Long id;
 
-  @Column
+  @NotBlank
   private String email;
 
-  @Column
+  @NotBlank
+  private String username;
+
+  @NotBlank
   private String firstname;
 
+  @NotBlank
   private String lastname;
 
-  @Column(name = "image_url")
-  private String imageURL;
+  @Column(name = "profile_picture")
+  private String profilePicture;
 
   @Column(name = "public_id")
   private UUID publicId;
 
-  @Column(name = "last_seen")
-  private Instant lastSeen;
+  private String bio;
 
+  @Column(name = "last_active")
+  private Instant lastActive;
+
+  // Profile settings
   @Column(name = "last_seen_setting")
   @Enumerated(EnumType.STRING)
   private LastSeenSettingEnum lastSeenSetting = LastSeenSettingEnum.EVERYONE;
@@ -88,35 +84,27 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "profile_visibility")
   private Boolean profileVisibility = true;
 
-  @Column(name = "bio")
-  private String bio;
-
-  @Column(name = "last_active")
-  private Instant lastActive;
-
   @ManyToMany(cascade = CascadeType.REMOVE)
   @JoinTable(name = "user_authority", joinColumns = {
       @JoinColumn(name = "user_id", referencedColumnName = "id")
   },
-
       inverseJoinColumns = {
           @JoinColumn(name = "authority_name", referencedColumnName = "name")
 
       }
-
   )
   private Set<AuthorityEntity> authorities = new HashSet<>();
 
-  @Column
-  @Enumerated(EnumType.STRING)
-  private Gender gender;
-
-  public enum Gender {
-    MALE, FEMALE
-  }
+  // @Column
+  // @Enumerated(EnumType.STRING)
+  // private Gender gender;
+  //
+  // public enum Gender {
+  // MALE, FEMALE
+  // }
 
   public String getUsername() {
-    return email;
+    return username;
 
   }
 
@@ -126,7 +114,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
       NullSafe.applyIfPresent(fullname::getLastname, ln -> this.lastname = ln.value());
     });
 
-    NullSafe.applyIfPresent(changes::getImageUrl, iu -> this.imageURL = iu.value());
+    NullSafe.applyIfPresent(changes::getImageUrl, iu -> this.profilePicture = iu.value());
 
     NullSafe.applyIfPresent(changes::getPrivacySetting, ps -> {
       NullSafe.applyIfPresent(ps::getLastSeenSetting, lss -> this.lastSeenSetting = lss.value());

@@ -43,6 +43,17 @@ spring:
 
 
 
+    # NOTE: update schema helper
+    # properties:
+    #   javax:
+    #     persistence:
+    #       schema-generation:
+    #         create-source: metadata
+    #         scripts:
+    #           action: update
+    #           create-target: src/main/resources/update.sql
+
+
   devtools:
     restart:
       enabled: true
@@ -97,7 +108,7 @@ shell:
     enabled: false
 
 logging:
-  com.loci.loci_backend: TRACE
+  com.loci.loci_backend: DEBUG
   level:
     com.loci.loci_backend.common.aspect.LoggingAspect: INFO
     root: INFO

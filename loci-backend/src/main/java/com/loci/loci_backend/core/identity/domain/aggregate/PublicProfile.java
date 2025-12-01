@@ -12,19 +12,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
+// @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class PublicProfile {
   private UserPublicId publicId;
-  private Username username;
-  private Fullname fullname;
   private UserEmail email;
+  private Fullname fullname;
+  private Username username;
   private UserImageUrl imageUrl;
   private Instant createdDate;
-
-
-
-
 }

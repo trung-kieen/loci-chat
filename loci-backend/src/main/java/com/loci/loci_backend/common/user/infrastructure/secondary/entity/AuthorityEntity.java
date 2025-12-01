@@ -1,12 +1,6 @@
 package com.loci.loci_backend.common.user.infrastructure.secondary.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import com.loci.loci_backend.common.user.domain.aggregate.Authority;
-import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

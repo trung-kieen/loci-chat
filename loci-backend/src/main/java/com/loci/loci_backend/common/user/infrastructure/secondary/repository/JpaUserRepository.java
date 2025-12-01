@@ -17,11 +17,12 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long>, JpaS
 
   Optional<UserEntity> findByEmail(String email);
 
+  Optional<UserEntity> findByUsername(String username);
+
   Optional<UserEntity> findByPublicId(UUID publicId);
 
   boolean existsByEmail(String email);
 
   Page<UserEntity> findAll(Specification<UserEntity> spec, Pageable pageable);
-
 
 }

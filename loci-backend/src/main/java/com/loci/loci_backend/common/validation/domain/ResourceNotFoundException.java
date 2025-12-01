@@ -1,6 +1,5 @@
 package com.loci.loci_backend.common.validation.domain;
 
-import jakarta.ws.rs.container.ResourceInfo;
 import lombok.Getter;
 
 @Getter

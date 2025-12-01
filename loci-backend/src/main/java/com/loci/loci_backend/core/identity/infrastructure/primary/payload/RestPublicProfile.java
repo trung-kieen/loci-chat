@@ -2,11 +2,6 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
 import java.time.Instant;
 
-import com.loci.loci_backend.common.util.TimeFormatter;
-import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-
-import org.springframework.data.domain.Page;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,21 +30,4 @@ public class RestPublicProfile {
   // recentActivity: RecentActivity[];
   // unfriended, blocked, not_determined aka guest
 
-  // public static Page<RestPublicProfile> from(Page<PublicProfile> profile) {
-  //   return profile.map(RestPublicProfile::from);
-  // }
-  //
-  // public static RestPublicProfile from(PublicProfile profile) {
-  //   return RestPublicProfile.builder()
-  //       .publicId(profile.getPublicId().value().toString())
-  //       .fullname(profile.getFullname().value())
-  //       .username(profile.getUsername().get())
-  //       .emailAddress(profile.getEmail().value())
-  //       .createdAt(profile.getCreatedDate())
-  //       .memberSince(TimeFormatter.timeAgo(profile.getCreatedDate()))
-  //       .profilePictureUrl(
-  //           profile.getImageUrl().valueOrDefault())
-  //       .build();
-  // }
-  //
 }

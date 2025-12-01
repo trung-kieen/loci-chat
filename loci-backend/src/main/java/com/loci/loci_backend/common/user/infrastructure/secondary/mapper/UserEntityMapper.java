@@ -7,7 +7,6 @@ import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
-import com.loci.loci_backend.common.user.infrastructure.secondary.entity.AuthorityEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity.UserEntityBuilder;
 import com.loci.loci_backend.common.util.NullSafe;
@@ -28,11 +27,11 @@ public class UserEntityMapper {
   public PublicProfile toPublicProfile(UserEntity userEntity) {
     return PublicProfile.builder()
         .publicId(new UserPublicId(userEntity.getPublicId()))
-        .username(new Username(userEntity.getUsername()))
+        .email(new UserEmail(userEntity.getEmail()))
         .fullname(
             Fullname.from(new UserFirstname(userEntity.getFirstname()), new UserLastname(userEntity.getLastname())))
-        .email(new UserEmail(userEntity.getEmail()))
-        .imageUrl(new UserImageUrl(userEntity.getImageURL()))
+        .username(new Username(userEntity.getUsername()))
+        .imageUrl(new UserImageUrl(userEntity.getProfilePicture()))
         .createdDate(userEntity.getCreatedDate())
         .build();
   }
@@ -46,14 +45,18 @@ public class UserEntityMapper {
 
   public User toDomain(UserEntity userEntity) {
     return User.builder()
+        .dbId(userEntity.getId())
+        .userPublicId(new UserPublicId(userEntity.getPublicId()))
         .email(new UserEmail(userEntity.getEmail()))
+        .username(new Username(userEntity.getUsername()))
         .firstname(new UserFirstname(userEntity.getFirstname()))
         .lastname(new UserLastname(userEntity.getLastname()))
-        .authorities(authorityEntityMapper.toDomain(userEntity.getAuthorities()))
-        .lastModifiedDate(userEntity.getLastModifiedDate())
+        .profilePicture(new UserImageUrl(userEntity.getProfilePicture()))
         .createdDate(userEntity.getCreatedDate())
+        .lastModifiedDate(userEntity.getLastModifiedDate())
+        .lastActive(userEntity.getLastActive())
         .privacySetting(userEntity.getPrivacySetting())
-        .dbId(userEntity.getId())
+        .authorities(authorityEntityMapper.toDomain(userEntity.getAuthorities()))
         .build();
   }
 
@@ -64,7 +67,7 @@ public class UserEntityMapper {
         .email(new UserEmail(userEntity.getEmail()))
         .username(new Username(userEntity.getUsername()))
         .userPublicId(new UserPublicId(userEntity.getPublicId()))
-        .imageUrl(new UserImageUrl(userEntity.getImageURL()))
+        .imageUrl(new UserImageUrl(userEntity.getProfilePicture()))
         .lastModifiedDate(userEntity.getLastModifiedDate())
         .createdDate(userEntity.getCreatedDate())
         .authorities(authorityEntityMapper.toDomain(userEntity.getAuthorities()))
@@ -76,46 +79,40 @@ public class UserEntityMapper {
   public UserEntity from(PersonalProfile profile) {
     UserEntityBuilder userEntityBuilder = UserEntity.builder();
 
-    NullSafe.applyIfPresent(profile::getImageUrl, i -> userEntityBuilder.imageURL(i.value()));
-
-    NullSafe.applyIfPresent(profile::getUserPublicId, i -> userEntityBuilder.publicId(i.value()));
 
     return userEntityBuilder
-        .authorities(authorityEntityMapper.from(profile.getAuthorities()))
+        .id(profile.getDbId())
+        .publicId(NullSafe.getIfPresent(profile.getUserPublicId()))
         .email(profile.getEmail().value())
+        .username(profile.getUsername().value())
         .firstname(profile.getFullname().getFirstname().value())
         .lastname(profile.getFullname().getLastname().value())
-        .lastSeen(profile.getLastSeen())
+        .profilePicture(NullSafe.getIfPresent(profile.getImageUrl()))
+        .lastActive(profile.getLastActive())
         .lastSeenSetting(profile.getPrivacySetting().getLastSeenSetting().value())
         .friendRequestSetting(profile.getPrivacySetting().getFriendRequestSetting().value())
         .profileVisibility(profile.getPrivacySetting().getProfileVisibility().value())
-        .id(profile.getDbId())
+        .authorities(authorityEntityMapper.from(profile.getAuthorities()))
         .build();
   }
 
   public UserEntity from(User user) {
     UserEntity.UserEntityBuilder builder = UserEntity.builder()
-        .authorities(authorityEntityMapper.from(user.getAuthorities()))
+        .id(user.getDbId())
+        .publicId(NullSafe.getIfPresent(user.getUserPublicId()))
         .email(user.getEmail().value())
         .firstname(user.getFirstname().value())
         .lastname(user.getLastname().value())
-        .lastSeen(user.getLastSeen())
-        .id(user.getDbId());
+        .username(user.getUsername().value())
+        .profilePicture(NullSafe.getIfPresent(user.getProfilePicture()))
+        .lastActive(user.getLastActive())
+        .authorities(authorityEntityMapper.from(user.getAuthorities()));
     NullSafe.applyIfPresent(user::getPrivacySetting, ps -> {
       NullSafe.applyIfPresent(ps::getLastSeenSetting, lss -> builder.lastSeenSetting(lss.value()));
       NullSafe.applyIfPresent(ps::getFriendRequestSetting, frs -> builder.friendRequestSetting(frs.value()));
       NullSafe.applyIfPresent(ps::getProfileVisibility, pv -> builder.profileVisibility(pv.value()));
     });
 
-    NullSafe.applyIfPresent(user::getImageUrl, iu -> builder.imageURL(iu.value()));
-    NullSafe.applyIfPresent(user::getUserPublicId, upi -> builder.publicId(upi.value()));
-
-    // EntityMapper.applyIfPresent(user::getUserAddress, addr -> {
-    // builder.addressCity(addr.city());
-    // builder.addressCountry(addr.country());
-    // builder.addressZipCode(addr.zipCode());
-    // builder.addressStreet(addr.street());
-    // });
     return builder.build();
   }
 
