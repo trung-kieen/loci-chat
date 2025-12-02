@@ -22,7 +22,7 @@ public class AuthenticatedUserArgumentResolver implements HandlerMethodArgumentR
   public boolean supportsParameter(MethodParameter parameter) {
     return
     // parameter.hasParameterAnnotation(AuthenticatedUser.class)
-    //     &&
+    // &&
     KeycloakPrincipal.class.isAssignableFrom(parameter.getParameterType());
   }
 

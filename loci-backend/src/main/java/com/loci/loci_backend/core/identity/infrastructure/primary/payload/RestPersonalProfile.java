@@ -1,14 +1,11 @@
 package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class RestPersonalProfile {
   private String emailAddress;
   private String firstname;
@@ -16,5 +13,16 @@ public class RestPersonalProfile {
   private String username;
   private String profilePictureUrl;
   private RestProfilePrivacy privacy;
+
+  @Builder(style = BuilderStyle.STAGED)
+  public RestPersonalProfile(String emailAddress, String firstname, String lastname, String username,
+      String profilePictureUrl, RestProfilePrivacy privacy) {
+    this.emailAddress = emailAddress;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.username = username;
+    this.profilePictureUrl = profilePictureUrl;
+    this.privacy = privacy;
+  }
 
 }

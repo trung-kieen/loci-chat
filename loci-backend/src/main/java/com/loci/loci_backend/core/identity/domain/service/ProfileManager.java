@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProfileManager {
   private final ProfileRepository repository;
-  private final UserAggregateMapper profileMapper;
+  private final ProfileAggregateMapper profileMapper;
 
   public PersonalProfile readPersonalProfile(KeycloakPrincipal keycloakPrincipal) {
     PersonalProfile profile = repository.findPersonalProfile(keycloakPrincipal.getUserEmail());

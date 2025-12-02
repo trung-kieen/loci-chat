@@ -2,19 +2,20 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestPersonalProfilePatch {
   private String firstname;
   private String lastname;
+  private String bio;
 
   // Unchange field
   // private String username;
@@ -22,6 +23,15 @@ public class RestPersonalProfilePatch {
 
   private String profilePictureUrl;
   private RestProfilePrivacy privacy;
+  @Builder(style =  BuilderStyle.STAGED)
+  public RestPersonalProfilePatch(String firstname, String lastname, String bio, String profilePictureUrl,
+      RestProfilePrivacy privacy) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.bio = bio;
+    this.profilePictureUrl = profilePictureUrl;
+    this.privacy = privacy;
+  }
 
 
 }

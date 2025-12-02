@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
+import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
+import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 
 import org.keycloak.representations.AccessToken;
 
@@ -17,17 +19,18 @@ public class KeycloakPrincipal {
   private final KeycloakUserId userId;
   private final UserEmail userEmail;
   private final Username username;
+  private final UserFirstname firstname;
+  private final UserLastname lastname;
   private final Roles roles;
 
-  KeycloakPrincipal(KeycloakUserId userId, UserEmail email, Username username, Roles roles) {
+  KeycloakPrincipal(KeycloakUserId userId, UserEmail email, Username username, UserFirstname firstname,
+      UserLastname lastname, Roles roles) {
     this.userId = userId;
     this.userEmail = email;
     this.username = username;
     this.roles = roles;
-  }
-
-  public static KeycloakPrincipal create(KeycloakUserId userId, UserEmail email, Username username, Roles roles) {
-    return new KeycloakPrincipal(userId, email, username, roles);
+    this.firstname = firstname;
+    this.lastname = lastname;
   }
 
   public static KeycloakPrincipal fromTokenAttribute(Map<String, Object> tokenAttrributes, Roles roles) {
@@ -37,7 +40,8 @@ public class KeycloakPrincipal {
     return KeycloakPrincipal.builder()
         .userId(new KeycloakUserId(email))
         .userEmail(new UserEmail(email))
-        // .username(new Username(firstname + ' ' + lastname))
+        .firstname(new UserFirstname(firstname))
+        .lastname(new UserLastname(lastname))
         .username(new Username(email))
         .roles(roles)
         .build();
@@ -51,7 +55,9 @@ public class KeycloakPrincipal {
     return KeycloakPrincipal.builder()
         .userId(new KeycloakUserId(token.getSubject()))
         .userEmail(new UserEmail(token.getEmail()))
-        .username(new Username(token.getEmail()))
+        .username(new Username(token.getPreferredUsername()))
+        .firstname(new UserFirstname(token.getFamilyName()))
+        .lastname(new UserLastname(token.getGivenName()))
         // .username(new Username(token.getEmail()))
         .roles(roles)
         .build();

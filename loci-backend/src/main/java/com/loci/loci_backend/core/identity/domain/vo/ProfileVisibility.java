@@ -1,8 +1,9 @@
 package com.loci.loci_backend.core.identity.domain.vo;
 
 import com.loci.loci_backend.common.util.NullSafe;
+import com.loci.loci_backend.common.util.ValueObject;
 
-public record ProfileVisibility(boolean value) {
+public record ProfileVisibility(Boolean value) implements ValueObject<Boolean> {
 
   public static ProfileVisibility of(Boolean value) {
     return NullSafe.getIfPresent(value, (v) -> new ProfileVisibility(v));

@@ -8,11 +8,15 @@ import com.loci.loci_backend.common.util.TimeFormatter;
 import com.loci.loci_backend.core.identity.domain.aggregate.Fullname;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
+import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChangesBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
+import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfile;
+import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfileBuilder;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfilePatch;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfilePrivacy;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfile;
+import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfileBuilder;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -24,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class RestProfileMapper {
 
   public RestPersonalProfile from(PersonalProfile personalProfile) {
-    return RestPersonalProfile.builder()
+    return RestPersonalProfileBuilder.restPersonalProfile()
         .emailAddress(personalProfile.getEmail().value())
         .firstname(personalProfile.getFullname().getFirstname().value())
         .lastname(personalProfile.getFullname().getLastname().value())
@@ -40,25 +44,26 @@ public class RestProfileMapper {
   }
 
   public PersonalProfileChanges toDomain(RestPersonalProfilePatch patch) {
-    var builder = PersonalProfileChanges.builder();
     UserFirstname firstname = NullSafe.constructOrNull(UserFirstname.class, patch.getFirstname());
     UserLastname lastname = NullSafe.constructOrNull(UserLastname.class, patch.getLastname());
-    builder.fullname(Fullname.from(firstname, lastname));
-    builder.imageUrl(NullSafe.constructOrNull(UserImageUrl.class, patch.getProfilePictureUrl()));
-    builder.privacySetting(NullSafe.getIfPresent(patch.getPrivacy(), p -> RestProfilePrivacy.toDomain(p)));
-    return builder.build();
+    return PersonalProfileChangesBuilder.personalProfileChanges()
+        .fullname(Fullname.from(firstname, lastname))
+        .bio(NullSafe.constructOrNull(ProfileBio.class, patch.getBio()))
+        .imageUrl(NullSafe.constructOrNull(UserImageUrl.class, patch.getProfilePictureUrl()))
+        .privacySetting(NullSafe.getIfPresent(patch.getPrivacy(), p -> RestProfilePrivacy.toDomain(p)))
+        .build();
   }
 
   public RestPublicProfile from(PublicProfile profile) {
-    return RestPublicProfile.builder()
+    return RestPublicProfileBuilder.restPublicProfile()
         .publicId(profile.getPublicId().value().toString())
         .emailAddress(profile.getEmail().value())
         .fullname(profile.getFullname().value())
         .username(profile.getUsername().get())
         .profilePictureUrl(
             profile.getImageUrl().valueOrDefault())
-        .createdAt(profile.getCreatedDate())
         .memberSince(TimeFormatter.timeAgo(profile.getCreatedDate()))
+        .createdAt(profile.getCreatedDate())
         .build();
   }
 }

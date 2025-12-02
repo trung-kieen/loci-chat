@@ -10,16 +10,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SimpleMigrationMapper implements MigrationMapper {
+public class MigrationMapperImpl implements MigrationMapper {
+  private final MapStructMigrationMapper mapper;
 
   @Override
   public KeycloakUser toKeycloakUser(User user) {
-    return KeycloakUser.builder()
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .firstName(user.getFirstname())
-        .lastName(user.getLastname())
-        .build();
+    return mapper.toKeycloakUser(user);
   }
 
 }

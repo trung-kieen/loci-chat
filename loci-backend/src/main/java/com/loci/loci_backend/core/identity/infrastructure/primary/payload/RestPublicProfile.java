@@ -2,24 +2,34 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
 import java.time.Instant;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class RestPublicProfile {
 
   private String publicId;
-  private String username;
-  private String fullname;
   private String emailAddress;
+  private String fullname;
+  private String username;
+  private String profilePictureUrl;
   private String memberSince;
   private Instant createdAt;
-  private String profilePictureUrl;
+  @Builder(style =  BuilderStyle.STAGED)
+  public RestPublicProfile(String publicId, String emailAddress, String fullname, String username,
+      String profilePictureUrl, String memberSince, Instant createdAt) {
+    this.publicId = publicId;
+    this.emailAddress = emailAddress;
+    this.fullname = fullname;
+    this.username = username;
+    this.profilePictureUrl = profilePictureUrl;
+    this.memberSince = memberSince;
+    this.createdAt = createdAt;
+  }
 
   // TODO: Implement other profile details
   // lastActive: Date;

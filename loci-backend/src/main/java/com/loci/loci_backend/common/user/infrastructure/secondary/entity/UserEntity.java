@@ -9,11 +9,15 @@ import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
 import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
+import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySettingBuilder;
 import com.loci.loci_backend.core.identity.domain.vo.FriendRequestSettingEnum;
 import com.loci.loci_backend.core.identity.domain.vo.LastSeenSettingEnum;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
+
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,8 +33,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,8 +41,6 @@ import lombok.Setter;
 @Table(name = "USER_")
 @Setter
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity extends AbstractAuditingEntity<Long> {
 
@@ -50,10 +50,8 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "id")
   private Long id;
 
-  @NotBlank
   private String email;
 
-  @NotBlank
   private String username;
 
   @NotBlank
@@ -87,12 +85,10 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @ManyToMany(cascade = CascadeType.REMOVE)
   @JoinTable(name = "user_authority", joinColumns = {
       @JoinColumn(name = "user_id", referencedColumnName = "id")
-  },
-      inverseJoinColumns = {
-          @JoinColumn(name = "authority_name", referencedColumnName = "name")
+  }, inverseJoinColumns = {
+      @JoinColumn(name = "authority_name", referencedColumnName = "name")
 
-      }
-  )
+  })
   private Set<AuthorityEntity> authorities = new HashSet<>();
 
   // @Column
@@ -108,12 +104,37 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
 
   }
 
+  @Builder(style = BuilderStyle.STAGED)
+  public UserEntity(UUID publicId, Long id, String email, String firstname, String lastname, String username,
+      String profilePicture,
+      String bio, Instant lastActive, LastSeenSettingEnum lastSeenSetting,
+      FriendRequestSettingEnum friendRequestSetting, Boolean profileVisibility, Set<AuthorityEntity> authorities) {
+    this.publicId = publicId;
+    this.id = id;
+    this.email = email;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.username = username;
+    this.profilePicture = profilePicture;
+    this.bio = bio;
+    this.lastSeenSetting = lastSeenSetting;
+    this.friendRequestSetting = friendRequestSetting;
+    this.profileVisibility = profileVisibility;
+    this.authorities = authorities;
+  }
+
+  /**
+   * Apply profile changes if field is not null
+   */
   public void applyChanges(PersonalProfileChanges changes) {
     NullSafe.applyIfPresent(changes::getFullname, fullname -> {
       NullSafe.applyIfPresent(fullname::getFirstname, fn -> this.firstname = fn.value());
       NullSafe.applyIfPresent(fullname::getLastname, ln -> this.lastname = ln.value());
     });
 
+
+    NullSafe.applyIfPresent(changes::getBio, iu -> this.bio = iu.value());
+    NullSafe.applyIfPresent(changes::getImageUrl, iu -> this.profilePicture = iu.value());
     NullSafe.applyIfPresent(changes::getImageUrl, iu -> this.profilePicture = iu.value());
 
     NullSafe.applyIfPresent(changes::getPrivacySetting, ps -> {
@@ -124,7 +145,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   }
 
   public PrivacySetting getPrivacySetting() {
-    return PrivacySetting.builder()
+    return PrivacySettingBuilder.privacySetting()
         .lastSeenSetting(UserLastSeenSetting.ofEnum(this.lastSeenSetting))
         .friendRequestSetting(UserFriendRequestSetting.ofEnum(this.friendRequestSetting))
         .profileVisibility(ProfileVisibility.of(this.profileVisibility))

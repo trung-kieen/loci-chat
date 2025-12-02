@@ -15,14 +15,21 @@ import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
 import com.loci.loci_backend.common.validation.domain.Assert;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
+import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySettingBuilder;
+import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
+import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
+import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
+import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Builder
-@AllArgsConstructor
+// @AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class User {
 
   private UserPublicId userPublicId;
@@ -39,6 +46,8 @@ public class User {
 
   private UserImageUrl profilePicture;
 
+  private ProfileBio bio;
+
   private Instant createdDate;
 
   private Instant lastModifiedDate;
@@ -49,6 +58,35 @@ public class User {
 
   private Set<Authority> authorities;
 
+  @Builder(style = BuilderStyle.STAGED)
+  public User(UserPublicId userPublicId,
+      Long dbId,
+      UserEmail email,
+      UserFirstname firstname,
+      UserLastname lastname,
+      Username username,
+      UserImageUrl profilePicture,
+      Instant createdDate,
+      Instant lastModifiedDate,
+      ProfileBio bio,
+      Instant lastActive,
+      PrivacySetting privacySetting,
+      Set<Authority> authorities) {
+    this.userPublicId = userPublicId;
+    this.dbId = dbId;
+    this.email = email;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.username = username;
+    this.profilePicture = profilePicture;
+    this.createdDate = createdDate;
+    this.lastModifiedDate = lastModifiedDate;
+    this.bio = bio;
+    this.lastActive = lastActive;
+    this.privacySetting = privacySetting;
+    this.authorities = authorities;
+  }
+
   public void assertMandatoryFields() {
     Assert.notNull("email", email);
     Assert.notNull("lastname", lastname);
@@ -57,71 +95,99 @@ public class User {
     Assert.notNull("authorities", authorities);
   }
 
-  public void updateFromUser(User user) {
+  /**
+   * Update new data of user in keycloak to database user
+   */
+  public void syncOauth2User(User user) {
+
     if (user != null) {
-      this.email = user.email;
-      this.profilePicture = user.profilePicture;
-      this.firstname = user.firstname;
-      this.lastname = user.lastname;
-      this.firstname = user.firstname;
-      this.lastname = user.lastname;
-      this.userPublicId = user.userPublicId;
+      if (user.userPublicId != null) {
+        this.userPublicId = user.userPublicId;
+      }
+      if (user.email != null) {
+        this.email = user.email;
+      }
+      if (user.firstname != null) {
+        this.firstname = user.firstname;
+      }
+      if (user.lastname != null) {
+        this.lastname = user.lastname;
+      }
+      if (user.username != null) {
+        this.username = user.username;
+      }
+      if (user.profilePicture != null) {
+        this.profilePicture = user.profilePicture;
+      }
+      if (user.authorities != null) {
+        this.authorities = user.authorities;
+      }
     }
   }
 
   public void provideMandatoryField() {
-    if (this.userPublicId == null) {
-      this.initFieldForSignup();
-    }
-
+    provideMandatoryField();
   }
 
   public void initFieldForSignup() {
-    this.userPublicId = UserPublicId.random();
+    if (this.userPublicId == null) {
+      this.userPublicId = UserPublicId.random();
+    }
+    if (this.profilePicture == null) {
+      this.profilePicture = UserImageUrl.random();
+    }
+    if (this.privacySetting == null) {
+      this.privacySetting = PrivacySettingBuilder.privacySetting()
+          .lastSeenSetting(UserLastSeenSetting.ofDefault())
+          .friendRequestSetting(UserFriendRequestSetting.ofDefault())
+          .profileVisibility(ProfileVisibility.ofDefault())
+          .build();
+    }
   }
 
   public static User fromTokenAttributes(Map<String, Object> attributes, Collection<String> rolesFromAccessToken) {
 
-    UserBuilder userBuilder = User.builder();
-
+    UserEmail email = null;
     if (attributes.containsKey("email")) {
-      userBuilder.email(new UserEmail(attributes.get("email").toString()));
+      email = new UserEmail(attributes.get("email").toString());
     }
-
+    UserFirstname firstname = null;
     if (attributes.containsKey("family_name")) {
-      userBuilder.firstname(new UserFirstname(attributes.get("family_name").toString()));
+      firstname = new UserFirstname(attributes.get("family_name").toString());
     }
 
+    UserLastname lastname = null;
     if (attributes.containsKey("given_name")) {
-      userBuilder.lastname(new UserLastname(attributes.get("given_name").toString()));
+      lastname = new UserLastname(attributes.get("given_name").toString());
     }
 
-    if (attributes.containsKey("picture")) {
-      userBuilder.profilePicture(new UserImageUrl(attributes.get("picture").toString()));
-    }
-
-
+    Username username = null;
     if (attributes.containsKey("preferred_username")) {
-      Username username = new Username(attributes.get("preferred_username").toString());
-      userBuilder.username(username);
-    }
-
-    if (attributes.containsKey("last_signed_in")) {
-      userBuilder.lastActive(
-          Instant.parse(attributes.get("last_signed_in").toString()));
-    } else {
-      userBuilder.lastActive(Instant.now());
+      username = new Username(attributes.get("preferred_username").toString());
     }
 
     Set<Authority> authorities = rolesFromAccessToken.stream()
-        .map(authority -> Authority.builder()
-            .name(new AuthorityName(authority))
-            .build())
+        .map(authority -> Authority.builder().name(new AuthorityName(authority)).build())
         .collect(Collectors.toSet());
 
-    userBuilder.authorities(authorities);
+    // Token use to update user so allow null field
+    // Update need to ingore the null value
+    var builder = UserBuilder.user();
+    return builder.userPublicId(null)
+        .dbId(null)
+        .email(email)
+        .firstname(firstname)
+        .lastname(lastname)
+        .username(username)
+        .profilePicture(null)
+        .createdDate(null)
+        .lastModifiedDate(Instant.now())
+        .bio(null)
+        .lastActive(Instant.now())
+        .privacySetting(null)
+        .authorities(authorities)
+        .build();
 
-    return userBuilder.build();
   }
 
   public Username getUsername() {

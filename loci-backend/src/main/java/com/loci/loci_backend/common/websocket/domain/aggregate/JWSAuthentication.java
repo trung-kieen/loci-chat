@@ -5,20 +5,21 @@ import java.util.Collection;
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.websocket.domain.vo.BearerToken;
 
-import org.jilt.Builder;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * Websocket channel authorization TCP connection
+ * implements Authentication interface to use and token
  */
 @Getter
 @Setter
-@Builder
-public class JWSAuthentication extends AbstractAuthenticationToken { // implements Authentication
+// @Builder
+public class JWSAuthentication extends AbstractAuthenticationToken {
   private BearerToken bearerToken;
   private KeycloakPrincipal keycloakPrincipal;
   private static final long serialVersionUID = 1L;

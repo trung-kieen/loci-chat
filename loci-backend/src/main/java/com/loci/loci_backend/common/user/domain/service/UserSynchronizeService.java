@@ -31,22 +31,22 @@ public class UserSynchronizeService {
     }
     log.debug("Receive user from oauth2 provider {}", user);
 
-    User finalUser = user;
-    Optional<User> dbUser = userRepository.getByUsername(user.getUsername());
+    User userToPersistence = user;
+    Optional<User> oldDbUser = userRepository.getByUsername(user.getUsername());
 
-    if (dbUser.isPresent()) {
-      finalUser = dbUser.get();
-      log.debug("Found user from database {}", dbUser.get());
-      finalUser.updateFromUser(user);
-      log.debug("Database user had updated {}", finalUser);
+    if (oldDbUser.isPresent()) {
+      userToPersistence = oldDbUser.get();
+      log.debug("Found user from database {}", oldDbUser.get());
+      userToPersistence.syncOauth2User(user);
+      log.debug("Database user had updated {}", userToPersistence);
     } else {
 
       // Confirm the authority is exist in database and save them consistently
       Set<Authority> authorities = authorityRepository.saveAll(user.getAuthorities());
-      finalUser.setAuthorities(authorities);
+      userToPersistence.setAuthorities(authorities);
     }
-    finalUser.provideMandatoryField();
-    userRepository.save(finalUser);
+    userToPersistence.provideMandatoryField();
+    userRepository.save(userToPersistence);
   }
 
 }

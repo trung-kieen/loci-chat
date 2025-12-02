@@ -1,28 +1,35 @@
 package com.loci.loci_backend.core.identity.domain.aggregate;
 
-import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
+import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.jilt.Builder;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class PrivacySetting {
   private UserLastSeenSetting lastSeenSetting;
   private UserFriendRequestSetting friendRequestSetting;
   private ProfileVisibility profileVisibility;
 
+  @Builder
+  public PrivacySetting(UserLastSeenSetting lastSeenSetting, UserFriendRequestSetting friendRequestSetting,
+
+      ProfileVisibility profileVisibility) {
+    this.lastSeenSetting = lastSeenSetting;
+    this.friendRequestSetting = friendRequestSetting;
+    this.profileVisibility = profileVisibility;
+  }
+
   public static PrivacySetting of(PrivacySetting settings) {
     if (settings == null) {
       return PrivacySetting.ofDefault();
     }
-    return PrivacySetting.builder()
+    return PrivacySettingBuilder.privacySetting()
         .lastSeenSetting(UserLastSeenSetting.of(settings.getLastSeenSetting()))
         .friendRequestSetting(UserFriendRequestSetting.of(settings.getFriendRequestSetting()))
         .profileVisibility(ProfileVisibility.of(settings.getProfileVisibility()))
@@ -30,7 +37,7 @@ public class PrivacySetting {
   }
 
   public static PrivacySetting ofDefault() {
-    return PrivacySetting.builder()
+    return PrivacySettingBuilder.privacySetting()
         .lastSeenSetting(UserLastSeenSetting.ofDefault())
         .friendRequestSetting(UserFriendRequestSetting.ofDefault())
         .profileVisibility(ProfileVisibility.ofDefault())

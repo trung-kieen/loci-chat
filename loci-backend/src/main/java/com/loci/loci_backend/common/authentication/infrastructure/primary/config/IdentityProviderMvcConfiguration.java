@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class IdentityBeanConfig {
+public class IdentityProviderMvcConfiguration {
 
 
   private final RestIdentityProvider identityRepository;

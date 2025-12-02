@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 /**
  * Log centerlize for common aspect of application
  * NOTE:
- * 1. AOP only proxies public methods, so don't try to use @Service + private constructor
+ * 1. AOP only proxies public methods, so don't try to use log private constructor or private method
  * 2. Use INFO or above for com.loci.loci_backend.common.aspect.LoggingAspect
  */
 @Aspect

@@ -1,8 +1,9 @@
 package com.loci.loci_backend.core.identity.domain.vo;
 
 import com.loci.loci_backend.common.util.NullSafe;
+import com.loci.loci_backend.common.util.ValueObject;
 
-public record UserLastSeenSetting(LastSeenSettingEnum value) {
+public record UserLastSeenSetting(LastSeenSettingEnum value) implements ValueObject<LastSeenSettingEnum> {
   public static UserLastSeenSetting of(String value) {
     return NullSafe.getIfPresent(value, (v) -> new UserLastSeenSetting(LastSeenSettingEnum.of(v)));
   }

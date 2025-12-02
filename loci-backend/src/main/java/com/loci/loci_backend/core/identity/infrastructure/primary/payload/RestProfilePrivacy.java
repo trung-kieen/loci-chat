@@ -3,24 +3,29 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
+import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySettingBuilder;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestProfilePrivacy {
   private String lastSeenSetting;
   private String friendRequests;
   private boolean profileVisibility;
+
+  @Builder
+  public RestProfilePrivacy(String lastSeenSetting, String friendRequests, boolean profileVisibility) {
+    this.lastSeenSetting = lastSeenSetting;
+    this.friendRequests = friendRequests;
+    this.profileVisibility = profileVisibility;
+  }
 
   public static RestProfilePrivacy from(PrivacySetting settings) {
     return RestProfilePrivacy.builder()
@@ -39,7 +44,7 @@ public class RestProfilePrivacy {
   }
 
   public static PrivacySetting toDomain(RestProfilePrivacy partialUpdateRequest) {
-    return PrivacySetting.builder()
+    return PrivacySettingBuilder.privacySetting()
         .profileVisibility(ProfileVisibility.of(partialUpdateRequest.profileVisibility))
         .friendRequestSetting(UserFriendRequestSetting.of(partialUpdateRequest.friendRequests))
         .lastSeenSetting(UserLastSeenSetting.of(partialUpdateRequest.lastSeenSetting))

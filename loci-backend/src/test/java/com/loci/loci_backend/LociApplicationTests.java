@@ -1,13 +1,25 @@
 package com.loci.loci_backend;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.loci.loci_backend.common.authentication.infrastructure.primary.keycloak.KeycloakProperties;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.cors.CorsConfiguration;
+
+@SpringBootTest(classes = { KeycloakProperties.class, CorsConfiguration.class })
+@ExtendWith(SpringExtension.class)
+// @Import({KeycloakProperties.class, CorsConfiguration.class})
+// @EnableConfigurationProperties({KeycloakProperties.class
+// ,CorsConfiguration.class})
+// @ComponentScan(basePackages = "com.loci.loci_backend")
+// @AutoConfigureMockMvc
 class LociApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+  @Test
+  void contextLoads() {
+  }
 
 }

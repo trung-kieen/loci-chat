@@ -7,16 +7,11 @@ import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.jilt.Builder;
 
-// @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+import lombok.Data;
+
 @Data
-@Builder
 public class PublicProfile {
   private UserPublicId publicId;
   private UserEmail email;
@@ -24,4 +19,15 @@ public class PublicProfile {
   private Username username;
   private UserImageUrl imageUrl;
   private Instant createdDate;
+
+  @Builder
+  public PublicProfile(UserPublicId publicId, UserEmail email, Fullname fullname, Username username,
+      UserImageUrl imageUrl, Instant createdDate) {
+    this.publicId = publicId;
+    this.email = email;
+    this.fullname = fullname;
+    this.username = username;
+    this.imageUrl = imageUrl;
+    this.createdDate = createdDate;
+  }
 }

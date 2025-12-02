@@ -8,33 +8,34 @@ import com.loci.loci_backend.common.user.domain.aggregate.Authority;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
 import com.loci.loci_backend.core.identity.domain.vo.UserLastSeenSetting;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class PersonalProfile {
 
-  private Long dbId;
-
   private UserPublicId userPublicId;
+
+  private Long dbId;
 
   private UserEmail email;
 
-  private Username username;
-
   private Fullname fullname;
 
+  private Username username;
 
   private UserImageUrl imageUrl;
+
+  private ProfileBio bio;
 
   private Instant createdDate;
 
@@ -46,16 +47,35 @@ public class PersonalProfile {
 
   private Set<Authority> authorities;
 
-  public void apply(PersonalProfileChanges profileChages) {
-    if (profileChages.getFullname() != null) {
-      this.fullname = profileChages.getFullname();
-    }
-    if (profileChages.getImageUrl() != null) {
-      this.imageUrl = profileChages.getImageUrl();
-    }
-    if (profileChages.getPrivacySetting() != null) {
-      this.privacySetting = profileChages.getPrivacySetting();
-    }
+  // public void apply(PersonalProfileChanges profileChages) {
+  // if (profileChages.getFullname() != null) {
+  // this.fullname = profileChages.getFullname();
+  // }
+  // if (profileChages.getImageUrl() != null) {
+  // this.imageUrl = profileChages.getImageUrl();
+  // }
+  // if (profileChages.getPrivacySetting() != null) {
+  // this.privacySetting = profileChages.getPrivacySetting();
+  // }
+  // }
+
+
+  @Builder(style =  BuilderStyle.STAGED)
+  public PersonalProfile(Long dbId, UserEmail email, Fullname fullname, Username username, UserImageUrl imageUrl,
+      ProfileBio bio, Instant createdDate, Instant lastModifiedDate, Instant lastActive, PrivacySetting privacySetting,
+      Set<Authority> authorities, UserPublicId userPublicId) {
+    this.dbId = dbId;
+    this.email = email;
+    this.fullname = fullname;
+    this.username = username;
+    this.imageUrl = imageUrl;
+    this.bio = bio;
+    this.createdDate = createdDate;
+    this.lastModifiedDate = lastModifiedDate;
+    this.lastActive = lastActive;
+    this.privacySetting = privacySetting;
+    this.authorities = authorities;
+    this.userPublicId = userPublicId;
   }
 
   public boolean existManadatoryField() {
@@ -63,6 +83,26 @@ public class PersonalProfile {
         && privacySetting.getFriendRequestSetting() != null && privacySetting.getProfileVisibility() != null;
 
   }
+
+  // public void setPrivacySetting(PrivacySetting settings){
+  //   if(settings == null){
+  //     this.privacySetting = null;
+  //     return;
+  //   }
+  //
+  //   if (privacySetting.getProfileVisibility() == null) {
+  //     this.privacySetting.setProfileVisibility(ProfileVisibility.of(false));
+  //   }
+  //   if (privacySetting.getFriendRequestSetting() == null) {
+  //     this.privacySetting.setFriendRequestSetting(UserFriendRequestSetting.ofDefault());
+  //   }
+  //   if (privacySetting.getLastSeenSetting() == null) {
+  //     this.privacySetting.setLastSeenSetting(UserLastSeenSetting.ofDefault());
+  //   }
+  //
+  //
+  // }
+  //
 
   public void initMandatoryField() {
     if (privacySetting == null) {

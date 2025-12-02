@@ -1,21 +1,18 @@
 spring:
+  main.web-application-type: none
+
   profiles:
     active: "dev"
   flyway:
     enabled: false
-  # datasource:
-    # url: jdbc:postgresql://localhost:5432/locidb
-    # username: admin
-    # password: admin
   datasource:
-    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
     username: sa
     password:
     hikari:
       poolName: Hikari
-      # Require to specify commit use like @Transactional
-      # auto-commit: false
     type: com.zaxxer.hikari.HikariDataSource
+  jpa.hibernate.ddl-auto: create-drop
   security:
     oauth2:
       resourceserver:
