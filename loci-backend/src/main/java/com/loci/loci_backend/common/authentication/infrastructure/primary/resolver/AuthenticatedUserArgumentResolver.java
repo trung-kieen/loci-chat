@@ -13,6 +13,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Provide mvc resolver for custom princial in controller layer
+ */
 @RequiredArgsConstructor
 @Component
 public class AuthenticatedUserArgumentResolver implements HandlerMethodArgumentResolver {

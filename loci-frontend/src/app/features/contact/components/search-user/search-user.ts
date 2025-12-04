@@ -1,21 +1,24 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, finalize, switchMap, tap } from 'rxjs';
-import { UserSearchItem } from '../../models/contact.model';
+import { ContactSearchItem } from '../../models/contact.model';
 import { SearchUserService } from '../../services/search-user.service';
+import { NotificationService } from '../../../../shared/services/notification.service';
+import { ContactListItem } from '../contact-list-item/contact-list-item';
 
 @Component({
   selector: 'app-search-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ContactListItem ],
   templateUrl: './search-user.html',
   styleUrl: './search-user.css',
 })
 export class SearchUser {
 
   private searchService = inject(SearchUserService);
+  private notificationService = inject(NotificationService);
 
   searchControl = new FormControl('', { nonNullable: true });
-  users = signal<UserSearchItem[]>([]);
+  users = signal<ContactSearchItem[]>([]);
   loading = signal(false);
 
   /* expose a signal that reacts to search text */
@@ -41,14 +44,31 @@ export class SearchUser {
       })
   }
 
-  trackById(_: number, u: UserSearchItem): string { return u.id; }
+  trackById(_: number, u: ContactSearchItem): string { return u.userId; }
 
-  onAddFriend(user: UserSearchItem): void {
-    this.searchService.addFriend(user.id).subscribe(() => {
-      user.friendshipStatus = 'pending';
-      /* re-trigger signal so button flips instantly */
-      this.users.set([...this.users()]);
+  onAddFriend(user: ContactSearchItem): void {
+    this.searchService.addFriend(user.userId).subscribe({
+      next: () => {
+        user.friendshipStatus = 'pending';
+        /* re-trigger signal so button flips instantly */
+        this.users.set([...this.users()]);
+
+
+
+        this.notificationService.success(
+          'Friend Request Sent!',
+          `Your request has been sent to ${user.fullname}`
+        );
+
+      },
+      error: () => {
+        this.notificationService.error(
+          'Request Failed',
+          'Unable to send friend request. Please try again.'
+        );
+      }
     });
+
   }
 
 }

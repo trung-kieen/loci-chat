@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j2;
 
 @ControllerAdvice
 @Log4j2
-@Order(Ordered.LOWEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE - 10)
 class BusinessExceptionHandler {
 
   @ExceptionHandler(EntityNotFoundException.class)

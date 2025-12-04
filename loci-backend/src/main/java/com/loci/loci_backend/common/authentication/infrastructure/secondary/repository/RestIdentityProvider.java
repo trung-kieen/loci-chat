@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestIdentityProvider {
 
-  public static final String PREFERED_USERNAME = "email";
+  public static final String PREFERED_USERNAME = "username";
 
   private RestIdentityProvider() {
   }
@@ -32,7 +32,9 @@ public class RestIdentityProvider {
   public KeycloakPrincipal currentPrincipal() {
     var attrributes = attributes();
     Roles authorities = roles();
-    return KeycloakPrincipal.fromTokenAttribute(attrributes , authorities);
+    // Perform before authentication provider authenticate token
+    // Action extract principal information
+    return KeycloakPrincipal.fromTokenAttribute(attrributes, authorities);
   }
 
   public Authentication authentication() {

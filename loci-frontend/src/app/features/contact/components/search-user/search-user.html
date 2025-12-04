@@ -142,7 +142,7 @@
 
     <!-- Results area -->
     <div class="flex-1 overflow-y-auto p-6">
-      <div class="max-w-2xl">
+      <div class="max-w-full">
 
         @if (loading()) {
         <!-- loading -->
@@ -164,32 +164,8 @@
         } @else {
         <!-- list -->
         <div class="space-y-4">
-          @for (u of users(); track u.id) {
-          <div class="bg-white border border-neutral-200 rounded-lg p-4 hover:bg-neutral-50">
-            <div class="flex items-center space-x-4">
-              <img [src]="'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=' + u.avatarSeed" [alt]="u.name"
-                class="w-12 h-12 rounded-full" />
-              <div class="flex-1 min-w-0">
-                <h4 class="text-lg text-black">{{ u.name }}</h4>
-                <p class="text-sm text-neutral-500">@{{ u.username }}</p>
-                <p class="text-xs text-neutral-400 mt-1">{{ u.email }}</p>
-              </div>
-
-              @if (u.friendshipStatus === 'none') {
-              <button (click)="onAddFriend(u)"
-                class="bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center space-x-2">
-                <i class="fa-solid fa-user-plus"></i>
-                <span>Add Friend</span>
-              </button>
-              } @else {
-              <button disabled
-                class="bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg cursor-not-allowed text-sm flex items-center space-x-2">
-                <i class="fa-solid fa-clock"></i>
-                <span>Pending</span>
-              </button>
-              }
-            </div>
-          </div>
+          @for (user of users(); track user.userId) {
+          <app-contact-list-item [user]="user" (addFriend)="onAddFriend($event)" />
           }
         </div>
         }
@@ -199,18 +175,3 @@
   </section>
 </main>
 
-<div id="toast-notification"
-  class="fixed top-4 right-4 bg-white border border-neutral-200 rounded-lg shadow-lg p-4 hidden">
-  <div class="flex items-center space-x-3">
-    <div class="w-8 h-8 bg-neutral-500 rounded-full flex items-center justify-center">
-      <i class="fa-solid fa-check text-white text-sm"></i>
-    </div>
-    <div>
-      <p class="text-sm text-black">Friend request sent!</p>
-      <p class="text-xs text-neutral-500">Your request has been sent to Jessica Brown</p>
-    </div>
-    <button class="text-neutral-400 hover:text-neutral-600">
-      <i class="fa-solid fa-times"></i>
-    </button>
-  </div>
-</div>

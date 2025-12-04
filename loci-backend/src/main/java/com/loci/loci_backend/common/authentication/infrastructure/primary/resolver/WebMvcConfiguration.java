@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer {
   private final AuthenticatedUserArgumentResolver authenticatedUserArgumentResolver;
 
   @Override

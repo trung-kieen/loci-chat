@@ -148,6 +148,11 @@ public class User {
 
   public static User fromTokenAttributes(Map<String, Object> attributes, Collection<String> rolesFromAccessToken) {
 
+    PublicId id = null;
+    if (attributes.containsKey("id")) {
+      id = PublicId.getOrRandom(attributes.get("id").toString());
+    }
+
     UserEmail email = null;
     if (attributes.containsKey("email")) {
       email = new UserEmail(attributes.get("email").toString());
@@ -174,7 +179,7 @@ public class User {
     // Token use to update user so allow null field
     // Update need to ingore the null value
     var builder = UserBuilder.user();
-    return builder.userPublicId(null)
+    return builder.userPublicId(id)
         .dbId(null)
         .email(email)
         .firstname(firstname)
@@ -193,5 +198,43 @@ public class User {
 
   public Username getUsername() {
     return username;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((userPublicId == null) ? 0 : userPublicId.hashCode());
+    result = prime * result + ((dbId == null) ? 0 : dbId.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    User other = (User) obj;
+    if (userPublicId == null) {
+      if (other.userPublicId != null) {
+        return false;
+      }
+    } else if (!userPublicId.equals(other.userPublicId)) {
+      return false;
+    }
+    if (dbId == null) {
+      if (other.dbId != null) {
+        return false;
+      }
+    } else if (!dbId.equals(other.dbId)) {
+      return false;
+    }
+    return true;
   }
 }

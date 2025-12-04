@@ -1,6 +1,23 @@
 package com.loci.loci_backend.common.authentication.domain;
 
+import java.util.UUID;
+
 import com.loci.loci_backend.common.util.ValueObject;
 
-public record KeycloakUserId(String value) implements ValueObject<String> {
+public record KeycloakUserId(UUID value) implements ValueObject<UUID> {
+
+  public static KeycloakUserId of(String value) {
+    if (value == null) {
+      random();
+    }
+    try {
+      return new KeycloakUserId(UUID.fromString(value));
+    } catch (Exception e) {
+      return random();
+    }
+  }
+
+  private static KeycloakUserId random() {
+    return new KeycloakUserId(UUID.randomUUID());
+  }
 }

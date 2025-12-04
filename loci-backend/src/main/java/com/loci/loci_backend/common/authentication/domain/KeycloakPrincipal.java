@@ -9,9 +9,11 @@ import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 
 import org.keycloak.representations.AccessToken;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Builder;
 import lombok.Data;
 
+@Hidden
 @Builder
 @Data
 public class KeycloakPrincipal {
@@ -34,11 +36,12 @@ public class KeycloakPrincipal {
   }
 
   public static KeycloakPrincipal fromTokenAttribute(Map<String, Object> tokenAttrributes, Roles roles) {
+    String id = tokenAttrributes.get("given_name").toString();
     String firstname = tokenAttrributes.get("given_name").toString();
     String lastname = tokenAttrributes.get("family_name").toString();
     String email = tokenAttrributes.get("email").toString();
     return KeycloakPrincipal.builder()
-        .userId(new KeycloakUserId(email))
+        .userId(KeycloakUserId.of(id))
         .userEmail(new UserEmail(email))
         .firstname(new UserFirstname(firstname))
         .lastname(new UserLastname(lastname))
@@ -49,11 +52,10 @@ public class KeycloakPrincipal {
 
   public static KeycloakPrincipal fromKeycloakAccessToken(AccessToken token) {
     var roleSet = token.getRealmAccess().getRoles().stream().map(Role::fromKeycloak)
-        // .filter(r -> !r.equals(Role.UNKNOWN))
         .collect(Collectors.toUnmodifiableSet());
     Roles roles = new Roles(roleSet);
     return KeycloakPrincipal.builder()
-        .userId(new KeycloakUserId(token.getSubject()))
+        .userId(KeycloakUserId.of(token.getId()))
         .userEmail(new UserEmail(token.getEmail()))
         .username(new Username(token.getPreferredUsername()))
         .firstname(new UserFirstname(token.getFamilyName()))

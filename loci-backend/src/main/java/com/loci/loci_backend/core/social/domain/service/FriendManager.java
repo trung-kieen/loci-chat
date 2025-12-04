@@ -7,7 +7,9 @@ import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
 import com.loci.loci_backend.core.social.domain.aggregate.CreateContactRequest;
 import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
 import com.loci.loci_backend.core.social.domain.repository.ContactRequestRepository;
+import com.nimbusds.jose.JWEObjectJSON.Recipient;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,11 @@ public class FriendManager {
     // Not allow to request to friend
     if (contactRepository.existsContactConnection(sender, receiver)) {
       throw new DuplicateResourceException("Already friend", "friend conntection");
+    }
+
+    if (sender.equals(receiver)) {
+      // TODO: create Bad_request type for this error
+      throw new IllegalArgumentException("Unable to send request to yourself");
     }
 
     // Not allow to duplicate the request

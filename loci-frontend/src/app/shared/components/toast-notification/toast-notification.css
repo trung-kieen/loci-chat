@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.toast {
+  @apply bg-white border rounded-lg shadow-lg overflow-hidden;
+
+  &.show {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.success {
+    --border-color: #10b981;
+  }
+
+  &.error {
+    --border-color: #ef4444;
+  }
+
+  &.info {
+    --border-color: #3b82f6;
+  }
+
+  &.warning {
+    --border-color: #f59e0b;
+  }
+
+  border-color: var(--border-color);
+
+  .icon-bg {
+    background-color: var(--border-color);
+  }
+}

@@ -1,9 +1,9 @@
 
-export interface UserSearchItem {
-  id: string;
-  name: string;
+export interface ContactSearchItem {
+  userId: string;
+  fullname: string;
   username: string;
   email: string;
-  avatarSeed: string;
+  imageUrl: string;
   friendshipStatus: 'none' | 'pending' | 'friends';
 }

@@ -19,6 +19,8 @@ import { Modal } from './components/modal/modal';
 import { HeaderBar } from './components/header-bar/header-bar';
 import { BottomNav } from './components/bottom-nav/bottom-nav';
 import { WebApiService } from '../api/web-api.service';
+import { NotificationService } from './services/notification.service';
+import { ToastNotification } from './components/toast-notification/toast-notification';
 
 @NgModule({
   imports: [
@@ -33,7 +35,9 @@ import { WebApiService } from '../api/web-api.service';
     LucideAngularModule.pick({ Check, Search, X, Send, Inbox, FileText, File }),
     ErrorCardComponent,
     Modal,
-    HeaderBar
+    HeaderBar,
+    ToastNotification,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
@@ -43,6 +47,7 @@ import { WebApiService } from '../api/web-api.service';
       useExisting: Input,
       multi: true,
     },
+    NotificationService
   ],
   declarations: [
     BottomNav,
@@ -73,7 +78,8 @@ import { WebApiService } from '../api/web-api.service';
     FilePreviewCard,
     Modal,
     HeaderBar,
-    BottomNav
+    BottomNav,
+    ToastNotification,
   ]
 })
 export class SharedModule { }

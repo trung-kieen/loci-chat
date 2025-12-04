@@ -1,5 +1,7 @@
 package com.loci.loci_backend.core.discovery.infrastructure.primary.payload;
 
+import java.util.UUID;
+
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;
 
@@ -7,19 +9,21 @@ import lombok.Data;
 
 @Data
 public class RestSearchContact {
+  private UUID userId;
   private String fullname;
   private String username;
-  private String userEmail;
+  private String email;
   private String imageUrl;
   private String friendshipStatus;
-
   @Builder(style = BuilderStyle.STAGED)
-  public RestSearchContact(String fullname, String username, String userEmail, String imageUrl,
+  public RestSearchContact(UUID userId, String fullname, String username, String email, String imageUrl,
       String friendshipStatus) {
+    this.userId = userId;
     this.fullname = fullname;
     this.username = username;
-    this.userEmail = userEmail;
+    this.email = email;
     this.imageUrl = imageUrl;
     this.friendshipStatus = friendshipStatus;
   }
+
 }

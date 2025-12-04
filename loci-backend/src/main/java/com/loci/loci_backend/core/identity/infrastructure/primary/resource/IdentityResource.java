@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -65,7 +66,9 @@ public class IdentityResource {
   }
 
   @PatchMapping("me/avatar")
-  public ResponseEntity<RestPersonalProfile> updateProfileImage(KeycloakPrincipal keycloakPrincipal,
+  public ResponseEntity<RestPersonalProfile> updateProfileImage(
+    @Parameter(hidden = true)
+    KeycloakPrincipal keycloakPrincipal,
       @RequestParam("image") MultipartFile file) {
 
     // validate file

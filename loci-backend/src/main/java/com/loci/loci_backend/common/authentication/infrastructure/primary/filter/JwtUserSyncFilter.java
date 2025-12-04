@@ -52,9 +52,9 @@ public class JwtUserSyncFilter extends OncePerRequestFilter {
       Map<String, Object> attributes = token.getTokenAttributes();
       Set<String> authorities = token.getAuthorities().stream().map(GrantedAuthority::getAuthority)
           .collect(Collectors.toSet());
-      User user = User.fromTokenAttributes(attributes, authorities);
+      User userFromKeycloak = User.fromTokenAttributes(attributes, authorities);
 
-      userSynchronize.syncUser(user);
+      userSynchronize.syncUser(userFromKeycloak);
     } catch (Exception e) {
       throw new SyncAuthenticatedUserException();
     }

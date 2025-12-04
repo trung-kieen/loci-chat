@@ -29,6 +29,15 @@ public record PublicId(UUID value) implements ValueObject<UUID> {
     }
   }
 
+  public static PublicId getOrRandom(String value) {
+    try {
+      UUID uuid = UUID.fromString(value);
+      return new PublicId(uuid);
+    } catch (RuntimeException ex) {
+      return new PublicId(UUID.randomUUID());
+    }
+  }
+
   public static boolean isValid(String publicId) {
     try {
       UUID.fromString(publicId);
@@ -37,7 +46,8 @@ public record PublicId(UUID value) implements ValueObject<UUID> {
       return false;
     }
   }
-  public static PublicId random(){
+
+  public static PublicId random() {
     return new PublicId(UUID.randomUUID());
   }
 }

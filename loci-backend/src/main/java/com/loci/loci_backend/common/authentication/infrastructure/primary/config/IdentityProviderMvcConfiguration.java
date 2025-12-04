@@ -10,6 +10,9 @@ import org.springframework.context.annotation.ScopedProxyMode;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Provide principal injection via request based
+ */
 @Configuration
 @RequiredArgsConstructor
 public class IdentityProviderMvcConfiguration {

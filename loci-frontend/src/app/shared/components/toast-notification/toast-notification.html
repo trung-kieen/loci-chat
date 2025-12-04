@@ -1,0 +1,16 @@
+<div class="toast" [class.show]="notification().show" [class]="notification().type">
+  <div class="flex items-center space-x-3 p-4">
+    <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 icon-bg">
+      <i class="fa-solid {{ iconMap[notification().type] }} text-white text-sm"></i>
+    </div>
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-medium text-black">{{ notification().title }}</p>
+      @if (notification().message) {
+        <p class="text-xs text-neutral-500">{{ notification().message }}</p>
+      }
+    </div>
+    <button (click)="onDismiss()" class="text-neutral-400 hover:text-neutral-600 transition-colors">
+      <i class="fa-solid fa-times"></i>
+    </button>
+  </div>
+</div>
