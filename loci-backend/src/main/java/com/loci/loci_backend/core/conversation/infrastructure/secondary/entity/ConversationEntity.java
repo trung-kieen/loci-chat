@@ -36,9 +36,12 @@ public class ConversationEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "id", nullable = false, updatable = false)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "creator_id", nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "creator_id", insertable = false, updatable = false)
   private UserEntity creator;
+
+  @Column(name = "creator_id", nullable = false, updatable = false)
+  private Long creatorId;
 
   @Column(name = "group_name", length = 255)
   private String groupName;
@@ -46,8 +49,7 @@ public class ConversationEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "group_profile_picture", length = 500)
   private String groupProfilePicture;
 
-  // TODO
-  @Column(name = "last_message_id")
+  @Column(name = "last_message_id", nullable = true)
   private Long lastMessageId;
 
   @Column(name = "updated_at")

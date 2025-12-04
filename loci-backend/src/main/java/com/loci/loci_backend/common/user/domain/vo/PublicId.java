@@ -6,24 +6,24 @@ import com.loci.loci_backend.common.util.ValueObject;
 import com.loci.loci_backend.common.validation.domain.Assert;
 
 /**
- * UserPublicId
+ * PublicId
  */
-public record UserPublicId(UUID value) implements ValueObject<UUID> {
-  public UserPublicId {
+public record PublicId(UUID value) implements ValueObject<UUID> {
+  public PublicId {
     Assert.notNull("public id", value);
   }
 
-  public static UserPublicId from(String userPublicId) {
-    return new UserPublicId(UUID.fromString(userPublicId));
+  public static PublicId from(String userPublicId) {
+    return new PublicId(UUID.fromString(userPublicId));
   }
 
   /**
    * Fail safety
    */
-  public static UserPublicId of(String publicIdOpt) {
+  public static PublicId of(String publicIdOpt) {
     try {
       UUID uuid = UUID.fromString(publicIdOpt);
-      return new UserPublicId(uuid);
+      return new PublicId(uuid);
     } catch (RuntimeException ex) {
       return null;
     }
@@ -37,7 +37,7 @@ public record UserPublicId(UUID value) implements ValueObject<UUID> {
       return false;
     }
   }
-  public static UserPublicId random(){
-    return new UserPublicId(UUID.randomUUID());
+  public static PublicId random(){
+    return new PublicId(UUID.randomUUID());
   }
 }

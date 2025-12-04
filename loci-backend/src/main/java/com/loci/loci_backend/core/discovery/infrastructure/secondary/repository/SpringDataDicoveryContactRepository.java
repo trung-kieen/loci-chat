@@ -2,10 +2,10 @@ package com.loci.loci_backend.core.discovery.infrastructure.secondary.repository
 
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.repository.JpaUserRepository;
-import com.loci.loci_backend.core.discovery.domain.aggregate.Contact;
-import com.loci.loci_backend.core.discovery.domain.repository.ContactRepository;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
+import com.loci.loci_backend.core.discovery.domain.repository.SearchContactRepository;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
-import com.loci.loci_backend.core.discovery.infrastructure.secondary.mapper.ContactEntityMapper;
+import com.loci.loci_backend.core.discovery.infrastructure.secondary.mapper.DiscoveryContactEntityMapper;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.persistence.UserSpecifications;
 
 import org.springframework.data.domain.Page;
@@ -17,12 +17,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class SpringDataContactRepository implements ContactRepository {
+public class SpringDataDicoveryContactRepository implements SearchContactRepository {
   private final JpaUserRepository userRepository;
-  private final ContactEntityMapper contactMapper;
+  private final DiscoveryContactEntityMapper contactMapper;
 
   @Override
-  public Page<Contact> searchContacts(ContactSearchCriteria criteria, Pageable pageable) {
+  public Page<SearchContact> searchContacts(ContactSearchCriteria criteria, Pageable pageable) {
     String keyword = criteria.getKeyword();
     Specification<UserEntity> spec = UserSpecifications.searchActiveUsers(keyword);
     Page<UserEntity> entityPage = userRepository.findAll(spec, pageable);

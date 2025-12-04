@@ -1,14 +1,57 @@
 package com.loci.loci_backend.core.social.domain.service;
 
-public interface FriendManager {
-  void addFriend();
+import com.loci.loci_backend.common.user.domain.aggregate.User;
+import com.loci.loci_backend.common.user.domain.repository.UserRepository;
+import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
+import com.loci.loci_backend.core.social.domain.aggregate.CreateContactRequest;
+import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
+import com.loci.loci_backend.core.social.domain.repository.ContactRequestRepository;
 
-  void unFriend();
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-  void acceptFriendRequest();
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 
-  void rejectFriendRequest();
+@Service
+@RequiredArgsConstructor
+public class FriendManager {
+  private final UserRepository userRepository;
+  private final ContactRepository contactRepository;
+  private final ContactRequestRepository contactRequestRepository;
 
-  void viewListContactRequest();
+  @Transactional(readOnly = false)
+  public ContactRequest addFriendRequest(CreateContactRequest request) {
+    User sender = userRepository.getByUsername(request.getSenderUsername())
+        .orElseThrow(() -> new EntityNotFoundException("Not found sender information"));
+    User receiver = userRepository.getByPublicId(request.getReceiverPublicId())
+        .orElseThrow(() -> new EntityNotFoundException("Not found target contact information"));
+
+    // Not allow to request to friend
+    if (contactRepository.existsContactConnection(sender, receiver)) {
+      throw new DuplicateResourceException("Already friend", "friend conntection");
+    }
+
+    // Not allow to duplicate the request
+    if (contactRequestRepository.existsPendingRequest(sender, receiver)) {
+      throw new DuplicateResourceException("Request already sent", "friend request");
+    }
+
+    ContactRequest contactRequest = ContactRequest.builderRequest(sender, receiver);
+    contactRequest.assertManadatoryField();
+
+    ContactRequest savedRequest = contactRequestRepository.save(contactRequest);
+    return savedRequest;
+
+  }
+
+  // void unFriend();
+  //
+  // void acceptFriendRequest();
+  //
+  // void rejectFriendRequest();
+  //
+  // void viewListContactRequest();
 
 }

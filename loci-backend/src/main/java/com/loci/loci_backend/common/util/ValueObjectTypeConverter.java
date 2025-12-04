@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValueObjectTypeConverter {
 
-  public <R, T extends ValueObject<R>> ValueObject<R> wrap(@TargetType Class<T> clazz, R value) {
+  public <R, T extends ValueObject<R>> T wrap(@TargetType Class<T> clazz, R value) {
     return NullSafe.constructOrNull(clazz, value);
   }
 

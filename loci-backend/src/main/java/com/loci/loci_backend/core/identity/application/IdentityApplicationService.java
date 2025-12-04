@@ -2,7 +2,7 @@ package com.loci.loci_backend.core.identity.application;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.core.discovery.application.DiscoveryApplicationService;
-import com.loci.loci_backend.core.discovery.domain.aggregate.Contact;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
@@ -27,7 +27,7 @@ public class IdentityApplicationService {
     return profile;
   }
 
-  public Page<Contact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable) {
+  public Page<SearchContact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable) {
     return discoveryApplicationService.discoveryContacts(criteria, pageable);
   }
 

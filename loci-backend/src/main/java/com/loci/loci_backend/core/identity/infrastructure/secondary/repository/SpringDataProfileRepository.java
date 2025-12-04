@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.UserEntityMapper;
 import com.loci.loci_backend.common.user.infrastructure.secondary.repository.JpaUserRepository;
@@ -36,7 +36,7 @@ public class SpringDataProfileRepository implements ProfileRepository {
   }
 
   @Override
-  public PublicProfile findPublicProfileByUserIdOrUserName(UserPublicId userId, Username username) {
+  public PublicProfile findPublicProfileByUserIdOrUserName(PublicId userId, Username username) {
     // Find by public id first else fall back to username
     UserEntity userEntity = userRepository.findByPublicId(userId.value()).orElseGet(() -> {
       return findByUsernameOpt(username)

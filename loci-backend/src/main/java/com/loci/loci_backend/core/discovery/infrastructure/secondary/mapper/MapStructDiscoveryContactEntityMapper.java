@@ -5,6 +5,6 @@
 // import org.mapstruct.Mapper;
 //
 // @Mapper(componentModel = "spring", uses = ValueObjectTypeConverter.class)
-// public interface MapStructContactEntityMapper {
+// public interface MapStructDiscoveryContactEntityMapper {
 //
 // }

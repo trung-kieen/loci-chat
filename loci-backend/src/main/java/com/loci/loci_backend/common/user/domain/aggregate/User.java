@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
+import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.validation.domain.Assert;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySettingBuilder;
@@ -32,9 +33,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 
-  private UserPublicId userPublicId;
+  private PublicId userPublicId;
 
-  private Long dbId;
+  private UserDBId dbId;
 
   private UserEmail email;
 
@@ -59,8 +60,8 @@ public class User {
   private Set<Authority> authorities;
 
   @Builder(style = BuilderStyle.STAGED)
-  public User(UserPublicId userPublicId,
-      Long dbId,
+  public User(PublicId userPublicId,
+      UserDBId dbId,
       UserEmail email,
       UserFirstname firstname,
       UserLastname lastname,
@@ -126,12 +127,12 @@ public class User {
   }
 
   public void provideMandatoryField() {
-    provideMandatoryField();
+    initFieldForSignup();
   }
 
   public void initFieldForSignup() {
     if (this.userPublicId == null) {
-      this.userPublicId = UserPublicId.random();
+      this.userPublicId = PublicId.random();
     }
     if (this.profilePicture == null) {
       this.profilePicture = UserImageUrl.random();

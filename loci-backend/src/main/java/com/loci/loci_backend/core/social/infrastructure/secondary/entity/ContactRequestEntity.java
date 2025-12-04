@@ -3,6 +3,8 @@ package com.loci.loci_backend.core.social.infrastructure.secondary.entity;
 import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 
+import org.jilt.Builder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,21 +34,30 @@ public class ContactRequestEntity extends AbstractAuditingEntity<Long> {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "receiver_user_id", nullable = false, referencedColumnName = "id")
+  // readonly entity
+  @JoinColumn(name = "receiver_user_id", referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity receiver;
 
+  @Column(name = "receiver_user_id", nullable = false, updatable = false)
+  private Long receiverUserId;
+
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "request_user_id", nullable = false, referencedColumnName = "id")
+  // readonly entity
+  @JoinColumn(name = "request_user_id", nullable = false, referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity requester;
+
+  @Column(name = "request_user_id", nullable = false, updatable = false)
+  private Long requestUserId;
+
+  @Builder
+  public ContactRequestEntity(Long receiverUserId, Long requestUserId) {
+    this.receiverUserId = receiverUserId;
+    this.requestUserId = requestUserId;
+  }
 
   @Override
   public Long getId() {
     return id;
   }
 
-  // public ContactRequestJpaEntity(UserEntity receiver, UserEntity requester) {
-  // this.contactRequestId = UUID.randomUUID();
-  // this.receiver = receiver;
-  // this.requester = requester;
-  // }
 }

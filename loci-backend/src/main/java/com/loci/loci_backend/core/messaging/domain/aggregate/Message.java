@@ -2,7 +2,7 @@ package com.loci.loci_backend.core.messaging.domain.aggregate;
 
 import java.time.Instant;
 
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileBuilders.UserPublicId;
+import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfileBuilders.PublicId;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageContent;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageState;
@@ -10,13 +10,13 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageStatus;
 
 public class Message {
   private final MessageId messageId;
-  private final UserPublicId senderId;
+  private final PublicId senderId;
   private final MessageContent content;
   private final Instant sentAt;
   private MessageStatus status;
   private MessageId replyToMessageId;
 
-  Message(UserPublicId senderId, MessageContent content) {
+  Message(PublicId senderId, MessageContent content) {
     this.messageId = MessageId.generate();
     this.senderId = senderId;
     this.content = content;
@@ -51,7 +51,7 @@ public class Message {
     return messageId;
   }
 
-  public UserPublicId getSenderId() {
+  public PublicId getSenderId() {
     return senderId;
   }
 }

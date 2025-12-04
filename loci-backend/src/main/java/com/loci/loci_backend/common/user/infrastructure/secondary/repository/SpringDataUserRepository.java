@@ -6,6 +6,7 @@ import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.UserEntityMapper;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ public class SpringDataUserRepository implements UserRepository {
   public void save(User user) {
     var userEntity = userEntityMapper.from(user);
     repository.save(userEntity);
+  }
+
+  @Override
+  public Optional<User> getByPublicId(PublicId publicId) {
+    return repository.findByPublicId(publicId.value()).map(userEntityMapper::toDomain);
   }
 
 }

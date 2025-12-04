@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "group")
+@Table(name = "group_")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

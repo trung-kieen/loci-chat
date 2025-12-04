@@ -3,11 +3,12 @@ package com.loci.loci_backend.common.user.infrastructure.secondary.mapper;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.aggregate.UserBuilder;
+import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntityBuilder;
 import com.loci.loci_backend.common.util.NullSafe;
@@ -32,7 +33,7 @@ public class UserEntityMapper {
 
   public PublicProfile toPublicProfile(UserEntity userEntity) {
     return PublicProfileBuilder.publicProfile()
-        .publicId(new UserPublicId(userEntity.getPublicId()))
+        .publicId(new PublicId(userEntity.getPublicId()))
         .email(new UserEmail(userEntity.getEmail()))
         .fullname(
             UserFullname.from(new UserFirstname(userEntity.getFirstname()), new UserLastname(userEntity.getLastname())))
@@ -52,8 +53,8 @@ public class UserEntityMapper {
   public User toDomain(UserEntity userEntity) {
 
     return UserBuilder.user()
-        .userPublicId(new UserPublicId(userEntity.getPublicId()))
-        .dbId(userEntity.getId())
+        .userPublicId(new PublicId(userEntity.getPublicId()))
+        .dbId(new UserDBId(userEntity.getId()))
         .email(new UserEmail(userEntity.getEmail()))
         .firstname(new UserFirstname(userEntity.getFirstname()))
         .lastname(new UserLastname(userEntity.getLastname()))
@@ -83,14 +84,14 @@ public class UserEntityMapper {
         .lastActive(userEntity.getLastActive())
         .privacySetting(userEntity.getPrivacySetting())
         .authorities(authorityEntityMapper.toDomain(userEntity.getAuthorities()))
-        .userPublicId(new UserPublicId(userEntity.getPublicId()))
+        .userPublicId(new PublicId(userEntity.getPublicId()))
         .build();
   }
 
   public UserEntity from(PersonalProfile profile) {
 
     return UserEntityBuilder.userEntity()
-        // .publicId(NullSafe.getIfPresent(profile.getUserPublicId()))
+        // .publicId(NullSafe.getIfPresent(profile.getPublicId()))
         .publicId(profile.getUserPublicId().value())
         .id(profile.getDbId())
         .email(profile.getEmail().value())
@@ -121,7 +122,7 @@ public class UserEntityMapper {
 
     return UserEntityBuilder.userEntity()
         .publicId(NullSafe.getIfPresent(user.getUserPublicId()))
-        .id(user.getDbId())
+        .id(NullSafe.getIfPresent(user.getDbId()))
         .email(user.getEmail().value())
         .firstname(user.getFirstname().value())
         .lastname(user.getLastname().value())

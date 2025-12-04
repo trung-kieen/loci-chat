@@ -60,10 +60,8 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
 
   private String username;
 
-  @NotBlank
   private String firstname;
 
-  @NotBlank
   private String lastname;
 
   @Column(name = "profile_picture")

@@ -2,7 +2,7 @@ package com.loci.loci_backend.core.identity.domain.service;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.authentication.domain.Username;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
@@ -31,9 +31,9 @@ public class ProfileManager {
 
   public PublicProfile readPublicProfileByPublicId(ProfilePublicId profilePublicId) {
     Username username = ProfilePublicId.toUserName(profilePublicId);
-    if (UserPublicId.isValid(profilePublicId.value())) {
+    if (PublicId.isValid(profilePublicId.value())) {
 
-      UserPublicId userId = ProfilePublicId.toUserPublicId(profilePublicId);
+      PublicId userId = ProfilePublicId.toPublicId(profilePublicId);
       return repository.findPublicProfileByUserIdOrUserName(userId, username);
 
     }

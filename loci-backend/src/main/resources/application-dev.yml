@@ -24,7 +24,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate # none
     show-sql: true
     properties:
       hibernate:
@@ -45,7 +45,7 @@ spring:
 
     # NOTE: update schema helper
     # properties:
-      # javax:
+      # javax: # use jakartar
       #   persistence:
       #     schema-generation:
       #       create-source: metadata
@@ -109,27 +109,27 @@ shell:
 
 logging:
   com.loci.loci_backend: DEBUG
-  level:
-    com.loci.loci_backend.common.aspect.LoggingAspect: INFO
-    root: INFO
-    org:
-      hibernate:
-        SQL: INFO
-      type:
-        descriptor:
-          sql:
-            BasicBinder: INFO
-      springframework:
-        messaging: INFO
-        web:
-          authentication: INFO
-          FilterChainProxy: INFO
-          socket: INFO
-          filter:
-            CommonsRequestLoggingFilter: INFO
-        security:
-          authentication: INFO
-          oauth2: INFO
+  # level:
+  #   com.loci.loci_backend.common.aspect.LoggingAspect: INFO
+  #   root: INFO
+  #   org:
+  #     hibernate:
+  #       SQL: INFO
+  #     type:
+  #       descriptor:
+  #         sql:
+  #           BasicBinder: INFO
+  #     springframework:
+  #       messaging: INFO
+  #       web:
+  #         authentication: INFO
+  #         FilterChainProxy: INFO
+  #         socket: INFO
+  #         filter:
+  #           CommonsRequestLoggingFilter: INFO
+  #       security:
+  #         authentication: INFO
+  #         oauth2: INFO
 keycloak:
   auth-server-url: http://localhost:8080
   # realm: your-target-realm          # Realm where users will be migrated

@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.Authority;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class PersonalProfile {
 
-  private UserPublicId userPublicId;
+  private PublicId userPublicId;
 
   private Long dbId;
 
@@ -63,7 +63,7 @@ public class PersonalProfile {
   @Builder(style =  BuilderStyle.STAGED)
   public PersonalProfile(Long dbId, UserEmail email, UserFullname fullname, Username username, UserImageUrl imageUrl,
       ProfileBio bio, Instant createdDate, Instant lastModifiedDate, Instant lastActive, PrivacySetting privacySetting,
-      Set<Authority> authorities, UserPublicId userPublicId) {
+      Set<Authority> authorities, PublicId userPublicId) {
     this.dbId = dbId;
     this.email = email;
     this.fullname = fullname;

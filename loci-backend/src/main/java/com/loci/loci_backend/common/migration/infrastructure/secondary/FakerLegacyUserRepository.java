@@ -17,7 +17,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class FakerLegacyUserRepository implements LegacyUserRepository {
     Authority userAuthority = Authority.builder().name(new AuthorityName("user")).build();
     Set<Authority> userAuthorities = Set.of(userAuthority);
     return UserBuilder.user()
-        .userPublicId(UserPublicId.random())
+        .userPublicId(PublicId.random())
         .dbId(null)
         .email(new UserEmail(faker.internet().emailAddress()))
         .firstname(new UserFirstname(faker.name().firstName()))

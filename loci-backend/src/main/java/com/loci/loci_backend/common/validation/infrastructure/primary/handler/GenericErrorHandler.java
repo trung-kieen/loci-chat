@@ -23,6 +23,7 @@ class GenericExceptionHandler {
     problem.setTitle("Internal server error");
     problem.setDetail("An unexpected error occurred");
     problem.setProperty("trace_id", UUID.randomUUID().toString());
+
     return problem;
   }
 }

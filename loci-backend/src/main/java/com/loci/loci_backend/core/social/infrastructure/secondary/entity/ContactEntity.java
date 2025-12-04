@@ -23,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+// TODO: unique constrant of pair of user and contact_user
 public class ContactEntity extends AbstractAuditingEntity<Long> {
 
   @Id
@@ -32,22 +33,30 @@ public class ContactEntity extends AbstractAuditingEntity<Long> {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
+  @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity owningUser; // The user who "owns" this contact
 
+  @Column(name = "user_id", nullable = false, updatable = false)
+  private Long owningUserId;
+
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "contact_user_id", nullable = false, referencedColumnName = "id")
+  @JoinColumn(name = "contact_user_id", referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity contactUser; // The actual contact person
 
+  @Column(name = "contact_user_id", nullable = false, updatable = false)
+  private Long contactUserId;
+
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "blocked_by", referencedColumnName = "id")
+  // readonly field just for enforce reference key
+  @JoinColumn(name = "blocked_by", referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity blockedBy; // Who blocked this contact (null if not blocked)
+
+  @Column(name = "blocked_by", nullable = false, updatable = false)
+  private Long blockedByUserId;
 
   @Override
   public Long getId() {
     return id;
   }
-
-
 
 }

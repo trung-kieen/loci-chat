@@ -1,12 +1,16 @@
 package com.loci.loci_backend.core.social.infrastructure.primary.resource;
 
-import com.loci.loci_backend.core.social.infrastructure.primary.payload.RestContactRequestResponse;
+import com.loci.loci_backend.common.migration.domain.aggregate.KeycloakUser;
+import com.loci.loci_backend.core.social.application.SocialApplicationService;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
+import com.loci.loci_backend.core.social.domain.aggregate.CreateContactRequest;
+import com.loci.loci_backend.core.social.infrastructure.primary.mapper.RestContactMapper;
+import com.loci.loci_backend.core.social.infrastructure.primary.payload.RestFriendRequestResponse;
 import com.loci.loci_backend.core.social.infrastructure.primary.payload.RestSendContactRequest;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,21 +20,21 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/contact-requests")
+@RequestMapping("/contacts")
 @RequiredArgsConstructor
 class ContactRequestResource {
 
-  // private final SendContactRequestUseCase sendContactRequestUseCase;
-  // private final ContactWebMapper mapper;
+  private final SocialApplicationService socialApplicationService;
+  private final RestContactMapper contactMapper;
 
-  @PostMapping
+  @PostMapping("request")
   @ResponseStatus(HttpStatus.CREATED)
-  public RestContactRequestResponse sendRequest(@Valid @RequestBody RestSendContactRequest request,
-      Authentication auth) {
-    // SendContactRequestCommand command = mapper.toCommand(request,
-    // auth.getName());
-    // ContactRequest sent = sendContactRequestUseCase.execute(command);
-    // return mapper.toResponse(sent);
-    throw new NotImplementedException();
+  public RestFriendRequestResponse sendRequest(@Valid @RequestBody RestSendContactRequest request,
+      KeycloakUser sender) {
+
+    CreateContactRequest contactRequest = contactMapper.toDomain(request, sender);
+    ContactRequest savedRequest = socialApplicationService.addContactRequest(contactRequest);
+
+    return contactMapper.from(request, savedRequest);
   }
 }

@@ -1,13 +1,8 @@
-    create table authority (
-        name varchar(50) not null,
-        primary key (name)
-    );
-
     create table contact (
         id bigint not null,
         created_date timestamp(6) with time zone,
         last_modified_date timestamp(6) with time zone,
-        blocked_by bigint,
+        blocked_by bigint not null,
         contact_user_id bigint not null,
         user_id bigint not null,
         primary key (id)
@@ -38,16 +33,16 @@
         id bigint not null,
         created_date timestamp(6) with time zone,
         last_modified_date timestamp(6) with time zone,
+        creator_id bigint not null,
         deleted boolean not null,
         group_name varchar(255),
         group_profile_picture varchar(500),
         last_message_id bigint,
         updated_at timestamp(6) with time zone,
-        creator_id bigint not null,
         primary key (id)
     );
 
-    create table group (
+    create table group_ (
         id bigint not null,
         created_date timestamp(6) with time zone,
         last_modified_date timestamp(6) with time zone,
@@ -87,35 +82,11 @@
         primary key (id)
     );
 
-    create table user_ (
-        id bigint not null,
-        created_date timestamp(6) with time zone,
-        last_modified_date timestamp(6) with time zone,
-        bio varchar(255),
-        email varchar(255),
-        firstname varchar(255) not null,
-        friend_request_setting smallint check (friend_request_setting between 0 and 2),
-        last_active timestamp(6) with time zone,
-        last_seen_setting varchar(255) check (last_seen_setting in ('EVERYONE','CONTACT_ONLY','NOBODY')),
-        lastname varchar(255) not null,
-        profile_picture varchar(255),
-        profile_visibility boolean,
-        public_id uuid,
-        username varchar(255),
-        primary key (id)
-    );
+    alter table if exists group_
+       drop constraint if exists UKgdlqdiqvcgqbe1fspoysdsjpw;
 
-    create table user_authority (
-        user_id bigint not null,
-        authority_name varchar(50) not null,
-        primary key (user_id, authority_name)
-    );
-
-    alter table if exists group
-       drop constraint if exists UK6hmawf8v0dik6sahkye7xx05a;
-
-    alter table if exists group
-       add constraint UK6hmawf8v0dik6sahkye7xx05a unique (conversation_id);
+    alter table if exists group_
+       add constraint UKgdlqdiqvcgqbe1fspoysdsjpw unique (conversation_id);
 
     create sequence contact_request_sequence start with 1 increment by 1;
 
@@ -130,8 +101,6 @@
     create sequence message_sequence start with 1 increment by 1;
 
     create sequence notification_sequence start with 1 increment by 1;
-
-    create sequence user_sequence start with 1 increment by 1;
 
     alter table if exists contact
        add constraint FKcgt5xpclo1jvlvy763u6m3w26
@@ -173,8 +142,8 @@
        foreign key (creator_id)
        references user_;
 
-    alter table if exists group
-       add constraint FKx9726ylvuvb0wsdarel7o4l5
+    alter table if exists group_
+       add constraint FK1s9ggxi7i7i7gq3869dlyws5e
        foreign key (conversation_id)
        references conversations;
 
@@ -190,15 +159,5 @@
 
     alter table if exists notification
        add constraint FKg9wcclio3v5xftqnc4q7lr7hd
-       foreign key (user_id)
-       references user_;
-
-    alter table if exists user_authority
-       add constraint FK6ktglpl5mjosa283rvken2py5
-       foreign key (authority_name)
-       references authority;
-
-    alter table if exists user_authority
-       add constraint FKio2xcw9ogcqbasp25n5vttxrf
        foreign key (user_id)
        references user_;

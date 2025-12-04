@@ -41,9 +41,9 @@ public class UserSpecifications {
         searchKeyword = "";
       }
       String lowerKeyword = "%" + searchKeyword.toLowerCase() + "%";
-      Predicate emailPredicate = cb.like(cb.lower(root.get("email")), lowerKeyword);
+      Predicate usernamePredicate = cb.like(cb.lower(root.get("username")), lowerKeyword);
 
-      return emailPredicate;
+      return usernamePredicate;
     };
   }
 

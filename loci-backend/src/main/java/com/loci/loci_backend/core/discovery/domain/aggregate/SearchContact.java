@@ -3,7 +3,7 @@ package com.loci.loci_backend.core.discovery.domain.aggregate;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
 
@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class Contact {
-  private UserPublicId publicId;
+public class SearchContact {
+  private PublicId publicId;
 
   private UserFullname fullname;
 
@@ -30,7 +30,7 @@ public class Contact {
 
 
   @Builder(style = BuilderStyle.STAGED)
-  public Contact(UserPublicId publicId, UserFullname fullname, Username username, UserEmail userEmail,
+  public SearchContact(PublicId publicId, UserFullname fullname, Username username, UserEmail userEmail,
       UserImageUrl imageUrl, FriendshipStatus friendshipStatus) {
     this.publicId = publicId;
     this.fullname = fullname;

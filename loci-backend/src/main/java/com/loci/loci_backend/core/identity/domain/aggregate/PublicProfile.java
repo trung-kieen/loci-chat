@@ -5,7 +5,7 @@ import java.time.Instant;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 
 import org.jilt.Builder;
 
@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 public class PublicProfile {
-  private UserPublicId publicId;
+  private PublicId publicId;
   private UserEmail email;
   private UserFullname fullname;
   private Username username;
@@ -21,7 +21,7 @@ public class PublicProfile {
   private Instant createdDate;
 
   @Builder
-  public PublicProfile(UserPublicId publicId, UserEmail email, UserFullname fullname, Username username,
+  public PublicProfile(PublicId publicId, UserEmail email, UserFullname fullname, Username username,
       UserImageUrl imageUrl, Instant createdDate) {
     this.publicId = publicId;
     this.email = email;

@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.discovery.application;
 
-import com.loci.loci_backend.core.discovery.domain.aggregate.Contact;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
 import com.loci.loci_backend.core.discovery.domain.service.DiscoveryService;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class DiscoveryApplicationService {
   private final DiscoveryService discoveryService;
 
-  public Page<Contact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable) {
+  public Page<SearchContact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable) {
     return discoveryService.discoveryContacts(criteria, pageable);
   }
 

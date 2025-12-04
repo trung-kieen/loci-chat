@@ -1,14 +1,12 @@
 package com.loci.loci_backend.core.discovery.infrastructure.primary.payload;
 
-import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
-
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;
 
 import lombok.Data;
 
 @Data
-public class RestContact {
+public class RestSearchContact {
   private String fullname;
   private String username;
   private String userEmail;
@@ -16,7 +14,7 @@ public class RestContact {
   private String friendshipStatus;
 
   @Builder(style = BuilderStyle.STAGED)
-  public RestContact(String fullname, String username, String userEmail, String imageUrl,
+  public RestSearchContact(String fullname, String username, String userEmail, String imageUrl,
       String friendshipStatus) {
     this.fullname = fullname;
     this.username = username;

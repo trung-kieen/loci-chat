@@ -2,8 +2,8 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.resource;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
-import com.loci.loci_backend.core.discovery.infrastructure.primary.mapper.RestContactMapper;
-import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestContact;
+import com.loci.loci_backend.core.discovery.infrastructure.primary.mapper.RestDicoveryContactMapper;
+import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestSearchContact;
 import com.loci.loci_backend.core.identity.application.IdentityApplicationService;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
@@ -36,11 +36,11 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/users")
 public class IdentityResource {
   private final IdentityApplicationService identityApplicationService;
-  private final RestContactMapper contactRestMapper;
+  private final RestDicoveryContactMapper contactRestMapper;
   private final RestProfileMapper restProfileMapper;
 
   @GetMapping("search")
-  public ResponseEntity<Page<RestContact>> searchUser(
+  public ResponseEntity<Page<RestSearchContact>> searchUser(
       @RequestParam(required = false, defaultValue = "", value = "q") String query,
       Pageable pageable) {
 

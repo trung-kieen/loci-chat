@@ -1,12 +1,12 @@
 package com.loci.loci_backend.core.discovery.domain.repository;
 
-import com.loci.loci_backend.core.discovery.domain.aggregate.Contact;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface ContactRepository {
+public interface SearchContactRepository {
 
-  Page<Contact> searchContacts(ContactSearchCriteria criteria, Pageable pageable);
+  Page<SearchContact> searchContacts(ContactSearchCriteria criteria, Pageable pageable);
 }

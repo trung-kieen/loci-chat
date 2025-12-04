@@ -15,7 +15,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.UserPublicId;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.AuthorityEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntityBuilder;
@@ -89,7 +89,7 @@ class UserEntityMapperTest {
     Set<Authority> domainAuths = Set.of(mock(Authority.class));
     Set<AuthorityEntity> entityAuths = Set.of(mock(AuthorityEntity.class));
 
-    UserPublicId publicId = UserPublicId.random();
+    PublicId publicId = PublicId.random();
 
     PersonalProfile profile = PersonalProfileBuilder.personalProfile()
         .dbId(99L)

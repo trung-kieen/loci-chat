@@ -1,24 +1,8 @@
 package com.loci.loci_backend.core.conversation.domain.aggregate;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import com.loci.loci_backend.core.conversation.domain.vo.ConversationId;
-import com.loci.loci_backend.core.conversation.domain.vo.Participant;
-import com.loci.loci_backend.core.conversation.domain.vo.ParticipantRole;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileBuilders.UserPublicId;
-import com.loci.loci_backend.core.messaging.domain.aggregate.Message;
-import com.loci.loci_backend.core.messaging.domain.vo.MessageContent;
-import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
-
 // public class Conversation {
 //   private final ConversationId conversationId;
-//   private final UserPublicId creatorId;
+//   private final PublicId creatorId;
 //   private final Set<Participant> participants = new HashSet<>();
 //   private final List<Message> messages = new ArrayList<>();
 //   private final Instant createdAt;
@@ -28,15 +12,15 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 //   private boolean deleted = false;
 //
 //   // Factory method for 1-1 conversation
-//   public static Conversation createOneToOne(UserPublicId creatorId, UserPublicId otherUserId) {
+//   public static Conversation createOneToOne(PublicId creatorId, PublicId otherUserId) {
 //     Conversation conversation = new Conversation(creatorId);
 //     conversation.addParticipant(creatorId, ParticipantRole.ADMIN);
-//     conversation.addParticipant(otherUserPublicId, ParticipantRole.MEMBER);
+//     conversation.addParticipant(otherPublicId, ParticipantRole.MEMBER);
 //     return conversation;
 //   }
 //
 //   // Factory method for group
-//   public static Conversation createGroup(UserPublicId creatorId, String groupName, Set<UserPublicId> initialMembers) {
+//   public static Conversation createGroup(PublicId creatorId, String groupName, Set<PublicId> initialMembers) {
 //     Conversation conversation = new Conversation(creatorId);
 //     conversation.groupName = groupName;
 //     conversation.addParticipant(creatorId, Participant.Role.ADMIN);
@@ -44,14 +28,14 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 //     return conversation;
 //   }
 //
-//   private Conversation(UserPublicId creatorId) {
+//   private Conversation(PublicId creatorId) {
 //     this.conversationId = ConversationId.generate();
 //     this.creatorId = creatorId;
 //     this.createdAt = Instant.now();
 //   }
 //
 //   // Business Methods - Enforce Invariants
-//   public Message sendMessage(UserPublicId senderId, MessageContent content) {
+//   public Message sendMessage(PublicId senderId, MessageContent content) {
 //     if (!isParticipant(senderId)) {
 //       throw new UnauthorizedActionException("Only participants can send messages");
 //     }
@@ -71,7 +55,7 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 //     return message;
 //   }
 //
-//   public void addParticipant(UserPublicId userId, ParticipantRole role) {
+//   public void addParticipant(PublicId userId, ParticipantRole role) {
 //     if (isParticipant(userId)) {
 //       // throw new DuplicateParticipantException("User already in conversation");
 //       throw new RuntimeException("User already in conversation");
@@ -84,7 +68,7 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 //     findMessage(messageId).ifPresent(Message::markAsDelivered);
 //   }
 //
-//   public void markMessageAsSeen(UserPublicId userId, MessageId messageId) {
+//   public void markMessageAsSeen(PublicId userId, MessageId messageId) {
 //     if (!isParticipant(userId)) {
 //       throw new UnauthorizedActionException("Only participants can see messages");
 //     }
@@ -94,13 +78,13 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 //     findMessage(messageId).ifPresent(Message::markAsSeen);
 //   }
 //
-//   private boolean isParticipant(UserPublicId userId) {
-//     return participants.stream().anyMatch(p -> p.getUserPublicId().equals(userId));
+//   private boolean isParticipant(PublicId userId) {
+//     return participants.stream().anyMatch(p -> p.getPublicId().equals(userId));
 //   }
 //
-//   private Participant getParticipant(UserPublicId userId) {
+//   private Participant getParticipant(PublicId userId) {
 //     return participants.stream()
-//         .filter(p -> p.getUserPublicId().equals(userId))
+//         .filter(p -> p.getPublicId().equals(userId))
 //         .findFirst()
 //         .orElseThrow(() -> new ParticipantNotFoundException(userId));
 //   }

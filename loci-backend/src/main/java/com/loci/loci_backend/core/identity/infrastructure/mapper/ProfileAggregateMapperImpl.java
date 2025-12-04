@@ -6,7 +6,6 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChang
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
 import com.loci.loci_backend.core.identity.domain.service.ProfileAggregateMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
