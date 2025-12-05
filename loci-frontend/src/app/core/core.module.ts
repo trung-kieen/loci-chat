@@ -17,6 +17,7 @@ import { RxStomp, RxStompConfig } from '@stomp/rx-stomp';
 import { rxStompConfig } from './socket/rx-stomp.config';
 import { KeycloakAuthenticationManager } from './auth/keycloak-auth-manager';
 import { WebApiService } from '../api/web-api.service';
+import { LoggerService } from './services/logger.service';
 
 @NgModule({
   imports: [],
@@ -68,6 +69,10 @@ export class CoreModule {
           useFactory: rxStompServiceFactory,
           deps: [KeycloakAuthenticationManager, RxStompConfig],
         },
+        {
+          provide: LoggerService,
+          useClass: LoggerService,
+        }
       ],
     };
   }

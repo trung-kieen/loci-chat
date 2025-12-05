@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.validation.domain.Assert;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySetting;
 import com.loci.loci_backend.core.identity.domain.aggregate.PrivacySettingBuilder;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
 import com.loci.loci_backend.core.identity.domain.vo.ProfileVisibility;
 import com.loci.loci_backend.core.identity.domain.vo.UserFriendRequestSetting;
@@ -207,6 +208,10 @@ public class User {
     result = prime * result + ((userPublicId == null) ? 0 : userPublicId.hashCode());
     result = prime * result + ((dbId == null) ? 0 : dbId.hashCode());
     return result;
+  }
+
+  public UserFullname getFullname() {
+    return UserFullname.from(this.firstname, this.lastname);
   }
 
   @Override

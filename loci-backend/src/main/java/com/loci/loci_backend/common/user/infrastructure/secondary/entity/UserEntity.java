@@ -113,13 +113,6 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private Set<NotificationEntity> notifications = new HashSet<>();
 
-  // @Column
-  // @Enumerated(EnumType.STRING)
-  // private Gender gender;
-  //
-  // public enum Gender {
-  // MALE, FEMALE
-  // }
 
   public String getUsername() {
     return username;

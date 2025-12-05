@@ -1,12 +1,12 @@
 package com.loci.loci_backend.core.discovery.domain.repository;
 
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
-import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
+import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.loci.loci_backend.common.user.domain.aggregate.User;
+import com.loci.loci_backend.common.user.domain.vo.UserDBId;
+import com.loci.loci_backend.core.discovery.infrastructure.secondary.dto.ContactRelation;
 
 public interface SearchContactRepository {
 
-  Page<SearchContact> searchContacts(ContactSearchCriteria criteria, Pageable pageable);
+  // List<ContactRelation> getAllFriendShipInvolveUser(User user, List<UserDBId> targetIds);
 }

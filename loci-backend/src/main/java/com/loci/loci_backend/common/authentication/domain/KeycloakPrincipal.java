@@ -36,6 +36,7 @@ public class KeycloakPrincipal {
   }
 
   public static KeycloakPrincipal fromTokenAttribute(Map<String, Object> tokenAttrributes, Roles roles) {
+    String username = tokenAttrributes.get("preferred_username").toString();
     String id = tokenAttrributes.get("given_name").toString();
     String firstname = tokenAttrributes.get("given_name").toString();
     String lastname = tokenAttrributes.get("family_name").toString();
@@ -45,7 +46,7 @@ public class KeycloakPrincipal {
         .userEmail(new UserEmail(email))
         .firstname(new UserFirstname(firstname))
         .lastname(new UserLastname(lastname))
-        .username(new Username(email))
+        .username(new Username(username))
         .roles(roles)
         .build();
   }

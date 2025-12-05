@@ -27,10 +27,10 @@ public class IdentityApplicationService {
     return profile;
   }
 
-  public Page<SearchContact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable) {
-    return discoveryApplicationService.discoveryContacts(criteria, pageable);
+  public Page<SearchContact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable,
+      KeycloakPrincipal principal) {
+    return discoveryApplicationService.discoveryContacts(criteria, pageable, principal);
   }
-
 
   public PublicProfile getPublicProfile(ProfilePublicId profilePublicId) {
     return profileManager.readPublicProfileByPublicId(profilePublicId);

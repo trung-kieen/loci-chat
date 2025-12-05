@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { ConnectionStatus, PublicProfile } from '../models/other-profile.model';
+import { PublicProfile } from '../models/other-profile.model';
 import { WebApiService } from '../../../api/web-api.service';
-import { firstValueFrom, lastValueFrom, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { FriendshipStatus } from '../../contact/models/contact.model';
 @Injectable()
 export class OtherProfileService {
   private apiService = inject(WebApiService);
@@ -51,7 +52,7 @@ export class OtherProfileService {
       createdAt: new Date('2024-11-20'),
       lastActive: new Date(Date.now() - 30 * 60 * 1000),
       mutualFriendCount: 8,
-      connectionStatus: 'friend',
+      connectionStatus: 'friends',
       showEmail: true,
       showLastOnline: true,
       recentActivity: [
@@ -136,7 +137,7 @@ export class OtherProfileService {
     return this.mockProfile.asReadonly();
   }
 
-  updateConnectionStatus(userId: string, status: ConnectionStatus): void {
+  updateConnectionStatus(userId: string, status: FriendshipStatus): void {
     // TODO: API call
     this.mockProfile.update(profile => ({
       ...profile,
@@ -178,7 +179,7 @@ export class OtherProfileService {
    */
   async acceptFriendRequest(userId: string): Promise<void> {
     await new Promise(resolve => setTimeout(resolve, 300));
-    this.updateConnectionStatus(userId, 'friend');
+    this.updateConnectionStatus(userId, 'friends');
     console.log('Friend request accepted from:', userId);
   }
 

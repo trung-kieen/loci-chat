@@ -64,6 +64,7 @@ public class RestProfileMapper {
             profile.getImageUrl().valueOrDefault())
         .memberSince(TimeFormatter.timeAgo(profile.getCreatedDate()))
         .createdAt(profile.getCreatedDate())
+        .connectionStatus(profile.getConnectionStatus().value())
         .build();
   }
 }

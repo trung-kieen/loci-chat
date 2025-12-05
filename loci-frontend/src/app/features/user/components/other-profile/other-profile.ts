@@ -2,11 +2,12 @@ import { Component, signal, computed, inject, OnInit, ChangeDetectionStrategy } 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { OtherProfileService } from '../../services/other-profile.service';
-import { ConnectionStatus, PublicProfile } from '../../models/other-profile.model';
+import { PublicProfile } from '../../models/other-profile.model';
 
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProblemDetail } from '../../../../core/error-handler/problem-detail';
+import { FriendshipStatus } from '../../../contact/models/contact.model';
 @Component({
   selector: 'app-other-profile',
   standalone: true,
@@ -29,12 +30,11 @@ export class OtherProfile implements OnInit {
   // Computed values
   connectionStatusText = computed(() => {
     const status = this.profile()?.connectionStatus;
-    const statusMap: Record<ConnectionStatus, string> = {
+    const statusMap: Record<FriendshipStatus, string> = {
       'not_connected': 'Add Friend',
       'friend_request_sent': 'Request Sent',
       'friend_request_received': 'Accept Request',
-      'friend': 'Friends',
-      'unfriended': 'Add Friend',
+      'friends': 'Friends',
       'blocked': 'Blocked',
       'blocked_by': 'Unavailable',
       'not_determined': 'Add Friend'
@@ -44,12 +44,11 @@ export class OtherProfile implements OnInit {
 
   connectionStatusIcon = computed(() => {
     const status = this.profile()?.connectionStatus;
-    const iconMap: Record<ConnectionStatus, string> = {
+    const iconMap: Record<FriendshipStatus, string> = {
       'not_connected': 'fa-user-plus',
       'friend_request_sent': 'fa-clock',
       'friend_request_received': 'fa-user-check',
-      'friend': 'fa-user-check',
-      'unfriended': 'fa-user-plus',
+      'friends': 'fa-user-check',
       'blocked': 'fa-ban',
       'blocked_by': 'fa-ban',
       'not_determined': 'fa-user-plus'
@@ -59,7 +58,7 @@ export class OtherProfile implements OnInit {
 
   canAddFriend = computed(() => {
     const status = this.profile()?.connectionStatus;
-    return status === 'not_connected' || status === 'unfriended' || status === 'not_determined';
+    return status === 'not_connected'  || status === 'not_determined';
   });
 
   canAcceptRequest = computed(() => {
@@ -68,7 +67,7 @@ export class OtherProfile implements OnInit {
 
   canMessage = computed(() => {
     const status = this.profile()?.connectionStatus;
-    return status === 'friend' || status === 'friend_request_received';
+    return status === 'friends' || status === 'friend_request_received';
   });
 
   canBlock = computed(() => {
@@ -150,7 +149,7 @@ export class OtherProfile implements OnInit {
     if (!currentProfile) return;
 
     this.profile.update(profile =>
-      profile ? { ...profile, connectionStatus: 'friend' } : null
+      profile ? { ...profile, connectionStatus: 'friends' } : null
     );
 
     // TODO: Call API to accept friend request

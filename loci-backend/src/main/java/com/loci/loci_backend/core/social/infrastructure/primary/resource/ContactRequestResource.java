@@ -2,6 +2,7 @@ package com.loci.loci_backend.core.social.infrastructure.primary.resource;
 
 import java.util.UUID;
 
+import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.migration.domain.aggregate.KeycloakUser;
 import com.loci.loci_backend.core.social.application.SocialApplicationService;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
@@ -29,7 +30,7 @@ class ContactRequestResource {
   @PostMapping("{userId}/request")
   @ResponseStatus(HttpStatus.CREATED)
   public RestFriendRequestResponse sendRequest(@PathVariable("userId") UUID receiverPublicId,
-      KeycloakUser sender) {
+      KeycloakPrincipal sender) {
 
     CreateContactRequest contactRequest = contactMapper.toDomain(receiverPublicId, sender);
     ContactRequest savedRequest = socialApplicationService.addContactRequest(contactRequest);

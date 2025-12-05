@@ -34,12 +34,14 @@ public class UserEntityMapper {
   public PublicProfile toPublicProfile(UserEntity userEntity) {
     return PublicProfileBuilder.publicProfile()
         .publicId(new PublicId(userEntity.getPublicId()))
+        .userDbId(new UserDBId(userEntity.getId()))
         .email(new UserEmail(userEntity.getEmail()))
         .fullname(
             UserFullname.from(new UserFirstname(userEntity.getFirstname()), new UserLastname(userEntity.getLastname())))
         .username(new Username(userEntity.getUsername()))
         .imageUrl(new UserImageUrl(userEntity.getProfilePicture()))
         .createdDate(userEntity.getCreatedDate())
+        .connectionStatus(null)
         .build();
   }
 

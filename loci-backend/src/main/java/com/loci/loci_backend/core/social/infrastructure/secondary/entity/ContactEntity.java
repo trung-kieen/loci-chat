@@ -54,6 +54,7 @@ public class ContactEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "blocked_by", nullable = false, updatable = false)
   private Long blockedByUserId;
 
+  // TODO: status
   @Override
   public Long getId() {
     return id;

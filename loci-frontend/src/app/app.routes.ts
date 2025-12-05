@@ -3,6 +3,7 @@ import { AccessDenied } from './core/components/access-denied/access-denied';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from './core/auth/auth.guard';
 import { Demo } from './shared/components/demo/demo';
+import { Logout } from './core/components/logout/logout';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/user/me', pathMatch: 'full' },
@@ -17,6 +18,12 @@ export const appRoutes: Routes = [
     component: Demo,
   },
   // { path: '', redirectTo: 'chat', pathMatch: 'full'},
+
+  {
+    path: 'logout',
+    loadComponent: () => import("./core/components/logout/logout").then(m => m.Logout),
+    // component: Logout,
+  },
 
   {
     path: 'chat',

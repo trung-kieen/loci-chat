@@ -5,18 +5,20 @@ import { ContactSearchItem } from '../../models/contact.model';
 import { SearchUserService } from '../../services/search-user.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { ContactListItem } from '../contact-list-item/contact-list-item';
+import { LoggerService } from '../../../../core/services/logger.service';
 
 @Component({
   selector: 'app-search-user',
-  imports: [ReactiveFormsModule, ContactListItem ],
+  imports: [ReactiveFormsModule, ContactListItem],
   templateUrl: './search-user.html',
   styleUrl: './search-user.css',
 })
 export class SearchUser {
 
+  private loggerService = inject(LoggerService);
   private searchService = inject(SearchUserService);
   private notificationService = inject(NotificationService);
-
+  private logger = this.loggerService.getLogger("SearchUser")
   searchControl = new FormControl('', { nonNullable: true });
   users = signal<ContactSearchItem[]>([]);
   loading = signal(false);
@@ -26,9 +28,12 @@ export class SearchUser {
     debounceTime(300),
     distinctUntilChanged(),
     tap(() => this.loading.set(true)),
-    switchMap(q => this.searchService.search(q).pipe(
-      finalize(() => this.loading.set(false))
-    ))
+    switchMap(q => {
+      this.logger.debug("Search query change", q);
+      return this.searchService.search(q).pipe(
+        finalize(() => this.loading.set(false))
+      )
+    })
   );
 
   constructor() {
@@ -39,7 +44,10 @@ export class SearchUser {
 
     this.searchService.search(this.searchControl.getRawValue())
       .subscribe({
-        next: (u) => this.users.set(u.content),
+        next: (u) => {
+          this.logger.debug("update new user search item ", u)
+          return this.users.set(u.content);
+        },
         complete: () => this.loading.set(false)
       })
   }
@@ -49,7 +57,7 @@ export class SearchUser {
   onAddFriend(user: ContactSearchItem): void {
     this.searchService.addFriend(user.userId).subscribe({
       next: () => {
-        user.friendshipStatus = 'pending';
+        user.friendshipStatus = 'friend_request_sent';
         /* re-trigger signal so button flips instantly */
         this.users.set([...this.users()]);
 

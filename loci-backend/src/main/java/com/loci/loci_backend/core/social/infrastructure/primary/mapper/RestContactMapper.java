@@ -2,6 +2,7 @@ package com.loci.loci_backend.core.social.infrastructure.primary.mapper;
 
 import java.util.UUID;
 
+import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.migration.domain.aggregate.KeycloakUser;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RestContactMapper {
 
-  public CreateContactRequest toDomain(UUID receiverPublicId, KeycloakUser sender) {
+  public CreateContactRequest toDomain(UUID receiverPublicId, KeycloakPrincipal sender) {
     Username senderUsername = sender.getUsername();
     return CreateContactRequestBuilder.createContactRequest()
         .sendUsername(senderUsername)

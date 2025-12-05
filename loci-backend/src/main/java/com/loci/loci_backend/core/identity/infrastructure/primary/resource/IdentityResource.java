@@ -43,10 +43,10 @@ public class IdentityResource {
   @GetMapping("search")
   public ResponseEntity<Page<RestSearchContact>> searchUser(
       @RequestParam(required = false, defaultValue = "", value = "q") String query,
-      Pageable pageable) {
+      Pageable pageable, KeycloakPrincipal principal) {
 
-    ContactSearchCriteria criteria = new ContactSearchCriteria(query);
-    return ResponseEntity.ok(contactRestMapper.from(identityApplicationService.discoveryContacts(criteria, pageable)));
+    ContactSearchCriteria criteria = new ContactSearchCriteria(query, principal.getUsername().value());
+    return ResponseEntity.ok(contactRestMapper.from(identityApplicationService.discoveryContacts(criteria, pageable, principal)));
   }
 
   @GetMapping("me")
@@ -67,8 +67,7 @@ public class IdentityResource {
 
   @PatchMapping("me/avatar")
   public ResponseEntity<RestPersonalProfile> updateProfileImage(
-    @Parameter(hidden = true)
-    KeycloakPrincipal keycloakPrincipal,
+      @Parameter(hidden = true) KeycloakPrincipal keycloakPrincipal,
       @RequestParam("image") MultipartFile file) {
 
     // validate file
@@ -76,8 +75,10 @@ public class IdentityResource {
     // upload image to file storage
 
     // Use image link to patch update profile
-    // PersonalProfileChanges profileChages = restProfileMapper.toDomain(patchRequest);
-    // PersonalProfile updatedProfile = identityApplicationService.updateProfile(keycloakPrincipal, profileChages);
+    // PersonalProfileChanges profileChages =
+    // restProfileMapper.toDomain(patchRequest);
+    // PersonalProfile updatedProfile =
+    // identityApplicationService.updateProfile(keycloakPrincipal, profileChages);
     //
     // return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
     throw new NotImplementedException();

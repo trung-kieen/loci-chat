@@ -6,45 +6,27 @@ import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-
 import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 public class UserSpecifications {
 
-  // TODO: Change logic follow the username
-  // public static Specification<UserEntity> searchActiveUsers(UserSearchCriteria
-  // criteria) {
-  // return (Root<UserEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) ->
-  // {
-  // Predicate activePredicate = cb.isTrue(root.get("active"));
-  //
-  // String keyword = criteria.getKeyword();
-  // if (keyword == null || keyword.isBlank()) {
-  // return activePredicate;
-  // }
-  //
-  // String lowerKeyword = "%" + keyword.toLowerCase() + "%";
-  // Predicate namePredicate = cb.like(cb.lower(root.get("name")), lowerKeyword);
-  // Predicate emailPredicate = cb.like(cb.lower(root.get("email")),
-  // lowerKeyword);
-  //
-  // return cb.and(activePredicate, cb.or(namePredicate, emailPredicate));
-  // };
-  // }
-
-  public static Specification<UserEntity> searchActiveUsers(String keyword) {
+  public static Specification<UserEntity> searchActiveUsers(String keyword, String currentUsername) {
+    // TODO: search for username, email, name by elastic search
     return (Root<UserEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
 
-      String searchKeyword = keyword;
-      if (searchKeyword == null || searchKeyword.isBlank()) {
-        searchKeyword = "";
-      }
-      String lowerKeyword = "%" + searchKeyword.toLowerCase() + "%";
+      // Username search predicate
+      String username = (keyword == null || keyword.isBlank()) ? "" : keyword;
+      String lowerKeyword = "%" + username.toLowerCase() + "%";
       Predicate usernamePredicate = cb.like(cb.lower(root.get("username")), lowerKeyword);
 
-      return usernamePredicate;
+      // Exclude current user predicate (handles null/blank)
+      Predicate excludeCurrentUserPredicate = (currentUsername != null && !currentUsername.isBlank())
+          ? cb.notEqual(root.get("username"), currentUsername)
+          : cb.conjunction();
+
+      // Combine predicates
+      return cb.and(usernamePredicate, excludeCurrentUserPredicate);
     };
   }
-
 }

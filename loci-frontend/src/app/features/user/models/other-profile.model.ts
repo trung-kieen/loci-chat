@@ -1,12 +1,4 @@
-export type ConnectionStatus =
-  | 'not_connected'
-  | 'friend_request_sent'
-  | 'friend_request_received'
-  | 'friend'
-  | 'unfriended'
-  | 'blocked'
-  | 'blocked_by'
-  | 'not_determined';
+import { FriendshipStatus } from "../../contact/models/contact.model";
 
 export interface RecentActivity {
   id: string;
@@ -24,7 +16,7 @@ export interface PublicProfile {
   createdAt: Date;
   lastActive: Date;
   mutualFriendCount: number;
-  connectionStatus: ConnectionStatus;
+  connectionStatus: FriendshipStatus;
   showEmail: boolean;
   showLastOnline: boolean;
   recentActivity: RecentActivity[];

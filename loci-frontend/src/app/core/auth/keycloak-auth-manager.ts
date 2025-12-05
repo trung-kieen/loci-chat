@@ -19,6 +19,7 @@ export class KeycloakAuthenticationManager {
     console.log(this.keycloakService);
     // this.keycloakService.clearToken();
     // this.keycloakService.logout().then(() => this.keycloakService.clearToken());
-    this.keycloakService.logout();
+    this.keycloakService.logout("http://localhost:4200/");
+
   }
 }

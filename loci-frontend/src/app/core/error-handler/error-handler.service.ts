@@ -2,15 +2,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, ErrorHandler, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
+import { LoggerService } from '../services/logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandlerService implements ErrorHandler {
   private router = inject(Router);
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger("ErrorHandlerService");
   handleError(error: unknown) {
-    // TODO: log error
-
 
     if (error instanceof HttpErrorResponse) {
       this.handleHttpError(error);
@@ -78,9 +79,8 @@ export class ErrorHandlerService implements ErrorHandler {
   }
 
   private showError(message: string) {
-    // TODO: Change handler for the error default behavior
+    this.logger.error("Handle error response: ", message)
     // Could be a toast notification, alert, or modal
-    console.error('Error notification:', message);
     // Example: this.notificationService.showError(message);
   }
 

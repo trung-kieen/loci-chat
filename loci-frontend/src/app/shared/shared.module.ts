@@ -21,6 +21,7 @@ import { BottomNav } from './components/bottom-nav/bottom-nav';
 import { WebApiService } from '../api/web-api.service';
 import { NotificationService } from './services/notification.service';
 import { ToastNotification } from './components/toast-notification/toast-notification';
+import { ToastContainer } from './components/toast-container/toast-container';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ToastNotification } from './components/toast-notification/toast-notific
     Modal,
     HeaderBar,
     ToastNotification,
+    ToastContainer,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -80,6 +82,7 @@ import { ToastNotification } from './components/toast-notification/toast-notific
     HeaderBar,
     BottomNav,
     ToastNotification,
+    ToastContainer
   ]
 })
 export class SharedModule { }

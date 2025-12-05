@@ -2,6 +2,8 @@ package com.loci.loci_backend.core.identity.infrastructure.primary.payload;
 
 import java.time.Instant;
 
+import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
+
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;
 
@@ -19,9 +21,11 @@ public class RestPublicProfile {
   private String profilePictureUrl;
   private String memberSince;
   private Instant createdAt;
-  @Builder(style =  BuilderStyle.STAGED)
+  private String connectionStatus;
+
+  @Builder(style = BuilderStyle.STAGED)
   public RestPublicProfile(String publicId, String emailAddress, String fullname, String username,
-      String profilePictureUrl, String memberSince, Instant createdAt) {
+      String profilePictureUrl, String memberSince, Instant createdAt, String connectionStatus) {
     this.publicId = publicId;
     this.emailAddress = emailAddress;
     this.fullname = fullname;
@@ -29,6 +33,7 @@ public class RestPublicProfile {
     this.profilePictureUrl = profilePictureUrl;
     this.memberSince = memberSince;
     this.createdAt = createdAt;
+    this.connectionStatus = connectionStatus;
   }
 
   // TODO: Implement other profile details
