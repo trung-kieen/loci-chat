@@ -53,15 +53,12 @@ export class SearchUser {
         complete: () => this.loading.set(false)
       })
 
-
-    this.friendManager.getListRequestConnectContact();
-
   }
 
   trackById(_: number, u: ContactSearchItem): string { return u.userId; }
 
   onAddFriend(user: ContactSearchItem): void {
-    this.friendManager.addFriend(user.userId).subscribe({
+    this.friendManager.sendAddFriend(user.userId).subscribe({
       next: () => {
         user.friendshipStatus = 'friend_request_sent';
         /* re-trigger signal so button flips instantly */

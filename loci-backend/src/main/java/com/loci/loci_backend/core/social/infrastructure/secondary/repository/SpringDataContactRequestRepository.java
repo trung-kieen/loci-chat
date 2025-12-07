@@ -65,4 +65,21 @@ public class SpringDataContactRequestRepository implements ContactRequestReposit
     return repository.findByPublicId(publicId.value()).map(mapper::toDomain);
   }
 
+  @Override
+  public boolean existsAcceptedRequest(UserDBId a, UserDBId b) {
+    return repository.existsAcceptedRequest(a.value(), b.value());
+  }
+
+  @Override
+  public void deleteRequestBetween(UserDBId dbId, UserDBId dbId2) {
+    repository.deleteAllConnection(dbId.value(), dbId2.value());
+
+  }
+
+  @Override
+  public void delete(ContactRequest request) {
+    Long requestDBId = request.getId().value();
+    repository.deleteById(requestDBId);
+  }
+
 }

@@ -30,8 +30,10 @@ public class KeycloakWebSocketAuthenticationManager implements AuthenticationMan
 
   private final KeycloakTokenVerifier tokenVerifier;
 
+
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
     JWSAuthentication token = (JWSAuthentication) authentication;
     String tokenString = (String) token.getCredentials();
     try {

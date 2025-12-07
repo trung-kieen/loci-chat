@@ -13,6 +13,11 @@ const routes: Routes = [
       .then(m => m.Settings)
   },
   {
+    path: 'search',
+    loadComponent: () => import('./components/my-profile/my-profile')
+      .then(m => m.MyProfile)
+  },
+  {
     path: ':id',                              // /user/789  (other user)
     loadComponent: () => import('./components/other-profile/other-profile')
       .then(m => m.OtherProfile)

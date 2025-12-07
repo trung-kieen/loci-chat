@@ -51,6 +51,7 @@
     "lucide": "^0.553.0",
     "lucide-angular": "^0.553.0",
     "rxjs": "~7.8.0",
+    "rxjs-interop": "^2.0.0",
     "save": "^2.9.0",
     "socketjs-client": "^1.0.2",
     "sockjs-client": "^1.6.1",

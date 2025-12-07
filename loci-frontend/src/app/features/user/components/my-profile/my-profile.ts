@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, effect, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { MyProfileService } from '../../services/my-profile.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, merge, Subject, takeUntil } from 'rxjs';
@@ -15,6 +15,10 @@ export class MyProfile implements OnInit, OnDestroy {
   private profile = this.profileService.profile;
   private destroy$ = new Subject<void>();
 
+  // public isLoading = signal<boolean>(true);
+  // public error = signal<string | null> (null);
+  readonly isLoading = this.profileService.isLoading;
+  readonly error = this.profileService.error;
 
   public form = new FormGroup({
     firstname: new FormControl(''),
@@ -55,22 +59,9 @@ export class MyProfile implements OnInit, OnDestroy {
 
       })
     })
-    // const privacyControls = [
-    //   this.form.controls.lastSeen,
-    //   this.form.controls.friendRequests,
-    //   this.form.controls.profileVisibility,
-    // ];
-
-    // merge(...privacyControls.map(c => c.valueChanges))
-    //   .pipe(takeUntil(this.destroy$), debounceTime(4000)) // small debounce
-    //   .subscribe(() => {
-    //     const raw = this.form.getRawValue();
-    //     this.profileService.updateMyProfile({
-    //       lastSeen: raw.lastSeen,
-    //       friendRequests: raw.friendRequests,
-    //       profileVisibility: raw.profileVisibility,
-    //     });
-    //   });
+  }
+  public loadProfile(){
+    this.profileService.loadMyProfile();
   }
   ngOnInit(): void {
     this.profileService.loadMyProfile();

@@ -99,7 +99,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   })
   private Set<AuthorityEntity> authorities = new HashSet<>();
 
-  @OneToMany(mappedBy = "owningUser", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "owningUser", cascade = CascadeType.ALL)
   private Set<ContactEntity> contacts = new HashSet<>();
 
   @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
@@ -116,7 +116,6 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private Set<NotificationEntity> notifications = new HashSet<>();
-
 
   public String getUsername() {
     return username;
@@ -141,6 +140,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
     this.profileVisibility = profileVisibility;
     this.authorities = authorities;
   }
+
   public UserFullname getFullname() {
     return UserFullname.from(new UserFirstname(firstname), new UserLastname(this.lastname));
   }

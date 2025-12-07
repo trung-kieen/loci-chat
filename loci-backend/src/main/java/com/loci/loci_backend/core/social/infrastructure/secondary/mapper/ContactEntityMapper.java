@@ -20,10 +20,11 @@ public class ContactEntityMapper {
   private final MapStructContactEntityMapper mapstruct;
 
   public Contact toDomain(ContactEntity entity) {
-    return ContactBuilder.contact().contactId(new ContactId(entity.getId()))
-        .owningUserId(new UserDBId(entity.getOwningUser().getId()))
-        .contactUserId(new UserDBId(entity.getContactUser().getId()))
-        .blockedByUserId(NullSafe.getIfPresent(entity.getBlockedBy(), (userEntity) -> new UserDBId(userEntity.getId())))
+    return ContactBuilder.contact().contactId(NullSafe.constructOrNull(ContactId.class, entity.getId()))
+        .owningUserId(new UserDBId(entity.getOwningUserId()))
+        .contactUserId(new UserDBId(entity.getContactUserId()))
+        // .blockedByUserId(NullSafe.getIfPresent(entity.getBlockedBy(), (userEntity) -> new UserDBId(userEntity.getId())))
+        .blockedByUserId(new UserDBId(entity.getBlockedByUserId()))
         .build();
   }
 
@@ -34,7 +35,8 @@ public class ContactEntityMapper {
   public ContactRequestEntity from(ContactRequest contactRequest) {
     return mapstruct.from(contactRequest);
   }
-  public Page<ContactRequest> toDomain(Page<ContactRequestEntity> entities){
+
+  public Page<ContactRequest> toDomain(Page<ContactRequestEntity> entities) {
     return entities.map(this::toDomain);
   }
 

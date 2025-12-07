@@ -14,11 +14,11 @@ public class JpaContactSpecification {
 
       return cb.or(
           cb.and(
-              cb.equal(root.get("owningUser").get("id"), userId0),
-              cb.equal(root.get("contactUser").get("id"), userId1)),
+              cb.equal(root.get("owningUserId"), userId0),
+              cb.equal(root.get("contactUserId"), userId1)),
           cb.and(
-              cb.equal(root.get("owningUser").get("id"), userId1),
-              cb.equal(root.get("contactUser").get("id"), userId0)));
+              cb.equal(root.get("owningUserId"), userId1),
+              cb.equal(root.get("contactUserId"), userId0)));
     };
   }
 

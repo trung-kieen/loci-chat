@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 
 public class ContactRequest {
-  private final ContactRequestId id;
+  private ContactRequestId id;
   private UserDBId receiverUserId;
   private UserDBId requestUserId;
   private FriendRequestStatus status;

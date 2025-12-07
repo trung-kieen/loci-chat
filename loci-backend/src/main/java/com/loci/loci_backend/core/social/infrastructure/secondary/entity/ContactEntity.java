@@ -50,7 +50,7 @@ public class ContactEntity extends AbstractAuditingEntity<Long> {
   @JoinColumn(name = "blocked_by", referencedColumnName = "id", insertable = false, updatable = false)
   private UserEntity blockedBy; // Who blocked this contact (null if not blocked)
 
-  @Column(name = "blocked_by", nullable = false, updatable = false)
+  @Column(name = "blocked_by", nullable = true, updatable = true)
   private Long blockedByUserId;
 
   // TODO: status

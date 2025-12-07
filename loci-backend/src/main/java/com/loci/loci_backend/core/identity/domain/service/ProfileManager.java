@@ -32,6 +32,7 @@ public class ProfileManager {
   private final KeycloakPrincipal principal;
   private final UserConnectionResolver connectionResolver;
 
+  @Transactional(readOnly = true )
   public PersonalProfile readPersonalProfile(KeycloakPrincipal keycloakPrincipal) {
 
     PersonalProfile profile = repository.findPersonalProfile(keycloakPrincipal.getUserEmail());

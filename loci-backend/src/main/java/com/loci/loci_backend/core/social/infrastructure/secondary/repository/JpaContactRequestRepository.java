@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,7 @@ public interface JpaContactRequestRepository
     extends JpaRepository<ContactRequestEntity, Long>, JpaSpecificationExecutor<ContactRequestEntity> {
 
   List<ContactRequestEntity> findAll(Specification<ContactRequestEntity> spec);
+
   Page<ContactRequestEntity> findAll(Specification<ContactRequestEntity> spec, Pageable pageable);
 
   @Query("""
@@ -55,7 +57,6 @@ public interface JpaContactRequestRepository
       @Param("currentUserId") Long currentUserId,
       @Param("targetId") Long targetId);
 
-
   @Query("""
       SELECT r
       FROM ContactRequestEntity r
@@ -69,6 +70,27 @@ public interface JpaContactRequestRepository
       @Param("currentUserId") Long currentUserId,
       @Param("targetId") Long targetId);
 
+  Optional<ContactRequestEntity> findByPublicId(UUID publicId);
 
-  Optional<ContactRequestEntity> findByPublicId(UUID publicId) ;
+  @Query("""
+        SELECT COUNT(r) > 0
+        FROM ContactRequestEntity r
+        WHERE r.status = 'ACCEPTED'
+        AND (
+              (r.requestUserId = :userA AND r.receiverUserId = :userB)
+           OR (r.receiverUserId = :userA AND r.requestUserId = :userB)
+            )
+      """)
+  boolean existsAcceptedRequest(@Param("userA") Long userA, @Param("userB") Long userB);
+
+  @Modifying
+  @Query("""
+      DELETE FROM ContactRequestEntity r
+        WHERE
+          (r.requestUserId = :userA AND r.receiverUserId = :userB)
+           OR (r.receiverUserId = :userA AND r.requestUserId = :userB)
+          """)
+  void deleteAllConnection(@Param("userA") Long userA,
+      @Param("userB") Long userB);
+
 }

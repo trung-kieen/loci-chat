@@ -62,4 +62,9 @@ public class SpringDataContactRepository implements ContactRepository {
     repository.delete(connection);
   }
 
+  @Override
+  public void delete(Contact contact) {
+    repository.deleteById(contact.getContactId().value());
+  }
+
 }

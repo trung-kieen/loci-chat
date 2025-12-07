@@ -8,7 +8,6 @@ import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
-import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.identity.domain.repository.IdentityUserRepository;
 import com.loci.loci_backend.core.social.domain.aggregate.Contact;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
@@ -36,47 +35,9 @@ public class FriendManager {
   private final ContactRequestRepository contactRequestRepository;
   private final KeycloakPrincipal keycloakPrincipal;
 
-  public FriendshipStatus blockUser(PublicId userId) {
-    User toBlockUser = userRepository.getByPublicId(userId)
-        .orElseThrow(() -> new EntityNotFoundException("Not found user information to block"));
-    User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
-        .orElseThrow(() -> new EntityNotFoundException());
-
-    Contact contact = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId())
-        .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
-    contact.setBlockedByUserId(currentUser.getDbId());
-
-    // TODO: websocket - send ack for block conversation/contact
-
-    // TODO: notification - user block them, update converstaion state
-    Contact savedContact = contactRepository.save(contact);
-
-    FriendshipStatus updatedStatus = savedContact.friendshipStatusWithUser(currentUser.getDbId());
-    return updatedStatus;
-  }
-
-  public FriendshipStatus unblockUser(PublicId userId) {
-    User toBlockUser = userRepository.getByPublicId(userId)
-        .orElseThrow(() -> new EntityNotFoundException("Not found user information to block"));
-    User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
-        .orElseThrow(() -> new EntityNotFoundException());
-
-    Contact contact = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId())
-        .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
-    contact.setBlockedByUserId(null);
-
-    Contact savedContact = contactRepository.save(contact);
-    FriendshipStatus updatedStatus = savedContact.friendshipStatusWithUser(currentUser.getDbId());
-
-    // TODO: websocket - send ack for block conversation/contact
-
-    // TODO: notification - user block them, update converstaion state
-    return updatedStatus;
-
-  }
-
   @Transactional(readOnly = false)
   public ContactRequest sendRequest(CreateContactRequest request) {
+    // TODO: not allow bloceked user to send request
     User sender = userRepository.getByUsername(request.getSenderUsername())
         .orElseThrow(() -> new EntityNotFoundException("Not found sender information"));
     User receiver = userRepository.getByPublicId(request.getReceiverPublicId())
@@ -107,6 +68,9 @@ public class FriendManager {
   }
 
   private Contact acceptRequest(ContactRequest request, UserDBId currentUserId, UserDBId friendUserId) {
+    if (!request.getReceiverUserId().equals(currentUserId)) {
+      throw new IllegalAccessError("Not permited to accept this request");
+    }
 
     request.setStatus(FriendRequestStatus.ACCEPTED);
 
@@ -121,7 +85,7 @@ public class FriendManager {
   }
 
   @Transactional(readOnly = false)
-  public Contact acceptRequestForUser(PublicId friendId) {
+  public Contact acceptRequestFromUser(PublicId friendId) {
 
     User friendUser = userRepository.getByPublicId(friendId)
         .orElseThrow(() -> new EntityNotFoundException("Not found request user information"));
@@ -142,7 +106,16 @@ public class FriendManager {
     return acceptRequest(request, request.getRequestUserId(), request.getReceiverUserId());
   }
 
-  public void rejectRequest(PublicId friendId) {
+  private void rejectRequest(ContactRequest request, UserDBId currentUserId) {
+    if (!currentUserId.equals(request.getReceiverUserId())) {
+      throw new IllegalAccessError("Not permitted to deny this request");
+    }
+    request.setStatus(FriendRequestStatus.DECLINED);
+
+    contactRequestRepository.save(request);
+  }
+
+  public void rejectRequestFromUser(PublicId friendId) {
     User friendUser = userRepository.getByPublicId(friendId)
         .orElseThrow(() -> new EntityNotFoundException("Not found user send this request"));
     User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
@@ -151,9 +124,15 @@ public class FriendManager {
     ContactRequest request = contactRequestRepository.getPendingRequest(friendUser.getDbId(), currentUser.getDbId())
         .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
 
-    request.setStatus(FriendRequestStatus.DECLINED);
+    rejectRequest(request, currentUser.getDbId());
+  }
 
-    contactRequestRepository.save(request);
+  public void rejectRequestForRequest(PublicId requestId) {
+    User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
+        .orElseThrow(() -> new EntityNotFoundException());
+    ContactRequest request = contactRequestRepository.getByPublicId(requestId)
+        .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
+    rejectRequest(request, currentUser.getDbId());
   }
 
   @Transactional(readOnly = false)
@@ -164,6 +143,19 @@ public class FriendManager {
         .orElseThrow(() -> new EntityNotFoundException());
 
     contactRepository.removeContact(currentUser.getDbId(), friendUser.getDbId());
+
+    contactRequestRepository.deleteRequestBetween(currentUser.getDbId(), friendUser.getDbId());
+  }
+
+  @Transactional(readOnly = false)
+  public void unsendRequest(PublicId targetId) {
+    User friendUser = userRepository.getByPublicId(targetId)
+        .orElseThrow(() -> new EntityNotFoundException("Not found friend information"));
+    User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
+        .orElseThrow(() -> new EntityNotFoundException());
+
+    ContactRequest request = contactRequestRepository.getPendingRequest(currentUser.getDbId(), friendUser.getDbId()).orElseThrow(() -> new EntityNotFoundException("Requset not found"));
+    contactRequestRepository.delete(request);
   }
 
   public ContactRequestList viewListContactRequest(Pageable pageable) {

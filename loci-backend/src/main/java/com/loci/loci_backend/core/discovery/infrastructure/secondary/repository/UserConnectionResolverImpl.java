@@ -17,6 +17,7 @@ import com.loci.loci_backend.core.social.infrastructure.secondary.repository.Jpa
 import com.loci.loci_backend.core.social.infrastructure.secondary.repository.JpaContactRequestRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 

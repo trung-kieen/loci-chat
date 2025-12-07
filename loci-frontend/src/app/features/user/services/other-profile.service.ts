@@ -1,203 +1,350 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { PublicProfile } from '../models/other-profile.model';
+import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { PublicProfile, UpdatedStatus } from '../models/other-profile.model';
 import { WebApiService } from '../../../api/web-api.service';
-import { Observable } from 'rxjs';
+import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { FriendshipStatus } from '../../contact/models/contact.model';
+import { FriendManagerService } from '../../contact/services/friend-manager.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ProblemDetail } from '../../../core/error-handler/problem-detail';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Injectable()
 export class OtherProfileService {
+  private friendManager = inject(FriendManagerService);
+  private destroyRef = inject(DestroyRef);
   private apiService = inject(WebApiService);
-  // Mock data stored in signal
-  private mockProfile = signal<PublicProfile>({
-    publicId: 'user-7891',
-    username: 'emilydavis',
-    fullname: 'Emily Davis',
-    emailAddress: 'emily.davis@company.com',
-    profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891',
-    createdAt: new Date('2025-03-15'),
-    lastActive: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
-    mutualFriendCount: 12,
-    connectionStatus: 'not_connected',
-    showEmail: true,
-    showLastOnline: true,
-    recentActivity: [
-      {
-        id: 'activity-1',
-        type: 'message',
-        message: 'Sent a message in Marketing Team',
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000) // 2 hours ago
-      },
-      {
-        id: 'activity-2',
-        type: 'connection',
-        message: 'Connected with 3 new colleagues',
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000) // 1 day ago
-      },
-      {
-        id: 'activity-3',
-        type: 'file',
-        message: 'Shared project documents',
-        timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) // 3 days ago
-      }
-    ]
+
+  private _profile = signal<PublicProfile | null>(null);
+  private _isLoading = signal<boolean>(true);
+  private _error = signal<string | null>(null);
+
+
+  private _profileId = signal<string | null>(null);
+
+
+  public readonly profile = this._profile.asReadonly();
+  public readonly isLoading = this._isLoading.asReadonly();
+  public readonly error = this._error.asReadonly();
+  readonly profileId = this._profileId.asReadonly();
+
+
+  readonly connectionStatusText = computed(() => {
+    const status = this.profile()?.connectionStatus;
+    const statusMap: Record<FriendshipStatus, string> = {
+      'not_connected': 'Add Friend',
+      'friend_request_sent': 'Request Sent',
+      'friend_request_received': 'Accept Request',
+      'friends': 'Friends',
+      'blocked': 'Blocked',
+      'blocked_by': 'Unavailable',
+      'not_determined': 'Add Friend'
+    }
+
+    return status ? statusMap[status] : "Add friend";
+
+  })
+
+
+
+  readonly connectionStatusIcon = computed(() => {
+
+    const status = this.profile()?.connectionStatus;
+    const iconMap: Record<FriendshipStatus, string> = {
+      'not_connected': 'fa-user-plus',
+      'friend_request_sent': 'fa-clock',
+      'friend_request_received': 'fa-user-check',
+      'friends': 'fa-user-check',
+      'blocked': 'fa-ban',
+      'blocked_by': 'fa-ban',
+      'not_determined': 'fa-user-plus'
+    };
+    return status ? iconMap[status] : 'fa-user-plus';
+  })
+
+  readonly isFriends = computed(() => {
+    return this._profile()?.connectionStatus === 'friends';
   });
 
-  // Additional mock profiles for testing different states
-  private mockProfiles: Record<string, PublicProfile> = {
-    'friend': {
-      publicId: 'user-1234',
-      username: 'johnsmith',
-      fullname: 'John Smith',
-      emailAddress: 'john.smith@company.com',
-      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234',
-      createdAt: new Date('2024-11-20'),
-      lastActive: new Date(Date.now() - 30 * 60 * 1000),
-      mutualFriendCount: 8,
-      connectionStatus: 'friends',
-      showEmail: true,
-      showLastOnline: true,
-      recentActivity: [
-        {
-          id: 'activity-4',
-          type: 'message',
-          message: 'Replied to your message',
-          timestamp: new Date(Date.now() - 30 * 60 * 1000)
-        }
-      ]
-    },
-    'request_sent': {
-      publicId: 'user-5678',
-      username: 'sarahjones',
-      fullname: 'Sarah Jones',
-      emailAddress: 'sarah.jones@company.com',
-      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678',
-      createdAt: new Date('2025-01-10'),
-      lastActive: new Date(Date.now() - 2 * 60 * 60 * 1000),
-      mutualFriendCount: 5,
-      connectionStatus: 'friend_request_sent',
-      showEmail: false,
-      showLastOnline: true,
-      recentActivity: []
-    },
-    'request_received': {
-      publicId: 'user-9012',
-      username: 'mikebrown',
-      fullname: 'Mike Brown',
-      emailAddress: 'mike.brown@company.com',
-      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9012',
-      createdAt: new Date('2024-12-05'),
-      lastActive: new Date(Date.now() - 15 * 60 * 1000),
-      mutualFriendCount: 15,
-      connectionStatus: 'friend_request_received',
-      showEmail: true,
-      showLastOnline: true,
-      recentActivity: [
-        {
-          id: 'activity-5',
-          type: 'connection',
-          message: 'Sent you a friend request',
-          timestamp: new Date(Date.now() - 60 * 60 * 1000)
-        }
-      ]
-    },
-    'blocked': {
-      publicId: 'user-3456',
-      username: 'spamuser',
-      fullname: 'Blocked User',
-      profilePictureUrl: 'https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=3456',
-      createdAt: new Date('2024-10-01'),
-      lastActive: new Date(Date.now() - 48 * 60 * 60 * 1000),
-      mutualFriendCount: 0,
-      connectionStatus: 'blocked',
-      showEmail: false,
-      showLastOnline: false,
-      recentActivity: []
-    }
-  };
+  readonly canDenyRequest = computed(() => {
+    return this._profile()?.connectionStatus === 'friend_request_received';
+  });
 
-  /**
-   * Get other user's profile (mock data)
-   * @param userId Optional user ID to fetch specific profile state
-   * @returns UserProfile object
-   */
-  getOtherProfile(userId: string): Observable<PublicProfile> {
+  readonly canUnsendRequest = computed(() => {
+    return this._profile()?.connectionStatus === 'friend_request_sent';
+  });
 
-    return this.loadProfile(userId);
+  readonly canAddFriend = computed(() => {
+    const status = this.profile()?.connectionStatus;
+    return status === 'not_connected' || status === 'not_determined';
+
+  });
 
 
-    // // If userId provided and exists in mock profiles, return that
-    // if (userId && this.mockProfiles[userId]) {
-    //   return of(this.mockProfiles[userId]);
-    // }
+  readonly canAcceptRequest = computed(() => {
+    return this._profile()?.connectionStatus === 'friend_request_received';
+  });
 
-    // // Otherwise return default mock profile
-    // return of(this.mockProfile()); // use of function in the rxjs
-  }
+  readonly canMessage = computed(() => {
+    const status = this._profile()?.connectionStatus;
+    return status === 'friends' || status === 'friend_request_received';
+  });
 
-  get profile() {
-    return this.mockProfile.asReadonly();
-  }
+  readonly canBlock = computed(() => {
+    const status = this._profile()?.connectionStatus;
+    return status !== 'blocked' && status !== 'blocked_by';
+  });
 
-  updateConnectionStatus(userId: string, status: FriendshipStatus): void {
-    // TODO: API call
-    this.mockProfile.update(profile => ({
-      ...profile,
-      connectionStatus: status
-    }));
-  }
+  readonly isBlocked = computed(() => {
+    return this._profile()?.connectionStatus === 'blocked';
+  });
 
-  /**
-   * Get all mock profile variants for testing
-   */
-  getMockProfileVariants(): Record<string, PublicProfile> {
-    return this.mockProfiles;
-  }
+  readonly isActiveRecently = computed(() => {
+    const lastActive = this._profile()?.lastActive;
+    if (!lastActive) return false;
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    return new Date(lastActive) > fiveMinutesAgo;
+  });
 
-  /**
-   * Load profile by user ID (simulates API call)
-   * Returns a Promise for async operations
-   */
-  loadProfile(userId: string): Observable<PublicProfile> {
+
+
+  getProfile(userId: string): Observable<PublicProfile> {
     return this.apiService.get<PublicProfile>("/users/" + userId);
-
-    // Could throw error for testing error states
-    // throw new Error('User not found');
-
-    // return profile;
   }
 
-  /**
-   * Send friend request (mock implementation)
-   */
-  async sendFriendRequest(userId: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    this.updateConnectionStatus(userId, 'friend_request_sent');
-    console.log('Friend request sent to:', userId);
+  addFriend(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) {
+      return throwError(() => new Error('Profile ID not set'));
+    }
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.sendAddFriend(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to send friend request:', problem);
+        this._error.set(problem.detail);
+        // Refresh profile to ensure UI consistency
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this._isLoading.set(false);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
-  /**
-   * Accept friend request (mock implementation)
-   */
-  async acceptFriendRequest(userId: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    this.updateConnectionStatus(userId, 'friends');
-    console.log('Friend request accepted from:', userId);
+  public setProfileId(profileId: string) {
+    this._profileId.set(profileId);
+  }
+  public loadProfile(): void {
+    const profileId = this._profileId();
+    if (profileId == null) {
+      return;
+    }
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    this.getProfile(profileId).subscribe({
+      next: (p) => {
+        this._profile.set(p);
+        this._isLoading.set(false)
+      },
+      error: (err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail
+        this._error.set(problem.detail)
+        this._isLoading.set(false)
+      },
+      complete: () => this._isLoading.set(false)
+    })
   }
 
-  /**
-   * Block user (mock implementation)
-   */
-  async blockUser(userId: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    this.updateConnectionStatus(userId, 'blocked');
-    console.log('User blocked:', userId);
+
+
+  public acceptRequest(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) {
+      return throwError(() => new Error('Profile ID not set'));
+    }
+
+    return this.friendManager.acceptFriendRequestFromUser(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(p => {
+            return p ? { ...p, connectionStatus: updatedStatus.status } : null
+          })
+
+        },
+
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to accept friend request:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this._isLoading.set(false);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+
+    )
   }
 
-  /**
-   * Unblock user (mock implementation)
-   */
-  async unblockUser(userId: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    this.updateConnectionStatus(userId, 'not_connected');
-    console.log('User unblocked:', userId);
+  blockUser(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) {
+      return throwError(() => new Error('Profile ID not set'));
+    }
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.blockUser(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to block user:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this._isLoading.set(false);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
+
+
+  unblockUser(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) {
+      return throwError(() => new Error('Profile ID not set'));
+    }
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.unblockUser(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to unblock user:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this._isLoading.set(false);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+  unfriend(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) {
+      return throwError(() => new Error('Profile ID not set'));
+    }
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.unfriendUser(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to unfriend user:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => {
+        this._isLoading.set(false);
+      }),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+
+  denyRequest(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) return throwError(() => new Error('Profile ID not set'));
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.denyFriendRequest(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to deny friend request:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => this._isLoading.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+
+  unsendFriendRequest(): Observable<UpdatedStatus> {
+    const profileId = this._profileId();
+    if (!profileId) return throwError(() => new Error('Profile ID not set'));
+
+    this._isLoading.set(true);
+    this._error.set(null);
+
+    return this.friendManager.unsendFriendRequest(profileId).pipe(
+      tap({
+        next: (updatedStatus) => {
+          this._profile.update(profile =>
+            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          );
+        }
+      }),
+      catchError((err: HttpErrorResponse) => {
+        const problem = err.error as ProblemDetail;
+        console.error('Failed to unsend friend request:', problem);
+        this._error.set(problem.detail);
+        this.getProfile(profileId).subscribe();
+        return throwError(() => err);
+      }),
+      finalize(() => this._isLoading.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
+
 }

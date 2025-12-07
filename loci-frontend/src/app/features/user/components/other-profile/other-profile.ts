@@ -1,14 +1,10 @@
-import { Component, signal, computed, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { OtherProfileService } from '../../services/other-profile.service';
-import { PublicProfile } from '../../models/other-profile.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ProblemDetail } from '../../../../core/error-handler/problem-detail';
-import { FriendshipStatus } from '../../../contact/models/contact.model';
-import { FriendManagerService } from '../../../contact/services/friend-manager.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 @Component({
   selector: 'app-other-profile',
@@ -19,217 +15,187 @@ import { NotificationService } from '../../../../shared/services/notification.se
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OtherProfile implements OnInit {
-  private profileService = inject(OtherProfileService);
-  private friendManager = inject(FriendManagerService);
+
+
+  private stateService = inject(OtherProfileService);
   private notificationService = inject(NotificationService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
+
+  // Template binds directly to state service signals
+  readonly profile = this.stateService.profile;
+  readonly isLoading = this.stateService.isLoading;
+  readonly error = this.stateService.error;
+  readonly connectionStatusText = this.stateService.connectionStatusText;
+  readonly connectionStatusIcon = this.stateService.connectionStatusIcon;
+  readonly canAddFriend = this.stateService.canAddFriend;
+  readonly isFriends = this.stateService.isFriends;
+  readonly canAcceptRequest = this.stateService.canAcceptRequest;
+  readonly canMessage = this.stateService.canMessage;
+  readonly canUnsendRequest = this.stateService.canUnsendRequest;
+  readonly canBlock = this.stateService.canBlock;
+  readonly isBlocked = this.stateService.isBlocked;
+  readonly isActiveRecently = this.stateService.isActiveRecently;
+
   private profileId: string | null = null;
 
-  // State signals
-  profile = signal<PublicProfile | null>(null);
-  isLoading = signal<boolean>(true);
-  error = signal<string | null>(null);
-
-  // Computed values
-  connectionStatusText = computed(() => {
-    const status = this.profile()?.connectionStatus;
-    const statusMap: Record<FriendshipStatus, string> = {
-      'not_connected': 'Add Friend',
-      'friend_request_sent': 'Request Sent',
-      'friend_request_received': 'Accept Request',
-      'friends': 'Friends',
-      'blocked': 'Blocked',
-      'blocked_by': 'Unavailable',
-      'not_determined': 'Add Friend'
-    };
-    return status ? statusMap[status] : 'Add Friend';
-  });
-
-  connectionStatusIcon = computed(() => {
-    const status = this.profile()?.connectionStatus;
-    const iconMap: Record<FriendshipStatus, string> = {
-      'not_connected': 'fa-user-plus',
-      'friend_request_sent': 'fa-clock',
-      'friend_request_received': 'fa-user-check',
-      'friends': 'fa-user-check',
-      'blocked': 'fa-ban',
-      'blocked_by': 'fa-ban',
-      'not_determined': 'fa-user-plus'
-    };
-    return status ? iconMap[status] : 'fa-user-plus';
-  });
-
-  canAddFriend = computed(() => {
-    const status = this.profile()?.connectionStatus;
-    return status === 'not_connected' || status === 'not_determined';
-  });
-
-  canAcceptRequest = computed(() => {
-    return this.profile()?.connectionStatus === 'friend_request_received';
-  });
-
-  canMessage = computed(() => {
-    const status = this.profile()?.connectionStatus;
-    return status === 'friends' || status === 'friend_request_received';
-  });
-
-  canBlock = computed(() => {
-    return this.profile()?.connectionStatus !== 'blocked' &&
-      this.profile()?.connectionStatus !== 'blocked_by';
-  });
-
-  isBlocked = computed(() => {
-    return this.profile()?.connectionStatus === 'blocked';
-  });
-
-  isActiveRecently = computed(() => {
-    const lastActive = this.profile()?.lastActive;
-    if (!lastActive) return false;
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-    return new Date(lastActive) > fiveMinutesAgo;
-  });
 
   constructor() {
-    const userId = this.route.snapshot.paramMap.get('id')
-    if (userId == null) {
-      this.router.navigate(["/not-found"]);
-      return;
-    }
-    this.profileId = userId;
-
-  }
-  ngOnInit(): void {
-    this.profileId = this.route.snapshot.paramMap.get('id');
-    console.log("Receive profile id " + this.profileId);
-    if (this.profileId == null) {
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (!userId) {
       this.router.navigate(['/not-found']);
       return;
     }
-    this.loadProfile();
+    this.profileId = userId;
+    this.stateService.setProfileId(this.profileId);
+  }
 
+  ngOnInit(): void {
+    if (this.profileId) {
+      this.loadProfile();
+    }
   }
 
   public loadProfile(): void {
-    if (this.profileId == null) {
-      return;
-    }
-    this.isLoading.set(true);
-    this.error.set(null);
-
-    this.profileService.getOtherProfile(this.profileId).subscribe({
-      next: (p) => {
-        this.profile.set(p);
-        this.isLoading.set(false)
-      },
-      error: (err: HttpErrorResponse) => {
-        const problem = err.error as ProblemDetail
-        this.error.set(problem.detail)
-        this.isLoading.set(false)
-      },
-      complete: () => this.isLoading.set(false)
-    })
+    this.stateService.loadProfile();
+    // this.stateService.getProfile(this.profileId!).pipe(
+    //   takeUntilDestroyed(this.destroyRef)
+    // ).subscribe();
   }
 
   onBack(): void {
     this.router.navigate(['/chats']);
   }
 
-
-
   onAddFriend(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
-    this.friendManager.addFriend(currentProfile.publicId).subscribe({
+    const profile = this.profile();
+    if (!profile) return;
+
+    this.stateService.addFriend().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
       next: () => {
-        this.profile.update(profile =>
-          profile ? { ...profile, connectionStatus: 'friend_request_sent' } : null
-        );
-
-
-
-        this.notificationService.success(
-          'Friend Request Sent!',
-          `Your request has been sent to ${this.profile()?.fullname}`
-        );
-
+        this.notificationService.success('Success', `Friend request sent to ${profile.fullname}`);
       },
       error: () => {
-        this.notificationService.error(
-          'Request Failed',
-          'Unable to send friend request. Please try again.'
-        );
+        this.notificationService.error('Error', 'Unable to send friend request. Please try again.');
       }
     });
-
   }
-  // onAddFriend(): void {
-  //   const currentProfile = this.profile();
-  //   if (!currentProfile) return;
-
-  //   // Update local state optimistically
-  //   this.profile.update(profile =>
-  //     profile ? { ...profile, connectionStatus: 'friend_request_sent' } : null
-  //   );
-
-  //   // TODO: Call API to send friend request
-  //   console.log('Sending friend request to:', currentProfile.publicId);
-  // }
 
   onAcceptRequest(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
+    const profile = this.profile();
+    if (!profile) return;
 
-    this.profile.update(profile =>
-      profile ? { ...profile, connectionStatus: 'friends' } : null
-    );
-
-    // TODO: Call API to accept friend request
-    console.log('Accepting friend request from:', currentProfile.publicId);
-  }
-
-  onMessage(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
-
-    // Navigate to conversation
-    this.router.navigate(['/conversations', currentProfile.publicId]);
+    this.stateService.acceptRequest().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `You are now friends with ${profile.fullname}`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to accept request. Please try again.');
+      }
+    });
   }
 
   onBlock(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
+    const profile = this.profile();
+    if (!profile) return;
 
-    const confirmBlock = confirm(`Are you sure you want to block ${currentProfile.fullname}?`);
-    if (!confirmBlock) return;
+    if (!confirm(`Block ${profile.fullname}? You won't be able to see their activity.`)) {
+      return;
+    }
 
-    this.profile.update(profile =>
-      profile ? { ...profile, connectionStatus: 'blocked' } : null
-    );
-
-    // TODO: Call API to block user
-    console.log('Blocking user:', currentProfile.publicId);
+    this.stateService.blockUser().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `${profile.fullname} has been blocked`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to block user. Please try again.');
+      }
+    });
   }
 
   onUnblock(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
+    const profile = this.profile();
+    if (!profile) return;
 
-    this.profile.update(profile =>
-      profile ? { ...profile, connectionStatus: 'not_connected' } : null
-    );
+    this.stateService.unblockUser().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `${profile.fullname} has been unblocked`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to unblock user. Please try again.');
+      }
+    });
+  }
 
-    // TODO: Call API to unblock user
-    console.log('Unblocking user:', currentProfile.publicId);
+  onUnfriend(): void {
+    const profile = this.profile();
+    if (!profile) return;
+
+    if (!confirm(`Remove ${profile.fullname} from friends? This action cannot be undone.`)) {
+      return;
+    }
+
+    this.stateService.unfriend().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `You are no longer friends with ${profile.fullname}`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to unfriend user. Please try again.');
+      }
+    });
+  }
+
+  onUnsendFriendRequest() {
+    const profile = this.profile();
+    if (!profile) return;
+
+    this.stateService.unsendFriendRequest().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `Request ${profile.fullname} is unsend`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to unsend request. Please try again.');
+      }
+    });
+  }
+  onDenyRequest() {
+    const profile = this.profile();
+    if (!profile) return;
+
+    this.stateService.denyRequest().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => {
+        this.notificationService.success('Success', `Request from user ${profile.fullname} is ignore`);
+      },
+      error: () => {
+        this.notificationService.error('Error', 'Unable to deny request. Please try again.');
+      }
+    });
+  }
+
+  onMessage(): void {
+    const profile = this.profile();
+    if (!profile) return;
+
+    this.router.navigate(['/conversations', profile.publicId]);
   }
 
   onReport(): void {
-    const currentProfile = this.profile();
-    if (!currentProfile) return;
-
-    // TODO: Open report modal/dialog
-    console.log('Reporting user:', currentProfile.publicId);
-    alert('Report functionality will be implemented');
+    console.log('Reporting user:', this.profile()?.publicId);
   }
 
   getActivityIcon(type: string): string {
@@ -241,4 +207,7 @@ export class OtherProfile implements OnInit {
     };
     return iconMap[type] || iconMap['default'];
   }
+
+
+
 }

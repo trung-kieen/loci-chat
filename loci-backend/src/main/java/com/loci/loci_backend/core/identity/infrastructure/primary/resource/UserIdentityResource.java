@@ -35,9 +35,9 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
-public class IdentityResource {
+public class UserIdentityResource {
   private final IdentityApplicationService identityApplicationService;
-  private final RestDicoveryContactMapper contactRestMapper;
+  private final RestDicoveryContactMapper restContactMapper;
   private final RestProfileMapper restProfileMapper;
 
   @GetMapping("search")
@@ -46,7 +46,7 @@ public class IdentityResource {
       Pageable pageable, KeycloakPrincipal principal) {
 
     ContactSearchCriteria criteria = new ContactSearchCriteria(query, principal.getUsername().value());
-    return ResponseEntity.ok(contactRestMapper.from(identityApplicationService.discoveryContacts(criteria, pageable, principal)));
+    return ResponseEntity.ok(restContactMapper.from(identityApplicationService.discoveryContacts(criteria, pageable, principal)));
   }
 
   @GetMapping("me")
@@ -69,6 +69,7 @@ public class IdentityResource {
   public ResponseEntity<RestPersonalProfile> updateProfileImage(
       @Parameter(hidden = true) KeycloakPrincipal keycloakPrincipal,
       @RequestParam("image") MultipartFile file) {
+    // TODO: media file storage
 
     // validate file
 

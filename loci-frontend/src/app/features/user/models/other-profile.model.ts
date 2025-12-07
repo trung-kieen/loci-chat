@@ -1,5 +1,9 @@
 import { FriendshipStatus } from "../../contact/models/contact.model";
 
+export interface UpdatedStatus {
+  status: FriendshipStatus,
+}
+
 export interface RecentActivity {
   id: string;
   type: 'message' | 'connection' | 'file' | 'other';

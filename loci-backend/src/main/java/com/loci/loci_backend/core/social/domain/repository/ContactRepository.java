@@ -15,6 +15,6 @@ public interface ContactRepository {
 
   public Contact save(Contact contact);
 
-
   public void removeContact(UserDBId a, UserDBId b);
+  public void delete(Contact contact);
 }

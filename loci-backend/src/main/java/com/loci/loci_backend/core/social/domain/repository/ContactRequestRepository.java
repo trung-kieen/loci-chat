@@ -15,12 +15,16 @@ public interface ContactRequestRepository {
 
   public Optional<ContactRequest> getPendingRequest(UserDBId a, UserDBId b);
 
-
   public Optional<ContactRequest> getByPublicId(PublicId id);
 
   public ContactRequest save(ContactRequest contactRequest);
 
   public Page<ContactRequest> getAllPendingByReceiver(UserDBId dbId, Pageable pageable);
 
+  public boolean existsAcceptedRequest(UserDBId a, UserDBId b);
+
+  public void deleteRequestBetween(UserDBId dbId, UserDBId dbId2);
+
+  public void delete(ContactRequest request);
 
 }
