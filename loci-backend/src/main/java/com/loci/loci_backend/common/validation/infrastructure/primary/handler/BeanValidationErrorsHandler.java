@@ -24,7 +24,7 @@ import jakarta.validation.ConstraintViolationException;
  * Response as status code 400
  */
 @ControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE - 10)
+@Order(Ordered.HIGHEST_PRECEDENCE-1)
 class BeanValidationErrorsHandler {
   // Validation errors specific details field, use Map<String, String>
   private static final String ERRORS = "errors";

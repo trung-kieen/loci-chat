@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { ContactRoutingModule } from "./contact.routes";
-import { SearchUserService } from "./services/search-user.service";
+import { SearchContactService } from "./services/search-contact.service";
 
 @NgModule({
   imports: [ContactRoutingModule],
-  providers: [SearchUserService],
+  providers: [SearchContactService],
 })
 export class ContactModule {
 

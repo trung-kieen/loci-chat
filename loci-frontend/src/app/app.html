@@ -1,30 +1,79 @@
 <!-- Global layout wrapper -->
-<div class="layout">
+<!-- <div class="layout"> -->
 
-  <header class="header">
-    <h1>Loci</h1>
+<div class="flex flex-col h-screen">
 
-    <nav>
-      <a routerLink="/chat">Chat</a>
-      <a routerLink="/user/me">My Profile</a>
-      <a routerLink="/contact">Contacts</a>
-      <a routerLink="/notification">Notifications</a>
-    </nav>
-  </header>
+<header id="header" class="h-16 bg-white border-b border-neutral-200 flex items-center justify-between px-6 flex-shrink-0">
+  <div class="flex items-center space-x-4">
+    <i class="fa-solid fa-comment text-xl text-neutral-700"></i>
+    <h1 class="text-xl text-black">ChatApp</h1>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-bell text-neutral-600"></i>
+    </button>
+    <button class="p-2 hover:bg-neutral-100 rounded-lg">
+      <i class="fa-solid fa-cog text-neutral-600"></i>
+    </button>
+  </div>
+</header>
 
-  <aside class="sidebar">
-    <!-- menu items -->
-  </aside>
+<main id="main-content" class="flex flex-1 overflow-hidden">
+  <app-sidebar class="w-60 flex-shrink-0 overflow-y-auto"></app-sidebar>
 
+  <!-- <section id="chat-list" class="w-96 bg-white border-r border-neutral-200 flex flex-col -60 flex-shrink-0"> -->
+  <!--   <div class="p-4 border-b border-neutral-200"> -->
+  <!--     <div class="flex space-x-1"> -->
+  <!--       <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Inbox</button> -->
+  <!--       <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Unread</button> -->
+  <!--       <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Follow-ups</button> -->
+  <!--       <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Archived</button> -->
+  <!--     </div> -->
+  <!--   </div> -->
+
+  <!--   <div class="flex-1 overflow-y-auto"> -->
+  <!--     <div class="p-4"> -->
+  <!--       <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"> -->
+  <!--         <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234" alt="Contact" -->
+  <!--           class="w-10 h-10 rounded-full"> -->
+  <!--         <div class="flex-1 min-w-0"> -->
+  <!--           <div class="flex items-center justify-between"> -->
+  <!--             <p class="text-sm text-neutral-900 truncate">John Smith</p> -->
+  <!--             <p class="text-xs text-neutral-500">2:30 PM</p> -->
+  <!--           </div> -->
+  <!--           <p class="text-sm text-neutral-500 truncate">Hey, how are you doing?</p> -->
+  <!--         </div> -->
+  <!--       </div> -->
+
+  <!--       <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"> -->
+  <!--         <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678" alt="Contact" -->
+  <!--           class="w-10 h-10 rounded-full"> -->
+  <!--         <div class="flex-1 min-w-0"> -->
+  <!--           <div class="flex items-center justify-between"> -->
+  <!--             <p class="text-sm text-neutral-900 truncate">Sarah Johnson</p> -->
+  <!--             <p class="text-xs text-neutral-500">1:15 PM</p> -->
+  <!--           </div> -->
+  <!--           <p class="text-sm text-neutral-500 truncate">Thanks for the update!</p> -->
+  <!--         </div> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </section> -->
   <!-- Main content area -->
-  <main class="content">
-    <!-- <app-demo></app-demo> -->
-    <router-outlet></router-outlet>
-  </main>
-  <app-toast-container />
-  <!-- Footer  -->
-  <footer class="footer">
-    trung-kieen © 2025
-  </footer>
+  <!-- <main class="content"> -->
+  <!-- <app-demo></app-demo> -->
+
+  <div class="flex-1 overflow-auto">
+    <router-outlet class=""></router-outlet>
+  </div>
+  <!-- </main> -->
+  <!-- <app-toast-container /> -->
+  <!-- <!-1- Footer  -1-> -->
+  <!-- <footer class="footer"> -->
+  <!--   trung-kieen © 2025 -->
+  <!-- </footer> -->
+
+</main>
+<!-- </div> -->
 
 </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchUser } from './search-user';
+import { EmptyChat } from './empty-chat';
 
-describe('SearchUser', () => {
-  let component: SearchUser;
-  let fixture: ComponentFixture<SearchUser>;
+describe('EmptyChat', () => {
+  let component: EmptyChat;
+  let fixture: ComponentFixture<EmptyChat>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchUser]
+      imports: [EmptyChat]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchUser);
+    fixture = TestBed.createComponent(EmptyChat);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

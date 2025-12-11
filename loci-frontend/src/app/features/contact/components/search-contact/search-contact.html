@@ -1,0 +1,60 @@
+<main id="main-content" class="flex h-[calc(100vh-4rem)]">
+
+
+  <section id="search-users-panel" class="flex-1 bg-white flex flex-col">
+    <!-- Header -->
+    <div class="p-6 border-b border-neutral-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl text-black">Search Users</h2>
+          <p class="text-neutral-500 mt-1">Find and connect with new people</p>
+        </div>
+        <button type="button" class="text-neutral-400 hover:text-neutral-600">
+          <i class="fa-solid fa-arrow-left text-xl"></i>
+        </button>
+      </div>
+
+      <div class="mt-6">
+        <div class="relative max-w-2xl m-auto">
+          <input type="text" placeholder="Search by username, email, or name..."
+            class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500 text-base"
+            [formControl]="searchControl" />
+          <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results area -->
+    <div class="flex-1 overflow-y-auto px-48 py-8">
+      <div class="max-w-2xl m-auto">
+
+        @if (loading()) {
+        <!-- loading -->
+        <div class="flex items-center justify-center py-8">
+          <div class="flex items-center space-x-3">
+            <div class="w-6 h-6 border-2 border-neutral-300 border-t-neutral-600 rounded-full animate-spin"></div>
+            <span class="text-neutral-500">Searching users...</span>
+          </div>
+        </div>
+        } @else if (users() === null || users().length === 0 || searchControl.value.trim().length) {
+        <!-- empty -->
+        <div class="bg-white border border-neutral-200 rounded-lg p-8 text-center">
+          <div class="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-search text-neutral-400 text-xl"></i>
+          </div>
+          <h3 class="text-lg text-black mb-2">No users found</h3>
+          <p class="text-neutral-500">Try adjusting your search terms or check the spelling</p>
+        </div>
+        } @else {
+        <!-- list -->
+        <div class="space-y-4">
+          @for (user of users(); track user.userId) {
+          <app-contact-list-item [user]="user" (addFriend)="onAddFriend($event)" />
+          }
+        </div>
+        }
+
+      </div>
+    </div>
+  </section>
+</main>

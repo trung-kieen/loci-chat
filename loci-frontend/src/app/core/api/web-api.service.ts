@@ -1,10 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { environment } from '../../environments/environments';
-
-
-
+import { environment } from '../../../environments/environments';
 
 @Injectable()
 export class WebApiService {
@@ -18,13 +15,19 @@ export class WebApiService {
       // 'Authorization': `Bearer ${this.getToken()}` // Uncomment if using auth
     });
     if (options) {
-      Object.keys(options).forEach(key => headers = headers.set(key, options[key]));
+      Object.keys(options).forEach(
+        (key) => (headers = headers.set(key, options[key])),
+      );
     }
     return headers;
   }
 
   // Generic GET
-  get<T>(endpoint: string, params?: HttpParams, headers?: Record<string, string>): Observable<T> {
+  get<T>(
+    endpoint: string,
+    params?: HttpParams,
+    headers?: Record<string, string>,
+  ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     const httpOptions = { headers: this.getHeaders(headers), params };
     return this.http.get<T>(url, httpOptions).pipe(
@@ -34,37 +37,57 @@ export class WebApiService {
   }
 
   // Generic POST
-  post<T>(endpoint: string, body: unknown, headers?: Record<string, string>): Observable<T> {
+  post<T>(
+    endpoint: string,
+    body: unknown,
+    headers?: Record<string, string>,
+  ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     const httpOptions = { headers: this.getHeaders(headers) };
-    return this.http.post<T>(url, body, httpOptions).pipe(
+    return this.http
+      .post<T>(url, body, httpOptions)
+      .pipe
       // catchError(this.handleError)
-    );
+      ();
   }
 
   // Generic PUT
-  put<T>(endpoint: string, body: unknown, headers?: Record<string, string>): Observable<T> {
+  put<T>(
+    endpoint: string,
+    body: unknown,
+    headers?: Record<string, string>,
+  ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     const httpOptions = { headers: this.getHeaders(headers) };
-    return this.http.put<T>(url, body, httpOptions).pipe(
+    return this.http
+      .put<T>(url, body, httpOptions)
+      .pipe
       // catchError(this.handleError)
-    );
+      ();
   }
-  patch<T>(endpoint: string, body: unknown, headers?: Record<string, string>): Observable<T> {
+  patch<T>(
+    endpoint: string,
+    body: unknown,
+    headers?: Record<string, string>,
+  ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     const httpOptions = { headers: this.getHeaders(headers) };
-    return this.http.patch<T>(url, body, httpOptions).pipe(
+    return this.http
+      .patch<T>(url, body, httpOptions)
+      .pipe
       // catchError(this.handleError)
-    );
+      ();
   }
 
   // Generic DELETE
   delete<T>(endpoint: string, headers?: Record<string, string>): Observable<T> {
     const url = this.getFullUrl(endpoint);
     const httpOptions = { headers: this.getHeaders(headers) };
-    return this.http.delete<T>(url, httpOptions).pipe(
+    return this.http
+      .delete<T>(url, httpOptions)
+      .pipe
       // catchError(this.handleError)
-    );
+      ();
   }
 
   // Utility for full URL

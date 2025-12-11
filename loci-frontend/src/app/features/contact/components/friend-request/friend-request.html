@@ -1,117 +1,4 @@
-<header id="header" class="h-16 bg-white border-b border-neutral-200 flex items-center justify-between px-6">
-  <div class="flex items-center space-x-4">
-    <i class="fa-solid fa-comment text-xl text-neutral-700"></i>
-    <h1 class="text-xl text-black">ChatApp</h1>
-  </div>
-  <div class="flex items-center space-x-4">
-    <button class="p-2 hover:bg-neutral-100 rounded-lg">
-      <i class="fa-solid fa-bell text-neutral-600"></i>
-    </button>
-    <button class="p-2 hover:bg-neutral-100 rounded-lg">
-      <i class="fa-solid fa-cog text-neutral-600"></i>
-    </button>
-  </div>
-</header>
-
 <main id="main-content" class="flex h-[calc(100vh-4rem)]">
-  <aside id="sidebar" class="w-60 bg-white border-r border-neutral-200 flex flex-col">
-    <div class="p-4">
-      <div class="relative">
-        <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
-        <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
-      </div>
-    </div>
-
-    <nav class="flex-1 px-4">
-      <ul class="space-y-2">
-        <li>
-          <span class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-neutral-100 cursor-pointer">
-            <i class="fa-solid fa-chart-line text-neutral-600"></i>
-            <span class="text-neutral-700">Dashboard</span>
-          </span>
-        </li>
-        <li>
-          <span class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-neutral-100 cursor-pointer">
-            <i class="fa-solid fa-comment text-neutral-600"></i>
-            <span class="text-neutral-700">Chat</span>
-          </span>
-        </li>
-        <li>
-          <span class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-neutral-100 cursor-pointer">
-            <i class="fa-solid fa-users text-neutral-600"></i>
-            <span class="text-neutral-700">CRM</span>
-          </span>
-        </li>
-        <li>
-          <span class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-neutral-100 cursor-pointer">
-            <i class="fa-solid fa-user text-neutral-600"></i>
-            <span class="text-neutral-700">My Profile</span>
-          </span>
-        </li>
-        <li>
-          <span class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-neutral-100 cursor-pointer">
-            <i class="fa-solid fa-user-friends text-neutral-600"></i>
-            <span class="text-neutral-700">Accounts</span>
-          </span>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="p-4 border-t border-neutral-200">
-      <button class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-neutral-100 w-full">
-        <i class="fa-solid fa-sign-out-alt text-neutral-600"></i>
-        <span class="text-neutral-700">Logout</span>
-      </button>
-    </div>
-  </aside>
-
-  <section id="chat-list" class="w-96 bg-white border-r border-neutral-200 flex flex-col">
-    <div class="p-4 border-b border-neutral-200">
-      <div class="flex space-x-1">
-        <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Inbox</button>
-        <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Unread</button>
-        <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Follow-ups</button>
-        <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Archived</button>
-      </div>
-    </div>
-
-    <div class="flex-1 overflow-y-auto">
-      <div class="p-4">
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-neutral-50 cursor-pointer">
-          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891" alt="Contact" class="w-10 h-10 rounded-full">
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-900 truncate">Emily Davis</p>
-              <p class="text-xs text-neutral-500">3:45 PM</p>
-            </div>
-            <p class="text-sm text-neutral-500 truncate">Can we schedule a meeting?</p>
-          </div>
-        </div>
-
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
-          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234" alt="Contact" class="w-10 h-10 rounded-full">
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-900 truncate">John Smith</p>
-              <p class="text-xs text-neutral-500">2:30 PM</p>
-            </div>
-            <p class="text-sm text-neutral-500 truncate">Hey, how are you doing?</p>
-          </div>
-        </div>
-
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
-          <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678" alt="Contact" class="w-10 h-10 rounded-full">
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-900 truncate">Sarah Johnson</p>
-              <p class="text-xs text-neutral-500">1:15 PM</p>
-            </div>
-            <p class="text-sm text-neutral-500 truncate">Thanks for the update!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section id="friend-requests-panel" class="flex-1 bg-white flex flex-col">
     <div class="p-6 border-b border-neutral-200">
@@ -120,17 +7,18 @@
           <h2 class="text-2xl text-black">Friend Requests</h2>
           <p class="text-neutral-500 mt-1">Manage your friend requests and discover new connections</p>
         </div>
-        <div class="flex items-center space-x-3">
-          <div class="relative">
-            <input type="text" placeholder="Search users..." class="pl-10 pr-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500 w-64">
-            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
-          </div>
+      </div>
+      <div class="mt-6">
+        <div class="relative max-w-4xl m-auto">
+          <input type="text" placeholder="Search by username, email, or name..."
+            class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500 text-base" />
+          <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
         </div>
       </div>
     </div>
 
     <div class="flex-1 overflow-y-auto p-6">
-      <div class="max-w-4xl">
+      <div class="max-w-4xl m-auto">
         <div class="mb-8">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-lg text-black">Pending Requests</h3>
@@ -140,16 +28,19 @@
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9876" alt="Michael Chen" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9876" alt="Michael Chen"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Michael Chen</h4>
                 <p class="text-sm text-neutral-500 mb-2">@michaelchen</p>
                 <p class="text-xs text-neutral-400 mb-4">5 mutual connections</p>
 
                 <div class="flex space-x-2 w-full">
-                  <button class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Accept
                   </button>
-                  <button class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Decline
                   </button>
                 </div>
@@ -158,16 +49,19 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=4321" alt="Lisa Rodriguez" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=4321" alt="Lisa Rodriguez"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Lisa Rodriguez</h4>
                 <p class="text-sm text-neutral-500 mb-2">@lisarodriguez</p>
                 <p class="text-xs text-neutral-400 mb-4">2 mutual connections</p>
 
                 <div class="flex space-x-2 w-full">
-                  <button class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Accept
                   </button>
-                  <button class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Decline
                   </button>
                 </div>
@@ -176,16 +70,19 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8765" alt="David Park" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8765" alt="David Park"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">David Park</h4>
                 <p class="text-sm text-neutral-500 mb-2">@davidpark</p>
                 <p class="text-xs text-neutral-400 mb-4">8 mutual connections</p>
 
                 <div class="flex space-x-2 w-full">
-                  <button class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Accept
                   </button>
-                  <button class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Decline
                   </button>
                 </div>
@@ -194,16 +91,19 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=2468" alt="Amanda Taylor" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=2468" alt="Amanda Taylor"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Amanda Taylor</h4>
                 <p class="text-sm text-neutral-500 mb-2">@amandataylor</p>
                 <p class="text-xs text-neutral-400 mb-4">1 mutual connection</p>
 
                 <div class="flex space-x-2 w-full">
-                  <button class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Accept
                   </button>
-                  <button class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
+                  <button
+                    class="flex-1 bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm">
                     Decline
                   </button>
                 </div>
@@ -227,12 +127,14 @@
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1357" alt="Robert Kim" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1357" alt="Robert Kim"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Robert Kim</h4>
                 <p class="text-sm text-neutral-500 mb-2">@robertkim</p>
                 <p class="text-xs text-neutral-400 mb-4">Works at TechCorp • 6 mutual connections</p>
 
-                <button class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
+                <button
+                  class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
                   <i class="fa-solid fa-user-plus"></i>
                   <span>Add Friend</span>
                 </button>
@@ -241,12 +143,14 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9753" alt="Jennifer Wilson" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9753" alt="Jennifer Wilson"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Jennifer Wilson</h4>
                 <p class="text-sm text-neutral-500 mb-2">@jenniferwilson</p>
                 <p class="text-xs text-neutral-400 mb-4">Marketing Manager • 4 mutual connections</p>
 
-                <button class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
+                <button
+                  class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
                   <i class="fa-solid fa-user-plus"></i>
                   <span>Add Friend</span>
                 </button>
@@ -255,12 +159,14 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8642" alt="Alex Thompson" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8642" alt="Alex Thompson"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Alex Thompson</h4>
                 <p class="text-sm text-neutral-500 mb-2">@alexthompson</p>
                 <p class="text-xs text-neutral-400 mb-4">Software Engineer • 3 mutual connections</p>
 
-                <button class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
+                <button
+                  class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
                   <i class="fa-solid fa-user-plus"></i>
                   <span>Add Friend</span>
                 </button>
@@ -269,12 +175,14 @@
 
             <div class="bg-white border border-neutral-200 rounded-lg p-4">
               <div class="flex flex-col items-center text-center">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7531" alt="Maria Garcia" class="w-16 h-16 rounded-full mb-3">
+                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7531" alt="Maria Garcia"
+                  class="w-16 h-16 rounded-full mb-3">
                 <h4 class="text-lg text-black mb-1">Maria Garcia</h4>
                 <p class="text-sm text-neutral-500 mb-2">@mariagarcia</p>
                 <p class="text-xs text-neutral-400 mb-4">Product Designer • 7 mutual connections</p>
 
-                <button class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
+                <button
+                  class="w-full bg-white border border-neutral-200 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm flex items-center justify-center space-x-2">
                   <i class="fa-solid fa-user-plus"></i>
                   <span>Add Friend</span>
                 </button>
@@ -287,7 +195,8 @@
   </section>
 </main>
 
-<div id="toast-notification" class="fixed top-4 right-4 bg-white border border-neutral-200 rounded-lg shadow-lg p-4 hidden">
+<div id="toast-notification"
+  class="fixed top-4 right-4 bg-white border border-neutral-200 rounded-lg shadow-lg p-4 hidden">
   <div class="flex items-center space-x-3">
     <div class="w-8 h-8 bg-neutral-500 rounded-full flex items-center justify-center">
       <i class="fa-solid fa-check text-white text-sm"></i>

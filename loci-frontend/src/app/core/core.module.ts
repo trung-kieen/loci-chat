@@ -10,13 +10,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { HttpErrorInterceptor } from './middleware/http-error.interceptor';
 import { initializeKeycloak } from './auth/keycloak/keycloak.init';
-import {
-  rxStompServiceFactory,
-} from './socket/rx-stomp-service-factory';
+import { rxStompServiceFactory } from './socket/rx-stomp-service-factory';
 import { RxStomp, RxStompConfig } from '@stomp/rx-stomp';
 import { rxStompConfig } from './socket/rx-stomp.config';
 import { KeycloakAuthenticationManager } from './auth/keycloak-auth-manager';
-import { WebApiService } from '../api/web-api.service';
+import { WebApiService } from './api/web-api.service';
 import { LoggerService } from './services/logger.service';
 
 @NgModule({
@@ -72,7 +70,7 @@ export class CoreModule {
         {
           provide: LoggerService,
           useClass: LoggerService,
-        }
+        },
       ],
     };
   }

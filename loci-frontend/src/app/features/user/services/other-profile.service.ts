@@ -1,6 +1,12 @@
-import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
+import {
+  computed,
+  DestroyRef,
+  inject,
+  Injectable,
+  signal,
+} from '@angular/core';
 import { PublicProfile, UpdatedStatus } from '../models/other-profile.model';
-import { WebApiService } from '../../../api/web-api.service';
+import { WebApiService } from '../../../core/api/web-api.service';
 import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { FriendshipStatus } from '../../contact/models/contact.model';
 import { FriendManagerService } from '../../contact/services/friend-manager.service';
@@ -17,48 +23,41 @@ export class OtherProfileService {
   private _isLoading = signal<boolean>(true);
   private _error = signal<string | null>(null);
 
-
   private _profileId = signal<string | null>(null);
-
 
   public readonly profile = this._profile.asReadonly();
   public readonly isLoading = this._isLoading.asReadonly();
   public readonly error = this._error.asReadonly();
   readonly profileId = this._profileId.asReadonly();
 
-
   readonly connectionStatusText = computed(() => {
     const status = this.profile()?.connectionStatus;
     const statusMap: Record<FriendshipStatus, string> = {
-      'not_connected': 'Add Friend',
-      'friend_request_sent': 'Request Sent',
-      'friend_request_received': 'Accept Request',
-      'friends': 'Friends',
-      'blocked': 'Blocked',
-      'blocked_by': 'Unavailable',
-      'not_determined': 'Add Friend'
-    }
+      not_connected: 'Add Friend',
+      friend_request_sent: 'Request Sent',
+      friend_request_received: 'Accept Request',
+      friends: 'Friends',
+      blocked: 'Blocked',
+      blocked_by: 'Unavailable',
+      not_determined: 'Add Friend',
+    };
 
-    return status ? statusMap[status] : "Add friend";
-
-  })
-
-
+    return status ? statusMap[status] : 'Add friend';
+  });
 
   readonly connectionStatusIcon = computed(() => {
-
     const status = this.profile()?.connectionStatus;
     const iconMap: Record<FriendshipStatus, string> = {
-      'not_connected': 'fa-user-plus',
-      'friend_request_sent': 'fa-clock',
-      'friend_request_received': 'fa-user-check',
-      'friends': 'fa-user-check',
-      'blocked': 'fa-ban',
-      'blocked_by': 'fa-ban',
-      'not_determined': 'fa-user-plus'
+      not_connected: 'fa-user-plus',
+      friend_request_sent: 'fa-clock',
+      friend_request_received: 'fa-user-check',
+      friends: 'fa-user-check',
+      blocked: 'fa-ban',
+      blocked_by: 'fa-ban',
+      not_determined: 'fa-user-plus',
     };
     return status ? iconMap[status] : 'fa-user-plus';
-  })
+  });
 
   readonly isFriends = computed(() => {
     return this._profile()?.connectionStatus === 'friends';
@@ -75,9 +74,7 @@ export class OtherProfileService {
   readonly canAddFriend = computed(() => {
     const status = this.profile()?.connectionStatus;
     return status === 'not_connected' || status === 'not_determined';
-
   });
-
 
   readonly canAcceptRequest = computed(() => {
     return this._profile()?.connectionStatus === 'friend_request_received';
@@ -104,10 +101,8 @@ export class OtherProfileService {
     return new Date(lastActive) > fiveMinutesAgo;
   });
 
-
-
   getProfile(userId: string): Observable<PublicProfile> {
-    return this.apiService.get<PublicProfile>("/users/" + userId);
+    return this.apiService.get<PublicProfile>('/users/' + userId);
   }
 
   addFriend(): Observable<UpdatedStatus> {
@@ -122,10 +117,12 @@ export class OtherProfileService {
     return this.friendManager.sendAddFriend(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -138,7 +135,7 @@ export class OtherProfileService {
       finalize(() => {
         this._isLoading.set(false);
       }),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
 
@@ -156,18 +153,16 @@ export class OtherProfileService {
     this.getProfile(profileId).subscribe({
       next: (p) => {
         this._profile.set(p);
-        this._isLoading.set(false)
+        this._isLoading.set(false);
       },
       error: (err: HttpErrorResponse) => {
-        const problem = err.error as ProblemDetail
-        this._error.set(problem.detail)
-        this._isLoading.set(false)
+        const problem = err.error as ProblemDetail;
+        this._error.set(problem.detail);
+        this._isLoading.set(false);
       },
-      complete: () => this._isLoading.set(false)
-    })
+      complete: () => this._isLoading.set(false),
+    });
   }
-
-
 
   public acceptRequest(): Observable<UpdatedStatus> {
     const profileId = this._profileId();
@@ -178,12 +173,10 @@ export class OtherProfileService {
     return this.friendManager.acceptFriendRequestFromUser(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(p => {
-            return p ? { ...p, connectionStatus: updatedStatus.status } : null
-          })
-
+          this._profile.update((p) => {
+            return p ? { ...p, connectionStatus: updatedStatus.status } : null;
+          });
         },
-
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -195,9 +188,8 @@ export class OtherProfileService {
       finalize(() => {
         this._isLoading.set(false);
       }),
-      takeUntilDestroyed(this.destroyRef)
-
-    )
+      takeUntilDestroyed(this.destroyRef),
+    );
   }
 
   blockUser(): Observable<UpdatedStatus> {
@@ -212,10 +204,12 @@ export class OtherProfileService {
     return this.friendManager.blockUser(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -227,10 +221,9 @@ export class OtherProfileService {
       finalize(() => {
         this._isLoading.set(false);
       }),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
-
 
   unblockUser(): Observable<UpdatedStatus> {
     const profileId = this._profileId();
@@ -244,10 +237,12 @@ export class OtherProfileService {
     return this.friendManager.unblockUser(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -259,7 +254,7 @@ export class OtherProfileService {
       finalize(() => {
         this._isLoading.set(false);
       }),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
   unfriend(): Observable<UpdatedStatus> {
@@ -274,10 +269,12 @@ export class OtherProfileService {
     return this.friendManager.unfriendUser(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -289,7 +286,7 @@ export class OtherProfileService {
       finalize(() => {
         this._isLoading.set(false);
       }),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
 
@@ -303,10 +300,12 @@ export class OtherProfileService {
     return this.friendManager.denyFriendRequest(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -316,7 +315,7 @@ export class OtherProfileService {
         return throwError(() => err);
       }),
       finalize(() => this._isLoading.set(false)),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
 
@@ -330,10 +329,12 @@ export class OtherProfileService {
     return this.friendManager.unsendFriendRequest(profileId).pipe(
       tap({
         next: (updatedStatus) => {
-          this._profile.update(profile =>
-            profile ? { ...profile, connectionStatus: updatedStatus.status } : null
+          this._profile.update((profile) =>
+            profile
+              ? { ...profile, connectionStatus: updatedStatus.status }
+              : null,
           );
-        }
+        },
       }),
       catchError((err: HttpErrorResponse) => {
         const problem = err.error as ProblemDetail;
@@ -343,8 +344,7 @@ export class OtherProfileService {
         return throwError(() => err);
       }),
       finalize(() => this._isLoading.set(false)),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
   }
-
 }
