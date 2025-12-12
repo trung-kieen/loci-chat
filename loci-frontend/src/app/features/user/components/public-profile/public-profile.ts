@@ -1,23 +1,23 @@
 import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { OtherProfileService } from '../../services/other-profile.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../../../shared/services/notification.service';
+import { PublicProfileService } from '../../services/public-profile.service';
 @Component({
   selector: 'app-other-profile',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './other-profile.html',
-  styleUrls: ['./other-profile.css'],
+  templateUrl: './public-profile.html',
+  styleUrls: ['./public-profile.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OtherProfile implements OnInit {
+export class PublicProfile implements OnInit {
 
 
-  private stateService = inject(OtherProfileService);
+  private stateService = inject(PublicProfileService);
   private notificationService = inject(NotificationService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);

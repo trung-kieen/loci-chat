@@ -9,10 +9,12 @@
       <div class="w-10 h-10 bg-neutral-400 rounded-full flex items-center justify-center">
         <i class="fa-solid fa-users text-white text-sm"></i>
       </div>
-      <div class="flex flex-col">
-        <h2 class="text-neutral-900">{{ teamName() }}</h2>
-        <span class="text-sm text-neutral-500">{{ onlineCount() }} online</span>
-      </div>
+      <a href="/chat/group/c4338c6b-8480-4864-920a-2112d2dfe73a/profile">
+        <div class="flex flex-col">
+          <h2 class="text-neutral-900">{{ teamName() }}</h2>
+          <span class="text-sm text-neutral-500">{{ onlineCount() }} online</span>
+        </div>
+      </a>
     </div>
     <div class="flex items-center space-x-2">
       <button class="p-2 hover:bg-neutral-100 rounded-lg" (click)="toggleSearch()">
@@ -49,7 +51,9 @@
   <div class="bg-white border-b border-neutral-200 px-4 py-3 flex-shrink-0">
     <div class="flex items-center space-x-3">
       <div class="flex-1 relative">
-        <input type="text" placeholder="Search messages..." class="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500" [formControl]="searchControl">
+        <input type="text" placeholder="Search messages..."
+          class="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500"
+          [formControl]="searchControl">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"></i>
       </div>
       <select class="border border-neutral-300 rounded-lg px-3 py-2 text-sm">
@@ -192,7 +196,9 @@
         <i class="fa-solid fa-paperclip text-neutral-600"></i>
       </button>
       <div class="flex-1">
-        <textarea placeholder="Type a message..." rows="1" class="w-full resize-none border border-neutral-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-500 max-h-32" [formControl]="messageControl"></textarea>
+        <textarea placeholder="Type a message..." rows="1"
+          class="w-full resize-none border border-neutral-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-neutral-500 max-h-32"
+          [formControl]="messageControl"></textarea>
         <div class="flex items-center space-x-2 mt-2">
           @for (format of textFormats; track format) {
           <button class="text-sm text-neutral-600 hover:text-neutral-800" (click)="applyFormat(format)">
@@ -219,7 +225,8 @@
       </button>
     </div>
     <div class="mb-4">
-      <input type="text" placeholder="Search emojis..." class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
+      <input type="text" placeholder="Search emojis..."
+        class="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
     </div>
     <div class="grid grid-cols-8 gap-2">
       @for (emoji of reactionEmojis; track emoji) {

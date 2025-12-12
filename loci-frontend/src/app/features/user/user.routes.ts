@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'me',
-    loadComponent: () => import('./components/my-profile/my-profile')
-      .then(m => m.MyProfile)
+    loadComponent: () => import('./components/personal-profile/personal-profile')
+      .then(m => m.PersonalProfile)
   },
   {
     path: 'settings',                         // /user/settings
@@ -14,13 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'search',
-    loadComponent: () => import('./components/my-profile/my-profile')
-      .then(m => m.MyProfile)
+    loadComponent: () => import('./components/personal-profile/personal-profile')
+      .then(m => m.PersonalProfile)
   },
   {
     path: ':id',                              // /user/789  (other user)
-    loadComponent: () => import('./components/other-profile/other-profile')
-      .then(m => m.OtherProfile)
+    loadComponent: () => import('./components/public-profile/public-profile')
+      .then(m => m.PublicProfile)
   }
 ];
 

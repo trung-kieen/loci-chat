@@ -49,7 +49,9 @@
         <!-- list -->
         <div class="space-y-4">
           @for (user of users(); track user.userId) {
-          <app-contact-list-item [user]="user" (addFriend)="onAddFriend($event)" />
+            <div class="m-4">
+              <app-contact-list-item [user]="user" (addFriend)="onAddFriend($event)" />
+            </div>
           }
         </div>
         }

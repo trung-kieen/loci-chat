@@ -5,7 +5,7 @@ import {
   Injectable,
   signal,
 } from '@angular/core';
-import { PublicProfile, UpdatedStatus } from '../models/other-profile.model';
+import { PublicProfile, UpdatedStatus } from '../models/public-profile.model';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { FriendshipStatus } from '../../contact/models/contact.model';
@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ProblemDetail } from '../../../core/error-handler/problem-detail';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Injectable()
-export class OtherProfileService {
+export class PublicProfileService {
   private friendManager = inject(FriendManagerService);
   private destroyRef = inject(DestroyRef);
   private apiService = inject(WebApiService);

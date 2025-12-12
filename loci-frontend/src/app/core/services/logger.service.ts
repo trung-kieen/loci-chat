@@ -18,9 +18,6 @@ export class LoggerService {
     return level >= this.minLevel;
   }
 
-  /**
-   * Safely serializes any value to a string with circular reference handling
-   */
   private serializeParam(param: any): string {
     if (param === null || param === undefined) return String(param);
     if (typeof param === 'string') return param;
@@ -84,7 +81,6 @@ export class LoggerService {
         }
       },
 
-      // Fixed signature to match other methods
       error: (message: string, ...optionalParams: any[]) => {
         if (this.shouldLog(LogLevel.Error)) {
           const cssStyle = 'color: #ff3333; font-weight: bold;';

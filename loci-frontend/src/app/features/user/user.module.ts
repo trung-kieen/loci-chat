@@ -1,12 +1,11 @@
 import { NgModule } from "@angular/core";
 import { UserRoutingModule } from "./user.routes";
-import { MyProfileService } from "./services/my-profile.service";
-import { OtherProfileService } from "./services/other-profile.service";
+import { PersonalProfileService } from "./services/personal-profile.service";
+import { PublicProfileService } from "./services/public-profile.service";
 
 @NgModule({
-  // declarations: [MyProfile],
   imports: [UserRoutingModule],
-  providers: [MyProfileService, OtherProfileService],
+  providers: [PersonalProfileService, PublicProfileService],
 })
 export class UserModule {
 

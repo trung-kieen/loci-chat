@@ -8,10 +8,10 @@ import { LoggerService } from "../services/logger.service";
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
   private errorHandler = inject(ErrorHandler)
-  private loggerService = inject(LoggerService)
-  private logger = this.loggerService.getLogger("HttpErrorInterceptor")
+  // private loggerService = inject(LoggerService)
+  // private logger = this.loggerService.getLogger("HttpErrorInterceptor")
   intercept<T>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<T>> {
-    this.logger.error("Error request ", req)
+    // this.logger.error("Error request ", req)
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);

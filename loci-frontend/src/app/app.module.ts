@@ -9,7 +9,6 @@ import { AccessDenied } from './core/components/access-denied/access-denied';
 
 import { App } from './app';
 import { SharedModule } from './shared/shared.module';
-import { OtherProfile } from './features/user/components/other-profile/other-profile';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routes';
@@ -22,7 +21,6 @@ import { AppRoutingModule } from './app.routes';
     HttpClientModule,
     BrowserModule,
     AccessDenied,
-    OtherProfile,
 ],
   declarations: [App],
   bootstrap: [App],

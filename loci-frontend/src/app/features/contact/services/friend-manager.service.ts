@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
-import { UpdatedStatus } from '../../user/models/other-profile.model';
+import { UpdatedStatus } from '../../user/models/public-profile.model';
 
 @Injectable({
   providedIn: 'root',

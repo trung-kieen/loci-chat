@@ -3,10 +3,10 @@ import { WebApiService } from '../../../core/api/web-api.service';
 import {
   PersonalProfile,
   ProfileUpdateRequest,
-} from '../models/my-profile.model';
+} from '../models/personal-profile.model';
 
 @Injectable()
-export class MyProfileService {
+export class PersonalProfileService {
   private _isLoading = signal<boolean>(true);
   private _error = signal<string | null>(null);
   private _profileId = signal<string | null>(null);
@@ -35,7 +35,6 @@ export class MyProfileService {
     this._error.set(null);
     return this.apiService.get<PersonalProfile>('/users/me').subscribe({
       next: (u) => {
-        console.log(u);
         this.profileSignal.set(u);
       },
       error: () => {
@@ -47,10 +46,10 @@ export class MyProfileService {
     });
   }
   public updateMyProfile(data: Partial<ProfileUpdateRequest>) {
-    this._isLoading.set(true);
+    // this._isLoading.set(true);
     return this.apiService.patch<PersonalProfile>('/users/me', data).subscribe({
       next: (updated) => this.profileSignal.set(updated),
-      complete: () => this._isLoading.set(false),
+      // complete: () => this._isLoading.set(false),
     });
   }
 }
