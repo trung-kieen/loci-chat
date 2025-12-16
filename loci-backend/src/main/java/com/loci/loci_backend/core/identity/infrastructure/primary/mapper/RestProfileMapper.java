@@ -9,6 +9,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChangesBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
+import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChangesBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
@@ -72,10 +73,12 @@ public class RestProfileMapper {
   }
 
   public RestProfileSettings from(UserSettings profile) {
+    // return RestProfileSettings.from(profile);
     return mapstructRest.from(profile);
   }
 
   public ProfileSettingChanges toDomain(RestProfileSettingsPatch patchRequest) {
     return mapstructRest.toDomain(patchRequest);
+    // return RestProfileSettings.toDomain(patchRequest);
   }
 }

@@ -6,13 +6,14 @@ export interface PersonalProfile {
   username: string,
   profilePictureUrl: string,
   activityStatus: boolean;
-
-  privacy: {
-    lastSeenSetting: 'Everyone' | 'Contacts Only' | 'Nobody';
-    friendRequests: 'Everyone' | 'Friends of Friends' | 'Nobody';
-    profileVisibility: boolean;
-  };
 }
+
+
+export interface PersonalSettings {
+  lastSeenSetting: 'Everyone' | 'Contacts Only' | 'Nobody';
+  friendRequests: 'Everyone' | 'Friends of Friends' | 'Nobody';
+  profileVisibility: boolean;
+};
 
 
 export interface PublicProfile {
@@ -31,10 +32,10 @@ export interface ProfileUpdateRequest {
   emailAddress: string | null;
   profilePictureUrl: string | null;
   activityStatus: boolean | null;
-  privacy: {
-    lastSeenSetting: string | null;
-    friendRequests: string | null;        // probably not user-editable | null?
-    profileVisibility: boolean | null;
-  }
 }
 
+export interface SettingsUpdateRequest {
+  lastSeenSetting: string | null;
+  friendRequests: string | null;        // probably not user-editable | null?
+  profileVisibility: boolean | null;
+}

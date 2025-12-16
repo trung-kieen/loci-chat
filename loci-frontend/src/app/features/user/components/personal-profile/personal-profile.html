@@ -24,7 +24,6 @@
     </div>
   </div>
   }@else {
-  <form [formGroup]="form" (ngSubmit)="save()">
 
     <!-- Header -->
     <div class="p-6 border-b border-neutral-200">
@@ -35,13 +34,14 @@
     <!-- Content -->
     <div class="flex-1 overflow-y-auto p-6">
 
+  <form [formGroup]="profileForm" (ngSubmit)="save()">
 
       <!-- Profile Info -->
       <div class="bg-white border border-neutral-200 rounded-lg p-6 mb-6">
         <div class="flex items-center space-x-6 mb-6">
           <div class="relative">
 
-            <img [src]="form.value.profilePictureUrl" alt="Profile Avatar" class="w-20 h-20 rounded-full">
+            <img [src]="profileForm.value.profilePictureUrl" alt="Profile Avatar" class="w-20 h-20 rounded-full">
 
             <button type="button"
               class="absolute -bottom-1 -right-1 bg-neutral-500 text-white p-2 rounded-full hover:bg-neutral-600">
@@ -119,8 +119,11 @@
         </div>
       </div>
 
+  </form>
+
+  <form [formGroup]="settingForm" (ngSubmit)="saveSettings()">
       <!-- Privacy Settings -->
-      <div formGroupName="privacy" id="privacy" class="bg-white border border-neutral-200 rounded-lg p-6">
+      <div id="privacy" class="bg-white border border-neutral-200 rounded-lg p-6">
         <h3 class="text-lg text-black mb-4">Privacy Settings</h3>
 
         <div class="space-y-4">
@@ -132,7 +135,7 @@
               <p class="text-xs text-neutral-500">Control who can see when you were last online</p>
             </div>
 
-            <select formControlName="lastSeenSetting" (change)="save()"
+            <select formControlName="lastSeenSetting" (change)="saveSettings()"
               class="px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
               <option>Everyone</option>
               <option>Contacts Only</option>
@@ -147,7 +150,7 @@
               <p class="text-xs text-neutral-500">Who can send you friend requests</p>
             </div>
 
-            <select formControlName="friendRequests" (change)="save()"
+            <select formControlName="friendRequests" (change)="saveSettings()"
               class="px-3 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
               <option>Everyone</option>
               <option>Friends of Friends</option>
@@ -163,7 +166,7 @@
             </div>
 
             <label class="relative inline-flex items-center cursor-pointer">
-              <input (change)="save()" type="checkbox" formControlName="profileVisibility" class="sr-only peer">
+              <input (change)="saveSettings()" type="checkbox" formControlName="profileVisibility" class="sr-only peer">
               <div
                 class="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-neutral-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-neutral-500">
               </div>
@@ -173,8 +176,8 @@
         </div>
       </div>
 
+        </form>
       <!-- } -->
     </div>
-  </form>
   }
 </section>

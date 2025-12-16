@@ -10,7 +10,6 @@ import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEnt
 import com.loci.loci_backend.common.user.infrastructure.secondary.repository.JpaUserRepository;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
-import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 import com.loci.loci_backend.core.identity.domain.repository.ProfileRepository;
@@ -79,9 +78,9 @@ public class SpringDataProfileRepository implements ProfileRepository {
 
   @Override
   public UserSettings save(UserSettings settings) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'save'");
+    UserSettingsEntity settingEntity = profileMapper.from(settings);
+    UserSettingsEntity savedEntity = userSettingRepository.save(settingEntity);
+    return profileMapper.toDomain(savedEntity);
   }
-
 
 }

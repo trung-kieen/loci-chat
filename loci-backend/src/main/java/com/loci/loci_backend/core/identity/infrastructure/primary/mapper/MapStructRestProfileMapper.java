@@ -11,6 +11,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = { ValueObjectTypeConverter.class })
 public interface MapStructRestProfileMapper {
+  @Mapping(source= "friendRequests", target= "friendRequestSetting")
   public ProfileSettingChanges toDomain(RestProfileSettingsPatch patchRequest);
 
   @Mapping(source = "friendRequestSetting", target = "friendRequests")

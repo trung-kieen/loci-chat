@@ -1,5 +1,8 @@
 package com.loci.loci_backend.core.identity.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum LastSeenSettingEnum {
   EVERYONE("Everyone"),
   CONTACT_ONLY("Contacts Only"),
@@ -11,10 +14,13 @@ public enum LastSeenSettingEnum {
     this.value = v;
   }
 
+
+  @JsonValue
   public String value() {
     return this.value;
   }
 
+  @JsonCreator
   public static LastSeenSettingEnum of(String v) {
     for (LastSeenSettingEnum s : values()) {
       if (s.value.equals(v)) {

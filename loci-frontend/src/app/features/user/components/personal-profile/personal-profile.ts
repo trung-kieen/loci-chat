@@ -19,8 +19,9 @@ export class PersonalProfile implements OnInit, OnDestroy {
   // public error = signal<string | null> (null);
   readonly isLoading = this.profileService.isLoading;
   readonly error = this.profileService.error;
+  readonly settings = this.profileService.settings;
 
-  public form = new FormGroup({
+  public profileForm = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     username: new FormControl({ value: '', disabled: true }),
@@ -29,12 +30,13 @@ export class PersonalProfile implements OnInit, OnDestroy {
 
     activityStatus: new FormControl(false),
 
-    privacy: new FormGroup({
-      lastSeenSetting: new FormControl<'Everyone' | 'Contacts Only' | 'Nobody'>('Everyone'),
-      friendRequests: new FormControl<'Everyone' | 'Friends of Friends' | 'Nobody'>('Everyone'),
-      profileVisibility: new FormControl(true),
-    }),
   });
+  public settingForm = new FormGroup({
+    lastSeenSetting: new FormControl<'Everyone' | 'Contacts Only' | 'Nobody'>('Everyone'),
+    friendRequests: new FormControl<'Everyone' | 'Friends of Friends' | 'Nobody'>('Everyone'),
+    profileVisibility: new FormControl(true),
+  });
+
 
 
 
@@ -44,27 +46,32 @@ export class PersonalProfile implements OnInit, OnDestroy {
   constructor() {
     effect(() => {
       const p = this.profile();
+      const s = this.settings();
       if (!p) return;
-      this.form.patchValue({
+      this.profileForm.patchValue({
         firstname: p.firstname,
         lastname: p.lastname,
         emailAddress: p.emailAddress,
         profilePictureUrl: p.profilePictureUrl,
         activityStatus: p.activityStatus,
-        privacy: {
-          lastSeenSetting: p.privacy.lastSeenSetting,
-          friendRequests: p.privacy.friendRequests,
-          profileVisibility: p.privacy.profileVisibility,
-        }
 
+      })
+      if (!s) return;
+      this.settingForm.patchValue({
+
+        lastSeenSetting: s.lastSeenSetting,
+        friendRequests: s.friendRequests,
+        profileVisibility: s.profileVisibility,
       })
     })
   }
-  public loadProfile(){
+  public loadProfile() {
+    this.profileService.loadMyProfile();
     this.profileService.loadMyProfile();
   }
   ngOnInit(): void {
     this.profileService.loadMyProfile();
+    this.profileService.loadMyProfileSettings();
   }
 
   ngOnDestroy() {
@@ -72,9 +79,15 @@ export class PersonalProfile implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  public saveSettings() {
+    const settingRaw = this.settingForm.getRawValue();
+    if (!settingRaw) return;
+    this.profileService.updateSettings(settingRaw);
+  }
+
 
   public save() {
-    const profileRaw = this.form.getRawValue()
+    const profileRaw = this.profileForm.getRawValue()
     if (!profileRaw) return;
     this.profileService.updateMyProfile(profileRaw);
   }

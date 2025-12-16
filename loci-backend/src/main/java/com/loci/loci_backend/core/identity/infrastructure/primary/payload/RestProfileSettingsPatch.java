@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestProfileSettingsPatch {
   private LastSeenSettingEnum lastSeenSetting;
-  private FriendRequestSettingEnum friendRequestSetting;
+  private FriendRequestSettingEnum friendRequests;
   private Boolean profileVisibility;
   @Builder(style =  BuilderStyle.STAGED)
   public RestProfileSettingsPatch(LastSeenSettingEnum lastSeenSetting, FriendRequestSettingEnum friendRequestSetting,
       Boolean profileVisibility) {
     this.lastSeenSetting = lastSeenSetting;
-    this.friendRequestSetting = friendRequestSetting;
+    this.friendRequests = friendRequestSetting;
     this.profileVisibility = profileVisibility;
   }
 }
