@@ -118,9 +118,11 @@ shell:
 
 logging:
   com.loci.loci_backend: DEBUG
-  # level:
+
+  level:
+    org.springframework.security.web.FilterChainProxy: DEBUG
+  #   root: DEBUG
   #   com.loci.loci_backend.common.aspect.LoggingAspect: INFO
-  #   root: INFO
   #   org:
   #     hibernate:
   #       SQL: INFO

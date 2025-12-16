@@ -67,8 +67,9 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   private UUID publicId;
 
   private String bio;
-  @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
-  private UserSettingsEntity settings;
+
+  // @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,   fetch = FetchType.LAZY, optional = true, orphanRemoval = false)
+  // private UserSettingsEntity settings;
 
   @Column(name = "last_active")
   private Instant lastActive;
@@ -96,6 +97,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
 
   @OneToMany(mappedBy = "owningUser", cascade = CascadeType.ALL)
   private Set<ContactEntity> contacts = new HashSet<>();
+
 
   @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
   private Set<MessageEntity> sentMessages = new HashSet<>();

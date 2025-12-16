@@ -19,6 +19,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Map one to one unbidirectional with user entity
+ */
 @Entity
 @Table(name = "user_settings")
 @Getter
@@ -30,8 +33,8 @@ public class UserSettingsEntity extends AbstractAuditingEntity<Long> {
   private Long id;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @MapsId // This makes id = user.id
-  @JoinColumn(name = "user_id")
+  @MapsId // make join column map value to id field
+  @JoinColumn(name = "user_id") // mark primary field name as user_id
   private UserEntity user;
 
   @Column(name = "last_seen_setting")

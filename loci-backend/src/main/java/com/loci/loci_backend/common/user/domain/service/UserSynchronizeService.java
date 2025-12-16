@@ -51,14 +51,17 @@ public class UserSynchronizeService {
       userToPersistence.setAuthorities(authorities);
 
     }
-    // Init required field to create new user before update or create one
     userToPersistence.provideMandatoryField();
     User savedUser = userRepository.save(userToPersistence);
+    log.debug("User sync with persistence context ", savedUser);
 
     // When created new user
     if (!oldDbUser.isPresent()) {
       UserSettings defaultUserSettings = new UserSettings(savedUser);
-      userSettingsRepository.save(defaultUserSettings);
+
+      // Make sure flush entity before further setting creation, to avoid duplicate
+      // user entity in persistence context
+      userSettingsRepository.createSettings(savedUser, defaultUserSettings);
     }
 
   }

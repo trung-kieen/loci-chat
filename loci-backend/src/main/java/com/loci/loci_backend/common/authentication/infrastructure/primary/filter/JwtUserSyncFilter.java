@@ -56,6 +56,7 @@ public class JwtUserSyncFilter extends OncePerRequestFilter {
 
       userSynchronize.syncUser(userFromKeycloak);
     } catch (Exception e) {
+      e.printStackTrace();
       throw new SyncAuthenticatedUserException();
     }
 

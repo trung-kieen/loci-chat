@@ -127,19 +127,19 @@ public class User {
   }
 
   public void initFieldForSignup() {
-    if (this.userPublicId == null) {
+    if (this.userPublicId == null || userPublicId.value() == null) {
       this.userPublicId = PublicId.random();
     }
-    if (this.profilePicture == null) {
+    if (this.profilePicture == null || profilePicture.value() == null) {
       this.profilePicture = UserImageUrl.random();
     }
     // TODO: init with repository
     // if (this.privacySetting == null) {
-    //   this.privacySetting =
-    //       .lastSeenSetting(UserLastSeenSetting.ofDefault())
-    //       .friendRequestSetting(UserFriendRequestSetting.ofDefault())
-    //       .profileVisibility(ProfileVisibility.ofDefault())
-    //       .build();
+    // this.privacySetting =
+    // .lastSeenSetting(UserLastSeenSetting.ofDefault())
+    // .friendRequestSetting(UserFriendRequestSetting.ofDefault())
+    // .profileVisibility(ProfileVisibility.ofDefault())
+    // .build();
     // }
   }
 
