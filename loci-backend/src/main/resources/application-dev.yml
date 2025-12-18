@@ -152,6 +152,18 @@ keycloak:
     password: admin
 
 
+upload:
+  minio:
+    url: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    secure: false
+    bucket: loci-bucket-01
+    metric-name: ""
+    url-prefix: "http://127.0.0.1:9000" # use to point to
+    region: us-east-1
+
+
 # logging:
 #   structured:
 #     json:

@@ -1,6 +1,10 @@
 package com.loci.loci_backend.core.identity.infrastructure.primary.resource;
 
+import java.io.IOException;
+
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
+import com.loci.loci_backend.common.store.domain.aggregate.File;
+import com.loci.loci_backend.common.store.infrastructure.primary.mapper.RestFileMapper;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
 import com.loci.loci_backend.core.discovery.infrastructure.primary.mapper.RestDicoveryContactMapper;
 import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestSearchContact;
@@ -8,8 +12,8 @@ import com.loci.loci_backend.core.identity.application.IdentityApplicationServic
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 import com.loci.loci_backend.core.identity.domain.vo.ProfilePublicId;
 import com.loci.loci_backend.core.identity.infrastructure.primary.mapper.RestProfileMapper;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfile;
@@ -18,7 +22,6 @@ import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPr
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettingsPatch;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfile;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +46,7 @@ public class UserIdentityResource {
   private final IdentityApplicationService identityApplicationService;
   private final RestDicoveryContactMapper restContactMapper;
   private final RestProfileMapper restProfileMapper;
+  private final RestFileMapper restFileMapper;
 
   @GetMapping("search")
   public ResponseEntity<Page<RestSearchContact>> searchUser(
@@ -89,7 +93,12 @@ public class UserIdentityResource {
   @PatchMapping("me/avatar")
   public ResponseEntity<RestPersonalProfile> updateProfileImage(
       @Parameter(hidden = true) KeycloakPrincipal keycloakPrincipal,
-      @RequestParam("image") MultipartFile file) {
+      @RequestParam("avatar") MultipartFile file) throws IOException {
+    File requestAvatarFile = restFileMapper.toDomain(file);
+    PersonalProfile updatedProfile = identityApplicationService.updateProfileAvatar(keycloakPrincipal,
+        requestAvatarFile);
+    return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
+
     // TODO: media file storage
 
     // validate file
@@ -103,7 +112,6 @@ public class UserIdentityResource {
     // identityApplicationService.updateProfile(keycloakPrincipal, profileChages);
     //
     // return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
-    throw new NotImplementedException();
   }
 
   @GetMapping("{publicId}")

@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.media.domain.service;
+package com.loci.loci_backend.common.store.domain.service;
 
 public interface DataEncryptionService {
 

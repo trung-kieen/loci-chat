@@ -1,6 +1,8 @@
 package com.loci.loci_backend;
 
 import com.loci.loci_backend.common.authentication.infrastructure.primary.keycloak.KeycloakProperties;
+import com.loci.loci_backend.common.store.infrastructure.secondary.minio.MinioProperties;
+import com.loci.loci_backend.common.wire.store.StoreConfiguration;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.cors.CorsConfiguration;
 
-@SpringBootTest(classes = { KeycloakProperties.class, CorsConfiguration.class })
+@SpringBootTest(classes = { KeycloakProperties.class, CorsConfiguration.class, MinioProperties.class})
 @ExtendWith(SpringExtension.class)
 // @Import({KeycloakProperties.class, CorsConfiguration.class})
 // @EnableConfigurationProperties({KeycloakProperties.class

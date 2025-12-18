@@ -39,7 +39,7 @@ export class Avatar {
     const sizeMap = {
       small: 'w-9 h-9 text-xs',
       medium: 'w-10 h-10 text-sm',
-      big: 'w-16 h-16 text-lg'
+      big: 'w-20 h-20 text-lg'
     };
     return sizeMap[this.size()];
   });

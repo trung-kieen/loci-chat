@@ -40,13 +40,21 @@
       <div class="bg-white border border-neutral-200 rounded-lg p-6 mb-6">
         <div class="flex items-center space-x-6 mb-6">
           <div class="relative">
+    <app-avatar
+      size="big"
+      [src]="profileForm.value.profilePictureUrl || ''"
+      [alt]="profileForm.value.firstname || ''"
+      initials="JD"
+      [showOnline]="true"
+      (imageSelected)="onImageSelected($event)"
+    ></app-avatar>
+          <!-- <app-avatar size="big" [src]="profileForm.value.profilePictureUrl || ''" alt="avatar1" [showOnline]="false" /> -->
+            <!-- <img [src]="profileForm.value.profilePictureUrl" alt="Profile Avatar" class="w-20 h-20 rounded-full" (imageSelected)="handleUploadFile"> -->
 
-            <img [src]="profileForm.value.profilePictureUrl" alt="Profile Avatar" class="w-20 h-20 rounded-full">
-
-            <button type="button"
-              class="absolute -bottom-1 -right-1 bg-neutral-500 text-white p-2 rounded-full hover:bg-neutral-600">
-              <i class="fa-solid fa-camera text-sm"></i>
-            </button>
+            <!-- <button type="button" -->
+            <!--   class="absolute -bottom-1 -right-1 bg-neutral-500 text-white p-2 rounded-full hover:bg-neutral-600"> -->
+            <!--   <i class="fa-solid fa-camera text-sm"></i> -->
+            <!-- </button> -->
           </div>
 
           <div class="flex-1">

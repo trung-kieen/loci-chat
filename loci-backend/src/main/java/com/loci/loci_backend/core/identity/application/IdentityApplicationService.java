@@ -1,6 +1,7 @@
 package com.loci.loci_backend.core.identity.application;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
+import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.core.discovery.application.DiscoveryApplicationService;
 import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
 import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
@@ -51,6 +52,11 @@ public class IdentityApplicationService {
   public UserSettings updateProfileSettings(KeycloakPrincipal keycloakPrincipal,
       ProfileSettingChanges settingsChanges) {
     return profileManager.applyUpdate(keycloakPrincipal, settingsChanges);
+  }
+
+  public PersonalProfile updateProfileAvatar(KeycloakPrincipal keycloakPrincipal, File newProfileImage) {
+    return profileManager.applyUpdate(keycloakPrincipal, newProfileImage);
+
   }
 
 }

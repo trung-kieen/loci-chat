@@ -67,6 +67,15 @@ export class PersonalProfileService {
       complete: () => this._isLoading.set(false),
     });
   }
+
+  updateProfileAvatar(imageFile: File) {
+    const formRequest = new FormData();
+    formRequest.append("avatar", imageFile);
+    return this.apiService.patchForm<PersonalProfile>('/users/me/avatar', formRequest).subscribe({
+      next: (updated) => this.profileSignal.set(updated),
+    });
+  }
+
   public updateMyProfile(data: Partial<ProfileUpdateRequest>) {
     // this._isLoading.set(true);
     return this.apiService.patch<PersonalProfile>('/users/me', data).subscribe({

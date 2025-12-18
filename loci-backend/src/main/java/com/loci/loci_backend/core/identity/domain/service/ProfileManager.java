@@ -1,13 +1,18 @@
 package com.loci.loci_backend.core.identity.domain.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.authentication.domain.Username;
+import com.loci.loci_backend.common.store.domain.aggregate.File;
+import com.loci.loci_backend.common.store.domain.service.FileStorageService;
+import com.loci.loci_backend.common.store.domain.vo.FilePath;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
+import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
@@ -34,6 +39,7 @@ public class ProfileManager {
   private final ProfileAggregateMapper profileMapper;
   private final KeycloakPrincipal principal;
   private final UserConnectionResolver connectionResolver;
+  private final FileStorageService fileStorageService;
 
   @Transactional(readOnly = true)
   public PersonalProfile readPersonalProfile(KeycloakPrincipal keycloakPrincipal) {
@@ -91,6 +97,19 @@ public class ProfileManager {
 
     profileMapper.applyChanges(settings, settingsChanges);
     return repository.save(settings);
+  }
+
+  public PersonalProfile applyUpdate(KeycloakPrincipal keycloakPrincipal, File uploadImageFile) {
+    // TODO: validate image file using file assertion
+    FilePath requestFilePath = new FilePath(UUID.randomUUID() + uploadImageFile.path().value());
+    File savedFile = fileStorageService.saveFile(uploadImageFile, requestFilePath);
+
+    UserImageUrl newImageUrl = new UserImageUrl(savedFile.path().value());
+
+    PersonalProfileChanges changes = new PersonalProfileChanges();
+    changes.setImageUrl(newImageUrl);
+
+    return this.applyUpdate(keycloakPrincipal, changes);
   }
 
 }

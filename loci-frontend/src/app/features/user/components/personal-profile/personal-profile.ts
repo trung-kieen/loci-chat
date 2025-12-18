@@ -2,16 +2,20 @@ import { Component, effect, inject, OnInit, OnDestroy, signal } from '@angular/c
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, merge, Subject, takeUntil } from 'rxjs';
 import { PersonalProfileService } from '../../services/personal-profile.service';
+import { SharedModule } from "../../../../shared/shared.module";
+import { LoggerService } from '../../../../core/services/logger.service';
 
 @Component({
   selector: 'app-personal-profile',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SharedModule],
   templateUrl: './personal-profile.html',
   styleUrl: './personal-profile.css',
 })
 export class PersonalProfile implements OnInit, OnDestroy {
   private profileService = inject(PersonalProfileService);
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger("PersonalProfile");
   private profile = this.profileService.profile;
   private destroy$ = new Subject<void>();
 
@@ -92,5 +96,9 @@ export class PersonalProfile implements OnInit, OnDestroy {
     this.profileService.updateMyProfile(profileRaw);
   }
 
+  onImageSelected(avatar: File) {
+    this.logger.info("Receive user upload image ", avatar);
+    this.profileService.updateProfileAvatar(avatar);
+  }
 
 }
