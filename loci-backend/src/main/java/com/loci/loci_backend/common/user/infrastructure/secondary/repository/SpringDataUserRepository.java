@@ -1,15 +1,17 @@
 package com.loci.loci_backend.common.user.infrastructure.secondary.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
+import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.UserEntityMapper;
-import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
+import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.persistence.UserSpecifications;
 
 import org.springframework.data.domain.Page;
@@ -38,7 +40,7 @@ public class SpringDataUserRepository implements UserRepository {
 
   @Override
   @Transactional(readOnly = false)
-  public User  save(User user) {
+  public User save(User user) {
     UserEntity userEntity = userEntityMapper.from(user);
     User savedUser = userEntityMapper.toDomain(repository.saveAndFlush(userEntity));
     return savedUser;
@@ -50,13 +52,31 @@ public class SpringDataUserRepository implements UserRepository {
   }
 
   @Override
-  public Page<User> searchUser(ContactSearchCriteria criteria, Pageable pageable) {
-    String keyword = criteria.getKeyword();
-    String currentUsername = criteria.getCurrentUsername();
-    Specification<UserEntity> spec = UserSpecifications.searchActiveUsers(keyword, currentUsername);
-    Page<UserEntity> entityPage = repository.findAll(spec, pageable);
+  public Page<User> searchUser(UserSearchCriteria criteria, Pageable pageable) {
+    Page<UserEntity> entityPage = repository.findAll(UserSpecifications.fromCriteria(criteria), pageable);
     return entityPage.map(userEntityMapper::toDomain);
   }
 
+  // @Override
+  // public Page<User> getUsersFromIds(List<UserDBId> ids, Pageable pageable) {
+  // List<Long> userIds = ids.stream().map(UserDBId::value).toList();
+  // Page<UserEntity> entities = repository.findAllById(userIds, pageable);
+  //
+  // return userEntityMapper.toDomain(entities);
+  // }
+
+  @Override
+  public List<User> getUsersFromIds(List<UserDBId> ids) {
+    List<Long> userIds = ids.stream().map(UserDBId::value).toList();
+    List<UserEntity> entities = repository.findAllById(userIds);
+    return userEntityMapper.toDomain(entities);
+  }
+
+  @Override
+  public Page<User> getUsersFromIds(List<UserDBId> ids, Pageable pageable) {
+    List<Long> userIds = ids.stream().map(UserDBId::value).toList();
+    Page<UserEntity> entities = repository.findByIdIn(userIds, pageable);
+    return userEntityMapper.toDomain(entities);
+  }
 
 }

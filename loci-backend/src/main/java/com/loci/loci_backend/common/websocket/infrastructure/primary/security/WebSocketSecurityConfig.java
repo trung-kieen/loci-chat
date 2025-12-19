@@ -1,5 +1,5 @@
-// package com.loci.loci_backend.common.websocket.infrastructure.primary;
-//
+// package com.loci.loci_backend.common.websocket.infrastructure.primary.security;
+
 // import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Configuration;
 // import org.springframework.messaging.Message;

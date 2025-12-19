@@ -17,7 +17,6 @@ import com.loci.loci_backend.core.social.infrastructure.secondary.repository.Jpa
 import com.loci.loci_backend.core.social.infrastructure.secondary.repository.JpaContactRequestRepository;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -78,7 +77,7 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     return targetUserIdToFriendStatus;
   }
 
-  public SearchContact buildContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
+  public SearchContact   buildContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
     return SearchContactBuilder.searchContact()
         .publicId(user.getUserPublicId())
         .fullname(user.getFullname())

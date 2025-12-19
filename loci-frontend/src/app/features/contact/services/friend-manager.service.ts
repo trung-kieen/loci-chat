@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { UpdatedStatus } from '../../user/models/public-profile.model';
+import { FriendRequestList } from '../models/contact.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,11 +49,9 @@ export class FriendManagerService {
     return this.apiService.delete<UpdatedStatus>(`/blocks/${targetUserId}`, {});
   }
 
-  // TODO:
-  getListRequestConnectContact(): Observable<any> {
-    this.logger.debug('Request to view list of request connect contact');
-    const result = this.apiService.get<any>(`/contact-requests`);
-    this.logger.debug('List request connect contact result {}', result);
-    return result;
+  getPendingRequests(): Observable<FriendRequestList > {
+    return this.apiService.get<FriendRequestList >(
+      `/contact-requests`,
+    );
   }
 }

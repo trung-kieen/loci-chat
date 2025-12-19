@@ -1,0 +1,42 @@
+<div class="bg-white border border-neutral-200 rounded-lg p-4 h-full transition-all duration-300"
+  [class.opacity-75]="requestSent()">
+  <div class="flex flex-col items-center text-center h-full"
+  >
+    <img [src]="friend().imageUrl" [alt]="friend().fullname" class="w-16 h-16 rounded-full mb-3 cursor-pointer"
+          (click)="navigateToProfile()"
+
+    >
+
+    <h4 class="text-lg text-black mb-1 cursor-pointer"
+    (click)="navigateToProfile()">{{ friend().fullname }}</h4>
+    <p class="text-sm text-neutral-500 mb-2">{{ friend().username}}</p>
+    <p class="text-xs text-neutral-400 mb-4">
+      @if (friend().bio) {
+      {{ friend().bio}} •
+      }
+      {{ friend().mutualConnections || 0 }} mutual connections
+    </p>
+
+    @if (requestSent()) {
+    <div class="w-full py-2 text-center text-sm text-blue-600 font-medium"
+      (click)="navigateToProfile()"
+      >
+      <i class="fa-solid fa-check mr-1"></i> Request Sent
+    </div>
+    } @else {
+    <button (click)="onAddFriend(); $event.stopPropagation()" [disabled]="isSending()" class="w-full bg-white border border-neutral-200 text-neutral-700
+               px-4 py-2 rounded-lg hover:bg-neutral-50 disabled:opacity-50
+               disabled:cursor-not-allowed
+               focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm
+               flex items-center justify-center space-x-2 transition-all duration-200">
+      @if (isSending()) {
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      <span>Sending...</span>
+      } @else {
+      <i class="fa-solid fa-user-plus"></i>
+      <span>Add Friend</span>
+      }
+    </button>
+    }
+  </div>
+</div>

@@ -85,7 +85,7 @@
 
             <div class="flex items-center justify-between py-2">
               <span class="text-sm text-neutral-700 font-medium">Mutual friends</span>
-              <span class="text-sm text-neutral-900">{{ profile()!.mutualFriendCount }} connections</span>
+              <span class="text-sm text-neutral-900">{{ profile()!.mutualFriendCount || 0 }} connections</span>
             </div>
           </div>
 

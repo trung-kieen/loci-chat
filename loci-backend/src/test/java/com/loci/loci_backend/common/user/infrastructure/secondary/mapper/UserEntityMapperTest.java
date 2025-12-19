@@ -1,34 +1,7 @@
 package com.loci.loci_backend.common.user.infrastructure.secondary.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.time.Instant;
-import java.util.Set;
-import java.util.UUID;
-
-import com.loci.loci_backend.common.authentication.domain.Username;
-import com.loci.loci_backend.common.user.domain.aggregate.Authority;
-import com.loci.loci_backend.common.user.domain.vo.UserEmail;
-import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
-import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
-import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.PublicId;
-import com.loci.loci_backend.common.user.infrastructure.secondary.entity.AuthorityEntity;
-import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
-import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntityBuilder;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileBuilder;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
-import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
-import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;

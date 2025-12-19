@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.websocket.infrastructure.primary;
+package com.loci.loci_backend.common.websocket.infrastructure.primary.handler;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class AuthenticationHandshakeInterceptor implements HandshakeInterceptor {
+public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
 
   @Override
   public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,

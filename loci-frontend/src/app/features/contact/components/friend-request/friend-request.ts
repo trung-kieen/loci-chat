@@ -1,17 +1,101 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FriendManagerService } from '../../services/friend-manager.service';
+import { FriendRequestItem } from '../suggested-friend-item/friend-request-item/friend-request-item';
+import { SuggestedFriendItem } from '../suggested-friend-item/suggested-friend-item';
+import { DiscoveryContactService } from '../../services/search-contact.service';
+import { ConntectRequested, FriendSuggestion } from '../../models/contact.model';
 
 @Component({
   selector: 'app-friend-request',
-  imports: [],
+  imports: [FriendRequestItem, SuggestedFriendItem],
   templateUrl: './friend-request.html',
   styleUrl: './friend-request.css',
 })
 export class FriendRequest implements OnInit {
+
+
   private friendManager = inject(FriendManagerService);
-  ngOnInit(): void {
-    this.friendManager.getListRequestConnectContact();
+  private discoveryService = inject(DiscoveryContactService);
+
+
+  protected pendingRequests = signal<ConntectRequested[]>([]);
+  protected suggestedFriends = signal<FriendSuggestion[]>([]);
+
+
+  protected query = signal<string | null>(null);
+
+  protected isLoading = signal<boolean>(true);
+
+  protected error = signal<string | null>(null);
+
+  protected filteredPending = computed(() => {
+    return this.pendingRequests();
+  })
+
+  protected filteredSuggestions = computed(() => {
+    return this.suggestedFriends();
+  })
+
+
+
+  ngOnInit() {
+    this.loadData();
   }
 
+
+  loadData() {
+
+    this.isLoading.set(true);
+    this.error.set(null);
+    this.friendManager.getPendingRequests().subscribe({
+      next: (requests) => {
+        this.pendingRequests.set(requests.requests.content);
+      },
+      error: (e) => this.error.set(e)
+    })
+    this.discoveryService.getSuggestions().subscribe({
+      next: (suggested) => {
+        this.suggestedFriends.set(suggested.contacts.content);
+      },
+      error: (e) => this.error.set(e)
+    })
+    this.isLoading.set(false);
+  }
+
+
+  onSearchQueryChange(event: Event): void {
+    const query = (event.target as HTMLInputElement).value;
+    this.query.set(query);
+  }
+  // searchQuery() {
+  //   throw new Error('Method not implemented.');
+  // }
+
+  onSendFriendRequest(targetUserId: string) {
+
+
+    this.friendManager.sendAddFriend(targetUserId).subscribe({
+      next: (updated) => {
+        this.suggestedFriends.update(users => users.map(u => u.userId !== targetUserId ? u : { ...u, friendshipStatus: updated.status }))
+      }
+    })
+  }
+
+
+
+  public onDeclineRequest(targetUserId: string) {
+    this.friendManager.denyFriendRequest(targetUserId).subscribe({
+      next: (updated) => {
+        this.pendingRequests.update(users => users.map(u => u.userId !== targetUserId ? u : { ...u, friendshipStatus: updated.status }))
+      }
+    })
+  }
+  public onAcceptRequest(targetUserId: string) {
+    this.friendManager.acceptFriendRequestFromUser(targetUserId).subscribe({
+      next: (updated) => {
+        this.pendingRequests.update(users => users.map(u => u.userId !== targetUserId ? u : { ...u, friendshipStatus: updated.status }))
+      }
+    })
+  }
 
 }

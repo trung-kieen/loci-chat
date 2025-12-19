@@ -1,8 +1,14 @@
 package com.loci.loci_backend.common.websocket.infrastructure.primary;
 
+import com.loci.loci_backend.common.websocket.infrastructure.WSPaths;
+import com.loci.loci_backend.common.websocket.infrastructure.primary.queue.StompRelayProperties;
+import com.loci.loci_backend.common.websocket.infrastructure.primary.security.SecurityChannelInterceptorAdapter;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.cors.CorsConfiguration;
@@ -18,25 +24,51 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Order(Ordered.HIGHEST_PRECEDENCE - 10) // after the cors filter
 @EnableWebSocketMessageBroker
-public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+public class SimpleWebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+
+  private final Environment env;
   private final CorsConfiguration corsConfiguration;
   private final SecurityChannelInterceptorAdapter authChannelInterceptorAdapter;
 
+  private final StompRelayProperties relayProperties;
+
   @Override
   public void configureMessageBroker(MessageBrokerRegistry config) {
-    config.enableSimpleBroker("/topic", "/queue");
-    config.setApplicationDestinationPrefixes("/app");
+
+    if (env.acceptsProfiles(Profiles.of("rabbitmq"))) {
+      log.info("Use rabbitmq as broker for ws");
+      log.info("Register stomp relay at port {}", relayProperties.getRelayPort());
+      config.enableStompBrokerRelay(WSPaths.TOPIC, WSPaths.QUEUE)
+          .setRelayHost(relayProperties.getRelayHost())
+          .setRelayPort(relayProperties.getRelayPort())
+          .setClientLogin(relayProperties.getClientLogin())
+          .setClientPasscode(relayProperties.getClientPasscode())
+          .setSystemLogin(relayProperties.getSystemLogin())
+          .setSystemPasscode(relayProperties.getSystemPasscode())
+          .setSystemHeartbeatSendInterval(relayProperties.getSystemHeartbeatSendInterval())
+          .setAutoStartup(true)
+          .setSystemHeartbeatReceiveInterval(relayProperties.getSystemHeartbeatReceiveInterval());
+      // COnfig replay as proxy between websocket client and rabbitmq
+      config.setApplicationDestinationPrefixes(WSPaths.APP);
+    } else {
+      log.info("Profile rabbitmq is not active, use simple in-memory as message broker for ws");
+      config.enableSimpleBroker(WSPaths.TOPIC, WSPaths.QUEUE);
+    }
   }
 
   @Override
   public void registerStompEndpoints(StompEndpointRegistry registry) {
     for (String origin : corsConfiguration.getAllowedOrigins()) {
-      registry.addEndpoint("/ws", "/ws/messages", "/ws/notifications", "/ws/presence")
+      registry
+          .addEndpoint(WSPaths.ENDPOINT, WSPaths.MESSAGE_ENDPOINT, WSPaths.NOTIFICATION_ENDPOINT,
+              WSPaths.PRESENCE_ENDPOINT)
           .setAllowedOrigins(origin)
       // .setAllowedOriginPatterns("*") // Or this for flexibility
       // .withSockJS()// to disable SockJS wrapping
       ;
-      registry.addEndpoint("/ws", "/ws/messages", "/ws/notifications", "/ws/presence")
+      registry
+          .addEndpoint(WSPaths.ENDPOINT, WSPaths.MESSAGE_ENDPOINT, WSPaths.NOTIFICATION_ENDPOINT,
+              WSPaths.PRESENCE_ENDPOINT)
           .setAllowedOrigins(origin)
           .withSockJS();
     }
@@ -45,6 +77,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
   // Security pre handshake
   @Override
   public void configureClientInboundChannel(ChannelRegistration registration) {
+    log.info("Add stomp channel inbound interceptor for authenticaiton {}", authChannelInterceptorAdapter.getClass());
     registration.interceptors(authChannelInterceptorAdapter);
     // registration.setErrorHandler(new CustomMessageErrorHandler());
   }

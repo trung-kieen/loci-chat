@@ -27,4 +27,9 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long>, JpaS
   Page<UserEntity> findAll(Specification<UserEntity> spec, Pageable pageable);
 
   List<UserEntity> findAllById(Iterable<Long> ids);
+
+
+  Page<UserEntity> findByIdIn(List<Long> ids, Pageable pageable);
+
+  // Page<UserEntity> findAllById(Iterable<Long> ids, Pageable pageable);
 }

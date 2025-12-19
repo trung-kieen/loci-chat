@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./components/search-contact/search-contact').then(
+      import('./components/search-user/search-user').then(
         (m) => m.SearchUser,
       ),
   },

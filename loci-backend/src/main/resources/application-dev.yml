@@ -67,6 +67,31 @@ spring:
       enabled: true
 
 
+  # Define message queue connection
+  rabbitmq:
+    host: localhost
+    port: 5672
+    usename: admin
+    password: admin
+    virtual-host: /
+
+    stomp:
+      enabled: true
+      host: localhost
+      port: 61613
+  websocket:
+    max-text-message-size: 8192
+    max-binary-message-size: 8192
+
+stomp.replay:
+  relay-host: localhost
+  relay-port: 61613
+  client-login: guest
+  client-passcode: guest
+  system-login: guest
+  system-passcode: guest
+  system-heartbeat-send-interval: 5000
+  system-heartbeat-receive-interval: 4000
 
 application:
   client-base-url: http://localhost:4200

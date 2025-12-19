@@ -2,7 +2,6 @@ package com.loci.loci_backend.core.social.domain.aggregate;
 
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.core.discovery.domain.vo.FriendshipStatus;
-import com.loci.loci_backend.core.discovery.infrastructure.secondary.dto.UserRelation;
 import com.loci.loci_backend.core.social.domain.vo.ContactId;
 
 import org.jilt.Builder;

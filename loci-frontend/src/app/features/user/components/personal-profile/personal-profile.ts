@@ -54,6 +54,7 @@ export class PersonalProfile implements OnInit, OnDestroy {
       if (!p) return;
       this.profileForm.patchValue({
         firstname: p.firstname,
+        username: p.username,
         lastname: p.lastname,
         emailAddress: p.emailAddress,
         profilePictureUrl: p.profilePictureUrl,
@@ -71,11 +72,10 @@ export class PersonalProfile implements OnInit, OnDestroy {
   }
   public loadProfile() {
     this.profileService.loadMyProfile();
-    this.profileService.loadMyProfile();
+    this.profileService.loadMyProfileSettings();
   }
   ngOnInit(): void {
-    this.profileService.loadMyProfile();
-    this.profileService.loadMyProfileSettings();
+    this.loadProfile();
   }
 
   ngOnDestroy() {

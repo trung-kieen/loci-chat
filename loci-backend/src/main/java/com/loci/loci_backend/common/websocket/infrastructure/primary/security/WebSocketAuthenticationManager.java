@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.websocket.infrastructure.primary;
+package com.loci.loci_backend.common.websocket.infrastructure.primary.security;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +22,20 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Use keycloak to authenticate user token in websocket connection
+ */
 @Slf4j
 @Component
 @Qualifier("websocket")
 @RequiredArgsConstructor
-public class KeycloakWebSocketAuthenticationManager implements AuthenticationManager {
+public class WebSocketAuthenticationManager implements AuthenticationManager {
 
   private final KeycloakTokenVerifier tokenVerifier;
 
-
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    log.info("Authentication websocket connection");
 
     JWSAuthentication token = (JWSAuthentication) authentication;
     String tokenString = (String) token.getCredentials();

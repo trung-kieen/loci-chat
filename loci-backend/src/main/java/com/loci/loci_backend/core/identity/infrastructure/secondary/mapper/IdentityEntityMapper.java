@@ -14,23 +14,20 @@ import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEnt
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntityBuilder;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.AuthorityEntityMapper;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfileBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserSummary;
-import com.loci.loci_backend.core.identity.domain.vo.ProfileBio;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserSettingsEntity;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class IdentityEntityMapper implements  DomainEntityMapper<UserSettings, UserSettingsEntity> {
+public class IdentityEntityMapper implements DomainEntityMapper<UserSettings, UserSettingsEntity> {
   private final AuthorityEntityMapper authorityEntityMapper;
   private final MapStructIdentityEntityMapper mapstruct;
 
@@ -75,13 +72,6 @@ public class IdentityEntityMapper implements  DomainEntityMapper<UserSettings, U
 
   public List<UserSummary> toUserSummary(List<UserEntity> userEntities) {
     return userEntities.stream().map(this::toUserSummary).toList();
-  }
-
-  public Page<PublicProfile> toDomain(Page<UserEntity> userPage) {
-    Page<PublicProfile> profilePage = userPage.map(this::toPublicProfile);
-
-    return profilePage;
-
   }
 
   @Override

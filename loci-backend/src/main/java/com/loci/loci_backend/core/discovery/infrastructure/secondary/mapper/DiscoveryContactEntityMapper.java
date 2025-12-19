@@ -1,11 +1,11 @@
 package com.loci.loci_backend.core.discovery.infrastructure.secondary.mapper;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserImageUrl;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
-import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
 import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactBuilder;
@@ -20,11 +20,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DiscoveryContactEntityMapper {
 
-  public Page<SearchContact> toDomain(Page<UserEntity> entityPage) {
+  public Page<SearchContact > toDomain(Page<UserEntity> entityPage) {
     return entityPage.map(this::toDomain);
   }
 
-  public SearchContact toDomain(UserEntity entity) {
+  public SearchContact  toDomain(UserEntity entity) {
     UserFullname fullname = UserFullname.builder()
         .firstname(new UserFirstname(entity.getFirstname()))
         .lastname(new UserLastname(entity.getLastname()))

@@ -1,15 +1,17 @@
-<div class="bg-white border border-neutral-200 rounded-lg p-4 hover:bg-neutral-50 transition-colors cursor-pointer"
+<div class="bg-white border border-neutral-200 rounded-lg p-4 hover:bg-neutral-50 transition-colors "
      >
   <div class="flex items-center space-x-4"
-    (click)="navigateToProfile()"
   >
     <img [src]="user().imageUrl"
          [alt]="user().username"
+        (click)="navigateToProfile()"
          class="w-12 h-12 rounded-full object-cover"
          (click)="$event.stopPropagation()" />
 
     <div class="flex-1 min-w-0">
-      <h4 class="text-lg text-black font-medium">{{ user().fullname }}</h4>
+      <h4 class="text-lg text-black font-medium cursor-pointer"
+        (click)="navigateToProfile()"
+      >{{ user().fullname }}</h4>
       <p class="text-sm text-neutral-500">&#64;{{ user().username }}</p>
       <p class="text-xs text-neutral-400 mt-1">{{ user().email }}</p>
     </div>
@@ -19,7 +21,7 @@
       @case ('not_connected') {
         <button (click)="onAddFriend(); $event.stopPropagation()"
           class="bg-neutral-500 text-white px-4 py-2 rounded-lg hover:bg-neutral-600
-                 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm cursor-pointer
                  flex items-center space-x-2 transition-colors">
           <i class="fa-solid fa-user-plus"></i>
           <span>Add Friend</span>
@@ -36,7 +38,7 @@
       }
 
       @case ('friends') {
-        <div class="bg-green-50 text-green-700 px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
+        <div class="bg-neutral-500 text-white px-4 py-2 rounded-lg text-sm flex items-center space-x-2">
           <i class="fa-solid fa-user-check"></i>
           <span>Friends</span>
         </div>

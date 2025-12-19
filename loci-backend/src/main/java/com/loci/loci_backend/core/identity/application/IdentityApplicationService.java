@@ -3,8 +3,9 @@ package com.loci.loci_backend.core.identity.application;
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.core.discovery.application.DiscoveryApplicationService;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
-import com.loci.loci_backend.core.discovery.domain.vo.ContactSearchCriteria;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
+import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
+import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
@@ -13,7 +14,6 @@ import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 import com.loci.loci_backend.core.identity.domain.service.ProfileManager;
 import com.loci.loci_backend.core.identity.domain.vo.ProfilePublicId;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class IdentityApplicationService {
     return profile;
   }
 
-  public Page<SearchContact> discoveryContacts(ContactSearchCriteria criteria, Pageable pageable,
+  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable,
       KeycloakPrincipal principal) {
     return discoveryApplicationService.discoveryContacts(criteria, pageable, principal);
   }
@@ -57,6 +57,10 @@ public class IdentityApplicationService {
   public PersonalProfile updateProfileAvatar(KeycloakPrincipal keycloakPrincipal, File newProfileImage) {
     return profileManager.applyUpdate(keycloakPrincipal, newProfileImage);
 
+  }
+
+  public SearchContactList suggestFriends(SuggestFriendCriteria criteria, Pageable pageable) {
+    return discoveryApplicationService.suggestFriends(criteria, pageable);
   }
 
 }

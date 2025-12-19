@@ -1,5 +1,6 @@
-package com.loci.loci_backend.common.websocket.infrastructure.primary;
+package com.loci.loci_backend.common.websocket.infrastructure.primary.security;
 
+import com.loci.loci_backend.common.websocket.application.WebSocketTokenValicationException;
 import com.loci.loci_backend.common.websocket.domain.aggregate.JWSAuthentication;
 import com.loci.loci_backend.common.websocket.domain.vo.BearerToken;
 
@@ -18,7 +19,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 public class SecurityChannelInterceptorAdapter implements ChannelInterceptor {
-  private final KeycloakWebSocketAuthenticationManager keycloakWebSocketAuthManager;
+  private final WebSocketAuthenticationManager keycloakWebSocketAuthManager;
 
   @Override
   public Message<?> preSend(Message<?> message, MessageChannel channel) {
@@ -35,10 +36,19 @@ public class SecurityChannelInterceptorAdapter implements ChannelInterceptor {
       BearerToken bearerToken = BearerToken.fromHeader(authorizationHeader);
 
       log.debug("Received bearer token {}", bearerToken);
-      JWSAuthentication jwsAuthentication = (JWSAuthentication) keycloakWebSocketAuthManager
-          .authenticate(new JWSAuthentication(bearerToken));
-      accessor.setUser(jwsAuthentication);
-      log.debug("Auth inbound ws channel with principal {}", jwsAuthentication.getPrincipal());
+
+      try {
+
+        JWSAuthentication jwsAuthentication = (JWSAuthentication) keycloakWebSocketAuthManager
+            .authenticate(new JWSAuthentication(bearerToken));
+
+        accessor.setUser(jwsAuthentication);
+        log.debug("Auth inbound ws channel with principal {}", jwsAuthentication.getPrincipal());
+      } catch (Exception e) {
+        log.warn("Fail to authenticate websocket request {}", e);
+        e.printStackTrace();
+        throw new WebSocketTokenValicationException();
+      }
     }
     return message;
   }

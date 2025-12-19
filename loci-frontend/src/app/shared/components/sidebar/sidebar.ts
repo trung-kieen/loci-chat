@@ -44,17 +44,23 @@ export class Sidebar {
       badgeColor: 'primary'
     },
     {
-      label: 'Contacts',
+      label: 'Discovery',
       icon: 'fa-address-book',
       route: '/contact',
       tooltip: 'Search contacts'
     },
     {
-      label: 'Friends',
+      label: 'Friend Request',
       icon: 'fa-user-friends',
       route: '/contact/friends',
-      tooltip: 'Manager your friends'
+      tooltip: ''
     },
+    // {
+    //   label: 'Friends',
+    //   icon: 'fa-user-friends',
+    //   route: '/contact/friends',
+    //   tooltip: 'Manager your friends'
+    // },
     {
       label: 'Blocks',
       icon: 'fa-ban',

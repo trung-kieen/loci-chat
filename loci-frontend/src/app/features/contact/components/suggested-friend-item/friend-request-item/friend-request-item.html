@@ -1,0 +1,47 @@
+<div class="bg-white border border-neutral-200 rounded-lg p-4 h-full transition-all duration-300"
+  [class.opacity-50]="actionTaken()">
+  <div class="flex flex-col items-center text-center h-full">
+    <img [src]="request().imageUrl" [alt]="request().fullname" class="w-16 h-16 rounded-full mb-3 cursor-pointer"
+      (click)="navigateToProfile()">
+
+
+    <h4 class="text-lg text-black mb-1 cursor-pointer"
+      (click)="navigateToProfile()"
+    >{{ request().fullname}}</h4>
+    <p class="text-sm text-neutral-500 mb-2">{{ request().username }}</p>
+    <p class="text-xs text-neutral-400 mb-4">
+      {{ request().mutualConnections || 0 }} mutual connections
+    </p>
+
+    @if (actionTaken() === 'accepted') {
+    <div class="w-full py-2 text-center text-sm text-blue-400 font-medium">
+      ✓ Request Accepted
+    </div>
+    } @else if (actionTaken() === 'declined') {
+    <div class="w-full py-2 text-center text-sm text-neutral-500 font-medium">
+      ✗ Request Declined
+    </div>
+    } @else {
+    <div class="flex space-x-2 w-full mt-auto">
+      <button (click)="onAccept()" [disabled]="isProcessing()" class="flex-1 bg-neutral-500 text-white px-4 py-2 rounded-lg
+                 hover:bg-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed
+                 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm
+                 transition-colors duration-200">
+        @if (isProcessing()) {
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        } @else {
+        Accept
+        }
+      </button>
+
+      <button (click)="onDecline()" [disabled]="isProcessing()" class="flex-1 bg-white border border-neutral-200 text-neutral-700
+                 px-4 py-2 rounded-lg hover:bg-neutral-50 disabled:opacity-50
+                 disabled:cursor-not-allowed
+                 focus:outline-none focus:ring-2 focus:ring-neutral-500 text-sm
+                 transition-colors duration-200">
+        Decline
+      </button>
+    </div>
+    }
+  </div>
+</div>

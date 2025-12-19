@@ -61,8 +61,27 @@ services:
     command:
       start-dev --import-realm
 
+  loci-rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672 # Message broker 
+      - 15672:15672 # UI manager
+      - 61613:61613 # Relay 
+    volumes:
+      - loci-rabbitmq:/var/lib/rabbitmq
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    environment:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins # Use to enable stomp plugin
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - loci-net
+
+
   loci-minio:
-    image: minio/minio
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     container_name: loci-minio
     environment:
       - MINIO_ROOT_USER=minioadmin
@@ -83,7 +102,7 @@ services:
       retries: 3
 
   loci-minio-mc:
-    image: minio/mc:latest
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
     container_name: minio_client
     depends_on:
       - loci-minio
@@ -102,6 +121,9 @@ services:
       "
     networks:
       - loci-net
+
+
+
 networks:
   loci-net:
     driver: bridge
@@ -111,4 +133,7 @@ volumes:
   loci-keycloak:
     driver: local
   loci-minio:
+    driver: local
+
+  loci-rabbitmq:
     driver: local

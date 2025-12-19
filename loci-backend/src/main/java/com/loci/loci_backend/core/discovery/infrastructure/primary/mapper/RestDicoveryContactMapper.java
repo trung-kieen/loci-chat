@@ -1,7 +1,9 @@
 package com.loci.loci_backend.core.discovery.infrastructure.primary.mapper;
 
 import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
+import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
 import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestSearchContact;
+import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestSearchContactList;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,12 @@ public class RestDicoveryContactMapper {
     return contactMapper.from(contact);
   }
 
-  public Page<RestSearchContact> from(Page<SearchContact> contactPage) {
+  public RestSearchContactList from(SearchContactList domain) {
+    return new RestSearchContactList(this.from(domain.getContacts()));
+  }
+
+  public Page<RestSearchContact> from(Page<SearchContact > contactPage) {
+
     return contactPage.map(this::from);
   }
 

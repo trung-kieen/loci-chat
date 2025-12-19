@@ -191,7 +191,7 @@ export class PublicProfile implements OnInit {
     const profile = this.profile();
     if (!profile) return;
 
-    this.router.navigate(['/conversations', profile.publicId]);
+    this.router.navigate(['/chat/one/', profile.publicId]);
   }
 
   onReport(): void {
