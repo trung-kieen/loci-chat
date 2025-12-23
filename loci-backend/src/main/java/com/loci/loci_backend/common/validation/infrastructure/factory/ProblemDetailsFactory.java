@@ -2,7 +2,6 @@ package com.loci.loci_backend.common.validation.infrastructure.factory;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loci.loci_backend.common.validation.infrastructure.primary.problem.problem.AccessDeniedProblemDetail;
 import com.loci.loci_backend.common.validation.infrastructure.primary.problem.problem.AuthenticationProblemDetail;
 
@@ -22,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class ProblemDetailsFactory {
-  private final ObjectMapper objectMapper;
 
   public AuthenticationProblemDetail createAuthenticationProblem(
       HttpServletRequest request, AuthenticationException ex, String requestId) {

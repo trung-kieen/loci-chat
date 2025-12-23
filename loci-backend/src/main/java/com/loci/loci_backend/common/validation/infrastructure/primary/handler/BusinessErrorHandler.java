@@ -2,6 +2,7 @@ package com.loci.loci_backend.common.validation.infrastructure.primary.handler;
 
 import java.time.Instant;
 
+import com.loci.loci_backend.common.validation.domain.DomainViolationException;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
 import com.loci.loci_backend.common.validation.domain.ResourceNotFoundException;
 
@@ -12,12 +13,16 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import jakarta.annotation.Priority;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Lower of order = higher of priority
+ */
 @ControllerAdvice
 @Log4j2
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(1)
 class BusinessExceptionHandler {
 
   @ExceptionHandler(EntityNotFoundException.class)
@@ -49,10 +54,19 @@ class BusinessExceptionHandler {
   }
 
   @ExceptionHandler({ IllegalArgumentException.class, IllegalStateException.class })
-  public ProblemDetail handleBusinessLogic(RuntimeException ex) {
+  public ProblemDetail handleIllegalArgument(RuntimeException ex) {
     ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
-    problem.setTitle("Business rule violation");
+    problem.setTitle("Badd argument violate business rule");
     problem.setDetail(ex.getMessage());
     return problem;
   }
+
+  @ExceptionHandler({ DomainViolationException.class })
+  public ProblemDetail handleBussinessLogic(DomainViolationException ex) {
+    ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+    problem.setTitle("Business logic violation");
+    problem.setDetail(ex.getMessage());
+    return problem;
+  }
+
 }

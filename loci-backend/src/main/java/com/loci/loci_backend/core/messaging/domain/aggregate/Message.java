@@ -4,20 +4,20 @@ import java.time.Instant;
 
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfileBuilders.PublicId;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageContent;
-import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
+import com.loci.loci_backend.core.messaging.domain.vo.MessageDBId;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageState;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageStatus;
 
 public class Message {
-  private final MessageId messageId;
+  private MessageDBId messageId;
   private final PublicId senderId;
   private final MessageContent content;
   private final Instant sentAt;
   private MessageStatus status;
-  private MessageId replyToMessageId;
+  private MessageDBId replyToMessageId;
 
   Message(PublicId senderId, MessageContent content) {
-    this.messageId = MessageId.generate();
+    // this.messageId = MessageDBId.generate();
     this.senderId = senderId;
     this.content = content;
     this.sentAt = Instant.now();
@@ -47,7 +47,7 @@ public class Message {
   }
 
   // Getters
-  public MessageId getMessageId() {
+  public MessageDBId getMessageId() {
     return messageId;
   }
 

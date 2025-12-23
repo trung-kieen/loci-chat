@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @ControllerAdvice
 @Log4j2
-@Order(Ordered.HIGHEST_PRECEDENCE + 1)
+@Order(2)
 public class SecurityErrorHandler {
 
   @ExceptionHandler(AccessDeniedException.class)

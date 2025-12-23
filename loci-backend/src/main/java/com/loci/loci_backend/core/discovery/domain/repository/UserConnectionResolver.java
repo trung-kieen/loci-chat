@@ -19,4 +19,6 @@ public interface UserConnectionResolver {
 
   public FriendshipStatus aggreateConnection(UserDBId userId, UserDBId targetUserId);
 
+  public FriendshipStatus aggreateConnection(User a, User b);
+
 }

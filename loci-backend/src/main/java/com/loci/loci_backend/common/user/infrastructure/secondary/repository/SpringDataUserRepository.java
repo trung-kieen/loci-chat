@@ -3,6 +3,9 @@ package com.loci.loci_backend.common.user.infrastructure.secondary.repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.print.attribute.standard.PrinterInfo;
+
+import com.loci.loci_backend.common.authentication.domain.Principal;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
@@ -11,6 +14,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.UserEntityMapper;
+import com.loci.loci_backend.common.validation.domain.ResourceNotFoundException;
 import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.persistence.UserSpecifications;
 
@@ -40,7 +44,7 @@ public class SpringDataUserRepository implements UserRepository {
 
   @Override
   @Transactional(readOnly = false)
-  public User save(User user) {
+  public User createOrUpdate(User user) {
     UserEntity userEntity = userEntityMapper.from(user);
     User savedUser = userEntityMapper.toDomain(repository.saveAndFlush(userEntity));
     return savedUser;
@@ -77,6 +81,16 @@ public class SpringDataUserRepository implements UserRepository {
     List<Long> userIds = ids.stream().map(UserDBId::value).toList();
     Page<UserEntity> entities = repository.findByIdIn(userIds, pageable);
     return userEntityMapper.toDomain(entities);
+  }
+
+  @Override
+  public User getOrThrow(Principal principal) {
+    return get(principal).orElseThrow(() -> new ResourceNotFoundException(principal.getUsername()));
+  }
+
+  @Override
+  public Optional<User> get(Principal principal) {
+    return getByUsername(principal.getUsername());
   }
 
 }

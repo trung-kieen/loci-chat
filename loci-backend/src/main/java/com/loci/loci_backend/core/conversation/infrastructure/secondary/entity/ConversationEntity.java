@@ -5,9 +5,12 @@ import java.util.UUID;
 
 import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
+import com.loci.loci_backend.core.conversation.domain.vo.ConversationType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +29,7 @@ import lombok.Setter;
 @Table(name = "conversation")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class ConversationEntity extends AbstractAuditingEntity<Long> {
 
   @Id
@@ -43,17 +46,16 @@ public class ConversationEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "creator_id", nullable = false, updatable = false)
   private Long creatorId;
 
-  @Column(name = "group_name", length = 255)
-  private String groupName;
-
-  @Column(name = "group_profile_picture", length = 500)
-  private String groupProfilePicture;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "conversation_type", nullable = false, updatable = false)
+  private ConversationType conversationType;
 
   @Column(name = "last_message_id", nullable = true)
   private Long lastMessageId;
 
-  @Column(name = "updated_at")
-  private Instant updatedAt;
+  @Column(name = "last_message_sent", nullable = true)
+  private Instant lastMessageSent; // for query order
+
 
   @Column(name = "deleted", nullable = false)
   private boolean deleted = false;
@@ -76,19 +78,15 @@ public class ConversationEntity extends AbstractAuditingEntity<Long> {
   // = true)
   // private GroupJpaEntity groupDetails;
 
-  @PreUpdate
-  protected void onUpdate() {
-    this.updatedAt = Instant.now();
-  }
 
   // public ConversationJpaEntity(UserJpaEntity creator) {
   // this.conversationId = UUID.randomUUID();
   // this.creator = creator;
   // }
 
-  public boolean isGroup() {
-    return groupName != null && !groupName.isEmpty();
-  }
+  // public boolean isGroup() {
+  //   return groupName != null && !groupName.isEmpty();
+  // }
 
   @Override
   public Long getId() {

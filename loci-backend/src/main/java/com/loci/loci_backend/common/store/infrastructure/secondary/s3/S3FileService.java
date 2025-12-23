@@ -1,23 +1,5 @@
 package com.loci.loci_backend.common.store.infrastructure.secondary.s3;
 
-import java.io.InputStream;
-
-import com.loci.loci_backend.common.store.domain.aggregate.File;
-import com.loci.loci_backend.common.store.domain.service.FileStorageService;
-import com.loci.loci_backend.common.store.domain.vo.FileContentType;
-import com.loci.loci_backend.common.store.domain.vo.FileInputStream;
-import com.loci.loci_backend.common.store.domain.vo.FilePath;
-import com.loci.loci_backend.common.store.infrastructure.secondary.minio.MinioProperties;
-
-import io.minio.GetObjectArgs;
-import io.minio.ObjectWriteResponse;
-import io.minio.RemoveObjectArgs;
-import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-
 /**
  *
  * Minio already fully compatible with the Amazon S3 API

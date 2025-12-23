@@ -19,6 +19,11 @@ spring:
     user: admin
     schemas: public
     password: admin
+
+    # Deadzone!
+    # clean-disabled: false
+    # clean-on-validation-error: true
+
   datasource:
     url: jdbc:postgresql://localhost:5432/locidb
     username: admin

@@ -1,6 +1,7 @@
 package com.loci.loci_backend.core.identity.application;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
+import com.loci.loci_backend.common.authentication.domain.Principal;
 import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.core.discovery.application.DiscoveryApplicationService;
 import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
@@ -25,37 +26,36 @@ public class IdentityApplicationService {
   private final ProfileManager profileManager;
   private final DiscoveryApplicationService discoveryApplicationService;
 
-  public PersonalProfile getPersonalProfile(KeycloakPrincipal keycloakPrincipal) {
-    PersonalProfile profile = profileManager.readPersonalProfile(keycloakPrincipal);
+  public PersonalProfile getPersonalProfile() {
+    PersonalProfile profile = profileManager.readPersonalProfile();
     return profile;
   }
 
-  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable,
-      KeycloakPrincipal principal) {
-    return discoveryApplicationService.discoveryContacts(criteria, pageable, principal);
+  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable
+      ) {
+    return discoveryApplicationService.discoveryContacts(criteria, pageable);
   }
 
   public PublicProfile getPublicProfile(ProfilePublicId profilePublicId) {
     return profileManager.readPublicProfileByPublicId(profilePublicId);
   }
 
-  public PersonalProfile updateProfile(KeycloakPrincipal keycloakPrincipal, PersonalProfileChanges profileChanges) {
-    PersonalProfile savedProfile = profileManager.applyUpdate(keycloakPrincipal, profileChanges);
+  public PersonalProfile updateProfile(PersonalProfileChanges profileChanges) {
+    PersonalProfile savedProfile = profileManager.applyUpdate(profileChanges);
     return savedProfile;
   }
 
-  public UserSettings getPersonalProfileSettings(KeycloakPrincipal keycloakPrincipal) {
-    UserSettings settings = profileManager.readProfileSettings(keycloakPrincipal);
+  public UserSettings getPersonalProfileSettings() {
+    UserSettings settings = profileManager.readProfileSettings();
     return settings;
   }
 
-  public UserSettings updateProfileSettings(KeycloakPrincipal keycloakPrincipal,
-      ProfileSettingChanges settingsChanges) {
-    return profileManager.applyUpdate(keycloakPrincipal, settingsChanges);
+  public UserSettings updateProfileSettings(ProfileSettingChanges settingsChanges) {
+    return profileManager.applyUpdate(settingsChanges);
   }
 
-  public PersonalProfile updateProfileAvatar(KeycloakPrincipal keycloakPrincipal, File newProfileImage) {
-    return profileManager.applyUpdate(keycloakPrincipal, newProfileImage);
+  public PersonalProfile updateProfileAvatar(File newProfileImage) {
+    return profileManager.applyUpdate(newProfileImage);
 
   }
 

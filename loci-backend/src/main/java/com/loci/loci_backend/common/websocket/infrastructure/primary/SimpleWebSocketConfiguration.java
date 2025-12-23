@@ -1,5 +1,8 @@
 package com.loci.loci_backend.common.websocket.infrastructure.primary;
 
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loci.loci_backend.common.websocket.infrastructure.WSPaths;
 import com.loci.loci_backend.common.websocket.infrastructure.primary.queue.StompRelayProperties;
 import com.loci.loci_backend.common.websocket.infrastructure.primary.security.SecurityChannelInterceptorAdapter;
@@ -9,8 +12,12 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.messaging.converter.DefaultContentTypeResolver;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -54,6 +61,17 @@ public class SimpleWebSocketConfiguration implements WebSocketMessageBrokerConfi
       log.info("Profile rabbitmq is not active, use simple in-memory as message broker for ws");
       config.enableSimpleBroker(WSPaths.TOPIC, WSPaths.QUEUE);
     }
+  }
+
+  @Override
+  public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
+    DefaultContentTypeResolver resolver = new DefaultContentTypeResolver();
+    resolver.setDefaultMimeType(MimeTypeUtils.APPLICATION_JSON);
+    MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+    converter.setObjectMapper(new ObjectMapper());
+    converter.setContentTypeResolver(resolver);
+    messageConverters.add(converter);
+    return false;
   }
 
   @Override

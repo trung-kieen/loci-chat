@@ -2,6 +2,7 @@ package com.loci.loci_backend.common.authentication.infrastructure.primary.resol
 
 import com.loci.loci_backend.common.authentication.application.AuthenticatedUser;
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
+import com.loci.loci_backend.common.authentication.domain.Principal;
 import com.loci.loci_backend.common.authentication.infrastructure.secondary.repository.RestIdentityProvider;
 
 import org.springframework.core.MethodParameter;
@@ -26,7 +27,7 @@ public class AuthenticatedUserArgumentResolver implements HandlerMethodArgumentR
     return
     // parameter.hasParameterAnnotation(AuthenticatedUser.class)
     // &&
-    KeycloakPrincipal.class.isAssignableFrom(parameter.getParameterType());
+    Principal.class.isAssignableFrom(parameter.getParameterType());
   }
 
   @Override

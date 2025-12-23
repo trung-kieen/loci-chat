@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -57,7 +56,7 @@ public class UserIdentityResource {
     UserSearchCriteria criteria = new UserSearchCriteria(new SearchQuery(query), principal.getUsername());
     ;
     return ResponseEntity
-        .ok(restContactMapper.from(identityApplicationService.discoveryContacts(criteria, pageable, principal)));
+        .ok(restContactMapper.from(identityApplicationService.discoveryContacts(criteria, pageable)));
   }
 
   @GetMapping("suggests")
@@ -72,43 +71,42 @@ public class UserIdentityResource {
   }
 
   @GetMapping("me")
-  public ResponseEntity<RestPersonalProfile> currentUserProfile(KeycloakPrincipal keycloakPrincipal) {
-    PersonalProfile profile = identityApplicationService.getPersonalProfile(keycloakPrincipal);
+  public ResponseEntity<RestPersonalProfile> currentUserProfile() {
+    PersonalProfile profile = identityApplicationService.getPersonalProfile();
     log.debug(profile);
     return ResponseEntity.ok(restProfileMapper.from(profile));
   }
 
   @GetMapping("me/settings")
-  public ResponseEntity<RestProfileSettings> currentUserProfileSettings(KeycloakPrincipal keycloakPrincipal) {
-    UserSettings profile = identityApplicationService.getPersonalProfileSettings(keycloakPrincipal);
+  public ResponseEntity<RestProfileSettings> currentUserProfileSettings() {
+    UserSettings profile = identityApplicationService.getPersonalProfileSettings();
     log.debug(profile);
     RestProfileSettings restResponse = restProfileMapper.from(profile);
     return ResponseEntity.ok(restResponse);
   }
 
   @PatchMapping("me")
-  public ResponseEntity<RestPersonalProfile> partialUpdateProfile(KeycloakPrincipal keycloakPrincipal,
+  public ResponseEntity<RestPersonalProfile> partialUpdateProfile(
       @RequestBody RestPersonalProfilePatch patchRequest) {
     PersonalProfileChanges profileChanges = restProfileMapper.toDomain(patchRequest);
-    PersonalProfile updatedProfile = identityApplicationService.updateProfile(keycloakPrincipal, profileChanges);
+    PersonalProfile updatedProfile = identityApplicationService.updateProfile(profileChanges);
 
     return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
   }
 
   @PatchMapping("me/settings")
-  public ResponseEntity<RestProfileSettings> partialUpdateProfile(KeycloakPrincipal keycloakPrincipal,
+  public ResponseEntity<RestProfileSettings> partialUpdateProfile(
       @RequestBody RestProfileSettingsPatch patchRequest) {
     ProfileSettingChanges settingsChanges = restProfileMapper.toDomain(patchRequest);
-    UserSettings updatedSettings = identityApplicationService.updateProfileSettings(keycloakPrincipal, settingsChanges);
+    UserSettings updatedSettings = identityApplicationService.updateProfileSettings(settingsChanges);
     return ResponseEntity.ok(restProfileMapper.from(updatedSettings));
   }
 
   @PatchMapping("me/avatar")
   public ResponseEntity<RestPersonalProfile> updateProfileImage(
-      @Parameter(hidden = true) KeycloakPrincipal keycloakPrincipal,
       @RequestParam("avatar") MultipartFile file) throws IOException {
     File requestAvatarFile = restFileMapper.toDomain(file);
-    PersonalProfile updatedProfile = identityApplicationService.updateProfileAvatar(keycloakPrincipal,
+    PersonalProfile updatedProfile = identityApplicationService.updateProfileAvatar(
         requestAvatarFile);
     return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
 
@@ -128,7 +126,7 @@ public class UserIdentityResource {
   }
 
   @GetMapping("{publicId}")
-  public ResponseEntity<RestPublicProfile> getPublicProfile(KeycloakPrincipal keycloakPrincipal,
+  public ResponseEntity<RestPublicProfile> getPublicProfile(
       @PathVariable("publicId") String publicId) {
     ProfilePublicId profilePublicId = ProfilePublicId.from(publicId);
 

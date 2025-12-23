@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
+import com.loci.loci_backend.common.authentication.domain.Principal;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.common.store.domain.service.FileStorageService;
@@ -37,14 +38,14 @@ public class ProfileManager {
   private final ProfileRepository repository;
   private final UserRepository userRepository;
   private final ProfileAggregateMapper profileMapper;
-  private final KeycloakPrincipal principal;
   private final UserConnectionResolver connectionResolver;
   private final FileStorageService fileStorageService;
+  private final Principal principal;
 
   @Transactional(readOnly = true)
-  public PersonalProfile readPersonalProfile(KeycloakPrincipal keycloakPrincipal) {
+  public PersonalProfile readPersonalProfile() {
 
-    PersonalProfile profile = repository.findPersonalProfile(keycloakPrincipal.getUserEmail());
+    PersonalProfile profile = repository.findPersonalProfile(principal.getUserEmail());
     if (profile.existManadatoryField()) {
       return profile;
     }
@@ -80,11 +81,11 @@ public class ProfileManager {
     return profile;
   }
 
-  public PersonalProfile applyUpdate(KeycloakPrincipal keycloakPrincipal, PersonalProfileChanges profileChanges) {
-    return repository.applyProfileUpdate(keycloakPrincipal.getUsername(), profileChanges);
+  public PersonalProfile applyUpdate(PersonalProfileChanges profileChanges) {
+    return repository.applyProfileUpdate(principal.getUsername(), profileChanges);
   }
 
-  public UserSettings readProfileSettings(KeycloakPrincipal keycloakPrincipal) {
+  public UserSettings readProfileSettings() {
     User currentUser = userRepository.getByUsername(principal.getUsername())
         .orElseThrow(() -> new EntityNotFoundException());
     UserSettings settings = repository.readProfileSettings(currentUser.getDbId());
@@ -92,14 +93,14 @@ public class ProfileManager {
     return settings;
   }
 
-  public UserSettings applyUpdate(KeycloakPrincipal keycloakPrincipal, ProfileSettingChanges settingsChanges) {
-    UserSettings settings = this.readProfileSettings(keycloakPrincipal);
+  public UserSettings applyUpdate(ProfileSettingChanges settingsChanges) {
+    UserSettings settings = this.readProfileSettings();
 
     profileMapper.applyChanges(settings, settingsChanges);
     return repository.save(settings);
   }
 
-  public PersonalProfile applyUpdate(KeycloakPrincipal keycloakPrincipal, File uploadImageFile) {
+  public PersonalProfile applyUpdate(File uploadImageFile) {
     // TODO: validate image file using file assertion
     FilePath requestFilePath = new FilePath(UUID.randomUUID() + uploadImageFile.path().value());
     File savedFile = fileStorageService.saveFile(uploadImageFile, requestFilePath);
@@ -109,7 +110,7 @@ public class ProfileManager {
     PersonalProfileChanges changes = new PersonalProfileChanges();
     changes.setImageUrl(newImageUrl);
 
-    return this.applyUpdate(keycloakPrincipal, changes);
+    return this.applyUpdate(changes);
   }
 
 }

@@ -52,7 +52,7 @@ public class UserSynchronizeService {
 
     }
     userToPersistence.provideMandatoryField();
-    User savedUser = userRepository.save(userToPersistence);
+    User savedUser = userRepository.createOrUpdate(userToPersistence);
     log.debug("User sync with persistence context ", savedUser);
 
     // When created new user

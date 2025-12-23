@@ -7,6 +7,7 @@ import com.loci.loci_backend.core.discovery.domain.service.PersonalizedRecommend
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
 import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 
+import org.springframework.boot.actuate.web.exchanges.HttpExchange.Principal;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class DiscoveryApplicationService {
   private final DiscoveryService discoveryService;
   private final PersonalizedRecommendationService recommendationService;
 
-  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable,
-      KeycloakPrincipal principal) {
+  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable
+      ) {
     return discoveryService.discoveryContacts(criteria, pageable);
   }
 

@@ -1,10 +1,10 @@
 package com.loci.loci_backend.core.conversation.infrastructure.secondary.entity;
 
 import java.time.Instant;
-import java.util.UUID;
 
 import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
+import com.loci.loci_backend.core.conversation.domain.vo.ParticipantRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +26,7 @@ import lombok.Setter;
 @Table(name = "conversation_participant")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class ConversationParticipantEntity extends AbstractAuditingEntity<Long> {
 
   @Id
@@ -37,35 +36,30 @@ public class ConversationParticipantEntity extends AbstractAuditingEntity<Long> 
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "conversation_id", nullable = false)
+  @JoinColumn(name = "conversation_id", nullable = false, insertable = false, updatable = false)
   private ConversationEntity conversation;
 
+  @Column(name = "conversation_id", nullable = false, updatable = false)
+  private Long conversationId;
+
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = true, insertable = false, updatable = false)
   private UserEntity participant;
+
+  @Column(name = "user_id", nullable = false, updatable = false)
+  private Long userId;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "role", nullable = false, length = 20)
   private ParticipantRole role = ParticipantRole.MEMBER;
 
-  @Column(name = "joined_at", nullable = false)
-  private Instant joinedAt;
+  // @Column(name = "joined_at", nullable = false)
+  // private Instant joinedAt;
 
   @Column(name = "last_read_message_id")
   private Long lastReadMessageId;
 
-  public enum ParticipantRole {
-    MEMBER, ADMIN
-  }
 
-  // public ConversationParticipantJpaEntity(ConversationJpaEntity conversation,
-  // UserJpaEntity user, ParticipantRole role) {
-  // this.participantId = UUID.randomUUID();
-  // this.conversation = conversation;
-  // this.participant = user;
-  // this.role = role;
-  // this.joinedAt = Instant.now();
-  // }
 
   @Override
   public Long getId() {

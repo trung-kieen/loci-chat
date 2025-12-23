@@ -19,9 +19,6 @@ public class IdentityProviderMvcConfiguration {
 
   private final RestIdentityProvider identityRepository;
 
-
-
-
   @Bean
   @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
   public KeycloakPrincipal keycloakPrincipal() {

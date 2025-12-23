@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { PublicProfileService } from '../../services/public-profile.service';
+import { LoggerService } from '../../../../core/services/logger.service';
 @Component({
   selector: 'app-other-profile',
   standalone: true,
@@ -16,6 +17,8 @@ import { PublicProfileService } from '../../services/public-profile.service';
 })
 export class PublicProfile implements OnInit {
 
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger("PublicProfile ");
 
   private stateService = inject(PublicProfileService);
   private notificationService = inject(NotificationService);
@@ -190,8 +193,19 @@ export class PublicProfile implements OnInit {
   onMessage(): void {
     const profile = this.profile();
     if (!profile) return;
+    this.stateService.requestMessage().subscribe({
+      next: (conversation) => {
+        this.router.navigate(['/chat/one/', conversation.id]);
+      },
+      error: (err) => {
+        this.notificationService.error("Error", "Unable to message to this user");
+        this.logger.error(err);
+      }
 
-    this.router.navigate(['/chat/one/', profile.publicId]);
+
+    })
+
+    // this.stateService.getConversation();
   }
 
   onReport(): void {

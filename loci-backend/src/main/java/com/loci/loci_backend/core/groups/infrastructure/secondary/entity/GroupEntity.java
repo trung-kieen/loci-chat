@@ -25,7 +25,7 @@ import lombok.Setter;
 @Table(name = "group_")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class GroupEntity extends AbstractAuditingEntity<Long> {
 
   @Id
@@ -35,8 +35,11 @@ public class GroupEntity extends AbstractAuditingEntity<Long> {
   private Long id;
 
   @OneToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "conversation_id", nullable = false, unique = true)
+  @JoinColumn(name = "conversation_id", nullable = false, unique = true, insertable = false, updatable = false)
   private ConversationEntity conversation;
+
+  @Column(name = "conversation_id", nullable = false, unique = true, updatable = false)
+  private Long conversationId;
 
   @Column(name = "group_name", nullable = false, length = 255)
   private String groupName;
@@ -47,11 +50,8 @@ public class GroupEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "last_active")
   private Instant lastActive;
 
-
-  @Column(name = "public_id", unique = true)
+  @Column(name = "public_id", unique = true, nullable = false)
   private UUID publicId;
-
-
 
   // public GroupJpaEntity(ConversationJpaEntity conversation, String groupName) {
   // this.groupId = UUID.randomUUID();

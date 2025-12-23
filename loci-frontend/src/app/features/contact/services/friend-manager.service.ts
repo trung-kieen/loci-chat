@@ -4,6 +4,7 @@ import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { UpdatedStatus } from '../../user/models/public-profile.model';
 import { FriendRequestList } from '../models/contact.model';
+import { ConversationPreview } from '../../chat/models/chat.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,8 +50,17 @@ export class FriendManagerService {
     return this.apiService.delete<UpdatedStatus>(`/blocks/${targetUserId}`, {});
   }
 
-  getPendingRequests(): Observable<FriendRequestList > {
-    return this.apiService.get<FriendRequestList >(
+
+  getConversationByUser(targetUserId: string): Observable<ConversationPreview> {
+    return this.apiService.get<ConversationPreview>(`/conversations?userId=${targetUserId}`, {});
+  }
+
+  createConversationWithUser(targetUserId: string): Observable<ConversationPreview> {
+    return this.apiService.post<ConversationPreview>(`/conversations?userId=${targetUserId}`, {});
+  }
+
+  getPendingRequests(): Observable<FriendRequestList> {
+    return this.apiService.get<FriendRequestList>(
       `/contact-requests`,
     );
   }

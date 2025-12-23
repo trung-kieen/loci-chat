@@ -1,5 +1,6 @@
 package com.loci.loci_backend.common.mapper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,5 +33,8 @@ public interface DomainEntityMapper<D, E> {
 
   default List<D> toDomain(List<E> entities) {
     return entities.stream().map(this::toDomain).collect(Collectors.toList());
+  }
+  default Set<D> toDomain(Collection<E> entities) {
+    return entities.stream().map(this::toDomain).collect(Collectors.toSet());
   }
 }

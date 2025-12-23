@@ -1,9 +1,11 @@
 package com.loci.loci_backend.core.conversation.domain.vo;
 
-import java.util.UUID;
+import com.loci.loci_backend.common.util.ValueObject;
+import com.loci.loci_backend.common.validation.domain.Assert;
 
-public record ConversationId(UUID value) {
-  public static ConversationId generate() {
-    return new ConversationId(UUID.randomUUID());
+public record ConversationId(Long value) implements ValueObject<Long> {
+
+  public void validate() {
+    Assert.notNull("Conversation Id", value);
   }
 }

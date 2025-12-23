@@ -7,14 +7,20 @@ import {
 } from '@angular/core';
 import { PublicProfile, UpdatedStatus } from '../models/public-profile.model';
 import { WebApiService } from '../../../core/api/web-api.service';
-import { catchError, finalize, Observable, tap, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, Observable, tap, throwError } from 'rxjs';
 import { FriendshipStatus } from '../../contact/models/contact.model';
 import { FriendManagerService } from '../../contact/services/friend-manager.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { ProblemDetail } from '../../../core/error-handler/problem-detail';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ConversationPreview } from '../../chat/models/chat.model';
+import { LoggerService } from '../../../core/services/logger.service';
 @Injectable()
 export class PublicProfileService {
+
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger("PublicProfileService ");
+
   private friendManager = inject(FriendManagerService);
   private destroyRef = inject(DestroyRef);
   private apiService = inject(WebApiService);
@@ -105,6 +111,9 @@ export class PublicProfileService {
     return this.apiService.get<PublicProfile>('/users/' + userId);
   }
 
+
+
+
   addFriend(): Observable<UpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
@@ -137,6 +146,30 @@ export class PublicProfileService {
       }),
       takeUntilDestroyed(this.destroyRef),
     );
+  }
+
+
+  public requestMessage(): Observable<ConversationPreview> {
+    const profileId = this._profileId();
+    if (profileId == null) {
+      return EMPTY;
+    }
+    this.logger.info("Request for conversation with user {}", profileId);
+    return this.friendManager.getConversationByUser(profileId).pipe(
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === HttpStatusCode.NotFound) {
+            this.logger.info("Not found conversation request to create converstaion with user {}", profileId);
+            return this.friendManager.createConversationWithUser(profileId);
+          }
+        }
+
+        this.logger.error("Unknow error to get conversation {}", error);
+        return EMPTY;
+      })
+    );
+
+
   }
 
   public setProfileId(profileId: string) {

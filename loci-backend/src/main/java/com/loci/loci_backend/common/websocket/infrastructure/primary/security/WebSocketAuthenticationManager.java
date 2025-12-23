@@ -26,8 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  * Use keycloak to authenticate user token in websocket connection
  */
 @Slf4j
-@Component
-@Qualifier("websocket")
+// @Component
+// @Qualifier("websocket")
 @RequiredArgsConstructor
 public class WebSocketAuthenticationManager implements AuthenticationManager {
 
@@ -53,5 +53,6 @@ public class WebSocketAuthenticationManager implements AuthenticationManager {
     }
     return token;
   }
+
 
 }

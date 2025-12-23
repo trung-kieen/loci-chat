@@ -40,7 +40,8 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     }
 
     // Check pending contact request
-    Optional<ContactRequestRelation> requestOpt = contactRequestRepository.findPendingRequestBetweenUsers(currentUserId, targetId);
+    Optional<ContactRequestRelation> requestOpt = contactRequestRepository.findPendingRequestBetweenUsers(currentUserId,
+        targetId);
     if (requestOpt.isPresent()) {
       return requestOpt.get().friendshipStatusWithUser(currentUserId);
     }
@@ -59,7 +60,8 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
 
     List<ContactRelation> contacts = contactRepository.findAllInvolving(currentUserId, targetUserIds);
 
-    List<ContactRequestRelation> requests = contactRequestRepository.findInvolvingPendingRequest(currentUserId, targetUserIds);
+    List<ContactRequestRelation> requests = contactRequestRepository.findInvolvingPendingRequest(currentUserId,
+        targetUserIds);
 
     for (ContactRequestRelation request : requests) {
       FriendshipStatus status = request.friendshipStatusWithUser(currentUserId);
@@ -77,7 +79,7 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     return targetUserIdToFriendStatus;
   }
 
-  public SearchContact   buildContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
+  public SearchContact buildContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
     return SearchContactBuilder.searchContact()
         .publicId(user.getUserPublicId())
         .fullname(user.getFullname())
@@ -86,5 +88,10 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
         .imageUrl(user.getProfilePicture())
         .friendshipStatus(userDbIdToFriendStatus.getOrDefault(user.getDbId(), FriendshipStatus.UNKNOWN))
         .build();
+  }
+
+  @Override
+  public FriendshipStatus aggreateConnection(User a, User b) {
+    return aggreateConnection(a.getDbId(), b.getDbId());
   }
 }

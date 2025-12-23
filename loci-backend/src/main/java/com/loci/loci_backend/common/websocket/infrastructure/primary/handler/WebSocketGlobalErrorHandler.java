@@ -1,10 +1,6 @@
 package com.loci.loci_backend.common.websocket.infrastructure.primary.handler;
 
-import java.io.IOException;
-
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketSession;
 
 import lombok.extern.log4j.Log4j2;
 

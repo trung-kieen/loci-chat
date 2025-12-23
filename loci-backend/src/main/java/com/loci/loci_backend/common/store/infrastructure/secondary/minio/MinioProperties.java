@@ -2,7 +2,6 @@ package com.loci.loci_backend.common.store.infrastructure.secondary.minio;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;

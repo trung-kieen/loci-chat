@@ -3,6 +3,7 @@ package com.loci.loci_backend.common.user.domain.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.loci.loci_backend.common.authentication.domain.Principal;
 import com.loci.loci_backend.common.authentication.domain.Username;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
@@ -21,7 +22,7 @@ public interface UserRepository {
 
   boolean existByEmail(UserEmail email);
 
-  User save(User user);
+  User createOrUpdate(User user);
 
   Page<User> searchUser(UserSearchCriteria criteria, Pageable pageable);
 
@@ -29,6 +30,9 @@ public interface UserRepository {
 
   public List<User> getUsersFromIds(List<UserDBId> ids);
 
-  Page<User> getUsersFromIds(List<UserDBId> suggestUserIds, Pageable pageable);
+  public Page<User> getUsersFromIds(List<UserDBId> suggestUserIds, Pageable pageable);
+
+  public User getOrThrow(Principal principal);
+  public Optional<User> get(Principal principal);
 
 }
