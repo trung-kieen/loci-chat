@@ -7,8 +7,8 @@ import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfile;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
@@ -30,7 +30,7 @@ public class SearchResultExtractor {
 
   private final KeycloakPrincipal currentPrincipal;
 
-  public SearchContactList fromUserIds(List<UserDBId> suggestUserIds, Pageable pageable) {
+  public ContactProfileList fromUserIds(List<UserDBId> suggestUserIds, Pageable pageable) {
 
     Page<User> matchingUsers = userRepository.getUsersFromIds(suggestUserIds, pageable);
 
@@ -41,7 +41,7 @@ public class SearchResultExtractor {
    * Provide search normalize resolve user and their connection status relation to
    * current user
    */
-  public SearchContactList fromUsers(Page<User> matchingUsers) {
+  public ContactProfileList fromUsers(Page<User> matchingUsers) {
 
     User currentUser = userRepository.getByUsername(currentPrincipal.getUsername())
         .orElseThrow(() -> new EntityNotFoundException());
@@ -51,10 +51,10 @@ public class SearchResultExtractor {
     Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus = connectionResolver
         .aggreateConnection(currentUser.getDbId(), matchingUserIds);
 
-    Page<SearchContact> contacts = matchingUsers.map(user -> {
+    Page<ContactProfile> contacts = matchingUsers.map(user -> {
       return connectionResolver.buildSearchContact(userDbIdToFriendStatus, user);
     });
-    return new SearchContactList(contacts);
+    return new ContactProfileList(contacts);
   }
 
 }

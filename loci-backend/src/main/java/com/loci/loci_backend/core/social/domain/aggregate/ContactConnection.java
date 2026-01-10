@@ -10,22 +10,22 @@ import org.jilt.BuilderStyle;
 import lombok.Data;
 
 @Data
-public class Contact {
+public class ContactConnection {
   private ContactId contactId;
   private UserDBId owningUserId;
   private UserDBId contactUserId;
   private UserDBId blockedByUserId;
 
   @Builder(style = BuilderStyle.STAGED)
-  public Contact(ContactId contactId, UserDBId owningUserId, UserDBId contactUserId, UserDBId blockedByUserId) {
+  public ContactConnection(ContactId contactId, UserDBId owningUserId, UserDBId contactUserId, UserDBId blockedByUserId) {
     this.contactId = contactId;
     this.owningUserId = owningUserId;
     this.contactUserId = contactUserId;
     this.blockedByUserId = blockedByUserId;
   }
 
-  public static Contact createConnection(UserDBId a, UserDBId b) {
-    return new Contact(null, a, b, null);
+  public static ContactConnection createConnection(UserDBId a, UserDBId b) {
+    return new ContactConnection(null, a, b, null);
   }
 
   public FriendshipStatus friendshipStatusWithUser(UserDBId currentUserId) {

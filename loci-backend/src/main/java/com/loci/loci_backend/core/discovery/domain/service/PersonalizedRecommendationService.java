@@ -8,7 +8,7 @@ import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.repository.DiscoveryUserRepository;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
@@ -31,7 +31,7 @@ public class PersonalizedRecommendationService {
   private final DiscoveryUserRepository discoveryUserRepository;
   private final CurrentUser currentPrincipal;
 
-  public SearchContactList suggestFriends(SuggestFriendCriteria criteria, Pageable pageable) {
+  public ContactProfileList suggestFriends(SuggestFriendCriteria criteria, Pageable pageable) {
 
     // TODO: user recommendation engine
     List<UserDBId> suggestUserIds = discoveryUserRepository.suggestFriends(criteria);

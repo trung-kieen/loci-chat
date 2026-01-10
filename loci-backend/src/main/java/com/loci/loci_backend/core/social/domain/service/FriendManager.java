@@ -10,7 +10,7 @@ import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
 import com.loci.loci_backend.core.identity.domain.repository.IdentityUserRepository;
-import com.loci.loci_backend.core.social.domain.aggregate.Contact;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnection;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequestList;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequestListBuilder;
@@ -67,7 +67,7 @@ public class FriendManager {
 
   }
 
-  private Contact acceptRequest(ContactRequest request, UserDBId currentUserId, UserDBId friendUserId) {
+  private ContactConnection acceptRequest(ContactRequest request, UserDBId currentUserId, UserDBId friendUserId) {
     if (!request.getReceiverUserId().equals(currentUserId)) {
       throw new IllegalAccessError("Not permited to accept this request");
     }
@@ -77,15 +77,15 @@ public class FriendManager {
     contactRequestRepository.save(request);
     // Create contact connection
 
-    Contact contact = Contact.createConnection(currentUserId, friendUserId);
-    Contact savedContacted = contactRepository.save(contact);
+    ContactConnection contact = ContactConnection.createConnection(currentUserId, friendUserId);
+    ContactConnection savedContacted = contactRepository.save(contact);
     // TODO: Send notification accept request
 
     return savedContacted;
   }
 
   @Transactional(readOnly = false)
-  public Contact acceptRequestFromUser(PublicId friendId) {
+  public ContactConnection acceptRequestFromUser(PublicId friendId) {
 
     User friendUser = userRepository.getByPublicId(friendId)
         .orElseThrow(() -> new EntityNotFoundException("Not found request user information"));
@@ -98,7 +98,7 @@ public class FriendManager {
   }
 
   @Transactional(readOnly = false)
-  public Contact acceptRequestForRequest(PublicId requestId) {
+  public ContactConnection acceptRequestForRequest(PublicId requestId) {
 
     ContactRequest request = contactRequestRepository.getByPublicId(requestId)
         .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));

@@ -2,8 +2,11 @@ package com.loci.loci_backend.core.social.application;
 
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.ApplicationService;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
+import com.loci.loci_backend.core.discovery.domain.aggregate.FriendList;
+import com.loci.loci_backend.core.discovery.domain.service.SearchEngine;
+import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
 import com.loci.loci_backend.core.identity.domain.service.BlockManager;
-import com.loci.loci_backend.core.social.domain.aggregate.Contact;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnection;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequestList;
 import com.loci.loci_backend.core.social.domain.aggregate.CreateContactRequest;
@@ -11,7 +14,6 @@ import com.loci.loci_backend.core.social.domain.service.FriendManager;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,17 +22,18 @@ import lombok.RequiredArgsConstructor;
 public class SocialApplicationService {
   private final FriendManager friendManager;
   private final BlockManager blockManager;
+  private final SearchEngine searchEngine;
 
   public ContactRequest addContactRequest(CreateContactRequest contactRequest) {
     return friendManager.sendRequest(contactRequest);
 
   }
 
-  public Contact acceptContactRequestFromUser(PublicId friendId) {
+  public ContactConnection acceptContactRequestFromUser(PublicId friendId) {
     return friendManager.acceptRequestFromUser(friendId);
   }
 
-  public Contact acceptContactRequestForRequest(PublicId requestId) {
+  public ContactConnection acceptContactRequestForRequest(PublicId requestId) {
     return friendManager.acceptRequestForRequest(requestId);
   }
 
@@ -64,6 +67,11 @@ public class SocialApplicationService {
 
   public void unsendRequestToUser(PublicId targetUserId) {
     friendManager.unsendRequest(targetUserId);
+  }
+
+  public FriendList searchFriend(SearchQuery query) {
+    return this.searchEngine.searchFriend(query);
+
   }
 
 }

@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.translator;
+package com.loci.loci_backend.common.translation;
 
 /**
  * Convert to external id E id to internal Id I

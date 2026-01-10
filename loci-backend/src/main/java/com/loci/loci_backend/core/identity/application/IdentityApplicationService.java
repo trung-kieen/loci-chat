@@ -3,7 +3,7 @@ package com.loci.loci_backend.core.identity.application;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.ApplicationService;
 import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.core.discovery.application.DiscoveryApplicationService;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactList;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
 import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
@@ -29,7 +29,7 @@ public class IdentityApplicationService {
     return profile;
   }
 
-  public SearchContactList discoveryContacts(UserSearchCriteria criteria, Pageable pageable
+  public ContactProfileList discoveryContacts(UserSearchCriteria criteria, Pageable pageable
       ) {
     return discoveryApplicationService.discoveryContacts(criteria, pageable);
   }
@@ -57,7 +57,7 @@ public class IdentityApplicationService {
 
   }
 
-  public SearchContactList suggestFriends(SuggestFriendCriteria criteria, Pageable pageable) {
+  public ContactProfileList suggestFriends(SuggestFriendCriteria criteria, Pageable pageable) {
     return discoveryApplicationService.suggestFriends(criteria, pageable);
   }
 

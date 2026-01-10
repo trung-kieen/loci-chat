@@ -6,7 +6,11 @@ import java.util.Optional;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.SecondaryPort;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
-import com.loci.loci_backend.core.social.domain.aggregate.Contact;
+import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
+import com.loci.loci_backend.core.discovery.domain.aggregate.Friend;
+import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
+import com.loci.loci_backend.core.discovery.infrastructure.secondary.mapper.FriendEntityMapper;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnection;
 import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
 import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactEntity;
 import com.loci.loci_backend.core.social.infrastructure.secondary.mapper.ContactEntityMapper;
@@ -22,9 +26,10 @@ import lombok.RequiredArgsConstructor;
 public class SpringDataContactRepository implements ContactRepository {
   private final JpaContactRepository repository;
   private final ContactEntityMapper mapper;
+  private final FriendEntityMapper friendEntityMapper;
 
   @Override
-  public Optional<Contact> searchContact(UserDBId a, UserDBId b) {
+  public Optional<ContactConnection> searchContact(UserDBId a, UserDBId b) {
     Specification<ContactEntity> contactSpec = JpaContactSpecification.searchContact(a.value(), b.value());
     List<ContactEntity> contacts = repository.findAll(contactSpec);
     if (contacts.isEmpty()) {
@@ -39,18 +44,18 @@ public class SpringDataContactRepository implements ContactRepository {
   }
 
   @Override
-  public Optional<Contact> searchContact(User a, User b) {
+  public Optional<ContactConnection> searchContact(User a, User b) {
     return searchContact(a.getDbId(), b.getDbId());
   }
 
   @Override
   public boolean existsContactConnection(User a, User b) {
-    Optional<Contact> contactOpt = searchContact(a.getDbId(), b.getDbId());
+    Optional<ContactConnection> contactOpt = searchContact(a.getDbId(), b.getDbId());
     return contactOpt.isPresent();
   }
 
   @Override
-  public Contact save(Contact contact) {
+  public ContactConnection save(ContactConnection contact) {
     ContactEntity entity = mapper.from(contact);
     return mapper.toDomain(repository.save(entity));
   }
@@ -63,8 +68,15 @@ public class SpringDataContactRepository implements ContactRepository {
   }
 
   @Override
-  public void delete(Contact contact) {
+  public void delete(ContactConnection contact) {
     repository.deleteById(contact.getContactId().value());
+  }
+
+  @Override
+  public List<Friend> findConnectedWithUser(SearchQuery query, UserDBId userId) {
+    String prefixNameSearch = query.value();
+    List<UserEntity> users = repository.findContactsByNamePrefix(userId.value(), prefixNameSearch);
+    return friendEntityMapper.toDomain(users);
   }
 
 }

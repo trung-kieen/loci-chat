@@ -32,4 +32,5 @@ public class MinioProperties {
 
   // True for MinIO;
   private boolean forcePathStyle = false;
+  private boolean enable;
 }

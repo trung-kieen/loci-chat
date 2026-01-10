@@ -5,6 +5,7 @@ import com.loci.loci_backend.common.store.infrastructure.secondary.local.LocalOb
 import com.loci.loci_backend.common.store.infrastructure.secondary.minio.MinioObjectStorage;
 import com.loci.loci_backend.common.store.infrastructure.secondary.minio.MinioProperties;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -68,16 +69,18 @@ public class StoreConfiguration {
 
 
 
-  @Primary
   @Bean
+  @ConditionalOnProperty(name = "upload.minio.enable", havingValue = "true")
   // @Profile("minio")
   public ObjectStorage minioObjectStorage(MinioClient client, MinioProperties config) {
     log.info("Init minio service for ObjectStorage");
     return new MinioObjectStorage(client, config);
   }
 
+  @ConditionalOnProperty(name = "upload.minio.enable", havingValue = "false")
   @Bean
   public ObjectStorage localObjectStorage() {
+    log.info("Fallback use local object storage");
     return new LocalObjectStorage();
   }
 }

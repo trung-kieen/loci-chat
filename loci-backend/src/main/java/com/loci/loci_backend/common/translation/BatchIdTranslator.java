@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.translator;
+package com.loci.loci_backend.common.translation;
 
 import java.util.Collection;
 import java.util.Map;

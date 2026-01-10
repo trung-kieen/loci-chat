@@ -11,17 +11,17 @@ import org.jilt.BuilderStyle;
 import lombok.Data;
 
 @Data
-public class RestSearchContact {
-  private UUID userId;
+public class RestContactProfile {
+  private UUID id;
   private String fullname;
   private String username;
   private String email;
   private String imageUrl;
   private FriendshipStatusEnum friendshipStatus;
   @Builder(style = BuilderStyle.STAGED)
-  public RestSearchContact(UUID userId, String fullname, String username, String email, String imageUrl,
+  public RestContactProfile(UUID id, String fullname, String username, String email, String imageUrl,
       FriendshipStatusEnum  friendshipStatus) {
-    this.userId = userId;
+    this.id = id;
     this.fullname = fullname;
     this.username = username;
     this.email = email;

@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class SearchContact {
+public class ContactProfile {
   private PublicId publicId;
 
   private UserFullname fullname;
 
   private Username username;
 
-  private UserEmail userEmail;
+  private UserEmail email;
 
   private UserImageUrl imageUrl;
 
@@ -30,12 +30,12 @@ public class SearchContact {
 
 
   @Builder(style = BuilderStyle.STAGED)
-  public SearchContact(PublicId publicId, UserFullname fullname, Username username, UserEmail userEmail,
+  public ContactProfile(PublicId publicId, UserFullname fullname, Username username, UserEmail userEmail,
       UserImageUrl imageUrl, FriendshipStatus friendshipStatus) {
     this.publicId = publicId;
     this.fullname = fullname;
     this.username = username;
-    this.userEmail = userEmail;
+    this.email = userEmail;
     this.imageUrl = imageUrl;
     this.friendshipStatus = friendshipStatus;
   }

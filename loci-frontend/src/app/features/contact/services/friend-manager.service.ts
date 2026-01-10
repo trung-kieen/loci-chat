@@ -4,12 +4,20 @@ import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { UpdatedStatus } from '../../user/models/public-profile.model';
 import { FriendRequestList, FriendshipStatus } from '../models/contact.model';
-import { ConversationPreview } from '../../chat/models/chat.model';
+import { ConversationPreview, CreateGroupData, FriendList } from '../../chat/models/chat.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendManagerService {
+  createGroup(groupData: CreateGroupData) {
+    return this.apiService.post<void>("conversations/group", groupData);
+  }
+
+  searchFriend(query: string): Observable<FriendList> {
+    return this.apiService.get<FriendList>(`/friends?q=${query}`);
+  }
+
   unsendFriendRequest(profileId: string): Observable<UpdatedStatus> {
     return this.apiService.delete<UpdatedStatus>(
       `/contact-requests/${profileId}`,

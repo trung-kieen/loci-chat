@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-list',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './chat-list.css',
 })
 export class ChatList {
+  router = inject(Router);
 
+
+  public goToCreateGroup() {
+    this.router.navigate(["/chat/create-group"])
+  }
 }

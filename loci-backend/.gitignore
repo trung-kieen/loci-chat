@@ -37,3 +37,7 @@ loci.log
 
 logs/
 !logs/.gitkeep
+
+.gradle/
+build/
+bin/

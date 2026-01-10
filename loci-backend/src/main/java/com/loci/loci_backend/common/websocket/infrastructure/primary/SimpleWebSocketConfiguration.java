@@ -7,6 +7,7 @@ import com.loci.loci_backend.common.websocket.infrastructure.WsPaths;
 import com.loci.loci_backend.common.websocket.infrastructure.primary.queue.StompRelayProperties;
 import com.loci.loci_backend.common.websocket.infrastructure.primary.security.SecurityChannelInterceptorAdapter;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -42,6 +43,7 @@ public class SimpleWebSocketConfiguration implements WebSocketMessageBrokerConfi
   @Override
   public void configureMessageBroker(MessageBrokerRegistry config) {
 
+    // TODO extract autoconfigure with @ConditionalOnProperty(name="service.mock", havingValue="true")
     if (env.acceptsProfiles(Profiles.of("rabbitmq"))) {
       log.info("Use rabbitmq as broker for ws");
       log.info("Register stomp relay at port {}", relayProperties.getRelayPort());

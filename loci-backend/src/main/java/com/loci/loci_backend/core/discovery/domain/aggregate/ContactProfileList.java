@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SearchContactList {
+public class ContactProfileList {
 
-  private final Page<SearchContact> contacts;
+  private final Page<ContactProfile> contacts;
 
 }
