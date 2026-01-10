@@ -28,6 +28,9 @@ import lombok.RequiredArgsConstructor;
 public class RestContactMapper {
   private final MapStructRestContactMapper mapstruct;
 
+
+
+
   public CreateContactRequest toDomain(UUID receiverPublicId, KeycloakPrincipal sender) {
     Username senderUsername = sender.getUsername();
     return CreateContactRequestBuilder.createContactRequest()
@@ -60,5 +63,9 @@ public class RestContactMapper {
     return new RestContactRequestList(restRequestPage);
 
   }
+
+
+
+
 
 }

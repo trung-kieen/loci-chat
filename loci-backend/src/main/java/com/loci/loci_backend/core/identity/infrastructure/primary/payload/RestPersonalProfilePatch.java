@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.loci.loci_backend.common.user.domain.vo.UserFirstname;
 import com.loci.loci_backend.common.user.domain.vo.UserLastname;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserFullname;
-import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfileBuilders.Fullname;
 
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;

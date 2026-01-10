@@ -8,8 +8,8 @@ import com.loci.loci_backend.common.store.infrastructure.primary.mapper.RestFile
 import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
 import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
-import com.loci.loci_backend.core.discovery.infrastructure.primary.mapper.RestDicoveryContactMapper;
-import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestSearchContactList;
+import com.loci.loci_backend.core.discovery.infrastructure.primary.mapper.RestContactProfileMapper;
+import com.loci.loci_backend.core.discovery.infrastructure.primary.payload.RestContactProfileList;
 import com.loci.loci_backend.core.identity.application.IdentityApplicationService;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
@@ -23,6 +23,7 @@ import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPe
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettings;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettingsPatch;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfile;
+import com.loci.loci_backend.core.social.infrastructure.primary.mapper.RestContactMapper;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -44,30 +45,31 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/users")
 public class UserIdentityResource {
   private final IdentityApplicationService identityApplicationService;
-  private final RestDicoveryContactMapper restContactMapper;
+  private final RestContactMapper restContactMapper;
+  private final RestContactProfileMapper restContactProfileMapper;
   private final RestProfileMapper restProfileMapper;
   private final RestFileMapper restFileMapper;
 
   @GetMapping("search")
-  public ResponseEntity<RestSearchContactList> searchUser(
+  public ResponseEntity<RestContactProfileList> searchUser(
       @RequestParam(required = false, defaultValue = "", value = "q") String query,
       Pageable pageable, KeycloakPrincipal principal) {
 
     UserSearchCriteria criteria = new UserSearchCriteria(new SearchQuery(query), principal.getUsername());
     ;
     return ResponseEntity
-        .ok(restContactMapper.from(identityApplicationService.discoveryContacts(criteria, pageable)));
+        .ok(restContactProfileMapper.from(identityApplicationService.discoveryContacts(criteria, pageable)));
   }
 
   @GetMapping("suggests")
-  public ResponseEntity<RestSearchContactList> suggestUser(
+  public ResponseEntity<RestContactProfileList> suggestUser(
       // @RequestParam(required = false, defaultValue = "", value = "q") String query,
       KeycloakPrincipal principal,
       Pageable pageable) {
 
     SuggestFriendCriteria criteria = new SuggestFriendCriteria(principal.getUsername());
     return ResponseEntity
-        .ok(restContactMapper.from(identityApplicationService.suggestFriends(criteria, pageable)));
+        .ok(restContactProfileMapper.from(identityApplicationService.suggestFriends(criteria, pageable)));
   }
 
   @GetMapping("me")

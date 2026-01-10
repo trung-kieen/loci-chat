@@ -17,8 +17,6 @@ import com.loci.loci_backend.core.messaging.infrastructure.primary.mapper.MapStr
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-// @Mapper(componentModel = "spring", uses = { ValueObjectTypeConverter.class })
-
 @Mapper(componentModel = "spring", uses = { ValueObjectTypeConverter.class, MapStructRestProfileMapper.class,
     MapStructRestMessageMapper.class })
 public interface MapStructConversationMapper {

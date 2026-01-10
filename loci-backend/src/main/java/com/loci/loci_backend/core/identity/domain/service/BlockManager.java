@@ -7,7 +7,7 @@ import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
-import com.loci.loci_backend.core.social.domain.aggregate.Contact;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnection;
 import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
@@ -33,12 +33,12 @@ public class BlockManager {
     User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
         .orElseThrow(() -> new EntityNotFoundException());
 
-    Contact contact = null;
-    Optional<Contact> contactOpt = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId());
+    ContactConnection contact = null;
+    Optional<ContactConnection> contactOpt = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId());
     if (contactOpt.isPresent()) {
       contact = contactOpt.get();
     } else {
-      contact = Contact.createConnection(currentUser.getDbId(), toBlockUser.getDbId());
+      contact = ContactConnection.createConnection(currentUser.getDbId(), toBlockUser.getDbId());
     }
 
     // .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
@@ -47,7 +47,7 @@ public class BlockManager {
     // // TODO: websocket - send ack for block conversation/contact
     //
     // // TODO: notification - user block them, update converstaion state
-    Contact savedContact = contactRepository.save(contact);
+    ContactConnection savedContact = contactRepository.save(contact);
 
     FriendshipStatus updatedStatus = savedContact.friendshipStatusWithUser(currentUser.getDbId());
     return updatedStatus;
@@ -62,7 +62,7 @@ public class BlockManager {
         .orElseThrow(() -> new EntityNotFoundException());
 
     // Search for contact of user
-    Contact contact = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId())
+    ContactConnection contact = contactRepository.searchContact(toBlockUser.getDbId(), currentUser.getDbId())
         .orElseThrow(() -> new EntityNotFoundException("Not found contact request"));
     contact.setBlockedByUserId(null);
 

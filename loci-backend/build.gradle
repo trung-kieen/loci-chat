@@ -1,0 +1,180 @@
+plugins {
+    id 'java-library'
+    // id 'io.freefair.lombok' version '3.8.4'
+    id 'maven-publish'
+    id 'org.springframework.boot' version '3.5.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.flywaydb.flyway' version '10.4.1'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version '6.0.8'
+}
+
+group = 'com.loci'
+version = '0.0.1-SNAPSHOT'
+description = 'loci'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot starters
+    api libs.org.springframework.boot.spring.boot.starter.data.jpa
+    api libs.org.springframework.boot.spring.boot.starter.web
+    api libs.org.springframework.boot.spring.boot.starter.security
+    api libs.org.springframework.boot.spring.boot.starter.oauth2.resource.server
+    api libs.org.springframework.boot.spring.boot.starter.validation
+    api libs.org.springframework.boot.spring.boot.starter.webflux
+    api libs.org.springframework.boot.spring.boot.starter.websocket
+    api libs.org.springframework.boot.spring.boot.starter.amqp
+    api libs.org.springframework.boot.spring.boot.starter.aop
+    api libs.org.springframework.boot.spring.boot.starter.actuator
+    api libs.org.springframework.boot.spring.boot.starter.cache
+
+    // Spring Security
+    api libs.org.springframework.security.spring.security.messaging
+
+    // Spring Shell
+    api libs.org.springframework.shell.spring.shell.starter
+
+    // Spring Boot Admin
+    api libs.de.codecentric.spring.boot.admin.starter.client
+    api libs.de.codecentric.spring.boot.admin.server.ui
+
+    // Database
+    api libs.org.flywaydb.flyway.core
+    api libs.org.flywaydb.flyway.database.postgresql
+    runtimeOnly libs.org.postgresql.postgresql
+    runtimeOnly libs.com.h2database.h2
+
+    // Cloud & Storage
+    api libs.software.amazon.awssdk.s3
+    api libs.io.minio.minio
+    api libs.com.squareup.okhttp3.okhttp.urlconnection
+
+    // Networking
+    api libs.io.netty.netty.all
+    api libs.io.projectreactor.netty.reactor.netty
+
+    // Jackson & JSON
+    api libs.com.fasterxml.jackson.core.jackson.databind
+
+    // Mapping
+    // api libs.org.modelmapper.modelmapper
+
+    // Keycloak
+    api libs.org.keycloak.keycloak.core
+    api libs.org.keycloak.keycloak.admin.client
+    api libs.jakarta.ws.rs.jakarta.ws.rs.api
+    api libs.org.jboss.resteasy.resteasy.client
+    api libs.org.jboss.resteasy.resteasy.jackson2.provider
+
+    // WebJars
+    api libs.org.webjars.stomp.websocket
+    api libs.org.webjars.sockjs.client
+
+    // OpenAPI/Swagger
+    api libs.org.springdoc.springdoc.openapi.starter.webmvc.ui
+
+    // Monitoring
+    api libs.io.micrometer.micrometer.registry.prometheus
+    api libs.net.logstash.logback.logstash.logback.encoder
+
+    // Utilities
+    api libs.org.ocpsoft.prettytime.prettytime
+    api libs.com.github.ben.manes.caffeine.caffeine
+    api(libs.com.github.javafaker.javafaker) {
+        exclude group: 'org.yaml', module: 'snakeyaml'
+    }
+    api 'org.yaml:snakeyaml:2.4'
+
+    // Lombok
+    compileOnly libs.org.projectlombok.lombok
+    annotationProcessor libs.org.projectlombok.lombok
+
+
+    // Jilt annotation processor
+    implementation 'cc.jilt:jilt:1.6.3'
+    annotationProcessor 'cc.jilt:jilt:1.6.3'
+
+    // MapStruct annotation processor
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
+
+    // Development tools
+    runtimeOnly libs.org.springframework.boot.spring.boot.devtools
+
+    // Testing
+    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    testImplementation libs.org.springframework.security.spring.security.test
+}
+
+// Code quality tools
+spotbugs {
+    toolVersion = '4.8.3'
+    effort = 'max'
+    reportLevel = 'low'
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = '7.0.0'
+    ruleSets = ['category/java/errorprone.xml', 'category/java/bestpractices.xml']
+    ignoreFailures = false
+}
+
+checkstyle {
+    configFile = file('google_checks.xml')
+    toolVersion = '10.12.4'
+    maxWarnings = 0
+}
+
+// Flyway configuration
+flyway {
+    configFiles = ['src/main/resources/flyway.conf']
+}
+
+// Publishing
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            // Tell Gradle where generated sources are
+            srcDirs += 'build/generated/sources/annotationProcessor/java/main'
+        }
+    }
+}
+
+
+// Compiler options
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += [
+        '-Amapstruct.defaultComponentModel=spring',
+        '-Amapstruct.suppressGeneratorTimestamp=true',
+        '-Amapstruct.unmappedTargetPolicy=IGNORE'
+    ]
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+// Test configuration
+tasks.named('test') {
+    useJUnitPlatform()
+}

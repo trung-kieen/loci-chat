@@ -1,12 +1,9 @@
-
 <main id="main-content" class="flex h-[calc(100vh-4rem)]">
-
-
   <section id="create-group-panel" class="flex-1 bg-white flex flex-col">
     <div class="border-b border-neutral-200 p-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-3">
-          <button class="p-2 hover:bg-neutral-100 rounded-lg" aria-label="Back to conversations">
+          <button (click)="onBack()" class="p-2 hover:bg-neutral-100 rounded-lg" aria-label="Back to conversations">
             <i class="fa-solid fa-arrow-left text-neutral-600"></i>
           </button>
           <h2 class="text-xl text-black">Create New Group</h2>
@@ -14,114 +11,112 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto p-6">
+    <form (ngSubmit)="onCreateGroup()" class="flex-1 overflow-y-auto p-6">
       <div class="max-w-2xl mx-auto space-y-6">
+        <!-- Avatar Upload -->
         <div class="text-center">
           <div class="relative inline-block">
-            <div class="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center border-2 border-dashed border-neutral-300 hover:border-neutral-400 cursor-pointer">
+            <div
+              class="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center border-2 border-dashed border-neutral-300 hover:border-neutral-400 cursor-pointer"
+              (click)="fileInput.click()">
+              @if (!imageUrl()) {
               <i class="fa-solid fa-camera text-neutral-400 text-xl"></i>
+              } @else {
+              <img [src]="imageUrl()" alt="Group Avatar" class="w-full h-full rounded-full object-cover">
+              }
             </div>
-            <button class="absolute -bottom-2 -right-2 w-8 h-8 bg-neutral-600 text-white rounded-full flex items-center justify-center hover:bg-neutral-700">
+            <input type="file" #fileInput (change)="onAvatarSelected($event)" accept="image/*" class="hidden">
+            <button
+              class="absolute -bottom-2 -right-2 w-8 h-8 bg-neutral-600 text-white rounded-full flex items-center justify-center hover:bg-neutral-700"
+              (click)="fileInput.click()">
               <i class="fa-solid fa-plus text-sm"></i>
             </button>
           </div>
           <p class="text-sm text-neutral-500 mt-2">Upload group avatar</p>
         </div>
 
+        <!-- Form Fields -->
         <div class="space-y-4">
+          <!-- Group Name -->
           <div>
-            <label class="block text-sm text-neutral-700 mb-2">Group Name</label>
-            <input type="text" placeholder="Enter group name..." class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
+            <label for="groupName" class="block text-sm text-neutral-700 mb-2">Group Name</label>
+            <input id="groupName" type="text" placeholder="Enter group name..." [formControl]="groupNameControl"
+              class="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500"
+              [class.border-red-300]="groupNameControl.touched && groupNameControl.invalid">
+            @if (groupNameControl.touched && groupNameControl.hasError('required')) {
+            <p class="text-sm text-red-500 mt-1">Group name is required</p>
+            }
+            @if (groupNameControl.touched && groupNameControl.hasError('minlength')) {
+            <p class="text-sm text-red-500 mt-1">Name must be at least 3 characters</p>
+            }
           </div>
 
+          <!-- Search Members -->
           <div>
-            <label class="block text-sm text-neutral-700 mb-2">Add Members</label>
+            <label for="searchFriends" class="block text-sm text-neutral-700 mb-2">Add Members</label>
             <div class="relative mb-4">
-              <input type="text" placeholder="Search friends..." class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
+              <input id="searchFriends" type="text" placeholder="Search friends..." [formControl]="searchControl"
+                class="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
               <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
             </div>
           </div>
 
+          <!-- Selected Members -->
           <div class="space-y-3">
-            <h3 class="text-sm text-neutral-700">Selected Members (3)</h3>
+            <h3 class="text-sm text-neutral-700">Selected Members ({{ selectedCount() }})</h3>
             <div class="flex flex-wrap gap-2">
+              @for (member of selectedFriends(); track member.id) {
               <div class="flex items-center space-x-2 bg-neutral-100 rounded-full px-3 py-2">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234" alt="John Smith" class="w-6 h-6 rounded-full">
-                <span class="text-sm text-neutral-700">John Smith</span>
-                <button class="text-neutral-500 hover:text-neutral-700">
+                <img [src]="member.imageUrl" [alt]="member.name" class="w-6 h-6 rounded-full">
+                <span class="text-sm text-neutral-700">{{ member.name }}</span>
+                <button type="button" (click)="removeMember(member.id)" class="text-neutral-500 hover:text-neutral-700">
                   <i class="fa-solid fa-times text-xs"></i>
                 </button>
               </div>
-              <div class="flex items-center space-x-2 bg-neutral-100 rounded-full px-3 py-2">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678" alt="Sarah Johnson" class="w-6 h-6 rounded-full">
-                <span class="text-sm text-neutral-700">Sarah Johnson</span>
-                <button class="text-neutral-500 hover:text-neutral-700">
-                  <i class="fa-solid fa-times text-xs"></i>
-                </button>
-              </div>
-              <div class="flex items-center space-x-2 bg-neutral-100 rounded-full px-3 py-2">
-                <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891" alt="Emily Davis" class="w-6 h-6 rounded-full">
-                <span class="text-sm text-neutral-700">Emily Davis</span>
-                <button class="text-neutral-500 hover:text-neutral-700">
-                  <i class="fa-solid fa-times text-xs"></i>
-                </button>
-              </div>
+              }
             </div>
           </div>
 
+          <!-- Available Friends -->
           <div class="space-y-3">
             <h3 class="text-sm text-neutral-700">Available Friends</h3>
             <div class="space-y-2 max-h-64 overflow-y-auto">
-              <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
+              @for (friend of filteredFriends(); track friend.id) {
+              <div
+                class="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
                 <div class="flex items-center space-x-3">
-                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=4321" alt="Alex Chen" class="w-8 h-8 rounded-full">
+                  <img [src]="friend.imageUrl" [alt]="friend.name" class="w-8 h-8 rounded-full">
                   <div>
-                    <p class="text-sm text-neutral-900">Alex Chen</p>
-                    <p class="text-xs text-neutral-500">@alexchen</p>
+                    <p class="text-sm text-neutral-900">{{ friend.name }}</p>
+                    <p class="text-xs text-neutral-500">{{ friend.username }}</p>
                   </div>
                 </div>
-                <button class="px-3 py-1 text-sm bg-neutral-600 text-white rounded-lg hover:bg-neutral-700">
+                <button type="button" (click)="addMember(friend)"
+                  class="px-3 py-1 text-sm bg-neutral-600 text-white rounded-lg hover:bg-neutral-700">
                   Add
                 </button>
               </div>
-
-              <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
-                <div class="flex items-center space-x-3">
-                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8765" alt="Lisa Wang" class="w-8 h-8 rounded-full">
-                  <div>
-                    <p class="text-sm text-neutral-900">Lisa Wang</p>
-                    <p class="text-xs text-neutral-500">@lisawang</p>
-                  </div>
-                </div>
-                <button class="px-3 py-1 text-sm bg-neutral-600 text-white rounded-lg hover:bg-neutral-700">
-                  Add
-                </button>
-              </div>
-
-              <div class="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
-                <div class="flex items-center space-x-3">
-                  <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=2468" alt="Mike Rodriguez" class="w-8 h-8 rounded-full">
-                  <div>
-                    <p class="text-sm text-neutral-900">Mike Rodriguez</p>
-                    <p class="text-xs text-neutral-500">@mikerod</p>
-                  </div>
-                </div>
-                <button class="px-3 py-1 text-sm bg-neutral-600 text-white rounded-lg hover:bg-neutral-700">
-                  Add
-                </button>
-              </div>
+              } @empty {
+              <p class="text-sm text-neutral-500 text-center py-4">
+                {{ searchControl.value ? 'No friends found' : 'Search for friends to add' }}
+              </p>
+              }
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
 
+    <!-- Footer Actions -->
     <div class="border-t border-neutral-200 p-6">
       <div class="flex items-center justify-end space-x-3 max-w-2xl mx-auto">
-        <button class="px-6 py-2 text-neutral-600 border border-neutral-200 rounded-lg hover:bg-neutral-50">
+        <button type="button" (click)="onCancel()"
+          class="px-6 py-2 text-neutral-600 border border-neutral-200 rounded-lg hover:bg-neutral-50">
           Cancel
         </button>
-        <button class="px-6 py-2 bg-neutral-600 text-white rounded-lg hover:bg-neutral-700">
+        <button type="submit" [disabled]="!groupForm.valid || selectedCount() === 0"
+          class="px-6 py-2 bg-neutral-600 text-white rounded-lg hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          (click)="onCreateGroup()">
           Create Group
         </button>
       </div>

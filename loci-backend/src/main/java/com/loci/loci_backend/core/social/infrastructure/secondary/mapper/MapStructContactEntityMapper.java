@@ -1,7 +1,7 @@
 package com.loci.loci_backend.core.social.infrastructure.secondary.mapper;
 
 import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
-import com.loci.loci_backend.core.social.domain.aggregate.Contact;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnection;
 import com.loci.loci_backend.core.social.domain.aggregate.ContactRequest;
 import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactEntity;
 import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactRequestEntity;
@@ -22,5 +22,10 @@ public interface MapStructContactEntityMapper {
   @Mapping(source = "contactId", target = "id")
   @Mapping(target = "createdDate", ignore = true)
   @Mapping(target = "lastModifiedDate", ignore = true)
-  public ContactEntity from(Contact contact);
+  public ContactEntity from(ContactConnection contact);
+
+
+  @Mapping(source = "id", target = "contactId")
+  public ContactConnection toDomain(ContactEntity entity );
+
 }

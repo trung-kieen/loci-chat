@@ -9,11 +9,12 @@ import com.loci.loci_backend.common.ddd.domain.contract.ValueObject;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.SecondaryPort;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContact;
-import com.loci.loci_backend.core.discovery.domain.aggregate.SearchContactBuilder;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfile;
+import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileBuilder;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRelationJpaVO;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRequestRelationJpaVO;
+import com.loci.loci_backend.core.social.domain.aggregate.ContactConnectionBuilder;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.social.infrastructure.secondary.enumernation.FriendshipStatusEnum;
 import com.loci.loci_backend.core.social.infrastructure.secondary.repository.JpaContactRepository;
@@ -81,8 +82,8 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     return targetUserIdToFriendStatus;
   }
 
-  public SearchContact buildSearchContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
-    return SearchContactBuilder.searchContact()
+  public ContactProfile buildSearchContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
+    return ContactProfileBuilder.contactProfile()
         .publicId(user.getUserPublicId())
         .fullname(user.getFullname())
         .username(user.getUsername())

@@ -3,6 +3,7 @@ package com.loci.loci_backend.core.social.infrastructure.secondary.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRelationJpaVO;
 import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactEntity;
 
@@ -51,4 +52,13 @@ public interface JpaContactRepository
   Optional<ContactEntity> findConnection(
       @Param("currentUserId") Long currentUserId,
       @Param("targetId") Long targetId);
+
+  @Query("SELECT u FROM ContactEntity c " +
+      "JOIN UserEntity u ON (u.id = c.owningUserId OR u.id = c.contactUserId) " +
+      "WHERE (c.owningUserId = :userId OR c.contactUserId = :userId) " +
+      "AND u.id != :userId " +
+      "AND (LOWER(u.firstname) LIKE LOWER(CONCAT(:namePrefix, '%')) " +
+      "  OR LOWER(u.lastname) LIKE LOWER(CONCAT(:namePrefix, '%')))")
+  List<UserEntity> findContactsByNamePrefix(@Param("userId") Long userId,
+      @Param("namePrefix") String namePrefix);
 }

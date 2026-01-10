@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, finalize, switchMap, tap } from 'rxjs';
 import { ContactSearchItem } from '../../models/contact.model';
 import { DiscoveryContactService } from '../../services/search-contact.service';
@@ -21,10 +21,16 @@ export class SearchUser {
   private friendManager = inject(FriendManagerService);
   private notificationService = inject(NotificationService);
   private logger = this.loggerService.getLogger("SearchUser")
-  searchControl = new FormControl('', { nonNullable: true });
   users = signal<ContactSearchItem[]>([]);
   loading = signal(false);
 
+
+  groupNameControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3)]
+  });
+
+  searchControl = new FormControl('', { nonNullable: true });
   /* expose a signal that reacts to search text */
   private search$ = this.searchControl.valueChanges.pipe(
     debounceTime(300),
