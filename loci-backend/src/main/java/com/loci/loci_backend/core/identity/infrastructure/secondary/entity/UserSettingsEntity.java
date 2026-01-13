@@ -31,10 +31,11 @@ import lombok.Setter;
 public class UserSettingsEntity extends AbstractAuditingEntity<Long> {
 
   @Id
-  private Long id;
+  private Long userId;
 
+  // create contraint to fk from user
   @OneToOne(fetch = FetchType.LAZY)
-  @MapsId // make join column map value to id field
+  // @MapsId // make join column map value to id field
   @JoinColumn(name = "user_id") // mark primary field name as user_id
   @Getter(AccessLevel.NONE)
   @Setter(AccessLevel.NONE)
@@ -51,8 +52,22 @@ public class UserSettingsEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "profile_visibility")
   private Boolean profileVisibility = true;
 
-  public UserSettingsEntity(UserEntity user) {
-    this.user = user;
-    this.id = user.getId();
+  public void setUser(UserEntity user) {
+
+    // JPA required not direct assign maping id to primary key to avoid => use
+    // EntityManager if want to mannualy maping id instead of MapsId
+    // ObjectOptimisticLockingFailureException
+    this.userId = user.getId();
+    // this.user = user;
   }
+
+  @Override
+  public Long getId() {
+    return this.userId;
+  }
+
+  // public UserSettingsEntity(UserEntity user) {
+  // this.user = user;
+  // this.id = user.getId();
+  // }
 }

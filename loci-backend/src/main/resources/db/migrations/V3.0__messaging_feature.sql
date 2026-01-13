@@ -1,3 +1,17 @@
+    create table user_ (
+        profile_visibility boolean,
+        created_date timestamp(6) with time zone,
+        id bigint not null,
+        last_active timestamp(6) with time zone,
+        last_modified_date timestamp(6) with time zone,
+        last_seen timestamp(6) with time zone,
+        public_id uuid,
+        bio varchar(255),
+        email varchar(255),
+        firstname varchar(255),
+        image_url varchar(255),
+        lastname varchar(255), primary key (id)
+    );
     create table contact (
         id bigint not null,
         created_date timestamp(6) with time zone,
@@ -7,6 +21,7 @@
         user_id bigint not null,
         primary key (id)
     );
+
 
     create table contact_request (
         id bigint not null,

@@ -22,7 +22,7 @@ public class AuthorityEntityMapper implements DomainEntityMapper<Authority, Auth
 
   public AuthorityEntity from(Authority authority) {
     return AuthorityEntity.builder()
-        .name(authority.getName().name().toUpperCase())
+        .name(authority.getName().value())
         .build();
   }
 

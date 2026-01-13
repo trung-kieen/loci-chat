@@ -28,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SecurityConfiguration {
   private final AuthenticationEntryPointImpl authenticationEntryPoint;
   private final AuthorizationEntryPointImpl accessDeniedHandler;
+  private final JwtUserSyncFilter jwtSyncUserFilter;
+  private final KeycloakJwtTokenConverter tokenConverter;
 
   /**
    * Map Keycloak roles (REALM and CLIENT level) to get them all
@@ -39,24 +41,14 @@ public class SecurityConfiguration {
 
     var jwtAuthenticationConverter = new JwtAuthenticationConverter();
     // Set converter to mapping token to roles
-    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakJwtTokenConverter());
+    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(tokenConverter);
 
     return jwtAuthenticationConverter;
   }
 
   /**
-   * Sync local minimal user database with Keycloak db
-   */
-  @Bean
-  public JwtUserSyncFilter jwtAuthUserFilterBean() {
-    return new JwtUserSyncFilter();
-  }
-
-
-
-
-
-  /**
+   *
+   * /**
    * Configure security
    */
   @Bean
@@ -82,7 +74,7 @@ public class SecurityConfiguration {
 
     http.oauth2ResourceServer(
         t -> t.jwt(j -> j.jwtAuthenticationConverter(jwtAuthenticationConverterForKeycloak())));
-    http.addFilterAfter(jwtAuthUserFilterBean(), SwitchUserFilter.class);
+    http.addFilterAfter(jwtSyncUserFilter, SwitchUserFilter.class);
 
     return http.build();
   }

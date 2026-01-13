@@ -7,11 +7,18 @@ import java.util.stream.Stream;
 
 import com.loci.loci_backend.common.validation.domain.Assert;
 
+import lombok.Getter;
+
+@Getter
 public enum Role {
-  ADMIN,
-  USER,
-  ANONYMOUS,
-  UNKNOWN;
+
+  // use lowercase for consistence with keycloak and spring security
+  ADMIN("admin"),
+  USER("user"),
+  ANONYMOUS("anonymous"),
+  UNKNOWN("unknown");
+
+  private String value;
 
   private static final String PREFIX = "ROLE_";
   private static final Map<String, Role> ROLES = buildRoles();
@@ -21,11 +28,15 @@ public enum Role {
     return Stream.of(values()).collect(Collectors.toUnmodifiableMap(Role::key, Function.identity()));
   }
 
+  private Role(String value) {
+    this.value = value;
+  }
+
   /*
    * Return the name of role in spring app
    */
   public String key() {
-    return PREFIX + name();
+    return PREFIX + value;
   }
 
   public static Role from(String role) {
@@ -35,7 +46,7 @@ public enum Role {
   }
 
   public static Role fromKeycloak(String role) {
-    return ROLES.getOrDefault(PREFIX + role.strip().toUpperCase(), UNKNOWN);
+    return ROLES.getOrDefault(PREFIX + role, UNKNOWN);
   }
 
 }

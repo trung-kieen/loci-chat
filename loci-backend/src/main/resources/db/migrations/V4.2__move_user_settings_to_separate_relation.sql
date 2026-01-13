@@ -8,10 +8,10 @@
         primary key (user_id)
     );
 
-    alter table if exists user_settings
-       add constraint FKp3nomjf43s475m64i9q73arb0
-       foreign key (user_id)
-       references user_;
-    alter table user_ drop column friend_request_setting;
-    alter table user_ drop column last_seen_setting;
-    alter table user_ drop column profile_visibility;
+    -- alter table if exists user_settings
+    --    add constraint FKp3nomjf43s475m64i9q73arb0
+    --    foreign key (user_id)
+    --    references user_;
+    -- alter table user_ drop column friend_request_setting;
+    -- alter table user_ drop column last_seen_setting;
+    -- alter table user_ drop column profile_visibility;

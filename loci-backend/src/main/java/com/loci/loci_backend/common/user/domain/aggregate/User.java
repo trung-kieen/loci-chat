@@ -1,13 +1,9 @@
 package com.loci.loci_backend.common.user.domain.aggregate;
 
 import java.time.Instant;
-import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.loci.loci_backend.common.authentication.domain.Username;
-import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.user.domain.vo.UserEmail;
@@ -141,56 +137,6 @@ public class User {
     // .profileVisibility(ProfileVisibility.ofDefault())
     // .build();
     // }
-  }
-
-  public static User fromTokenAttributes(Map<String, Object> attributes, Collection<String> rolesFromAccessToken) {
-
-    PublicId id = null;
-    if (attributes.containsKey("id")) {
-      id = PublicId.getOrRandom(attributes.get("id").toString());
-    }
-
-    UserEmail email = null;
-    if (attributes.containsKey("email")) {
-      email = new UserEmail(attributes.get("email").toString());
-    }
-    UserFirstname firstname = null;
-    if (attributes.containsKey("family_name")) {
-      firstname = new UserFirstname(attributes.get("family_name").toString());
-    }
-
-    UserLastname lastname = null;
-    if (attributes.containsKey("given_name")) {
-      lastname = new UserLastname(attributes.get("given_name").toString());
-    }
-
-    Username username = null;
-    if (attributes.containsKey("preferred_username")) {
-      username = new Username(attributes.get("preferred_username").toString());
-    }
-
-    Set<Authority> authorities = rolesFromAccessToken.stream()
-        .map(authority -> Authority.builder().name(new AuthorityName(authority)).build())
-        .collect(Collectors.toSet());
-
-    // Token use to update user so allow null field
-    // Update need to ingore the null value
-    var builder = UserBuilder.user();
-    return builder.userPublicId(id)
-        .dbId(null)
-        .email(email)
-        .firstname(firstname)
-        .lastname(lastname)
-        .username(username)
-        .profilePicture(null)
-        .createdDate(null)
-        .lastModifiedDate(Instant.now())
-        .bio(null)
-        .lastActive(Instant.now())
-        // .privacySetting(null)
-        .authorities(authorities)
-        .build();
-
   }
 
   public Username getUsername() {

@@ -24,6 +24,8 @@ public interface UserRepository {
 
   User createOrUpdate(User user);
 
+  // User create(User user);
+
   // Move to discovery boundcontext
   Page<User> searchUser(UserSearchCriteria criteria, Pageable pageable);
 
@@ -36,8 +38,5 @@ public interface UserRepository {
   public User findByPrincipal(CurrentUser principal);
 
   public Optional<User> get(CurrentUser principal);
-
-
-
 
 }

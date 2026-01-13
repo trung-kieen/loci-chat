@@ -2,15 +2,19 @@ package com.loci.loci_backend.common.user.infrastructure.secondary.repository;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.loci.loci_backend.common.collection.Sets;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.SecondaryPort;
 import com.loci.loci_backend.common.user.domain.aggregate.Authority;
+import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.AuthorityRepository;
+import com.loci.loci_backend.common.user.domain.vo.AuthorityName;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.AuthorityEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.mapper.AuthorityEntityMapper;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -25,19 +29,22 @@ public class SpringDataAuthorityRepository implements AuthorityRepository {
 
   @Transactional(readOnly = false)
   @Override
-  public Set<Authority> saveAll(Collection<Authority> authorities) {
+  public Set<Authority> createIfNotExists(Collection<Authority> authorities) {
     Set<AuthorityEntity> entities = authorityEntityMapper.from(authorities);
-    Set<AuthorityEntity> savedEntities = new HashSet<>();
-    for (AuthorityEntity authorityEntity : entities) {
-      if (!repository.existsById(authorityEntity.getName())) {
-        AuthorityEntity newEntity = repository.save(authorityEntity);
-        savedEntities.add(newEntity);
-      } else {
-        repository.findById(authorityEntity.getName()).ifPresent(savedEntities::add);
-      }
+
+    Set<String> authoritieNames = authorities.stream().map(Authority::getName).map(AuthorityName::value)
+        .collect(Collectors.toSet());
+
+    List<AuthorityEntity> existsAuthorityEntities = repository.findAllById(authoritieNames);
+
+    Set<AuthorityEntity> missingAuthorityEntities = Sets.difference(entities, existsAuthorityEntities);
+
+    if (!missingAuthorityEntities.isEmpty()) {
+      repository.saveAll(missingAuthorityEntities);
+      repository.flush();
     }
-    repository.flush();
-    return authorityEntityMapper.toDomain(savedEntities);
+
+    return new HashSet<>(authorities);
   }
 
   // @Override
@@ -63,6 +70,11 @@ public class SpringDataAuthorityRepository implements AuthorityRepository {
   @Override
   public boolean exists(Authority authority) {
     return repository.existsById(authorityEntityMapper.from(authority).getName());
+  }
+
+  @Override
+  public void addUserAuthorities(User user, Set<Authority> authorities) {
+    user.setAuthorities(authorities);
   }
 
 }

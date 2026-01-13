@@ -21,4 +21,10 @@ public class Sets {
         .map(fieldExtractor)
         .collect(Collectors.toSet());
   }
+
+  public static <T> Set<T> difference(Collection<T> a, Collection<T> b) {
+    Set<T> substractions = new HashSet<>(a);
+    substractions.removeAll(b);
+    return substractions;
+  }
 }

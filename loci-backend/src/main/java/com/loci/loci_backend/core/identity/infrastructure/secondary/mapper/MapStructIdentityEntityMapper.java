@@ -40,7 +40,7 @@ public interface MapStructIdentityEntityMapper {
   @Mapping(source = "id", target = "userId")
   public UserSettings toDomain(UserSettingsEntity settings);
 
-  @Mapping(source = "userId", target = "id")
+  // @Mapping(source = "userId", target = "id")
   // @Mapping(target = "user", ignore = true)
   @Mapping(target = "createdDate", ignore = true)
   @Mapping(target = "lastModifiedDate", ignore = true)

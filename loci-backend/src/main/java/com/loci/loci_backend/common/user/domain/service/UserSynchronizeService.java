@@ -1,10 +1,8 @@
 package com.loci.loci_backend.common.user.domain.service;
 
 import java.util.Optional;
-import java.util.Set;
 
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
-import com.loci.loci_backend.common.user.domain.aggregate.Authority;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.AuthorityRepository;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
@@ -12,9 +10,10 @@ import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
 // removed direct JPA repository usage - use domain repository instead
 import com.loci.loci_backend.core.identity.domain.repository.UserSettingsRepository;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -27,36 +26,47 @@ public class UserSynchronizeService {
   private final UserSettingsRepository userSettingsRepository;
   private final AuthorityRepository authorityRepository;
 
-  @Transactional(readOnly = false)
-  public void syncUser(User user) {
-    if (user == null) {
-      throw new EntityNotFoundException("Error while user sync not accept null user from Oauth2 Provider");
-    }
-    log.debug("Receive user from oauth2 provider {}", user);
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+  public void syncUser(User requestUser) {
 
-    User userToPersistence = user;
-    Optional<User> oldDbUser = userRepository.getByUsername(user.getUsername());
+    Assert.notNull(requestUser, "Error while user sync not accept null user from Oauth2 Provider");
 
+    log.debug("Receive user from oauth2 provider {}", requestUser);
+
+    // Confirm the authority is exist in database and save them consistently
+    authorityRepository.createIfNotExists(requestUser.getAuthorities());
+
+    User userToPersistence = requestUser;
+    Optional<User> queryDbUser = userRepository.getByUsername(requestUser.getUsername());
+    User savedUser = null;
+
+    final boolean existsKeyCloakUser = queryDbUser.isPresent();
     // User is exist in system
-    if (oldDbUser.isPresent()) {
-      userToPersistence = oldDbUser.get();
-      log.debug("Found user from database {}", oldDbUser.get());
-      userToPersistence.syncOauth2User(user);
+    if (existsKeyCloakUser) {
+      userToPersistence = queryDbUser.get();
+      log.debug("Found user from database {}", queryDbUser.get());
+
+      userToPersistence.syncOauth2User(requestUser);
+
       log.debug("Database user had updated {}", userToPersistence);
+
+      userToPersistence.provideMandatoryField();
+
+      savedUser = userRepository.createOrUpdate(userToPersistence);
+
+      log.debug("User sync with persistence context ", savedUser);
+
     } else {
-      // User data from keycloak not exist in system
+      log.debug("Keycloak user not exist for user {}", userToPersistence);
+      // Create new keycloak user
+      // userToPersistence.setAuthorities(authorities);
+      userToPersistence.initFieldForSignup();
+      savedUser = userRepository.createOrUpdate(userToPersistence);
 
-      // Confirm the authority is exist in database and save them consistently
-      Set<Authority> authorities = authorityRepository.saveAll(user.getAuthorities());
-      userToPersistence.setAuthorities(authorities);
+      // authorityRepository.addUserAuthorities(savedUser, authorities);
 
-    }
-    userToPersistence.provideMandatoryField();
-    User savedUser = userRepository.createOrUpdate(userToPersistence);
-    log.debug("User sync with persistence context ", savedUser);
+      // Init authorities
 
-    // When created new user
-    if (!oldDbUser.isPresent()) {
       UserSettings defaultUserSettings = new UserSettings(savedUser);
 
       // Make sure flush entity before further setting creation, to avoid duplicate

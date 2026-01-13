@@ -51,8 +51,10 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   @Column(name = "id")
   private Long id;
 
+  @Column(unique = true)
   private String email;
 
+  @Column(unique = true)
   private String username;
 
   private String firstname;
@@ -86,7 +88,7 @@ public class UserEntity extends AbstractAuditingEntity<Long> {
   // @Column(name = "profile_visibility")
   // private Boolean profileVisibility = true;
 
-  @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+  @ManyToMany(cascade = { CascadeType.REMOVE, CascadeType.MERGE }, fetch = FetchType.LAZY)
   @JoinTable(name = "user_authority", joinColumns = {
       @JoinColumn(name = "user_id", referencedColumnName = "id")
   }, inverseJoinColumns = {
