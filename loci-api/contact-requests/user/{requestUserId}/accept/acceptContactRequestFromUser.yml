@@ -1,0 +1,45 @@
+info:
+  name: acceptContactRequestFromUser
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/contact-requests/user/:requestUserId/accept"
+  params:
+    - name: requestUserId
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 202 Response
+    description: Accepted
+    request:
+      url: "{{baseUrl}}/contact-requests/user/:requestUserId/accept"
+      method: POST
+      params:
+        - name: requestUserId
+          value: ""
+          type: path
+    response:
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: "*/*"
+      body:
+        type: text
+        data: |-
+          {
+            "status": {
+              "value": "",
+              "connected": false,
+              "notConnected": false
+            }
+          }

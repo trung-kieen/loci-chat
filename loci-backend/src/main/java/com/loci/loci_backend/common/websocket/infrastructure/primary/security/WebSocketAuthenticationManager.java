@@ -11,13 +11,11 @@ import com.loci.loci_backend.common.websocket.domain.vo.BearerToken;
 
 import org.keycloak.common.VerificationException;
 import org.keycloak.representations.AccessToken;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +51,5 @@ public class WebSocketAuthenticationManager implements AuthenticationManager {
     }
     return token;
   }
-
 
 }

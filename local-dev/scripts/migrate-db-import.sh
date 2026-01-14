@@ -1,7 +1,8 @@
 #!/bin/bash
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # NOTE: run this in current directory not root (use relative path to the ../backups/ folder)
-BACKUP_FILE=$(ls -t ../backups/*.sql | head -n1)
+BACKUP_FILE=$(ls -t $SCRIPT_DIR/../backups/*.sql | head -n1)
 until docker exec -t loci-db pg_isready -U admin ; do sleep 1; done
 
 # Restore database

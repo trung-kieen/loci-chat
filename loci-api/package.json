@@ -1,0 +1,17 @@
+{
+  "name": "bruno-api-tests",
+  "version": "1.0.0",
+  "description": "You must edit the `./environments/local-env.yml` file first to have appropriate user and keycloak connection.",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test",
+    "test:dev": "make test-env ENV=dev",
+    "test:staging": "make test-env ENV=staging"
+  },
+  "devDependencies": {
+    "@usebruno/cli": "^1.0.0"
+  }
+}

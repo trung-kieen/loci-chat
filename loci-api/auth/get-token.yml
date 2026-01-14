@@ -1,0 +1,43 @@
+info:
+  name: get-token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{keycloak_url}}"
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: form-urlencoded
+    data:
+      - name: client_id
+        value: "{{client_id}}"
+      - name: username
+        value: "{{username}}"
+      - name: password
+        value: "{{password}}"
+      - name: grant_type
+        value: password
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar('access_token',res.body.access_token)
+    - type: tests
+      code: |-
+        test("Status is 200", () => { 
+          expect(res.status).to.equal(200); 
+        })
+        test("Have correct token type", () => { 
+          expect(res.body.access_token).to.be.a('string');
+          expect(res.body.access_token.length).greaterThan(0);
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

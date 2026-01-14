@@ -5,8 +5,8 @@ spring:
     admin:
       client:
         url: http://localhost:7070
-        username: 'admin'
-        password: 'adminadmin'
+        username: "admin"
+        password: "adminadmin"
 
   security:
     websocket:
@@ -41,10 +41,10 @@ spring:
       hibernate:
         format_sql: true
 
-    # NOTE: Use for init database schema
-    # hibernate:
-    #   ddl-auto: create
-    # properties:
+      # NOTE: Use for init database schema
+      # hibernate:
+      #   ddl-auto: create
+      # properties:
       # javax:
       #   persistence:
       #     schema-generation:
@@ -52,10 +52,8 @@ spring:
       #         action: create
       #         create-target: src/main/resources/schema.sql
 
-
-
-    # NOTE: update schema helper
-    # properties:
+      # NOTE: update schema helper
+      # properties:
       javax: # use jakartar
         persistence:
           schema-generation:
@@ -64,13 +62,11 @@ spring:
               action: update
               create-target: src/main/resources/update.sql
 
-
   devtools:
     restart:
       enabled: true
     livereload:
       enabled: true
-
 
   # Define message queue connection
   rabbitmq:
@@ -130,8 +126,7 @@ management:
       prometheus:
         enabled: true
     tags:
-      application: loci-app  # tag for app-server metrics
-
+      application: loci-app # tag for app-server metrics
 
 flyway:
   enabled: true
@@ -140,7 +135,6 @@ flyway:
   # schemas: public
   password: admin
   locations: src/main/resources/db/migrations
-
 
 shell:
   interactive:
@@ -151,7 +145,7 @@ logging:
 
   level:
     # logging.level.org.springframework.cache=TRACE
-    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security.web.FilterChainProxy: TRACE
   #   root: DEBUG
   #   com.loci.loci_backend.common.aspect.LoggingAspect: INFO
   #   org:
@@ -182,7 +176,6 @@ keycloak:
     username: admin
     password: admin
 
-
 upload:
   minio:
     enable: false
@@ -192,9 +185,8 @@ upload:
     secure: false
     bucket: loci-bucket-01
     metric-name: ""
-    url-prefix: "http://127.0.0.1:9000" # use to point to
+    url-prefix: "http://localhost:9000" # use to point to
     region: us-east-1
-
 
 # logging:
 #   structured:

@@ -3,7 +3,7 @@
 # Make sure check user is verified and temporary password is off
 # READ docs; https://documenter.getpostman.com/view/7294517/SzmfZHnd
 
-TOKEN_RESPONSE=$(curl --location 'http://127.0.0.1:9090/realms/loci-realm/protocol/openid-connect/token' \
+TOKEN_RESPONSE=$(curl --location 'http://localhost:9090/realms/loci-realm/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'client_id=spring' \
 --data-urlencode 'username=testuser1@gmail.com' \

@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 backup_file=./backups/backup.sql
 docker exec -i loci-db pg_dump -U admin locidb > $backup_file
 

@@ -1,0 +1,73 @@
+info:
+  name: getAllRequest
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{baseUrl}}/contact-requests"
+  params:
+    - name: pageable
+      value: ""
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{baseUrl}}/contact-requests"
+      method: GET
+      params:
+        - name: pageable
+          value: ""
+          type: query
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: "*/*"
+      body:
+        type: text
+        data: |-
+          {
+            "requests": {
+              "totalPages": 0,
+              "totalElements": 0,
+              "size": 0,
+              "content": [
+                {
+                  "userId": "",
+                  "fullname": "",
+                  "username": "",
+                  "email": "",
+                  "imageUrl": "",
+                  "friendshipStatus": ""
+                }
+              ],
+              "number": 0,
+              "sort": {
+                "empty": false,
+                "sorted": false,
+                "unsorted": false
+              },
+              "pageable": {
+                "offset": 0,
+                "sort": {},
+                "paged": false,
+                "pageNumber": 0,
+                "pageSize": 0,
+                "unpaged": false
+              },
+              "numberOfElements": 0,
+              "first": false,
+              "last": false,
+              "empty": false
+            }
+          }

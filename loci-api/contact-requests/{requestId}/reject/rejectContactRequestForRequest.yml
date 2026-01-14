@@ -1,0 +1,45 @@
+info:
+  name: rejectContactRequestForRequest
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/contact-requests/:requestId/reject"
+  params:
+    - name: requestId
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 202 Response
+    description: Accepted
+    request:
+      url: "{{baseUrl}}/contact-requests/:requestId/reject"
+      method: POST
+      params:
+        - name: requestId
+          value: ""
+          type: path
+    response:
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: "*/*"
+      body:
+        type: text
+        data: |-
+          {
+            "status": {
+              "value": "",
+              "connected": false,
+              "notConnected": false
+            }
+          }

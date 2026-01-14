@@ -23,7 +23,7 @@
   <a href="#screenshots">Screenshots</a> •
   <a href="#architecture-overview">Architecture Overview</a> •
   <a href="#tech-stack">Tech Stack</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#contributing">Contributing</a> •
   <a href="#license">License</a>
 </p>
 

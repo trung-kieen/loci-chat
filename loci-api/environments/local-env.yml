@@ -1,0 +1,14 @@
+name: local-env
+variables:
+  - name: baseUrl
+    value: http://localhost:8080/api/v1
+  - name: keycloak_url
+    value: http://localhost:9090/realms/loci-realm/protocol/openid-connect/token
+  - name: client_id
+    value: spring
+  - name: username
+    value: testuser1@gmail.com
+  - name: password
+    value: example1
+  - name: access_token
+    value: ""

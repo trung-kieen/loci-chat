@@ -1,0 +1,45 @@
+info:
+  name: unblockUser
+  type: http
+  seq: 2
+
+http:
+  method: DELETE
+  url: "{{baseUrl}}/blocks/:blockUserId"
+  params:
+    - name: blockUserId
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 202 Response
+    description: Accepted
+    request:
+      url: "{{baseUrl}}/blocks/:blockUserId"
+      method: DELETE
+      params:
+        - name: blockUserId
+          value: ""
+          type: path
+    response:
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: "*/*"
+      body:
+        type: text
+        data: |-
+          {
+            "status": {
+              "value": "",
+              "connected": false,
+              "notConnected": false
+            }
+          }
