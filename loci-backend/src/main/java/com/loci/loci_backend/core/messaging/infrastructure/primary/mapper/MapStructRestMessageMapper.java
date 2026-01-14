@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 public interface MapStructRestMessageMapper {
 
   // TODO:
-  @Mapping(source = "publicId", target = "id")
+  @Mapping(source = "publicId", target = "messageId")
   @Mapping(source = "conversationPublicId", target = "conversationId")
   @Mapping(source = "senderPublicId", target = "senderId")
 

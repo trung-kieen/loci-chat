@@ -32,7 +32,7 @@ public class SearchResultExtractor {
 
   public ContactProfileList fromUserIds(List<UserDBId> suggestUserIds, Pageable pageable) {
 
-    Page<User> matchingUsers = userRepository.getUsersFromIds(suggestUserIds, pageable);
+    Page<User> matchingUsers = userRepository.getPageByIds(suggestUserIds, pageable);
 
     return fromUsers(matchingUsers);
   }

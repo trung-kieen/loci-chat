@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RestChat {
 
-  private UUID id; // only pubic id
+  private UUID conversationId; // only pubic id
   private ConversationTypeEnum type;
 
   private Long unreadCount;

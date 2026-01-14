@@ -15,19 +15,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestPublicProfile {
 
-  private UUID publicId;
+  private UUID userId;
   private String emailAddress;
   private String fullname;
   private String username;
   private String profilePictureUrl;
   private String memberSince;
   private Instant createdAt;
-  private FriendshipStatusEnum  connectionStatus;
+  private FriendshipStatusEnum connectionStatus;
 
   @Builder(style = BuilderStyle.STAGED)
-  public RestPublicProfile(UUID publicId, String emailAddress, String fullname, String username,
+  public RestPublicProfile(UUID userId, String emailAddress, String fullname, String username,
       String profilePictureUrl, String memberSince, Instant createdAt, FriendshipStatusEnum connectionStatus) {
-    this.publicId = publicId;
+    this.userId = userId;
     this.emailAddress = emailAddress;
     this.fullname = fullname;
     this.username = username;

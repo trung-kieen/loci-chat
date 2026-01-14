@@ -8,7 +8,6 @@ import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
 import com.loci.loci_backend.core.groups.domain.vo.GroupId;
 import com.loci.loci_backend.core.groups.domain.vo.GroupImageUrl;
 import com.loci.loci_backend.core.groups.domain.vo.GroupName;
-import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
 
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;
@@ -43,7 +42,8 @@ public class GroupChatInfo {
   }
 
   @Builder(style = BuilderStyle.STAGED, className = "GroupChatInfoBuilderForConversation")
-  public static GroupChatInfo from(Conversation conversation, GroupProfile groupProfile, ParticipantCount participantCount) {
+  public static GroupChatInfo from(Conversation conversation, GroupProfile groupProfile,
+      ParticipantCount participantCount) {
     return GroupChatInfoBuilder
         .groupChatInfo()
         .conversationId(conversation.getId())

@@ -1,5 +1,5 @@
 import { Component, inject, input, output, signal } from '@angular/core';
-import { ConntectRequested } from '../../../models/contact.model';
+import { IConntectRequested } from '../../../models/contact.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,18 +9,14 @@ import { Router } from '@angular/router';
   styleUrl: './friend-request-item.css',
 })
 export class FriendRequestItem {
-
   private router = inject(Router);
-  request = input.required<ConntectRequested>();
+  request = input.required<IConntectRequested>();
 
   accept = output<string>();
   decline = output<string>();
 
-
-
   protected isProcessing = signal(false);
   protected actionTaken = signal<'accepted' | 'declined' | null>(null);
-
 
   onAccept() {
     if (this.isProcessing()) return;
@@ -43,10 +39,7 @@ export class FriendRequestItem {
     this.isProcessing.set(false);
   }
 
-
   navigateToProfile(): void {
     this.router.navigate(['/user', this.request().userId]);
   }
-
 }
-

@@ -1,6 +1,8 @@
 package com.loci.loci_backend.core.conversation.domain.aggregate;
 
-import com.loci.loci_backend.common.user.domain.vo.PublicId;
+import java.util.List;
+import java.util.UUID;
+
 import com.loci.loci_backend.core.groups.domain.vo.GroupImageUrl;
 import com.loci.loci_backend.core.groups.domain.vo.GroupName;
 
@@ -16,6 +18,8 @@ public class CreateGroupRequest {
 
   private GroupName groupName;
   private GroupImageUrl profileImage;
+  // TODO: add list of memberIds
+  private List<UUID> memberIds;
 
   @Builder(style = BuilderStyle.STAGED)
   public CreateGroupRequest(GroupName groupName, GroupImageUrl profileImage) {

@@ -1,32 +1,30 @@
-
-
 export type ConversationType = 'one to one' | 'group';
-export interface Message {
+export interface IMessage {
   // TODO
-  id: string
+  messageId: string;
 }
 
-export interface ConversationPreview {
-  id: string,
-  conversationType: ConversationType,
-  unreadCount: number,
-  lastMessage: Message,
-  createDate: Date,
+export interface IChatPreview {
+  conversationId: string;
+  conversationType: ConversationType;
+  unreadCount: number;
+  lastMessage: IMessage;
+  createDate: Date;
 }
 
-export interface CreateGroupData {
-  groupName: string,
-  imageUrl: string | null,
-  memberIds: string[], // init member ids
+export interface ICreateGroupRequest {
+  groupName: string;
+  imageUrl: string | null;
+  memberIds: string[]; // init member ids
 }
 
-export interface Friend {
-  id: string,
-  name: string,
-  username: string,
-  imageUrl: string,
+export interface IFriend {
+  userId: string;
+  name: string;
+  username: string;
+  imageUrl: string;
 }
 
-export interface FriendList {
-  friends: Friend[]
+export interface IFriendList {
+  friends: IFriend[];
 }

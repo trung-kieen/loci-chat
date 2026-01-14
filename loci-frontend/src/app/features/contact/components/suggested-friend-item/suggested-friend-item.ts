@@ -1,5 +1,5 @@
 import { Component, input, output, signal, inject } from '@angular/core';
-import { FriendSuggestion } from '../../models/contact.model';
+import { IFriendSuggestion } from '../../models/contact.model';
 import { Router } from '@angular/router';
 import { LoggerService } from '../../../../core/services/logger.service';
 
@@ -12,9 +12,9 @@ import { LoggerService } from '../../../../core/services/logger.service';
 export class SuggestedFriendItem {
   private router = inject(Router);
   private loggerService = inject(LoggerService);
-  private logger = this.loggerService.getLogger("Search Contact Item")
+  private logger = this.loggerService.getLogger('Search Contact Item');
 
-  friend = input.required<FriendSuggestion>();
+  friend = input.required<IFriendSuggestion>();
   addFriend = output<string>();
 
   protected isSending = signal(false);
@@ -35,11 +35,7 @@ export class SuggestedFriendItem {
   }
 
   navigateToProfile(): void {
-    this.logger.info("Naviation to user {} profile", this.friend().userId)
+    this.logger.info('Naviation to user {} profile', this.friend().userId);
     this.router.navigate(['/user', this.friend().userId]);
   }
-
-
 }
-
-

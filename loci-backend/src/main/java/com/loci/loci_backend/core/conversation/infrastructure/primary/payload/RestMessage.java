@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestMessage {
-  private UUID id;
+  private UUID messageId;
   private UUID conversationId;
   private UUID senderId;
 
@@ -32,6 +32,5 @@ public class RestMessage {
   private boolean deleted;
 
   // Message status
-
 
 }

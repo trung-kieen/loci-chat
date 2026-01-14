@@ -1,14 +1,4 @@
-
-// export type ConnectionStatus =
-//   | 'not_connected'
-//   | 'friend_request_sent'
-//   | 'friend_request_received'
-//   | 'friend'
-//   | 'unfriended'
-//   | 'blocked'
-//   | 'blocked_by'
-
-import { Page } from "../../../core/model/page";
+import { Page } from '../../../core/model/page';
 
 export enum FriendshipStatus {
   NOT_CONNECTED = 'not_connected',
@@ -18,21 +8,9 @@ export enum FriendshipStatus {
   FRIEND_REQUEST_RECEIVED = 'friend_request_received',
   BLOCKED = 'blocked',
   BLOCKED_BY = 'blocked_by',
-
 }
 
-
-//   | 'not_determined';
-// export type FriendshipStatus =
-//   | 'not_connected'
-//   | 'friend_request_sent'
-//   | 'friends'
-//   | 'not_determined'
-//   | 'friend_request_received'
-//   | 'blocked'
-//   | 'blocked_by';
-
-export interface ContactSearchItem {
+export interface IContactProfile {
   userId: string;
   fullname: string;
   username: string;
@@ -41,25 +19,21 @@ export interface ContactSearchItem {
   friendshipStatus: FriendshipStatus;
 }
 
-export interface SearchContactList {
-  contacts: Page<ContactSearchItem>;
+export interface IContactProfileList {
+  contacts: Page<IContactProfile>;
 }
 
-
-
-export interface FriendRequestList {
-  requests: Page<ConntectRequested>;
+export interface IFriendRequestList {
+  requests: Page<IConntectRequested>;
 }
 
-
-
-export interface FriendSuggestionList {
-  contacts: Page<FriendSuggestion>;
+export interface IFriendSuggestionList {
+  contacts: Page<IFriendSuggestion>;
 }
-export interface ConntectRequested extends ContactSearchItem {
-  mutualConnections: number,
+export interface IConntectRequested extends IContactProfile {
+  mutualConnections: number;
 }
-export interface FriendSuggestion extends ContactSearchItem {
-  bio: string,
-  mutualConnections: number,
+export interface IFriendSuggestion extends IContactProfile {
+  bio: string;
+  mutualConnections: number;
 }

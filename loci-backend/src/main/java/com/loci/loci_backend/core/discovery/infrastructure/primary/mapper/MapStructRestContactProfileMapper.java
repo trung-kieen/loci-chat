@@ -10,6 +10,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = ValueObjectTypeConverter.class)
 public interface MapStructRestContactProfileMapper {
 
-  @Mapping(source = "publicId", target = "id")
+  @Mapping(source = "publicId", target = "userId")
   public RestContactProfile from(ContactProfile domain);
 }

@@ -1,9 +1,6 @@
 package com.loci.loci_backend.core.identity.infrastructure.primary.mapper;
 
-import java.time.Instant;
-
 import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
-import com.loci.loci_backend.common.util.TimeFormatter;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
@@ -17,7 +14,6 @@ import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPu
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring", uses = { ValueObjectTypeConverter.class })
 public interface MapStructRestProfileMapper {
@@ -27,6 +23,7 @@ public interface MapStructRestProfileMapper {
   @Mapping(source = "friendRequestSetting", target = "friendRequests")
   public RestProfileSettings from(UserSettings profile);
 
+  @Mapping(source = "userPublicId", target = "userId")
   @Mapping(source = "email", target = "emailAddress")
   @Mapping(source = "fullname.firstname", target = "firstname")
   @Mapping(source = "fullname.lastname", target = "lastname")
@@ -36,6 +33,7 @@ public interface MapStructRestProfileMapper {
   @Mapping(source = "profilePictureUrl", target = "imageUrl")
   public PersonalProfileChanges toDomain(RestPersonalProfilePatch patch);
 
+  @Mapping(source = "publicId", target = "userId")
   @Mapping(source = "email", target = "emailAddress")
   @Mapping(source = "imageUrl", target = "profilePictureUrl")
   @Mapping(source = "createdDate", target = "createdAt")
@@ -45,6 +43,6 @@ public interface MapStructRestProfileMapper {
 
   // @Named("formatTimeAgo")
   // default String formatTimeAgo(Instant createdDate) {
-  //   return TimeFormatter.timeAgo(createdDate);
+  // return TimeFormatter.timeAgo(createdDate);
   // }
 }

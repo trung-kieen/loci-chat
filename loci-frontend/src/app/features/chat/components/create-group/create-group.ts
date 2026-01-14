@@ -1,7 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CreateGroupService } from '../../service/create-group-service';
-import { Friend } from '../../models/chat.model';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IFriend } from '../../models/chat.model';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-create-group',
@@ -10,9 +16,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
   styleUrl: './create-group.css',
 })
 export class CreateGroup implements OnInit {
-
   private service = inject(CreateGroupService);
-
 
   groupName = this.service.groupName;
   imageUrl = this.service.imageUrl;
@@ -30,29 +34,26 @@ export class CreateGroup implements OnInit {
 
   private fb = inject(FormBuilder);
   groupForm: FormGroup = this.fb.group({
-    groupName: ['', [Validators.required, Validators.minLength(3)]]
+    groupName: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   ngOnInit() {
-    this.groupForm.get('groupName')?.valueChanges.subscribe(value => {
+    this.groupForm.get('groupName')?.valueChanges.subscribe((value) => {
       this.service.updateGroupName(value);
     });
   }
-
-
 
   onSearchFriends(query: string): void {
     this.service.searchFriends(query);
   }
 
-  addMember(friend: Friend): void {
+  addMember(friend: IFriend): void {
     this.service.addMember(friend);
   }
 
   removeMember(friendId: string): void {
     this.service.removeMember(friendId);
   }
-
 
   onAvatarSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -80,7 +81,6 @@ export class CreateGroup implements OnInit {
     }
   }
 
-
   onCancel(): void {
     this.groupForm.reset();
     this.service.reset();
@@ -89,6 +89,4 @@ export class CreateGroup implements OnInit {
   onBack(): void {
     // Navigate back
   }
-
-
 }

@@ -1,15 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { WebApiService } from '../../../core/api/web-api.service';
 import {
-  PersonalProfile,
-  PersonalSettings,
-  ProfileUpdateRequest,
-  SettingsUpdateRequest,
-} from '../models/personal-profile.model';
+  IPersonalProfile,
+  IPersonalSettings,
+  IUpdateProfileRequest,
+  IUpdateSettingsRequest,
+} from '../models/user.model';
 
 @Injectable()
 export class PersonalProfileService {
-
   private apiService = inject(WebApiService);
 
   private _isLoading = signal<boolean>(true);
@@ -21,41 +20,42 @@ export class PersonalProfileService {
 
   readonly profileId = this._profileId.asReadonly();
 
-
-  private profileSignal = signal<PersonalProfile | null>(null);
+  private profileSignal = signal<IPersonalProfile | null>(null);
   profile = this.profileSignal.asReadonly();
 
-  private settingsSignal = signal<PersonalSettings | null>(null);
+  private settingsSignal = signal<IPersonalSettings | null>(null);
   settings = this.settingsSignal.asReadonly();
 
-
-  updateSettings(newSettings: Partial<SettingsUpdateRequest>) {
-    return this.apiService.patch<PersonalSettings>('/users/me/settings', newSettings).subscribe({
-      next: (updated) => this.settingsSignal.set(updated),
-    });
+  updateSettings(newSettings: Partial<IUpdateSettingsRequest>) {
+    return this.apiService
+      .patch<IPersonalSettings>('/users/me/settings', newSettings)
+      .subscribe({
+        next: (updated) => this.settingsSignal.set(updated),
+      });
   }
-
 
   loadMyProfileSettings() {
     this._isLoading.set(true);
     this._error.set(null);
-    return this.apiService.get<PersonalSettings>('/users/me/settings').subscribe({
-      next: (u) => {
-        this.settingsSignal.set(u);
-      },
-      error: () => {
-        this.settingsSignal.set(null);
-        this._isLoading.set(false);
-        this._error.set('Unable to load profile settings');
-      },
-      complete: () => this._isLoading.set(false),
-    });
+    return this.apiService
+      .get<IPersonalSettings>('/users/me/settings')
+      .subscribe({
+        next: (u) => {
+          this.settingsSignal.set(u);
+        },
+        error: () => {
+          this.settingsSignal.set(null);
+          this._isLoading.set(false);
+          this._error.set('Unable to load profile settings');
+        },
+        complete: () => this._isLoading.set(false),
+      });
   }
 
   loadMyProfile() {
     this._isLoading.set(true);
     this._error.set(null);
-    return this.apiService.get<PersonalProfile>('/users/me').subscribe({
+    return this.apiService.get<IPersonalProfile>('/users/me').subscribe({
       next: (u) => {
         this.profileSignal.set(u);
       },
@@ -70,17 +70,21 @@ export class PersonalProfileService {
 
   updateProfileAvatar(imageFile: File) {
     const formRequest = new FormData();
-    formRequest.append("avatar", imageFile);
-    return this.apiService.patchForm<PersonalProfile>('/users/me/avatar', formRequest).subscribe({
-      next: (updated) => this.profileSignal.set(updated),
-    });
+    formRequest.append('avatar', imageFile);
+    return this.apiService
+      .patchForm<IPersonalProfile>('/users/me/avatar', formRequest)
+      .subscribe({
+        next: (updated) => this.profileSignal.set(updated),
+      });
   }
 
-  public updateMyProfile(data: Partial<ProfileUpdateRequest>) {
+  public updateMyProfile(data: Partial<IUpdateProfileRequest>) {
     // this._isLoading.set(true);
-    return this.apiService.patch<PersonalProfile>('/users/me', data).subscribe({
-      next: (updated) => this.profileSignal.set(updated),
-      // complete: () => this._isLoading.set(false),
-    });
+    return this.apiService
+      .patch<IPersonalProfile>('/users/me', data)
+      .subscribe({
+        next: (updated) => this.profileSignal.set(updated),
+        // complete: () => this._isLoading.set(false),
+      });
   }
 }

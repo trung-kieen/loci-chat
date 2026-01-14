@@ -31,22 +31,19 @@ services:
     networks:
       - loci-net
 
-
-
-
   loci-keycloak:
     container_name: loci-keycloak
     image: quay.io/keycloak/keycloak:26.0.0
     ports:
       - 9090:8080
     environment:
-        KEYCLOAK_ADMIN: admin
-        KEYCLOAK_ADMIN_PASSWORD: admin
-        KC_DB: postgres
-        KC_DB_URL_HOST: loci-db
-        KC_DB_URL_DATABASE: locidb
-        KC_DB_USERNAME: admin
-        KC_DB_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: loci-db
+      KC_DB_URL_DATABASE: locidb
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: admin
     networks:
       - loci-net
     depends_on:
@@ -58,12 +55,11 @@ services:
       # User export as the data import
       # - ./keycloak-data/export/:/opt/keycloak/data/import
 
-    command:
-      start-dev --import-realm
+    command: start-dev --import-realm
 
   loci-rabbitmq:
     image: rabbitmq:3.12-management-alpine
-    container_name: 'rabbitmq'
+    container_name: "rabbitmq"
     ports:
       - 5672:5672 # Message broker
       - 15672:15672 # UI manager
@@ -78,7 +74,6 @@ services:
       - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - loci-net
-
 
   loci-minio:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
@@ -121,8 +116,6 @@ services:
       "
     networks:
       - loci-net
-
-
 
 networks:
   loci-net:

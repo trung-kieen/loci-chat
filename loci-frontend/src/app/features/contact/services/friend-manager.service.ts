@@ -2,75 +2,85 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
-import { UpdatedStatus } from '../../user/models/public-profile.model';
-import { FriendRequestList, FriendshipStatus } from '../models/contact.model';
-import { ConversationPreview, CreateGroupData, FriendList } from '../../chat/models/chat.model';
+import { IFriendRequestList, FriendshipStatus } from '../models/contact.model';
+import {
+  IChatPreview,
+  ICreateGroupRequest,
+  IFriendList,
+} from '../../chat/models/chat.model';
+import { IUpdatedStatus } from '../../user/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendManagerService {
-  createGroup(groupData: CreateGroupData) {
-    return this.apiService.post<void>("conversations/group", groupData);
+  createGroup(groupData: ICreateGroupRequest) {
+    return this.apiService.post<void>('conversations/group', groupData);
   }
 
-  searchFriend(query: string): Observable<FriendList> {
-    return this.apiService.get<FriendList>(`/friends?q=${query}`);
+  searchFriend(query: string): Observable<IFriendList> {
+    return this.apiService.get<IFriendList>(`/friends?q=${query}`);
   }
 
-  unsendFriendRequest(profileId: string): Observable<UpdatedStatus> {
-    return this.apiService.delete<UpdatedStatus>(
+  unsendFriendRequest(profileId: string): Observable<IUpdatedStatus> {
+    return this.apiService.delete<IUpdatedStatus>(
       `/contact-requests/${profileId}`,
       {},
     );
   }
-  denyFriendRequest(profileId: string): Observable<UpdatedStatus> {
-    return this.apiService.post<UpdatedStatus>(
+  denyFriendRequest(profileId: string): Observable<IUpdatedStatus> {
+    return this.apiService.post<IUpdatedStatus>(
       `/contact-requests/user/${profileId}/reject`,
       {},
     );
   }
   unfriendUser(profileId: string) {
-    return this.apiService.delete<UpdatedStatus>(`/friends/${profileId}`, {});
+    return this.apiService.delete<IUpdatedStatus>(`/friends/${profileId}`, {});
   }
 
   private apiService = inject(WebApiService);
   private loggerService = inject(LoggerService);
   private logger = this.loggerService.getLogger('FriendManagerService');
-  sendAddFriend(userId: string): Observable<UpdatedStatus> {
-    return this.apiService.post<UpdatedStatus>(
+  sendAddFriend(userId: string): Observable<IUpdatedStatus> {
+    return this.apiService.post<IUpdatedStatus>(
       `/contact-requests/${userId}`,
       {},
     );
   }
 
-  acceptFriendRequestFromUser(publicId: string): Observable<UpdatedStatus> {
-    return this.apiService.post<UpdatedStatus>(
+  acceptFriendRequestFromUser(publicId: string): Observable<IUpdatedStatus> {
+    return this.apiService.post<IUpdatedStatus>(
       `/contact-requests/user/${publicId}/accept`,
       {},
     );
   }
-  blockUser(targetUserId: string): Observable<UpdatedStatus> {
-    return this.apiService.post<UpdatedStatus>(`/blocks/${targetUserId}`, {});
+  blockUser(targetUserId: string): Observable<IUpdatedStatus> {
+    return this.apiService.post<IUpdatedStatus>(`/blocks/${targetUserId}`, {});
   }
 
-  unblockUser(targetUserId: string): Observable<UpdatedStatus> {
-    return this.apiService.delete<UpdatedStatus>(`/blocks/${targetUserId}`, {});
-  }
-
-
-  getConversationByUser(targetUserId: string): Observable<ConversationPreview> {
-    return this.apiService.get<ConversationPreview>(`/conversations/user/${targetUserId}`, {});
-  }
-
-  createConversationWithUser(targetUserId: string): Observable<ConversationPreview> {
-    return this.apiService.post<ConversationPreview>(`/conversations?userId=${targetUserId}`, {});
-  }
-
-  getPendingRequests(): Observable<FriendRequestList> {
-    return this.apiService.get<FriendRequestList>(
-      `/contact-requests`,
+  unblockUser(targetUserId: string): Observable<IUpdatedStatus> {
+    return this.apiService.delete<IUpdatedStatus>(
+      `/blocks/${targetUserId}`,
+      {},
     );
+  }
+
+  getConversationByUser(targetUserId: string): Observable<IChatPreview> {
+    return this.apiService.get<IChatPreview>(
+      `/conversations/user/${targetUserId}`,
+      {},
+    );
+  }
+
+  createConversationWithUser(targetUserId: string): Observable<IChatPreview> {
+    return this.apiService.post<IChatPreview>(
+      `/conversations?userId=${targetUserId}`,
+      {},
+    );
+  }
+
+  getPendingRequests(): Observable<IFriendRequestList> {
+    return this.apiService.get<IFriendRequestList>(`/contact-requests`);
   }
 
   public static isFriends = (status: FriendshipStatus) => {
@@ -82,20 +92,29 @@ export class FriendManagerService {
   };
 
   public static canUnsendRequest = (status: FriendshipStatus) => {
-    return status === FriendshipStatus.FRIEND_REQUEST_SENT
+    return status === FriendshipStatus.FRIEND_REQUEST_SENT;
   };
 
   public static canAddFriend = (status: FriendshipStatus) => {
-    return status === FriendshipStatus.NOT_CONNECTED || status === FriendshipStatus.NOT_DETERMINED;
+    return (
+      status === FriendshipStatus.NOT_CONNECTED ||
+      status === FriendshipStatus.NOT_DETERMINED
+    );
   };
   public static canAcceptRequest = (status: FriendshipStatus) => {
     return status === FriendshipStatus.FRIEND_REQUEST_RECEIVED;
   };
   public static canMessage = (status: FriendshipStatus) => {
-    return status === FriendshipStatus.FRIENDS || status === FriendshipStatus.FRIEND_REQUEST_RECEIVED;
+    return (
+      status === FriendshipStatus.FRIENDS ||
+      status === FriendshipStatus.FRIEND_REQUEST_RECEIVED
+    );
   };
   public static canBlock = (status: FriendshipStatus) => {
-    return status !== FriendshipStatus.BLOCKED && status !== FriendshipStatus.BLOCKED_BY;
+    return (
+      status !== FriendshipStatus.BLOCKED &&
+      status !== FriendshipStatus.BLOCKED_BY
+    );
   };
   public static isBlocked = (status: FriendshipStatus) => {
     return status === FriendshipStatus.BLOCKED;
@@ -105,5 +124,3 @@ export class FriendManagerService {
     return status === FriendshipStatus.BLOCKED_BY;
   };
 }
-
-

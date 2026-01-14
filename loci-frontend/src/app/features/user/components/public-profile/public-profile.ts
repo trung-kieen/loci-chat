@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,12 +19,11 @@ import { LoggerService } from '../../../../core/services/logger.service';
   imports: [CommonModule],
   templateUrl: './public-profile.html',
   styleUrls: ['./public-profile.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PublicProfile implements OnInit {
-
   private loggerService = inject(LoggerService);
-  private logger = this.loggerService.getLogger("PublicProfile ");
+  private logger = this.loggerService.getLogger('PublicProfile ');
 
   private stateService = inject(PublicProfileService);
   private notificationService = inject(NotificationService);
@@ -42,7 +47,6 @@ export class PublicProfile implements OnInit {
   readonly isActiveRecently = this.stateService.isActiveRecently;
 
   private profileId: string | null = null;
-
 
   constructor() {
     const userId = this.route.snapshot.paramMap.get('id');
@@ -75,119 +79,176 @@ export class PublicProfile implements OnInit {
     const profile = this.profile();
     if (!profile) return;
 
-    this.stateService.addFriend().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `Friend request sent to ${profile.fullname}`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to send friend request. Please try again.');
-      }
-    });
+    this.stateService
+      .addFriend()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `Friend request sent to ${profile.fullname}`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to send friend request. Please try again.',
+          );
+        },
+      });
   }
 
   onAcceptRequest(): void {
     const profile = this.profile();
     if (!profile) return;
 
-    this.stateService.acceptRequest().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `You are now friends with ${profile.fullname}`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to accept request. Please try again.');
-      }
-    });
+    this.stateService
+      .acceptRequest()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `You are now friends with ${profile.fullname}`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to accept request. Please try again.',
+          );
+        },
+      });
   }
 
   onBlock(): void {
     const profile = this.profile();
     if (!profile) return;
 
-    if (!confirm(`Block ${profile.fullname}? You won't be able to see their activity.`)) {
+    if (
+      !confirm(
+        `Block ${profile.fullname}? You won't be able to see their activity.`,
+      )
+    ) {
       return;
     }
 
-    this.stateService.blockUser().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `${profile.fullname} has been blocked`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to block user. Please try again.');
-      }
-    });
+    this.stateService
+      .blockUser()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `${profile.fullname} has been blocked`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to block user. Please try again.',
+          );
+        },
+      });
   }
 
   onUnblock(): void {
     const profile = this.profile();
     if (!profile) return;
 
-    this.stateService.unblockUser().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `${profile.fullname} has been unblocked`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to unblock user. Please try again.');
-      }
-    });
+    this.stateService
+      .unblockUser()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `${profile.fullname} has been unblocked`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to unblock user. Please try again.',
+          );
+        },
+      });
   }
 
   onUnfriend(): void {
     const profile = this.profile();
     if (!profile) return;
 
-    if (!confirm(`Remove ${profile.fullname} from friends? This action cannot be undone.`)) {
+    if (
+      !confirm(
+        `Remove ${profile.fullname} from friends? This action cannot be undone.`,
+      )
+    ) {
       return;
     }
 
-    this.stateService.unfriend().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `You are no longer friends with ${profile.fullname}`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to unfriend user. Please try again.');
-      }
-    });
+    this.stateService
+      .unfriend()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `You are no longer friends with ${profile.fullname}`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to unfriend user. Please try again.',
+          );
+        },
+      });
   }
 
   onUnsendFriendRequest() {
     const profile = this.profile();
     if (!profile) return;
 
-    this.stateService.unsendFriendRequest().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `Request ${profile.fullname} is unsend`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to unsend request. Please try again.');
-      }
-    });
+    this.stateService
+      .unsendFriendRequest()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `Request ${profile.fullname} is unsend`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to unsend request. Please try again.',
+          );
+        },
+      });
   }
   onDenyRequest() {
     const profile = this.profile();
     if (!profile) return;
 
-    this.stateService.denyRequest().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe({
-      next: () => {
-        this.notificationService.success('Success', `Request from user ${profile.fullname} is ignore`);
-      },
-      error: () => {
-        this.notificationService.error('Error', 'Unable to deny request. Please try again.');
-      }
-    });
+    this.stateService
+      .denyRequest()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.notificationService.success(
+            'Success',
+            `Request from user ${profile.fullname} is ignore`,
+          );
+        },
+        error: () => {
+          this.notificationService.error(
+            'Error',
+            'Unable to deny request. Please try again.',
+          );
+        },
+      });
   }
 
   onMessage(): void {
@@ -195,33 +256,31 @@ export class PublicProfile implements OnInit {
     if (!profile) return;
     this.stateService.requestMessage().subscribe({
       next: (conversation) => {
-        this.router.navigate(['/chat/one/', conversation.id]);
+        this.router.navigate(['/chat/one/', conversation.conversationId]);
       },
       error: (err) => {
-        this.notificationService.error("Error", "Unable to message to this user");
+        this.notificationService.error(
+          'Error',
+          'Unable to message to this user',
+        );
         this.logger.error(err);
-      }
-
-
-    })
+      },
+    });
 
     // this.stateService.getConversation();
   }
 
   onReport(): void {
-    console.log('Reporting user:', this.profile()?.publicId);
+    console.log('Reporting user:', this.profile()?.userId);
   }
 
   getActivityIcon(type: string): string {
     const iconMap: Record<string, string> = {
-      'message': 'fa-comment',
-      'connection': 'fa-user-plus',
-      'file': 'fa-file',
-      'default': 'fa-circle'
+      message: 'fa-comment',
+      connection: 'fa-user-plus',
+      file: 'fa-file',
+      default: 'fa-circle',
     };
     return iconMap[type] || iconMap['default'];
   }
-
-
-
 }

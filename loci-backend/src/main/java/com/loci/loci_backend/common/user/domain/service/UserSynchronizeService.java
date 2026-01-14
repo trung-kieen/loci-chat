@@ -52,7 +52,7 @@ public class UserSynchronizeService {
 
       userToPersistence.provideMandatoryField();
 
-      savedUser = userRepository.createOrUpdate(userToPersistence);
+      savedUser = userRepository.save(userToPersistence);
 
       log.debug("User sync with persistence context ", savedUser);
 
@@ -61,7 +61,7 @@ public class UserSynchronizeService {
       // Create new keycloak user
       // userToPersistence.setAuthorities(authorities);
       userToPersistence.initFieldForSignup();
-      savedUser = userRepository.createOrUpdate(userToPersistence);
+      savedUser = userRepository.save(userToPersistence);
 
       // authorityRepository.addUserAuthorities(savedUser, authorities);
 

@@ -5,7 +5,6 @@ import {
   Injectable,
   signal,
 } from '@angular/core';
-import { PublicProfile, UpdatedStatus } from '../models/public-profile.model';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { catchError, EMPTY, finalize, Observable, tap, throwError } from 'rxjs';
 import { FriendshipStatus } from '../../contact/models/contact.model';
@@ -13,19 +12,20 @@ import { FriendManagerService } from '../../contact/services/friend-manager.serv
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { ProblemDetail } from '../../../core/error-handler/problem-detail';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ConversationPreview } from '../../chat/models/chat.model';
+import { IChatPreview } from '../../chat/models/chat.model';
 import { LoggerService } from '../../../core/services/logger.service';
+import { IPublicProfile, IUpdatedStatus } from '../models/user.model';
+
 @Injectable()
 export class PublicProfileService {
-
   private loggerService = inject(LoggerService);
-  private logger = this.loggerService.getLogger("PublicProfileService ");
+  private logger = this.loggerService.getLogger('PublicProfileService ');
 
   private friendManager = inject(FriendManagerService);
   private destroyRef = inject(DestroyRef);
   private apiService = inject(WebApiService);
 
-  private _profile = signal<PublicProfile | null>(null);
+  private _profile = signal<IPublicProfile | null>(null);
   private _isLoading = signal<boolean>(true);
   private _error = signal<string | null>(null);
 
@@ -67,44 +67,42 @@ export class PublicProfileService {
 
   readonly canAddFriend = computed(() => {
     const status = this.profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.canAddFriend(status);
   });
 
-
   readonly isFriends = computed(() => {
     const status = this.profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.isFriends(status);
   });
 
-
   readonly canAcceptRequest = computed(() => {
     const status = this._profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.canAcceptRequest(status);
   });
 
   readonly canMessage = computed(() => {
     const status = this._profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.canMessage(status);
   });
   readonly canUnsendRequest = computed(() => {
     const status = this._profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.canUnsendRequest(status);
   });
 
   readonly canBlock = computed(() => {
     const status = this._profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.canBlock(status);
   });
 
   readonly isBlocked = computed(() => {
     const status = this._profile()?.connectionStatus;
-    if (!status) return
+    if (!status) return;
     return FriendManagerService.isBlocked(status);
   });
 
@@ -117,14 +115,11 @@ export class PublicProfileService {
     return new Date(lastActive) > fiveMinutesAgo;
   });
 
-  getProfile(userId: string): Observable<PublicProfile> {
-    return this.apiService.get<PublicProfile>('/users/' + userId);
+  getProfile(userId: string): Observable<IPublicProfile> {
+    return this.apiService.get<IPublicProfile>('/users/' + userId);
   }
 
-
-
-
-  addFriend(): Observable<UpdatedStatus> {
+  addFriend(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
       return throwError(() => new Error('Profile ID not set'));
@@ -158,28 +153,28 @@ export class PublicProfileService {
     );
   }
 
-
-  public requestMessage(): Observable<ConversationPreview> {
+  public requestMessage(): Observable<IChatPreview> {
     const profileId = this._profileId();
     if (profileId == null) {
       return EMPTY;
     }
-    this.logger.info("Request for conversation with user {}", profileId);
+    this.logger.info('Request for conversation with user {}', profileId);
     return this.friendManager.getConversationByUser(profileId).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === HttpStatusCode.NotFound) {
-            this.logger.info("Not found conversation request to create converstaion with user {}", profileId);
+            this.logger.info(
+              'Not found conversation request to create converstaion with user {}',
+              profileId,
+            );
             return this.friendManager.createConversationWithUser(profileId);
           }
         }
 
-        this.logger.error("Unknow error to get conversation {}", error);
+        this.logger.error('Unknow error to get conversation {}', error);
         return EMPTY;
-      })
+      }),
     );
-
-
   }
 
   public setProfileId(profileId: string) {
@@ -207,7 +202,7 @@ export class PublicProfileService {
     });
   }
 
-  public acceptRequest(): Observable<UpdatedStatus> {
+  public acceptRequest(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
       return throwError(() => new Error('Profile ID not set'));
@@ -235,7 +230,7 @@ export class PublicProfileService {
     );
   }
 
-  blockUser(): Observable<UpdatedStatus> {
+  blockUser(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
       return throwError(() => new Error('Profile ID not set'));
@@ -268,7 +263,7 @@ export class PublicProfileService {
     );
   }
 
-  unblockUser(): Observable<UpdatedStatus> {
+  unblockUser(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
       return throwError(() => new Error('Profile ID not set'));
@@ -300,7 +295,7 @@ export class PublicProfileService {
       takeUntilDestroyed(this.destroyRef),
     );
   }
-  unfriend(): Observable<UpdatedStatus> {
+  unfriend(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) {
       return throwError(() => new Error('Profile ID not set'));
@@ -333,7 +328,7 @@ export class PublicProfileService {
     );
   }
 
-  denyRequest(): Observable<UpdatedStatus> {
+  denyRequest(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) return throwError(() => new Error('Profile ID not set'));
 
@@ -362,7 +357,7 @@ export class PublicProfileService {
     );
   }
 
-  unsendFriendRequest(): Observable<UpdatedStatus> {
+  unsendFriendRequest(): Observable<IUpdatedStatus> {
     const profileId = this._profileId();
     if (!profileId) return throwError(() => new Error('Profile ID not set'));
 

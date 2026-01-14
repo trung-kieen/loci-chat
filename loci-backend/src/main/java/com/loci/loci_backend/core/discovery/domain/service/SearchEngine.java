@@ -6,15 +6,11 @@ import com.loci.loci_backend.common.authentication.domain.CurrentUser;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
-import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.aggregate.Friend;
 import com.loci.loci_backend.core.discovery.domain.aggregate.FriendList;
 import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
-import com.loci.loci_backend.core.identity.domain.repository.UserIdTranslator;
 import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
-
-import org.keycloak.representations.account.UserRepresentation;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

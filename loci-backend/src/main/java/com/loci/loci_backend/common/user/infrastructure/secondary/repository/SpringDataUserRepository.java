@@ -42,7 +42,7 @@ public class SpringDataUserRepository implements UserRepository {
 
   @Override
   @Transactional(readOnly = false)
-  public User createOrUpdate(User user) {
+  public User save(User user) {
     UserEntity userEntity = userEntityMapper.from(user);
     User savedUser = userEntityMapper.toDomain(repository.saveAndFlush(userEntity));
     return savedUser;
@@ -68,14 +68,14 @@ public class SpringDataUserRepository implements UserRepository {
   // }
 
   @Override
-  public List<User> getUsersFromIds(List<UserDBId> ids) {
+  public List<User> getAllByIds(List<UserDBId> ids) {
     List<Long> userIds = ids.stream().map(UserDBId::value).toList();
     List<UserEntity> entities = repository.findAllById(userIds);
     return userEntityMapper.toDomain(entities);
   }
 
   @Override
-  public Page<User> getUsersFromIds(List<UserDBId> ids, Pageable pageable) {
+  public Page<User> getPageByIds(List<UserDBId> ids, Pageable pageable) {
     List<Long> userIds = ids.stream().map(UserDBId::value).toList();
     Page<UserEntity> entities = repository.findByIdIn(userIds, pageable);
     return userEntityMapper.toDomain(entities);

@@ -24,14 +24,6 @@ public class RestProfileMapper {
 
   public RestPersonalProfile from(PersonalProfile personalProfile) {
     return mapstructRest.from(personalProfile);
-    // return RestPersonalProfileBuilder.restPersonalProfile()
-    // .emailAddress(personalProfile.getEmail().value())
-    // .firstname(personalProfile.getFullname().getFirstname().value())
-    // .lastname(personalProfile.getFullname().getLastname().value())
-    // .username(personalProfile.getUsername().value())
-    // .profilePictureUrl(
-    // personalProfile.getImageUrl().valueOrDefault())
-    // .build();
   }
 
   public Page<RestPublicProfile> from(Page<PublicProfile> profile) {

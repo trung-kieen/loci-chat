@@ -1,43 +1,40 @@
-import { signal, inject, computed, Injectable } from "@angular/core";
-import { CreateGroupData, Friend } from "../models/chat.model";
-import { toObservable, toSignal } from "@angular/core/rxjs-interop";
-import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
-import { FriendManagerService } from "../../contact/services/friend-manager.service";
-
+import { signal, inject, computed, Injectable } from '@angular/core';
+import { ICreateGroupRequest, IFriend } from '../models/chat.model';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
+import { FriendManagerService } from '../../contact/services/friend-manager.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CreateGroupService {
   groupName = signal<string>('');
   imageUrl = signal<string | null>(null);
-  selectedFriends = signal<Friend[]>([]);
+  selectedFriends = signal<IFriend[]>([]);
   searchQuery = signal<string>('');
   friendService = inject(FriendManagerService);
-
 
   // facade
   private filteredFriends$ = toObservable(this.searchQuery).pipe(
     debounceTime(300),
     distinctUntilChanged(),
-    switchMap(query => this.friendService.searchFriend(query)),
-    map(firendlist => firendlist.friends)
-  )
+    switchMap((query) => this.friendService.searchFriend(query)),
+    map((firendlist) => firendlist.friends),
+  );
 
   filteredFriends = toSignal(this.filteredFriends$, {
-    initialValue: []
-  })
+    initialValue: [],
+  });
   selectedCount = computed(() => this.selectedFriends().length);
-  addMember(friend: Friend): void {
-    this.selectedFriends.update(members => [...members, friend]);
+  addMember(friend: IFriend): void {
+    this.selectedFriends.update((members) => [...members, friend]);
   }
 
   removeMember(friendId: string): void {
-    this.selectedFriends.update(members =>
-      members.filter(m => m.id !== friendId)
+    this.selectedFriends.update((members) =>
+      members.filter((m) => m.userId !== friendId),
     );
   }
-
 
   updateAvatar(url: string): void {
     this.imageUrl.set(url);
@@ -47,12 +44,11 @@ export class CreateGroupService {
     this.searchQuery.set(query);
   }
 
-
   async createGroup() {
-    const groupData: CreateGroupData = {
+    const groupData: ICreateGroupRequest = {
       groupName: this.groupName(),
       imageUrl: this.imageUrl(),
-      memberIds: this.selectedFriends().map(m => m.id)
+      memberIds: this.selectedFriends().map((m) => m.userId),
     };
 
     if (!groupData.groupName.trim()) {
@@ -79,9 +75,4 @@ export class CreateGroupService {
     this.selectedFriends.set([]);
     this.searchQuery.set('');
   }
-
-
-
-
-
 }

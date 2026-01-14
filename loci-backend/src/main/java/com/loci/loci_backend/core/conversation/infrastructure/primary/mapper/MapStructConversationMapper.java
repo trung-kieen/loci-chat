@@ -35,7 +35,7 @@ public interface MapStructConversationMapper {
   public RestDirectChatInfo from(DirectChatInfo metadata);
 
   // TODO: message mapping
-  @Mapping(source = "publicId", target = "id")
+  @Mapping(source = "publicId", target = "conversationId")
   public RestChat from(Chat chat);
 
 }

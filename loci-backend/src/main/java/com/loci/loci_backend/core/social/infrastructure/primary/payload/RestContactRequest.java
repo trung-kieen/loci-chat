@@ -8,8 +8,10 @@ import org.jilt.Builder;
 import org.jilt.BuilderStyle;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class RestContactRequest {
   private UUID userId;
   private String fullname;

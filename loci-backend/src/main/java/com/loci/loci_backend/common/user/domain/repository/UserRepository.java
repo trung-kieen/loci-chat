@@ -22,18 +22,14 @@ public interface UserRepository {
 
   boolean existByEmail(UserEmail email);
 
-  User createOrUpdate(User user);
-
-  // User create(User user);
+  User save(User user);
 
   // Move to discovery boundcontext
   Page<User> searchUser(UserSearchCriteria criteria, Pageable pageable);
 
-  // public Page<User> getUsersFromIds(List<UserDBId> ids, Pageable pageable);
+  public List<User> getAllByIds(List<UserDBId> ids);
 
-  public List<User> getUsersFromIds(List<UserDBId> ids);
-
-  public Page<User> getUsersFromIds(List<UserDBId> suggestUserIds, Pageable pageable);
+  public Page<User> getPageByIds(List<UserDBId> suggestUserIds, Pageable pageable);
 
   public User findByPrincipal(CurrentUser principal);
 

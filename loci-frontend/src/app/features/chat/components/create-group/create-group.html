@@ -65,11 +65,11 @@
           <div class="space-y-3">
             <h3 class="text-sm text-neutral-700">Selected Members ({{ selectedCount() }})</h3>
             <div class="flex flex-wrap gap-2">
-              @for (member of selectedFriends(); track member.id) {
+              @for (member of selectedFriends(); track member.userId) {
               <div class="flex items-center space-x-2 bg-neutral-100 rounded-full px-3 py-2">
                 <img [src]="member.imageUrl" [alt]="member.name" class="w-6 h-6 rounded-full">
                 <span class="text-sm text-neutral-700">{{ member.name }}</span>
-                <button type="button" (click)="removeMember(member.id)" class="text-neutral-500 hover:text-neutral-700">
+                <button type="button" (click)="removeMember(member.userId)" class="text-neutral-500 hover:text-neutral-700">
                   <i class="fa-solid fa-times text-xs"></i>
                 </button>
               </div>
@@ -81,7 +81,7 @@
           <div class="space-y-3">
             <h3 class="text-sm text-neutral-700">Available Friends</h3>
             <div class="space-y-2 max-h-64 overflow-y-auto">
-              @for (friend of filteredFriends(); track friend.id) {
+              @for (friend of filteredFriends(); track friend.userId) {
               <div
                 class="flex items-center justify-between p-3 border border-neutral-200 rounded-lg hover:bg-neutral-50">
                 <div class="flex items-center space-x-3">
