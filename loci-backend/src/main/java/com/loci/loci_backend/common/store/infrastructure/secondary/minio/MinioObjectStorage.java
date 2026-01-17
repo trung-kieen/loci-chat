@@ -48,8 +48,9 @@ public class MinioObjectStorage implements ObjectStorage {
     FilePath fullPath = uploadPath.fullPath(configurationProperties);
     log.debug("File success upload to {}", fullPath);
     return FileBuilder.file()
-        .stream(new FileInputStream(inputStream))
+        .contentType(contentType)
         .path(fullPath)
+        .stream(new FileInputStream(inputStream))
         .build();
   }
 
@@ -76,8 +77,9 @@ public class MinioObjectStorage implements ObjectStorage {
     // Return with with prefix is minio self host with fix or s3 global unique
     FilePath fullPath = filePath.fullPath(configurationProperties);
     return FileBuilder.file()
-        .stream(stream)
+        .contentType(null)
         .path(fullPath)
+        .stream(stream)
         .build();
   }
 

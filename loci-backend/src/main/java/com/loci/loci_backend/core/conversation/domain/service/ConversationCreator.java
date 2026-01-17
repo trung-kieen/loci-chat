@@ -1,14 +1,17 @@
 package com.loci.loci_backend.core.conversation.domain.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-import com.loci.loci_backend.common.authentication.domain.CurrentUser;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
-import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Conversation;
+import com.loci.loci_backend.core.conversation.domain.aggregate.Participant;
 import com.loci.loci_backend.core.conversation.domain.repository.ConversationRepository;
+import com.loci.loci_backend.core.conversation.domain.repository.ParticipantRepository;
+import com.loci.loci_backend.core.groups.domain.factory.ConversationParticipantFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,14 +24,16 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class ConversationCreator {
   private final ConversationRepository conversationRepository;
+  private final ParticipantRepository participantRepository;
 
   @Transactional(readOnly = false)
-  public Conversation asGroup(User creator) {
+  public Conversation asGroup(User creator, Set<UserDBId> memberInternalIds) {
 
-    // create conversation for user as admin
-    Conversation conversation = Conversation.forGroup(creator.getDbId());
+    Conversation conversation = Conversation.forGroup(creator.getDbId(), memberInternalIds);
 
-    return conversationRepository.save(conversation);
+    Conversation savedConversation = conversationRepository.createAndAddParticipants(conversation);
+
+    return savedConversation;
 
   }
 
@@ -45,7 +50,7 @@ public class ConversationCreator {
     Conversation conversationRequest = Conversation.createOneToOne(creatorId, otherUserId);
 
     // save conversation
-    Conversation savedConversation = conversationRepository.save(conversationRequest);
+    Conversation savedConversation = conversationRepository.createAndAddParticipants(conversationRequest);
 
     return savedConversation;
 

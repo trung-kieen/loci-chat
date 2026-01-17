@@ -13,5 +13,6 @@ public enum AssertionErrorType {
   STRING_TOO_LONG,
   STRING_TOO_SHORT,
   TOO_MANY_ELEMENTS,
+  NOT_ENOUGH_ELEMENTS,
   NOT_A_COLOR
 }

@@ -69,8 +69,8 @@ public class SocialApplicationService {
     friendManager.unsendRequest(targetUserId);
   }
 
-  public FriendList searchFriend(SearchQuery query) {
-    return this.searchEngine.searchFriend(query);
+  public FriendList searchFriends(SearchQuery query, Pageable pageable) {
+    return this.searchEngine.searchFriends(query, pageable);
 
   }
 

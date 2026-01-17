@@ -1,10 +1,15 @@
 package com.loci.loci_backend.core.conversation.infrastructure.primary.payload;
 
-import org.jilt.Builder;
-import org.jilt.BuilderStyle;
+import java.util.Set;
+import java.util.UUID;
 
-@Builder(style = BuilderStyle.STAGED)
-public record RestCreateGroup(
-    String groupName,
-    String profileImage) {
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
+public class RestCreateGroup {
+  private String groupName;
+  private String profileImage;
+  private Set<UUID> memberIds;
 }

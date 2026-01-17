@@ -14,21 +14,21 @@ import org.jilt.BuilderStyle;
 
 @Builder(style = BuilderStyle.STAGED)
 public record CreateGroupProfileRequest(
+    ConversationId conversationId,
     GroupName groupName,
     GroupImageUrl groupProfilePicture,
-    ConversationId conversationId,
     Instant lastActive,
     PublicId publicId) {
 
   public static CreateGroupProfileRequest fromConversation(Conversation conversation,
       CreateGroupRequest request) {
     return CreateGroupProfileRequestBuilder.createGroupProfileRequest()
+        .conversationId(conversation.getId())
         .groupName(request.getGroupName())
         .groupProfilePicture(request.getProfileImage())
-        .conversationId(conversation.getId())
         .lastActive(Instant.now())
         .publicId(PublicId.random())
-    .build();
+        .build();
   }
 
 }

@@ -31,8 +31,8 @@ public interface UserRepository {
 
   public Page<User> getPageByIds(List<UserDBId> suggestUserIds, Pageable pageable);
 
-  public User findByPrincipal(CurrentUser principal);
+  public User getByPrincipalThrow(CurrentUser principal);
 
-  public Optional<User> get(CurrentUser principal);
+  public Optional<User> getByPrincipal(CurrentUser principal);
 
 }

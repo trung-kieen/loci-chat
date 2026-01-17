@@ -5,10 +5,10 @@ info:
 
 http:
   method: POST
-  url: "{{baseUrl}}/conversations"
+  url: "{{baseUrl}}/conversations?userId={{user_public_id_1}}"
   params:
     - name: userId
-      value: ""
+      value: "{{user_public_id_1}}"
       type: query
   auth: inherit
 

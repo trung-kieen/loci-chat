@@ -1,16 +1,27 @@
 info:
-  name: findFriend
+  name: findFriends
   type: http
   seq: 1
 
 http:
   method: GET
-  url: "{{baseUrl}}/friends"
+  url: "{{baseUrl}}/friends?query"
   params:
     - name: query
       value: ""
       type: query
   auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        expect("All cotnact must be friend", () => {
+          const contacts = res.body.friends.content || [];
+          contacts.forEach((conact, index) =>{
+            expect(contact).to.have.property("friendshipStatus", "friends");
+          })
+        })
 
 settings:
   encodeUrl: true

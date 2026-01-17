@@ -1,5 +1,6 @@
 package com.loci.loci_backend.core.discovery.domain.repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
 public interface UserConnectionResolver {
 
-  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, List<UserDBId> ids);
+  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, Collection<UserDBId> ids);
 
   /**
    * Build contact information from hashmap information of friendship status
@@ -21,4 +22,5 @@ public interface UserConnectionResolver {
 
   public FriendshipStatus aggreateConnection(User a, User b);
 
+  public boolean isConnected(UserDBId userId, Collection<UserDBId> targetUserIds);
 }

@@ -19,7 +19,7 @@ export class CreateGroupService {
     debounceTime(300),
     distinctUntilChanged(),
     switchMap((query) => this.friendService.searchFriend(query)),
-    map((firendlist) => firendlist.friends),
+    map((friendList) => friendList.friends.content),
   );
 
   filteredFriends = toSignal(this.filteredFriends$, {

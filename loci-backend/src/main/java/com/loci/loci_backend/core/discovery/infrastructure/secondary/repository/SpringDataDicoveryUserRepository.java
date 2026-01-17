@@ -12,8 +12,7 @@ import com.loci.loci_backend.core.discovery.domain.repository.DiscoveryUserRepos
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.specification.UserSpecifications;
 
-import org.springframework.stereotype.Service;
-
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @SecondaryPort
@@ -24,7 +23,10 @@ public class SpringDataDicoveryUserRepository implements DiscoveryUserRepository
 
   @Override
   public List<UserDBId> suggestFriends(SuggestFriendCriteria criteria) {
-    List<UserEntity> users = userRepository.findAll(UserSpecifications.fromCriteria(criteria));
+    Long userId = userRepository.findByUsername(criteria.getCurrentUsername().value())
+        .orElseThrow(EntityNotFoundException::new).getId();
+    List<UserEntity> users = userRepository.findAll(UserSpecifications.notConnectedToUser(userId));
+
     return mapper.toDomain(users).stream().map(User::getDbId).toList();
 
   }

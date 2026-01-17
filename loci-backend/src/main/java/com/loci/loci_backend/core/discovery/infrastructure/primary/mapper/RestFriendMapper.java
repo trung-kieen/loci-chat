@@ -1,7 +1,6 @@
 package com.loci.loci_backend.core.discovery.infrastructure.primary.mapper;
 
-import java.util.List;
-
+import com.loci.loci_backend.common.ddd.infrastructure.contract.Domain2RestMapper;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.PrimaryMapper;
 import com.loci.loci_backend.core.discovery.domain.aggregate.Friend;
 import com.loci.loci_backend.core.discovery.domain.aggregate.FriendList;
@@ -12,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @PrimaryMapper
 @RequiredArgsConstructor
-public class RestFriendMapper {
+public class RestFriendMapper implements Domain2RestMapper<Friend, RestFriend> {
   private final MapStructRestFriendMapper mapstruct;
 
   public RestFriend from(Friend domain) {
@@ -20,9 +19,7 @@ public class RestFriendMapper {
   }
 
   public RestFriendList from(FriendList models) {
-    List<RestFriend> friends = models.getFriends().stream()
-        .map(this::from).toList();
-    return new RestFriendList(friends);
+    return new RestFriendList(this.from(models.getFriends()));
   }
 
 }

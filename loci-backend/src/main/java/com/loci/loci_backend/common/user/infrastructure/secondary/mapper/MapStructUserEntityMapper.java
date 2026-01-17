@@ -12,8 +12,7 @@ public interface MapStructUserEntityMapper {
 
   @Mapping(source = "id", target = "dbId")
   @Mapping(source = "publicId", target = "userPublicId")
-  public User toDomain(UserEntity userEntity) ;
-
+  public User toDomain(UserEntity userEntity);
 
   @Mapping(source = "dbId", target = "id")
   @Mapping(source = "userPublicId", target = "publicId")

@@ -15,5 +15,4 @@ import org.springframework.stereotype.Service;
 @Loggable
 public @interface PrimaryMapper {
 
-
 }

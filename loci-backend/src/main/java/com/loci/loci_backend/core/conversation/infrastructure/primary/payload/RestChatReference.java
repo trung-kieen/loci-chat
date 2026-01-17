@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RestChatReference {
-  private UUID id;
+  private UUID conversationId;
   private ConversationTypeEnum conversationType;
   private Instant createdDate;
 

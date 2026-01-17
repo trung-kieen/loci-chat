@@ -21,12 +21,18 @@ spring:
 
 # keycloak.auth-server-url=https://your-keycloak-server.com
 # keycloak.realm=your-realm-name
-  # mvc:
-  #   servlet:
-  #     path: /api/v1
+# mvc:
+#   servlet:
+#     path: /api/v1
 server:
   servlet:
     context-path: /api/v1
 springdoc:
   api-docs:
     path: /api-docs
+
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+        max-page-size: 100

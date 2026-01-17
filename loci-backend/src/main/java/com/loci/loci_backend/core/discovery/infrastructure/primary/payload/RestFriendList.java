@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.discovery.infrastructure.primary.payload;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RestFriendList {
-  private final List<RestFriend> friends;
+  private final Page<RestFriend> friends;
 }

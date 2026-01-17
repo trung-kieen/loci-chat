@@ -76,7 +76,7 @@ public class SpringDataConversationRepository implements ConversationRepository 
    */
   @Transactional(readOnly = false)
   @Override
-  public Conversation save(Conversation conversation) {
+  public Conversation createAndAddParticipants(Conversation conversation) {
     ConversationEntity entity = mapper.from(conversation);
 
     // Create new conversation

@@ -10,10 +10,20 @@ http:
     type: json
     data: |-
       {
-        "groupName": "",
-        "profileImage": ""
+        "groupName": "Padora",
+        "profileImage": "",
+        "memberIds": [
+          "0f2d5e36-cd9f-4304-9225-f59a0a9bb41b",
+          "84677ef2-efb5-4b26-a873-576fbf07cc01",
+          "e7edb997-a98e-4c69-8df4-4816ea07cc02"
+        ]
       }
   auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: bru.setEnvVar('conversation_id',res.body.conversationId)
 
 settings:
   encodeUrl: true

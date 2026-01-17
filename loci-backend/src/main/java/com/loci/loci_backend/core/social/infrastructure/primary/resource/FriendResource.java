@@ -2,6 +2,7 @@ package com.loci.loci_backend.core.social.infrastructure.primary.resource;
 
 import java.util.UUID;
 
+import com.loci.loci_backend.common.jpa.PageDefaults;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.discovery.domain.aggregate.FriendList;
 import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.ws.rs.QueryParam;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -40,12 +41,11 @@ public class FriendResource {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public RestFriendList findFirend(@QueryParam(value = "q") String query) {
+  public RestFriendList searchFriends(@RequestParam(value = "q", defaultValue = "") String query) {
     SearchQuery searchQuery = new SearchQuery(query);
-    FriendList friends = socialApplicationService.searchFriend(searchQuery);
+    FriendList friends = socialApplicationService.searchFriends(searchQuery, PageDefaults.FRIEND_SEARCH_PAGE);
 
     return restFriendMapper.from(friends);
-    // return new RestFriendshipUpdatedResponse(FriendshipStatus.notConnected());
   }
 
 }

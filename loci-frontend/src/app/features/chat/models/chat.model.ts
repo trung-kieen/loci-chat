@@ -1,4 +1,5 @@
 export type ConversationType = 'one to one' | 'group';
+import { Page } from '../../../core/model/page';
 export interface IMessage {
   // TODO
   messageId: string;
@@ -26,5 +27,5 @@ export interface IFriend {
 }
 
 export interface IFriendList {
-  friends: IFriend[];
+  friends: Page<IFriend>;
 }

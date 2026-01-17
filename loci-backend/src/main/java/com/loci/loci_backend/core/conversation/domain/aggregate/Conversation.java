@@ -15,6 +15,7 @@ import com.loci.loci_backend.core.conversation.domain.vo.ConversationId;
 import com.loci.loci_backend.core.conversation.domain.vo.ConversationType;
 import com.loci.loci_backend.core.conversation.domain.vo.ParticipantRole;
 import com.loci.loci_backend.core.conversation.infrastructure.secondary.enumeration.ConversationTypeEnum;
+import com.loci.loci_backend.core.groups.domain.factory.ConversationParticipantFactory;
 import com.loci.loci_backend.core.messaging.domain.aggregate.Message;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 
@@ -53,17 +54,21 @@ public class Conversation {
     conversation.conversationType = new ConversationType(ConversationTypeEnum.ONE_TO_ONE);
 
     // init conversation metadata: participant
-    conversation.addParticipant(creatorId, ParticipantRole.ADMIN);
+    conversation.addParticipant(creatorId, ParticipantRole.MEMBER);
     conversation.addParticipant(otherUserId, ParticipantRole.MEMBER);
     return conversation;
   }
 
-  public static Conversation forGroup(UserDBId creatorId) {
+  public static Conversation forGroup(UserDBId creatorId, Set<UserDBId> memberInternalIds) {
     Conversation conversation = new Conversation(creatorId);
     conversation.conversationType = new ConversationType(ConversationTypeEnum.GROUP);
-
     // init conversation metadata: participant
     conversation.addParticipant(creatorId, ParticipantRole.ADMIN);
+
+    for (UserDBId memberId : memberInternalIds) {
+      conversation.addParticipant(memberId, ParticipantRole.MEMBER);
+    }
+
     return conversation;
   }
 
@@ -112,7 +117,7 @@ public class Conversation {
 
   private void addParticipant(UserDBId userId, ParticipantRole role) {
     if (!isParticipant(userId)) {
-      this.participants.add(Participant.unmanagerParticipant(userId, role));
+      this.participants.add(ConversationParticipantFactory.unmanagerParticipant(userId, role));
     }
   }
 

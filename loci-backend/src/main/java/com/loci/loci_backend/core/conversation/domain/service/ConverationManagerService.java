@@ -1,26 +1,32 @@
 package com.loci.loci_backend.core.conversation.domain.service;
 
+import java.util.Set;
+
 import com.loci.loci_backend.common.authentication.domain.CurrentUser;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.jpa.SortOrder;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
+import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.common.validation.domain.Assert;
 import com.loci.loci_backend.common.validation.domain.ResourceNotFoundException;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Chat;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Conversation;
 import com.loci.loci_backend.core.conversation.domain.aggregate.ConversationSearchCriteria;
+import com.loci.loci_backend.core.conversation.domain.aggregate.CreateGroupRequest;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Participant;
 import com.loci.loci_backend.core.conversation.domain.aggregate.UserChatList;
 import com.loci.loci_backend.core.conversation.domain.aggregate.UserConversation;
+import com.loci.loci_backend.core.conversation.domain.exception.UserNotConnectedException;
 import com.loci.loci_backend.core.conversation.domain.repository.ConversationRepository;
 import com.loci.loci_backend.core.conversation.domain.repository.ParticipantRepository;
 import com.loci.loci_backend.core.conversation.domain.vo.ConversationQuery;
+import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
+import com.loci.loci_backend.core.identity.domain.repository.UserIdTranslator;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -38,11 +44,31 @@ public class ConverationManagerService {
   private final ParticipantRepository participantRepository;
   private final ConversationAuthenticationProvider conversationAuthentication;
   private final ConversationCreator conversationCreator;
+  private final UserIdTranslator userIdTranslator;
+  private final UserConnectionResolver userConnectionResolver;
 
-  public Conversation createGroupConversation() {
-    User creator = userRepository.findByPrincipal(principal);
+  public Conversation createGroupConversation(CreateGroupRequest request) {
+    User currentUser = userRepository.getByPrincipalThrow(principal);
 
-    return conversationCreator.asGroup(creator);
+    // Validate request
+    request.validate();
+
+    // Mapping member public id to internal id
+    Set<UserDBId> memberInternalIds = userIdTranslator.toInternal(request.getMemberIds());
+
+    // Validate member list is connected to current user
+    final boolean userConnectedToMemberList = userConnectionResolver.isConnected(currentUser.getDbId(),
+        memberInternalIds);
+    if (!userConnectedToMemberList) {
+      throw new UserNotConnectedException();
+
+    }
+
+    // Create group conversation
+    User creator = userRepository.getByPrincipalThrow(principal);
+
+    // Add member to conversation
+    return conversationCreator.asGroup(creator, memberInternalIds);
   }
 
   @Transactional(readOnly = false)
@@ -50,7 +76,7 @@ public class ConverationManagerService {
 
     // check conversation is not exists
 
-    User currentUser = userRepository.findByPrincipal(principal);
+    User currentUser = userRepository.getByPrincipalThrow(principal);
 
     User targetUser = userRepository.getByPublicId(targetUserId).orElseThrow(() -> new EntityNotFoundException());
 
@@ -71,7 +97,7 @@ public class ConverationManagerService {
   public UserChatList getUserChatList(Pageable pageable, ConversationQuery userQuery) {
 
     // get current user id
-    User user = userRepository.findByPrincipal(principal);
+    User user = userRepository.getByPrincipalThrow(principal);
 
     ConversationSearchCriteria criteria = ConversationSearchCriteria.from(user, SortOrder.byLastUpdateDesc(),
         userQuery);
@@ -90,7 +116,7 @@ public class ConverationManagerService {
    */
   public Conversation getConversation(PublicId targetUserId) {
 
-    User currentUser = userRepository.findByPrincipal(principal);
+    User currentUser = userRepository.getByPrincipalThrow(principal);
 
     User targetUser = userRepository.getByPublicId(targetUserId).orElseThrow(() -> new EntityNotFoundException());
 
@@ -107,7 +133,7 @@ public class ConverationManagerService {
     Conversation conversation = conversationRepository.getByPublicId(conversationId)
         .orElseThrow(ResourceNotFoundException::new);
 
-    User currentUser = userRepository.findByPrincipal(principal);
+    User currentUser = userRepository.getByPrincipalThrow(principal);
 
     conversationAuthentication.validateUserInConversation(currentUser, conversation);
 

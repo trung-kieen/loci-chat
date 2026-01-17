@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import com.loci.loci_backend.common.store.domain.aggregate.File;
+import com.loci.loci_backend.common.validation.domain.NotEnoughElementsException.NotEnoughElementsExceptionBuilder;
 
 /**
  * This class provides utilities for input assertions.
@@ -1117,6 +1118,17 @@ public final class Assert {
       return this;
     }
 
+    public CollectionAsserter<T> minSize(int minSize) {
+      if (minSize <= 0 && value == null) {
+        return this;
+      }
+      notNull();
+      if (value.size() < minSize) {
+        throw NotEnoughElementsException.builder().field(field).minSize(minSize).currentSize(value.size()).build();
+      }
+      return this;
+    }
+
     /**
      * Ensure that no element in this {@link Collection} is null
      *
@@ -1392,18 +1404,13 @@ public final class Assert {
 
     // validate is list of type
 
-
     // validate size of file
-
 
     // validate image size
 
-
     // validate file path is valid
 
-
     // validate pdf file correct
-
 
   }
 }

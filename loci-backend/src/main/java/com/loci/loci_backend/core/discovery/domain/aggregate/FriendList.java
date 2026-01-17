@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.discovery.domain.aggregate;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class FriendList {
-  private List<Friend> friends;
+  // Limit about 10 user?
+  private Page<Friend> friends;
 
 }

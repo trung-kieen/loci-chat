@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestCreateGroupResponse {
 
-  private UUID id;
+  private UUID conversationId;
   private ConversationTypeEnum type;
   private String name;
   private String inviteLink;

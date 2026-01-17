@@ -1,8 +1,9 @@
 package com.loci.loci_backend.core.identity.infrastructure.secondary.specification;
 
+import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactRequestEntity;
+import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactEntity;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.common.validation.domain.Assert;
-import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
 import com.loci.loci_backend.core.discovery.domain.vo.UserSearchCriteria;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -11,14 +12,50 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 
 public class UserSpecifications {
   private UserSpecifications() {
 
   }
 
-  public static Specification<UserEntity> fromCriteria(SuggestFriendCriteria criteria) {
-    return UserSpecifications.excludeUsername(criteria.getCurrentUsername().value());
+  public static Specification<UserEntity> notConnectedToUser(Long currentUserId) {
+
+    return (root, query, cb) -> {
+
+      Predicate notCurrentUser = cb.notEqual(root.get("id"), currentUserId);
+
+      Subquery<Long> contactSubQuery = query.subquery(Long.class);
+      Root<ContactEntity> contactRoot = contactSubQuery.from(ContactEntity.class);
+      contactSubQuery.select(contactRoot.get("id"));
+      contactSubQuery.where(
+          cb.or(
+              cb.and(
+                  cb.equal(contactRoot.get("owningUserId"), currentUserId),
+                  cb.equal(contactRoot.get("contactUserId"), root.get("id"))),
+              cb.and(
+                  cb.equal(contactRoot.get("contactUserId"), currentUserId),
+                  cb.equal(contactRoot.get("owningUserId"), root.get("id")))));
+
+      // Subquery for contact requests
+      Subquery<Long> requestSubquery = query.subquery(Long.class);
+      Root<ContactRequestEntity> requestRoot = requestSubquery.from(ContactRequestEntity.class);
+      requestSubquery.select(requestRoot.get("id"));
+      requestSubquery.where(
+          cb.or(
+              cb.and(
+                  cb.equal(requestRoot.get("requestUserId"), currentUserId),
+                  cb.equal(requestRoot.get("receiverUserId"), root.get("id"))),
+              cb.and(
+                  cb.equal(requestRoot.get("receiverUserId"), currentUserId),
+                  cb.equal(requestRoot.get("requestUserId"), root.get("id")))));
+
+      return cb.and(
+          notCurrentUser,
+          cb.not(cb.exists(contactSubQuery)),
+          cb.not(cb.exists(requestSubquery)));
+
+    };
 
   }
 

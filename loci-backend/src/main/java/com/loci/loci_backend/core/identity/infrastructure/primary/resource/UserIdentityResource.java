@@ -23,7 +23,6 @@ import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPe
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettings;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettingsPatch;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPublicProfile;
-import com.loci.loci_backend.core.social.infrastructure.primary.mapper.RestContactMapper;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +44,6 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/users")
 public class UserIdentityResource {
   private final IdentityApplicationService identityApplicationService;
-  private final RestContactMapper restContactMapper;
   private final RestContactProfileMapper restContactProfileMapper;
   private final RestProfileMapper restProfileMapper;
   private final RestFileMapper restFileMapper;
@@ -63,11 +61,11 @@ public class UserIdentityResource {
 
   @GetMapping("suggests")
   public ResponseEntity<RestContactProfileList> suggestUser(
-      // @RequestParam(required = false, defaultValue = "", value = "q") String query,
+      @RequestParam(required = false, defaultValue = "", value = "q") String query,
       KeycloakPrincipal principal,
       Pageable pageable) {
 
-    SuggestFriendCriteria criteria = new SuggestFriendCriteria(principal.getUsername());
+    SuggestFriendCriteria criteria = new SuggestFriendCriteria(principal.getUsername(), new SearchQuery(query));
     return ResponseEntity
         .ok(restContactProfileMapper.from(identityApplicationService.suggestFriends(criteria, pageable)));
   }
@@ -107,24 +105,14 @@ public class UserIdentityResource {
   @PatchMapping("me/avatar")
   public ResponseEntity<RestPersonalProfile> updateProfileImage(
       @RequestParam("avatar") MultipartFile file) throws IOException {
+
+    // TODO: validate file
+
     File requestAvatarFile = restFileMapper.toDomain(file);
     PersonalProfile updatedProfile = identityApplicationService.updateProfileAvatar(
         requestAvatarFile);
     return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
 
-    // TODO: media file storage
-
-    // validate file
-
-    // upload image to file storage
-
-    // Use image link to patch update profile
-    // PersonalProfileChanges profileChages =
-    // restProfileMapper.toDomain(patchRequest);
-    // PersonalProfile updatedProfile =
-    // identityApplicationService.updateProfile(keycloakPrincipal, profileChages);
-    //
-    // return ResponseEntity.ok(restProfileMapper.from(updatedProfile));
   }
 
   @GetMapping("{publicId}")

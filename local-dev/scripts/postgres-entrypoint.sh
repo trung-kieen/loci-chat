@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# TODO: Provide correct backup sql file path
+
+
 # Only backup if database already exists
 if [ -d "/var/lib/postgresql/data/pgdata/base" ]; then
   # BACKUP_FILE="/backups/startup_$(date +%Y%m%d_%H%M%S).sql"

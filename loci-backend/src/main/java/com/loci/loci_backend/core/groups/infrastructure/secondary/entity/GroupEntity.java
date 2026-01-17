@@ -4,7 +4,9 @@ import java.time.Instant;
 import java.util.UUID;
 
 import com.loci.loci_backend.common.jpa.AbstractAuditingEntity;
+import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.conversation.infrastructure.secondary.entity.ConversationEntity;
+import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfileChanges;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -60,6 +62,13 @@ public class GroupEntity extends AbstractAuditingEntity<Long> {
   // this.conversation = conversation;
   // this.groupName = groupName;
   // }
+
+  public void applyChanges(GroupProfileChanges changes) {
+
+    NullSafe.applyIfPresent(changes::getGroupName, name -> this.groupName = name.value());
+    NullSafe.applyIfPresent(changes::getGroupProfilePicture, img -> this.groupProfilePicture = img.value());
+
+  }
 
   @Override
   public Long getId() {

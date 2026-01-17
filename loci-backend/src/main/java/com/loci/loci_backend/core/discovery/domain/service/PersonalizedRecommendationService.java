@@ -16,7 +16,6 @@ import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

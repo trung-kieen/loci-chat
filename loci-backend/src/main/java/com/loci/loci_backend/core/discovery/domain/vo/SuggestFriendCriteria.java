@@ -10,5 +10,6 @@ import lombok.Getter;
 public class SuggestFriendCriteria {
 
   private final Username currentUsername;
+  private final SearchQuery searchTerm;
 
 }

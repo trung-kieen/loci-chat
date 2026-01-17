@@ -8,6 +8,18 @@ http:
   url: "{{baseUrl}}/users/me"
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status is 200", () => { 
+          expect(res.status).to.equal(200); 
+        })
+        test("Valid userId public id convention", () => { 
+          expect(res.body.userId).to.be.a('string'); // uuid 
+          expect(res.body.userId.length).greaterThan(0);
+        })
+
 settings:
   encodeUrl: true
   timeout: 0

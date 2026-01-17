@@ -154,7 +154,8 @@ public class FriendManager {
     User currentUser = userRepository.getByUsername(keycloakPrincipal.getUsername())
         .orElseThrow(() -> new EntityNotFoundException());
 
-    ContactRequest request = contactRequestRepository.getPendingRequest(currentUser.getDbId(), friendUser.getDbId()).orElseThrow(() -> new EntityNotFoundException("Requset not found"));
+    ContactRequest request = contactRequestRepository.getPendingRequest(currentUser.getDbId(), friendUser.getDbId())
+        .orElseThrow(() -> new EntityNotFoundException("Friend request not found"));
     contactRequestRepository.delete(request);
   }
 

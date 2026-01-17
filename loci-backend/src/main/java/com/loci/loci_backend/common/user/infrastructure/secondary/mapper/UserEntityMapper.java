@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 public class UserEntityMapper implements DomainEntityMapper<User, UserEntity> {
 
   private final MapStructUserEntityMapper mapstruct;
-  private final AuthorityEntityMapper authorityEntityMapper;
 
   public User toDomain(UserEntity userEntity) {
     return mapstruct.toDomain(userEntity);

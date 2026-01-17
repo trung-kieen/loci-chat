@@ -16,6 +16,8 @@ import com.loci.loci_backend.core.social.infrastructure.secondary.entity.Contact
 import com.loci.loci_backend.core.social.infrastructure.secondary.mapper.ContactEntityMapper;
 import com.loci.loci_backend.core.social.infrastructure.secondary.specification.JpaContactSpecification;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -73,9 +75,9 @@ public class SpringDataContactRepository implements ContactRepository {
   }
 
   @Override
-  public List<Friend> findConnectedWithUser(SearchQuery query, UserDBId userId) {
+  public Page<Friend> findConnectedToUser(SearchQuery query, UserDBId userId, Pageable pageable) {
     String prefixNameSearch = query.value();
-    List<UserEntity> users = repository.findContactsByNamePrefix(userId.value(), prefixNameSearch);
+    Page<UserEntity> users = repository.findContactsByNamePrefix(userId.value(), prefixNameSearch, pageable);
     return friendEntityMapper.toDomain(users);
   }
 

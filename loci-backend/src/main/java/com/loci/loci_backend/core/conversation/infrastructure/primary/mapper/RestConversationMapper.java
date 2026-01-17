@@ -13,14 +13,13 @@ import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.Re
 import com.loci.loci_backend.core.messaging.domain.aggregate.GroupChatInfo;
 
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @PrimaryPort
 @RequiredArgsConstructor
 public class RestConversationMapper {
-  private final MapStructConversationMapper mapstruct;
+  private final MapStructRestConversationMapper mapstruct;
 
   public RestChatReference from(Conversation domain) {
     RestChatReference conversation = mapstruct.from(domain);

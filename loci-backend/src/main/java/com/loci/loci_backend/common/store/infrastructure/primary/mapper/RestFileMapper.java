@@ -19,9 +19,9 @@ public class RestFileMapper {
   public File toDomain(MultipartFile file) throws IOException {
 
     return FileBuilder.file()
-        .stream(new FileInputStream(file.getInputStream()))
         .contentType(new FileContentType(file.getContentType()))
         .path(new FilePath(file.getOriginalFilename()))
+        .stream(new FileInputStream(file.getInputStream()))
         .build();
 
   }

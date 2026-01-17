@@ -38,6 +38,7 @@ public class ConversationResource {
   @GetMapping
   public ResponseEntity<RestUserChatList> getUserChatList(Pageable pageable,
       @RequestParam(value = "q", required = false) String query) { // filter
+    // todo user strategy
     ConversationQuery userQuery = new ConversationQuery(ConversationFilter.INBOX, new SearchQuery(query));
     UserChatList conversations = conversationService.getUserChats(pageable, userQuery);
 

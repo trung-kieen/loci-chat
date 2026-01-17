@@ -12,3 +12,11 @@ variables:
     value: example1
   - name: access_token
     value: ""
+  - name: user_public_id_1
+    value: 0f2d5e36-cd9f-4304-9225-f59a0a9bb41b
+  - name: conversation_id
+    value: ""
+  - name: conversation_id
+    value: 9803ca71-7356-4393-9d3c-ce5cb57f05ff
+  - name: group_id
+    value: 0784ce65-4c88-4f72-81d7-dcb386e5e1bd

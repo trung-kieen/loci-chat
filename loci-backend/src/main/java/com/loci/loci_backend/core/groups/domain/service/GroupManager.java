@@ -3,17 +3,18 @@ package com.loci.loci_backend.core.groups.domain.service;
 import java.util.Optional;
 
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
+import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
 import com.loci.loci_backend.common.validation.domain.ResourceNotFoundException;
 import com.loci.loci_backend.core.conversation.domain.repository.ConversationRepository;
-import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
 import com.loci.loci_backend.core.groups.domain.aggregate.CreateGroupProfileRequest;
+import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
+import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfileChanges;
 import com.loci.loci_backend.core.groups.domain.repository.GroupRepository;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @DomainService
@@ -22,12 +23,14 @@ public class GroupManager {
   private final GroupRepository groupRepository;
   private final ConversationRepository conversationRepository;
 
-  void updatGroupInfo() {
-    throw new NotImplementedException();
+  public GroupProfile updatGroupInfo(PublicId groupPublicId, GroupProfileChanges profileChanges) {
+    // TODO: validate role before perform change
+    return groupRepository.applyProfileUpdate(groupPublicId, profileChanges);
   }
 
-  void retrieveGroupInfo() {
-    throw new NotImplementedException();
+  public GroupProfile retrieveGroupInfo(PublicId groupPublicId) {
+    GroupProfile profile = groupRepository.getByPublicId(groupPublicId).orElseThrow(EntityNotFoundException::new);
+    return profile;
   }
 
   @Transactional(readOnly = false)

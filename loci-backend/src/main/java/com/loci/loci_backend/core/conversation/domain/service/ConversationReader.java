@@ -36,6 +36,7 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageId;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -93,7 +94,8 @@ public class ConversationReader {
 
   public GroupChatInfo getGroupInfo(Conversation conversation, User currentUser) {
     ParticipantCount count = participantRepository.countConversationMember(conversation);
-    GroupProfile groupProfile = groupRepository.findByConversationId(conversation.getId());
+    GroupProfile groupProfile = groupRepository.getByConversationId(conversation.getId())
+        .orElseThrow(EntityNotFoundException::new);
     return GroupChatInfoBuilderForConversation.groupChatInfo()
         .conversation(conversation)
         .groupProfile(groupProfile)

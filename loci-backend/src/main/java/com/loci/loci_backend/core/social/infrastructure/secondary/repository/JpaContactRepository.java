@@ -7,6 +7,8 @@ import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEnt
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRelationJpaVO;
 import com.loci.loci_backend.core.social.infrastructure.secondary.entity.ContactEntity;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -59,6 +61,6 @@ public interface JpaContactRepository
       "AND u.id != :userId " +
       "AND (LOWER(u.firstname) LIKE LOWER(CONCAT(:namePrefix, '%')) " +
       "  OR LOWER(u.lastname) LIKE LOWER(CONCAT(:namePrefix, '%')))")
-  List<UserEntity> findContactsByNamePrefix(@Param("userId") Long userId,
-      @Param("namePrefix") String namePrefix);
+  Page<UserEntity> findContactsByNamePrefix(@Param("userId") Long userId,
+      @Param("namePrefix") String namePrefix, Pageable pageable);
 }

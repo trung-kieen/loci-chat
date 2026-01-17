@@ -1,5 +1,6 @@
 package com.loci.loci_backend.core.discovery.infrastructure.secondary.repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileBuild
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRelationJpaVO;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRequestRelationJpaVO;
-import com.loci.loci_backend.core.social.domain.aggregate.ContactConnectionBuilder;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.social.infrastructure.secondary.enumernation.FriendshipStatusEnum;
 import com.loci.loci_backend.core.social.infrastructure.secondary.repository.JpaContactRepository;
@@ -27,6 +27,15 @@ import lombok.RequiredArgsConstructor;
 public class UserConnectionResolverImpl implements UserConnectionResolver {
   private final JpaContactRequestRepository contactRequestRepository;
   private final JpaContactRepository contactRepository;
+
+  /**
+   * Check is userid is connect to all the list of targetUserIds
+   */
+  public boolean isConnected(UserDBId userId, Collection<UserDBId> targetUserIds) {
+    Map<UserDBId, FriendshipStatus> connections = this.aggreateConnection(userId, targetUserIds);
+    return connections.values().stream().allMatch(connect -> connect.isConnected());
+
+  }
 
   public FriendshipStatus aggreateConnection(UserDBId userId, UserDBId targetUserId) {
     if (ValueObject.isAbsent(userId)) {
@@ -52,10 +61,10 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     return new FriendshipStatus(FriendshipStatusEnum.NOT_CONNECTED);
   }
 
-  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, List<UserDBId> ids) {
+  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, Collection<UserDBId> ids) {
     Long currentUserId = userId.value();
     List<Long> targetUserIds = ids.stream().map(UserDBId::value).toList();
-    // Init to unknow for all
+    // Init to unknown for all
     Map<UserDBId, FriendshipStatus> targetUserIdToFriendStatus = new HashMap<>();
     for (Long targetId : targetUserIds) {
       targetUserIdToFriendStatus.put(new UserDBId(targetId), new FriendshipStatus(FriendshipStatusEnum.NOT_CONNECTED));
@@ -98,4 +107,5 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
   public FriendshipStatus aggreateConnection(User a, User b) {
     return aggreateConnection(a.getDbId(), b.getDbId());
   }
+
 }

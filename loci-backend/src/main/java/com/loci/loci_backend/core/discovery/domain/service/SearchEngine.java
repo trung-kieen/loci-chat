@@ -1,7 +1,5 @@
 package com.loci.loci_backend.core.discovery.domain.service;
 
-import java.util.List;
-
 import com.loci.loci_backend.common.authentication.domain.CurrentUser;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
@@ -11,6 +9,9 @@ import com.loci.loci_backend.core.discovery.domain.aggregate.Friend;
 import com.loci.loci_backend.core.discovery.domain.aggregate.FriendList;
 import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
 import com.loci.loci_backend.core.social.domain.repository.ContactRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,10 @@ public class SearchEngine {
     return null;
   }
 
-  public FriendList searchFriend(SearchQuery query) {
+  public FriendList searchFriends(SearchQuery query, Pageable pageable) {
 
     User user = userRepository.getByUsername(principal.getUsername()).orElseThrow(EntityNotFoundException::new);
-    List<Friend> friends = contactRepository.findConnectedWithUser(query, user.getDbId());
+    Page<Friend> friends = contactRepository.findConnectedToUser(query, user.getDbId(), pageable);
     return new FriendList(friends);
 
   }

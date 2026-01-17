@@ -12,6 +12,19 @@ http:
       type: query
   auth: inherit
 
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const jsonData = res.getBody();
+        test("All contacts must have friendshipStatus as 'not_connected'", () => {
+          const contacts = jsonData?.contacts?.content || [];
+          
+          contacts.forEach((contact, index) => {
+            expect(contact).to.have.property('friendshipStatus', 'not_connected');
+          });
+        });
+
 settings:
   encodeUrl: true
   timeout: 0

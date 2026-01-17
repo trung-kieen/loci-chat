@@ -30,13 +30,12 @@ public class ConversationEntityMapper implements DomainEntityMapper<Conversation
   public Conversation toDomain(ConversationEntity entity,
       Collection<ConversationParticipantEntity> participantEntities) {
     Conversation conversation = mapstruct.toDomain(entity);
-    Set<Participant> participants = participantMapper.toDomain(participantEntities);
+    Set<Participant> participants = participantMapper.toDomainSet(participantEntities);
 
     conversation.setParticipants(participants);
 
     return conversation;
   }
-
 
   @Override
   public ConversationEntity from(Conversation domainObject) {

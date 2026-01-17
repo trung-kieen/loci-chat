@@ -1,7 +1,7 @@
 services:
   loci-db:
     container_name: loci-db
-    image: postgres
+    image: postgres:18.1
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -9,9 +9,13 @@ services:
       POSTGRES_DB: locidb
     volumes:
       - loci-db:/data/postgres
-      # - ./postgres-data:/var/lib/postgresql/data
-      - ./backups:/backups
-      # - ./postgres-entrypoint.sh:/postgres-entrypoint.sh
+      ## Init script sql
+      # - ./backups:/backups
+      # - ./backups/backup.sql:/docker-entrypoint-initdb.d/init.sql
+      ## Entry point to access via script
+      # - ./scripts/postgres-entrypoint.sh:/postgres-entrypoint.sh
+      # - ./scripts/postgres-entrypoint.sh:/docker-entrypoint-initdb.d/initdb.sh
+
     # entrypoint: ["postgres-entrypoint.sh"]
 
     ports:
@@ -21,7 +25,7 @@ services:
 
   loci-pgadmin:
     container_name: loci-pgadmin
-    image: dpage/pgadmin4:latest
+    image: dpage/pgadmin4:9.11
     restart: always
     ports:
       - "81:80"
