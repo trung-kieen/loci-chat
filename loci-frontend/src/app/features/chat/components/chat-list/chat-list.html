@@ -1,31 +1,58 @@
-<section id="chat-list" class="w-96 bg-white border-r border-neutral-200 flex flex-col h-full">
+<section
+  id="chat-list"
+  class="w-96 bg-white border-r border-neutral-200 flex flex-col h-full"
+>
   <div class="p-4 border-b border-neutral-200">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg text-black">Messages</h2>
-      <button (click)="goToCreateGroup()" class="p-2 hover:bg-neutral-100 rounded-lg" aria-label="Create new group">
+      <div
+        role="button"
+        (click)="goToCreateGroup()"
+        class="p-2 hover:bg-neutral-100 rounded-lg"
+        aria-label="Create new group"
+      >
         <i class="fa-solid fa-users-plus text-neutral-600"></i>
-      </button>
+      </div>
     </div>
 
     <div class="relative mb-4">
-      <input type="text" placeholder="Search conversations..."
-        class="w-full pl-10 pr-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500">
-      <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"></i>
+      <input
+        type="text"
+        placeholder="Search conversations..."
+        class="w-full pl-10 pr-4 py-2 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-500"
+      />
+      <i
+        class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"
+      ></i>
     </div>
 
     <div class="flex space-x-1">
-      <button class="px-4 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-lg">Inbox</button>
-      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Unread</button>
-      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Follow-ups</button>
-      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">Archived</button>
+      <button
+        class="px-4 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-lg"
+      >
+        Inbox
+      </button>
+      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">
+        Unread
+      </button>
+      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">
+        Follow-ups
+      </button>
+      <button class="px-4 py-2 text-sm text-neutral-500 hover:text-neutral-700">
+        Archived
+      </button>
     </div>
   </div>
 
   <div class="flex-1 overflow-y-auto">
     <div class="p-2">
       <button
-        class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer text-left mb-2">
-        <div class="w-10 h-10 bg-neutral-500 rounded-full flex items-center justify-center">
+        (click)="goToCreateGroup()"
+        class="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer text-left mb-2"
+      >
+        <div
+          class="w-10 h-10 bg-neutral-500 rounded-full flex items-center justify-center"
+        >
           <i class="fa-solid fa-plus text-white text-sm"></i>
         </div>
         <div class="flex-1 min-w-0">
@@ -36,11 +63,17 @@
 
       <a href="/chat/one/c4338c6b-8480-4864-920a-2112d2dfe73a">
         <div
-          class="flex items-center space-x-3 p-3 rounded-lg bg-neutral-50 border-l-4 border-neutral-500 cursor-pointer">
+          class="flex items-center space-x-3 p-3 rounded-lg bg-neutral-50 border-l-4 border-neutral-500 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891" alt="Emily Davis"
-              class="w-10 h-10 rounded-full">
-            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-neutral-500 border-2 border-white rounded-full"></div>
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=7891"
+              alt="Emily Davis"
+              class="w-10 h-10 rounded-full"
+            />
+            <div
+              class="absolute -bottom-1 -right-1 w-4 h-4 bg-neutral-500 border-2 border-white rounded-full"
+            ></div>
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -51,7 +84,9 @@
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-600 truncate">Can we schedule a meeting for tomorrow?</p>
+              <p class="text-sm text-neutral-600 truncate">
+                Can we schedule a meeting for tomorrow?
+              </p>
               <i class="fa-solid fa-check-double text-neutral-500 text-xs"></i>
             </div>
           </div>
@@ -59,10 +94,15 @@
       </a>
 
       <a href="/chat/one/c4338c6b-8480-4864-920a-2112d2dfe73a">
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
+        <div
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234" alt="John Smith"
-              class="w-10 h-10 rounded-full">
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=1234"
+              alt="John Smith"
+              class="w-10 h-10 rounded-full"
+            />
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -73,8 +113,13 @@
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-600 truncate">Hey, how are you doing today?</p>
-              <div class="bg-neutral-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2
+              <p class="text-sm text-neutral-600 truncate">
+                Hey, how are you doing today?
+              </p>
+              <div
+                class="bg-neutral-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+              >
+                2
               </div>
             </div>
           </div>
@@ -82,11 +127,18 @@
       </a>
 
       <a href="/chat/one/c4338c6b-8480-4864-920a-2112d2dfe73a">
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
+        <div
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678" alt="Sarah Johnson"
-              class="w-10 h-10 rounded-full">
-            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-neutral-500 border-2 border-white rounded-full"></div>
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=5678"
+              alt="Sarah Johnson"
+              class="w-10 h-10 rounded-full"
+            />
+            <div
+              class="absolute -bottom-1 -right-1 w-4 h-4 bg-neutral-500 border-2 border-white rounded-full"
+            ></div>
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -94,7 +146,9 @@
               <p class="text-xs text-neutral-500">1:15 PM</p>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-500 truncate">Thanks for the update! 👍</p>
+              <p class="text-sm text-neutral-500 truncate">
+                Thanks for the update! 👍
+              </p>
               <i class="fa-solid fa-check-double text-neutral-500 text-xs"></i>
             </div>
           </div>
@@ -102,10 +156,15 @@
       </a>
 
       <a href="/chat/group/c4338c6b-8480-4864-920a-2112d2dfe73a">
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
+        <div
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9876" alt="Marketing Team"
-              class="w-10 h-10 rounded-full">
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=9876"
+              alt="Marketing Team"
+              class="w-10 h-10 rounded-full"
+            />
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -116,8 +175,13 @@
               <p class="text-xs text-neutral-500">12:45 PM</p>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-500 truncate">Mike: Let's review the campaign...</p>
-              <div class="bg-neutral-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">5
+              <p class="text-sm text-neutral-500 truncate">
+                Mike: Let's review the campaign...
+              </p>
+              <div
+                class="bg-neutral-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+              >
+                5
               </div>
             </div>
           </div>
@@ -125,10 +189,15 @@
       </a>
 
       <a href="/chat/group/c4338c6b-8480-4864-920a-2112d2dfe73a">
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
+        <div
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=4321" alt="Alex Chen"
-              class="w-10 h-10 rounded-full">
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=4321"
+              alt="Alex Chen"
+              class="w-10 h-10 rounded-full"
+            />
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -136,7 +205,9 @@
               <p class="text-xs text-neutral-500">11:30 AM</p>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-500 truncate">📎 Document_final.pdf</p>
+              <p class="text-sm text-neutral-500 truncate">
+                📎 Document_final.pdf
+              </p>
               <i class="fa-solid fa-check text-neutral-400 text-xs"></i>
             </div>
           </div>
@@ -144,10 +215,15 @@
       </a>
 
       <a href="/chat/one/c4338c6b-8480-4864-920a-2112d2dfe73a">
-        <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer">
+        <div
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-neutral-50 cursor-pointer"
+        >
           <div class="relative">
-            <img src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8765" alt="Lisa Wang"
-              class="w-10 h-10 rounded-full">
+            <img
+              src="https://api.dicebear.com/7.x/notionists/svg?scale=200&seed=8765"
+              alt="Lisa Wang"
+              class="w-10 h-10 rounded-full"
+            />
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
@@ -155,7 +231,9 @@
               <p class="text-xs text-neutral-500">Yesterday</p>
             </div>
             <div class="flex items-center justify-between">
-              <p class="text-sm text-neutral-500 truncate">Perfect! See you then.</p>
+              <p class="text-sm text-neutral-500 truncate">
+                Perfect! See you then.
+              </p>
               <i class="fa-solid fa-check-double text-neutral-500 text-xs"></i>
             </div>
           </div>

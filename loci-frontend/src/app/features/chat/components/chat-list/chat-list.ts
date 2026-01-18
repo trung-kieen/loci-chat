@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
   styleUrl: './chat-list.css',
 })
 export class ChatList {
-  router = inject(Router);
-
+  private router = inject(Router);
 
   public goToCreateGroup() {
-    this.router.navigate(["/chat/create-group"])
+    this.router.navigate(['/chat/create-group']);
   }
 }

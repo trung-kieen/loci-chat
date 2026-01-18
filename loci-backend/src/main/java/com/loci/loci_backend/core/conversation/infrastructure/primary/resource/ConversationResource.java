@@ -6,13 +6,15 @@ import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.conversation.application.ConversationApplicationService;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Conversation;
 import com.loci.loci_backend.core.conversation.domain.aggregate.CreateGroupRequest;
+import com.loci.loci_backend.core.conversation.domain.aggregate.GroupConversationInfo;
 import com.loci.loci_backend.core.conversation.domain.aggregate.UserChatList;
 import com.loci.loci_backend.core.conversation.domain.vo.ConversationFilter;
 import com.loci.loci_backend.core.conversation.domain.vo.ConversationQuery;
 import com.loci.loci_backend.core.conversation.infrastructure.primary.mapper.RestConversationMapper;
-import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestUserChatList;
 import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestChatReference;
 import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestCreateGroup;
+import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestCreatedGroupConversationResponse;
+import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestUserChatList;
 import com.loci.loci_backend.core.discovery.domain.vo.SearchQuery;
 
 import org.springframework.data.domain.Pageable;
@@ -56,11 +58,12 @@ public class ConversationResource {
   }
 
   @PostMapping("/group")
-  public ResponseEntity<RestChatReference> createGroupConveration(@RequestBody RestCreateGroup rest) {
+  public ResponseEntity<RestCreatedGroupConversationResponse> createGroupConveration(
+      @RequestBody RestCreateGroup rest) {
     CreateGroupRequest request = mapper.toDomain(rest);
-    Conversation conversation = conversationService.createGroupConversation(request);
+    GroupConversationInfo conversation = conversationService.createGroupConversation(request);
 
-    RestChatReference restResponse = mapper.from(conversation);
+    RestCreatedGroupConversationResponse restResponse = mapper.from(conversation);
     return ResponseEntity.ok(restResponse);
   }
 

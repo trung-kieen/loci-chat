@@ -3,20 +3,16 @@ import { Observable } from 'rxjs';
 import { LoggerService } from '../../../core/services/logger.service';
 import { WebApiService } from '../../../core/api/web-api.service';
 import { IFriendRequestList, FriendshipStatus } from '../models/contact.model';
-import {
-  IChatPreview,
-  ICreateGroupRequest,
-  IFriendList,
-} from '../../chat/models/chat.model';
+import { IChatReference, IFriendList } from '../../chat/models/chat.model';
 import { IUpdatedStatus } from '../../user/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendManagerService {
-  createGroup(groupData: ICreateGroupRequest) {
-    return this.apiService.post<void>('conversations/group', groupData);
-  }
+  private apiService = inject(WebApiService);
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger('FriendManagerService');
 
   searchFriend(query: string): Observable<IFriendList> {
     return this.apiService.get<IFriendList>(`/friends?q=${query}`);
@@ -38,9 +34,6 @@ export class FriendManagerService {
     return this.apiService.delete<IUpdatedStatus>(`/friends/${profileId}`, {});
   }
 
-  private apiService = inject(WebApiService);
-  private loggerService = inject(LoggerService);
-  private logger = this.loggerService.getLogger('FriendManagerService');
   sendAddFriend(userId: string): Observable<IUpdatedStatus> {
     return this.apiService.post<IUpdatedStatus>(
       `/contact-requests/${userId}`,
@@ -65,15 +58,15 @@ export class FriendManagerService {
     );
   }
 
-  getConversationByUser(targetUserId: string): Observable<IChatPreview> {
-    return this.apiService.get<IChatPreview>(
+  getConversationByUser(targetUserId: string): Observable<IChatReference> {
+    return this.apiService.get<IChatReference>(
       `/conversations/user/${targetUserId}`,
       {},
     );
   }
 
-  createConversationWithUser(targetUserId: string): Observable<IChatPreview> {
-    return this.apiService.post<IChatPreview>(
+  createConversationWithUser(targetUserId: string): Observable<IChatReference> {
+    return this.apiService.post<IChatReference>(
       `/conversations?userId=${targetUserId}`,
       {},
     );

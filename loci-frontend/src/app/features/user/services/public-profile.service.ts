@@ -12,7 +12,7 @@ import { FriendManagerService } from '../../contact/services/friend-manager.serv
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { ProblemDetail } from '../../../core/error-handler/problem-detail';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IChatPreview } from '../../chat/models/chat.model';
+import { IChatReference } from '../../chat/models/chat.model';
 import { LoggerService } from '../../../core/services/logger.service';
 import { IPublicProfile, IUpdatedStatus } from '../models/user.model';
 
@@ -153,7 +153,7 @@ export class PublicProfileService {
     );
   }
 
-  public requestMessage(): Observable<IChatPreview> {
+  public requestMessage(): Observable<IChatReference> {
     const profileId = this._profileId();
     if (profileId == null) {
       return EMPTY;

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { CreateGroupService } from '../../service/create-group-service';
 import { IFriend } from '../../models/chat.model';
 import {
@@ -8,6 +8,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subject,
+  takeUntil,
+  tap,
+} from 'rxjs';
+import { LoggerService } from '../../../../core/services/logger.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-group',
@@ -15,36 +24,72 @@ import {
   templateUrl: './create-group.html',
   styleUrl: './create-group.css',
 })
-export class CreateGroup implements OnInit {
-  private service = inject(CreateGroupService);
+export class CreateGroup implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
 
-  groupName = this.service.groupName;
-  imageUrl = this.service.imageUrl;
+  private router = inject(Router);
+  private service = inject(CreateGroupService);
+  private loggerService = inject(LoggerService);
+  private fb = inject(FormBuilder);
+
+  private logger = this.loggerService.getLogger('CreateGroup');
+
+  // Signals from service
+  imagePreviewUrl = this.service.imagePreviewUrl;
   selectedFriends = this.service.selectedFriends;
   filteredFriends = this.service.filteredFriends;
-  searchQuery = this.service.searchQuery;
   selectedCount = this.service.selectedCount;
 
+  serverError = this.service.serverError;
+
+  // Form Controls
   searchControl = new FormControl('', { nonNullable: true });
-  groupNameControl = new FormControl('', { nonNullable: true });
 
-  // onGroupNameChange(name: string): void {
-  //   this.service.updateGroupName(name);
-  // }
-
-  private fb = inject(FormBuilder);
   groupForm: FormGroup = this.fb.group({
-    groupName: ['', [Validators.required, Validators.minLength(3)]],
+    groupName: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
+    ],
   });
 
-  ngOnInit() {
-    this.groupForm.get('groupName')?.valueChanges.subscribe((value) => {
-      this.service.updateGroupName(value);
+  // Convenience getter for group name control
+  get groupNameControl(): FormControl {
+    return this.groupForm.get('groupName') as FormControl;
+  }
+
+  constructor() {
+    effect(() => {
+      if (this.selectedCount() > 0) {
+        this.groupForm.markAsTouched();
+      }
     });
   }
 
-  onSearchFriends(query: string): void {
-    this.service.searchFriends(query);
+  ngOnInit() {
+    // Sync group name with service
+    this.groupNameControl.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((value) => {
+          this.logger.debug('Update group name', value);
+          this.service.updateGroupName(value);
+        }),
+      )
+      .subscribe();
+
+    // Handle search
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((query) => {
+        this.logger.debug('Change search query', query);
+        this.service.searchFriends(query);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.service.reset();
   }
 
   addMember(friend: IFriend): void {
@@ -52,12 +97,14 @@ export class CreateGroup implements OnInit {
   }
 
   removeMember(friendId: string): void {
+    this.logger.debug('Remove user with id ', friendId);
     this.service.removeMember(friendId);
   }
 
   onAvatarSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
+      this.service.updateImageFile(file);
       const reader = new FileReader();
       reader.onload = (e) => {
         this.service.updateAvatar(e.target?.result as string);
@@ -65,28 +112,53 @@ export class CreateGroup implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  async onCreateGroup(): Promise<void> {
+
+  onCreateGroup(): void {
+    this.logger.info('Receive create group action');
+    this.groupForm.markAllAsTouched();
+
+    // Client validation
     if (this.groupForm.invalid) {
-      this.groupForm.markAllAsTouched();
+      this.logger.warn('Form validation failed', this.groupForm.errors);
       return;
     }
 
-    try {
-      await this.service.createGroup();
-      console.log('Group created successfully');
-      this.groupForm.reset();
-      this.service.reset();
-    } catch (error) {
-      console.error('Failed to create group:', error);
+    if (this.selectedCount() < 2) {
+      this.logger.warn('Not enough members selected');
+      this.service.setServerError('At least 2 members are required');
+      return;
     }
+
+    this.service.createGroup().subscribe({
+      next: (createdGroup) => {
+        if (createdGroup) {
+          this.router.navigate([
+            '/chat/group/',
+            createdGroup.chat.conversationId,
+          ]);
+        }
+        // If null, error was already handled by service
+      },
+    });
+  }
+
+  setServerError(message: string): void {
+    this.serverError.set(message);
+  }
+
+  clearServerError(): void {
+    this.serverError.set(null);
   }
 
   onCancel(): void {
     this.groupForm.reset();
+    this.searchControl.reset();
     this.service.reset();
+    this.service.clearServerError();
   }
 
   onBack(): void {
-    // Navigate back
+    // // Navigate back - implement your routing logic
+    this.router.navigate(['/chat']);
   }
 }

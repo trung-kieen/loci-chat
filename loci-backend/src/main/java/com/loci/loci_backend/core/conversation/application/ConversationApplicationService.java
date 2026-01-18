@@ -4,6 +4,7 @@ import com.loci.loci_backend.common.ddd.infrastructure.stereotype.ApplicationSer
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Conversation;
 import com.loci.loci_backend.core.conversation.domain.aggregate.CreateGroupRequest;
+import com.loci.loci_backend.core.conversation.domain.aggregate.GroupConversationInfo;
 import com.loci.loci_backend.core.conversation.domain.aggregate.UserChatList;
 import com.loci.loci_backend.core.conversation.domain.service.ConverationManagerService;
 import com.loci.loci_backend.core.conversation.domain.vo.ConversationQuery;
@@ -36,7 +37,7 @@ public class ConversationApplicationService {
     return converationManager.createDirectConversation(targetUserId);
   }
 
-  public Conversation createGroupConversation(CreateGroupRequest request) {
+  public GroupConversationInfo createGroupConversation(CreateGroupRequest request) {
 
     Conversation currentUserConversation = converationManager.createGroupConversation(request);
 
@@ -48,6 +49,8 @@ public class ConversationApplicationService {
     GroupProfile profile = groupManager.createGroupProfile(createProfileRequest);
     log.debug("Create group profile {} for conversation {}", profile, currentUserConversation);
 
-    return currentUserConversation;
+    GroupConversationInfo groupConversation = new GroupConversationInfo(currentUserConversation, profile);
+
+    return groupConversation;
   }
 }

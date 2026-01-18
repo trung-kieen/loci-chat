@@ -1,0 +1,1247 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Loci API",
+    "contact": {
+      "name": "trung-kieen"
+    },
+    "version": "1.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "bearerToken": []
+    }
+  ],
+  "paths": {
+    "/conversations": {
+      "get": {
+        "tags": [
+          "conversation-resource"
+        ],
+        "operationId": "getUserChatList",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestUserChatList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "conversation-resource"
+        ],
+        "operationId": "createDirectMessageConversation",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestChatReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/group": {
+      "post": {
+        "tags": [
+          "conversation-resource"
+        ],
+        "operationId": "createGroupConveration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestCreateGroup"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestChatReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests/{userId}": {
+      "post": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "sendRequest",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "unsendRequest",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests/{requestId}/reject": {
+      "post": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "rejectContactRequestForRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests/{requestId}/accept": {
+      "post": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "acceptContactForRequest",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests/user/{requestUserId}/reject": {
+      "post": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "rejectContactRequestFromUser",
+        "parameters": [
+          {
+            "name": "requestUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests/user/{requestUserId}/accept": {
+      "post": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "acceptContactRequestFromUser",
+        "parameters": [
+          {
+            "name": "requestUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blocks/{blockUserId}": {
+      "post": {
+        "tags": [
+          "block-user-resource"
+        ],
+        "operationId": "blockUser",
+        "parameters": [
+          {
+            "name": "blockUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "block-user-resource"
+        ],
+        "operationId": "unblockUser",
+        "parameters": [
+          {
+            "name": "blockUserId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "currentUserProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestPersonalProfile"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "partialUpdateProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestPersonalProfilePatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestPersonalProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/settings": {
+      "get": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "currentUserProfileSettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestProfileSettings"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "partialUpdateProfile_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestProfileSettingsPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestProfileSettings"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/avatar": {
+      "patch": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "updateProfileImage",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "avatar"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestPersonalProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupId}": {
+      "get": {
+        "tags": [
+          "group-resource"
+        ],
+        "operationId": "getProfile",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PublicId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestGroupProfile"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "group-resource"
+        ],
+        "operationId": "partialUpdateProfile_2",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PublicId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestGroupProfileChanges"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestGroupProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{publicId}": {
+      "get": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "getPublicProfile",
+        "parameters": [
+          {
+            "name": "publicId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestPublicProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/suggests": {
+      "get": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "suggestUser",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestContactProfileList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/search": {
+      "get": {
+        "tags": [
+          "user-identity-resource"
+        ],
+        "operationId": "searchUser",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestContactProfileList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/friends": {
+      "get": {
+        "tags": [
+          "friend-resource"
+        ],
+        "operationId": "searchFriends",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/user/{userId}": {
+      "get": {
+        "tags": [
+          "conversation-resource"
+        ],
+        "operationId": "getConversationByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestChatReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact-requests": {
+      "get": {
+        "tags": [
+          "contact-request-resource"
+        ],
+        "operationId": "getAllRequest",
+        "parameters": [
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestContactRequestList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/friends/{friendId}": {
+      "delete": {
+        "tags": [
+          "friend-resource"
+        ],
+        "operationId": "removeFriendContact",
+        "parameters": [
+          {
+            "name": "friendId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestFriendshipUpdatedResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RestChatReference": {
+        "type": "object",
+        "properties": {
+          "conversationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "conversationType": {
+            "type": "string",
+            "enum": [
+              "ONE_TO_ONE",
+              "GROUP"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RestCreateGroup": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string"
+          },
+          "profileImage": {
+            "type": "string"
+          },
+          "memberIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "FriendshipStatus": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "not_connected",
+              "friend_request_sent",
+              "friends",
+              "not_determined",
+              "friend_request_received",
+              "blocked",
+              "blocked_by"
+            ]
+          },
+          "connected": {
+            "type": "boolean"
+          },
+          "notConnected": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RestFriendshipUpdatedResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/FriendshipStatus"
+          }
+        }
+      },
+      "RestPersonalProfilePatch": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "profilePictureUrl": {
+            "type": "string"
+          },
+          "privacy": {
+            "$ref": "#/components/schemas/RestProfileSettings"
+          },
+          "fullname": {
+            "$ref": "#/components/schemas/UserFullname"
+          }
+        }
+      },
+      "RestProfileSettings": {
+        "type": "object",
+        "properties": {
+          "lastSeenSetting": {
+            "type": "string",
+            "enum": [
+              "Everyone",
+              "Contacts Only",
+              "Nobody"
+            ]
+          },
+          "friendRequests": {
+            "type": "string",
+            "enum": [
+              "Everyone",
+              "Friends of Friends",
+              "Nobody"
+            ]
+          },
+          "profileVisibility": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserFirstname": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "UserFullname": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "$ref": "#/components/schemas/UserFirstname"
+          },
+          "lastname": {
+            "$ref": "#/components/schemas/UserLastname"
+          }
+        }
+      },
+      "UserLastname": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "RestPersonalProfile": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "profilePictureUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "RestProfileSettingsPatch": {
+        "type": "object",
+        "properties": {
+          "lastSeenSetting": {
+            "type": "string",
+            "enum": [
+              "Everyone",
+              "Contacts Only",
+              "Nobody"
+            ]
+          },
+          "friendRequests": {
+            "type": "string",
+            "enum": [
+              "Everyone",
+              "Friends of Friends",
+              "Nobody"
+            ]
+          },
+          "profileVisibility": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PublicId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "RestGroupProfileChanges": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string"
+          },
+          "groupProfilePicture": {
+            "type": "string"
+          }
+        }
+      },
+      "RestGroupProfile": {
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "groupName": {
+            "type": "string"
+          },
+          "groupPictureUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "RestPublicProfile": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "profilePictureUrl": {
+            "type": "string"
+          },
+          "memberSince": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "connectionStatus": {
+            "type": "string",
+            "enum": [
+              "not_connected",
+              "friend_request_sent",
+              "friends",
+              "not_determined",
+              "friend_request_received",
+              "blocked",
+              "blocked_by"
+            ]
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PageObject": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestContactProfile"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RestContactProfile": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullname": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "friendshipStatus": {
+            "type": "string",
+            "enum": [
+              "not_connected",
+              "friend_request_sent",
+              "friends",
+              "not_determined",
+              "friend_request_received",
+              "blocked",
+              "blocked_by"
+            ]
+          }
+        }
+      },
+      "RestContactProfileList": {
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "$ref": "#/components/schemas/PageObject"
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RestFriendList": {
+        "type": "object",
+        "properties": {
+          "friends": {
+            "$ref": "#/components/schemas/PageObject"
+          }
+        }
+      },
+      "RestUserChatList": {
+        "type": "object",
+        "properties": {
+          "conversations": {
+            "$ref": "#/components/schemas/PageObject"
+          }
+        }
+      },
+      "RestContactRequestList": {
+        "type": "object",
+        "properties": {
+          "requests": {
+            "$ref": "#/components/schemas/PageObject"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
 package com.loci.loci_backend.core.groups.domain.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
+import com.loci.loci_backend.common.store.domain.aggregate.File;
+import com.loci.loci_backend.common.store.domain.service.FileStorageService;
+import com.loci.loci_backend.common.store.domain.vo.FilePath;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.common.validation.domain.DuplicateResourceException;
 import com.loci.loci_backend.common.validation.domain.ResourceNotFoundException;
@@ -11,6 +15,7 @@ import com.loci.loci_backend.core.groups.domain.aggregate.CreateGroupProfileRequ
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfileChanges;
 import com.loci.loci_backend.core.groups.domain.repository.GroupRepository;
+import com.loci.loci_backend.core.groups.domain.vo.GroupImageUrl;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class GroupManager {
   private final GroupRepository groupRepository;
+  private final FileStorageService fileStorageService;
   private final ConversationRepository conversationRepository;
 
   public GroupProfile updatGroupInfo(PublicId groupPublicId, GroupProfileChanges profileChanges) {
@@ -48,5 +54,14 @@ public class GroupManager {
     }
 
     return groupRepository.createProfile(request);
+  }
+
+  public GroupProfile applyGroupUpdateImage(PublicId groupPublicId, File file) {
+    FilePath requestFilePath = new FilePath(UUID.randomUUID() + file.path().value());
+    File savedFile = fileStorageService.saveFile(file, requestFilePath);
+    GroupImageUrl newImageUrl = new GroupImageUrl(savedFile.path().value());
+    GroupProfileChanges changes = new GroupProfileChanges();
+    changes.setGroupProfilePicture(newImageUrl);
+    return this.updatGroupInfo(groupPublicId, changes);
   }
 }

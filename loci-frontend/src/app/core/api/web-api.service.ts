@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpContext,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { environment } from '../../../environments/environments';
@@ -26,7 +31,6 @@ export interface RequestOptions {
   timeout?: number;
 }
 
-
 /**
  * Proxy service provide httpclient wrapper and websocket wrapper
  * Can be replaced by Interceptor
@@ -37,12 +41,7 @@ export class WebApiService {
   private http = inject(HttpClient);
   private apiBaseUrl = environment.apiUrl;
 
-
-  get<T>(
-    endpoint: string,
-    options?: RequestOptions
-
-  ): Observable<T> {
+  get<T>(endpoint: string, options?: RequestOptions): Observable<T> {
     const url = this.getFullUrl(endpoint);
     return this.http.get<T>(url, options).pipe(
       retry(2), // Retry on failure
@@ -53,7 +52,7 @@ export class WebApiService {
   post<T>(
     endpoint: string,
     body: any,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     return this.http
@@ -63,11 +62,7 @@ export class WebApiService {
       ();
   }
 
-  put<T>(
-    endpoint: string,
-    body: any,
-    options?: RequestOptions,
-  ): Observable<T> {
+  put<T>(endpoint: string, body: any, options?: RequestOptions): Observable<T> {
     const url = this.getFullUrl(endpoint);
     return this.http
       .put<T>(url, body, options)
@@ -78,7 +73,7 @@ export class WebApiService {
   patch<T>(
     endpoint: string,
     body: any,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Observable<T> {
     const url = this.getFullUrl(endpoint);
     return this.http
@@ -104,9 +99,13 @@ export class WebApiService {
   }
 
   /**
-   *
+   * Mostly use for patch update for image file
    */
-  patchForm<T>(endpoint: string, formData: FormData, options?: RequestOptions): Observable<T> {
+  patchForm<T>(
+    endpoint: string,
+    formData: FormData,
+    options?: RequestOptions,
+  ): Observable<T> {
     return this.patch<T>(endpoint, formData, {
       ...options,
       // Form data omit cotnent type of request
@@ -114,7 +113,11 @@ export class WebApiService {
     });
   }
 
-  postForm<T>(endpoint: string, formData: FormData, options?: RequestOptions): Observable<T> {
+  postForm<T>(
+    endpoint: string,
+    formData: FormData,
+    options?: RequestOptions,
+  ): Observable<T> {
     return this.patch<T>(endpoint, formData, {
       ...options,
       // Form data omit cotnent type of request

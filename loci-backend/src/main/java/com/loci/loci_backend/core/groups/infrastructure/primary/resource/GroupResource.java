@@ -1,6 +1,9 @@
 package com.loci.loci_backend.core.groups.infrastructure.primary.resource;
 
-import org.springframework.web.bind.annotation.RequestBody;
+import java.io.IOException;
+
+import com.loci.loci_backend.common.store.domain.aggregate.File;
+import com.loci.loci_backend.common.store.infrastructure.primary.mapper.RestFileMapper;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.groups.application.GroupApplicationService;
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
@@ -13,8 +16,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class GroupResource {
   private final GroupApplicationService groupApplicationService;
   private final RestGroupMapper groupMapper;
+  private final RestFileMapper fileMapper;
 
   @GetMapping("/{groupId}")
   public ResponseEntity<RestGroupProfile> getProfile(@PathVariable("groupId") PublicId groupPublicId) {
@@ -38,4 +45,13 @@ public class GroupResource {
     GroupProfile updatedProfile = groupApplicationService.updatGroupInfo(groupPublicId, changes);
     return ResponseEntity.ok(groupMapper.from(updatedProfile));
   }
+
+  @PatchMapping("/{groupId}/image")
+  public ResponseEntity<RestGroupProfile> partialUpdateImage(@PathVariable("groupId") PublicId groupPublicId,
+      @RequestParam("groupProfilePicture") MultipartFile formFile) throws IOException {
+    File file = fileMapper.toDomain(formFile);
+    GroupProfile profile = groupApplicationService.updateProfileAvatar(groupPublicId, file);
+    return ResponseEntity.ok(groupMapper.from(profile));
+  }
+
 }

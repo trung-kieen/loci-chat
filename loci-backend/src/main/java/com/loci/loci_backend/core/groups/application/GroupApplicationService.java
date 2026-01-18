@@ -1,6 +1,7 @@
 package com.loci.loci_backend.core.groups.application;
 
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.ApplicationService;
+import com.loci.loci_backend.common.store.domain.aggregate.File;
 import com.loci.loci_backend.common.user.domain.vo.PublicId;
 import com.loci.loci_backend.core.groups.domain.aggregate.CreateGroupProfileRequest;
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
@@ -25,6 +26,10 @@ public class GroupApplicationService {
 
   public GroupProfile updatGroupInfo(PublicId groupPublicId, GroupProfileChanges profileChanges) {
     return groupManager.updatGroupInfo(groupPublicId, profileChanges);
+  }
+
+  public GroupProfile updateProfileAvatar(PublicId groupPublicId, File file) {
+    return groupManager.applyGroupUpdateImage(groupPublicId, file);
   }
 
 }

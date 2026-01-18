@@ -1,8 +1,8 @@
-import { Component, effect, inject, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, merge, Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { PersonalProfileService } from '../../services/personal-profile.service';
-import { SharedModule } from "../../../../shared/shared.module";
+import { SharedModule } from '../../../../shared/shared.module';
 import { LoggerService } from '../../../../core/services/logger.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { LoggerService } from '../../../../core/services/logger.service';
 export class PersonalProfile implements OnInit, OnDestroy {
   private profileService = inject(PersonalProfileService);
   private loggerService = inject(LoggerService);
-  private logger = this.loggerService.getLogger("PersonalProfile");
+  private logger = this.loggerService.getLogger('PersonalProfile');
   private profile = this.profileService.profile;
   private destroy$ = new Subject<void>();
 
@@ -33,19 +33,16 @@ export class PersonalProfile implements OnInit, OnDestroy {
     profilePictureUrl: new FormControl(''),
 
     activityStatus: new FormControl(false),
-
   });
   public settingForm = new FormGroup({
-    lastSeenSetting: new FormControl<'Everyone' | 'Contacts Only' | 'Nobody'>('Everyone'),
-    friendRequests: new FormControl<'Everyone' | 'Friends of Friends' | 'Nobody'>('Everyone'),
+    lastSeenSetting: new FormControl<'Everyone' | 'Contacts Only' | 'Nobody'>(
+      'Everyone',
+    ),
+    friendRequests: new FormControl<
+      'Everyone' | 'Friends of Friends' | 'Nobody'
+    >('Everyone'),
     profileVisibility: new FormControl(true),
   });
-
-
-
-
-
-
 
   constructor() {
     effect(() => {
@@ -59,16 +56,14 @@ export class PersonalProfile implements OnInit, OnDestroy {
         emailAddress: p.emailAddress,
         profilePictureUrl: p.profilePictureUrl,
         activityStatus: p.activityStatus,
-
-      })
+      });
       if (!s) return;
       this.settingForm.patchValue({
-
         lastSeenSetting: s.lastSeenSetting,
         friendRequests: s.friendRequests,
         profileVisibility: s.profileVisibility,
-      })
-    })
+      });
+    });
   }
   public loadProfile() {
     this.profileService.loadMyProfile();
@@ -89,16 +84,14 @@ export class PersonalProfile implements OnInit, OnDestroy {
     this.profileService.updateSettings(settingRaw);
   }
 
-
   public save() {
-    const profileRaw = this.profileForm.getRawValue()
+    const profileRaw = this.profileForm.getRawValue();
     if (!profileRaw) return;
     this.profileService.updateMyProfile(profileRaw);
   }
 
   onImageSelected(avatar: File) {
-    this.logger.info("Receive user upload image ", avatar);
+    this.logger.info('Receive user upload image ', avatar);
     this.profileService.updateProfileAvatar(avatar);
   }
-
 }
