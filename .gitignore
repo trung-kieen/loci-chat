@@ -3,3 +3,4 @@ postgres-data/**
 *.log
 .idea/
 .idea
+loci-backend/.env

@@ -94,6 +94,9 @@ dependencies {
     }
     api 'org.yaml:snakeyaml:2.4'
 
+    implementation("me.paulschwarz:spring-dotenv:4.0.0")
+
+
     // Lombok
     compileOnly libs.org.projectlombok.lombok
     annotationProcessor libs.org.projectlombok.lombok
@@ -106,6 +109,7 @@ dependencies {
     // MapStruct annotation processor
     implementation 'org.mapstruct:mapstruct:1.6.3'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
 
 
     // Development tools

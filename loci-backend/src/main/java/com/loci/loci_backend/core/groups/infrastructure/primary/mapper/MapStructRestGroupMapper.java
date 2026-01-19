@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.groups.infrastructure.primary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfile;
 import com.loci.loci_backend.core.groups.domain.aggregate.GroupProfileChanges;
 import com.loci.loci_backend.core.groups.infrastructure.primary.payload.RestGroupProfile;

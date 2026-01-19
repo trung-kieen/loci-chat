@@ -4,9 +4,9 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:7070
-        username: "admin"
-        password: "adminadmin"
+        url: ${SPRING_BOOT_ADMIN_CLIENT_URL:http://localhost:7070}
+        username: ${SPRING_BOOT_ADMIN_CLIENT_USERNAME:admin}
+        password: ${SPRING_BOOT_ADMIN_CLIENT_PASSWORD:adminadmin}
 
   security:
     websocket:
@@ -15,19 +15,19 @@ spring:
     enabled: true
     locations: classpath:db/migrations
     baseline-on-migrate: true
-    url: jdbc:postgresql://localhost:5432/locidb
-    user: admin
+    url: ${SPRING_FLYWAY_URL:jdbc:postgresql://localhost:5432/locidb}
+    user: ${SPRING_FLYWAY_USER:admin}
     schemas: public
-    password: admin
+    password: ${SPRING_FLYWAY_PASSWORD:admin}
 
     # Deadzone!
     # clean-disabled: false
     # clean-on-validation-error: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/locidb
-    username: admin
-    password: admin
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/locidb}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     hikari:
       poolName: Hikari
       # Require to specify commit use like @Transactional
@@ -70,34 +70,34 @@ spring:
 
   # Define message queue connection
   rabbitmq:
-    host: localhost
-    port: 5672
-    usename: admin
-    password: admin
-    virtual-host: /
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    virtual-host: ${SPRING_RABBITMQ_VIRTUAL_HOST:/}
+    username: ${SPRING_RABBITMQ_USERNAME:admin}
+    password: ${SPRING_RABBITMQ_PASSWORD}
 
     stomp:
       enabled: true
-      host: localhost
-      port: 61613
+      host: ${SPRING_RABBITMQ_STOMP_HOST:localhost}
+      port: ${SPRING_RABBITMQ_STOMP_PORT:61613}
   websocket:
     max-text-message-size: 8192
     max-binary-message-size: 8192
 
 stomp.relay:
-  relay-host: localhost
-  relay-port: 61613
-  client-login: guest
-  client-passcode: guest
-  system-login: guest
-  system-passcode: guest
+  relay-host: ${STOMP_RELAY_HOST:localhost}
+  relay-port: ${STOMP_RELAY_PORT:61613}
+  client-login: ${STOMP_RELAY_CLIENT_LOGIN:guest}
+  client-passcode: ${STOMP_RELAY_CLIENT_PASSCODE:guest}
+  system-login: ${STOMP_RELAY_SYSTEM_LOGIN:guest}
+  system-passcode: ${STOMP_RELAY_SYSTEM_PASSCODE:guest}
   system-heartbeat-send-interval: 5000
   system-heartbeat-receive-interval: 4000
 
 application:
-  client-base-url: http://localhost:4200
+  client-base-url: ${APPLICATION_CLIENT_BASE_URL:http://localhost:4200}
   cors:
-    allowed-origins: http://localhost:4200
+    allowed-origins: ${APPLICATION_CORS_ALLOWED_ORIGINS:http://localhost:4200}
     allowed-methods: "*"
     # allowed-mappings: "/**"
     allowed-headers: "*"
@@ -130,10 +130,10 @@ management:
 
 flyway:
   enabled: true
-  url: jdbc:postgresql://localhost:5432/locidb
-  user: admin
-  # schemas: public
-  password: admin
+  url: ${FLYWAY_URL:jdbc:postgresql://localhost:5432/locidb}
+  user: ${FLYWAY_USER:admin}
+  schemas: public
+  password: ${FLYWAY_PASSWORD:admin}
   locations: src/main/resources/db/migrations
 
 shell:
@@ -144,49 +144,27 @@ logging:
   com.loci.loci_backend: DEBUG
 
   level:
-    # logging.level.org.springframework.cache=TRACE
     org.springframework.security.web.FilterChainProxy: TRACE
-  #   root: DEBUG
-  #   com.loci.loci_backend.common.aspect.LoggingAspect: INFO
-  #   org:
-  #     hibernate:
-  #       SQL: INFO
-  #     type:
-  #       descriptor:
-  #         sql:
-  #           BasicBinder: INFO
-  #     springframework:
-  #       messaging: INFO
-  #       web:
-  #         authentication: INFO
-  #         FilterChainProxy: INFO
-  #         socket: INFO
-  #         filter:
-  #           CommonsRequestLoggingFilter: INFO
-  #       security:
-  #         authentication: INFO
-  #         oauth2: INFO
 keycloak:
-  auth-server-url: http://localhost:8080
-  # realm: your-target-realm          # Realm where users will be migrated
-  resource: spring
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER_URL:http://localhost:8080}
+  resource: ${KEYCLOAK_RESOURCE:spring}
   public-client: false
-  migration-password: exampleloci123
-  credentials: # admin credentials
-    username: admin
-    password: admin
+  migration-password: ${KEYCLOAK_MIGRATION_PASSWORD:exampleloci123}
+  credentials:
+    username: ${KEYCLOAK_CREDENTIALS_USERNAME:admin}
+    password: ${KEYCLOAK_CREDENTIALS_PASSWORD:admin}
 
 upload:
   minio:
-    enable: false
-    url: http://localhost:9000
-    access-key: minioadmin
-    secret-key: minioadmin
+    enable: ${UPLOAD_MINIO_ENABLE:false}
+    url: ${UPLOAD_MINIO_URL:http://localhost:9000}
+    access-key: ${UPLOAD_MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${UPLOAD_MINIO_SECRET_KEY}
     secure: false
-    bucket: loci-bucket-01
+    bucket: ${UPLOAD_MINIO_BUCKET:loci-bucket-01}
     metric-name: ""
-    url-prefix: "http://localhost:9000" # use to point to
-    region: us-east-1
+    url-prefix: ${UPLOAD_MINIO_URL_PREFIX:http://localhost:9000}
+    region: ${UPLOAD_MINIO_REGION:us-east-1}
 
 # logging:
 #   structured:

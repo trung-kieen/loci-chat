@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.discovery.infrastructure.secondary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfile;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;

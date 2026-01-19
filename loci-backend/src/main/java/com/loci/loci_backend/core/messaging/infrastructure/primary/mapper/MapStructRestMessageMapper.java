@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.messaging.infrastructure.primary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.core.conversation.infrastructure.primary.payload.RestMessage;
 import com.loci.loci_backend.core.messaging.domain.aggregate.Message;
 

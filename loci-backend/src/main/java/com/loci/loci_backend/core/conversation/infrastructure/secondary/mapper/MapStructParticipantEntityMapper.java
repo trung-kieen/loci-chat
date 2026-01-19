@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.conversation.infrastructure.secondary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.core.conversation.domain.aggregate.Participant;
 import com.loci.loci_backend.core.conversation.infrastructure.secondary.entity.ConversationEntity;
 import com.loci.loci_backend.core.conversation.infrastructure.secondary.entity.ConversationParticipantEntity;

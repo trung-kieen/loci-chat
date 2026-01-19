@@ -1,6 +1,6 @@
 package com.loci.loci_backend.core.identity.infrastructure.secondary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserPresence;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserPresenceEntity;
 

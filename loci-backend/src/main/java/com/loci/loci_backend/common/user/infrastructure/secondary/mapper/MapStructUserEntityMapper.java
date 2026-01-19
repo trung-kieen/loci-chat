@@ -1,6 +1,6 @@
 package com.loci.loci_backend.common.user.infrastructure.secondary.mapper;
 
-import com.loci.loci_backend.common.mapper.ValueObjectTypeConverter;
+import com.loci.loci_backend.common.ddd.infrastructure.mapper.ValueObjectTypeConverter;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 

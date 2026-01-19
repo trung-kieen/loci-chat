@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.5.3</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <relativePath/>
+    <!-- lookup parent from repository -->
   </parent>
   <groupId>com.loci</groupId>
   <artifactId>loci-backend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>loci</name>
   <description>Demo project for Spring Boot</description>
-  <url />
+  <url/>
   <licenses>
-    <license />
+    <license/>
   </licenses>
   <developers>
-    <developer />
+    <developer/>
   </developers>
   <scm>
-    <connection />
-    <developerConnection />
-    <tag />
-    <url />
+    <connection/>
+    <developerConnection/>
+    <tag/>
+    <url/>
   </scm>
   <properties>
     <java.version>17</java.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
   </properties>
   <dependencies>
-
     <dependency>
       <groupId>org.ocpsoft.prettytime</groupId>
       <artifactId>prettytime</artifactId>
@@ -43,7 +41,6 @@
       <artifactId>jilt</artifactId>
       <version>1.6.3</version>
     </dependency>
-
     <dependency>
       <groupId>io.minio</groupId>
       <artifactId>minio</artifactId>
@@ -55,14 +52,11 @@
       <artifactId>okhttp-urlconnection</artifactId>
       <version>5.3.2</version>
     </dependency>
-
-
     <!-- RabbitMQ  -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
-
     <!-- Netty undelying connection to relay with rabbitmq  -->
     <dependency>
       <groupId>io.netty</groupId>
@@ -72,12 +66,15 @@
       <groupId>io.projectreactor.netty</groupId>
       <artifactId>reactor-netty</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>me.paulschwarz</groupId>
+      <artifactId>spring-dotenv</artifactId>
+      <version>4.0.0</version>
+    </dependency>
     <dependency>
       <groupId>org.modelmapper</groupId>
       <artifactId>modelmapper</artifactId>
@@ -92,13 +89,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
-
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>s3</artifactId>
       <version>2.28.23</version>
     </dependency>
-
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
@@ -138,31 +133,25 @@
       <artifactId>stomp-websocket</artifactId>
       <version>2.3.4</version>
     </dependency>
-
     <!-- <dependency> -->
     <!--   <groupId>de.codecentric</groupId> -->
     <!--   <artifactId>spring-boot-admin-starter-server</artifactId> -->
     <!--   <version>3.3.5</version> -->
     <!-- </dependency> -->
-
     <dependency>
       <groupId>de.codecentric</groupId>
       <artifactId>spring-boot-admin-starter-client</artifactId>
       <version>3.1.5</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
-
     <dependency>
       <groupId>de.codecentric</groupId>
       <artifactId>spring-boot-admin-server-ui</artifactId>
       <version>1.5.7</version>
     </dependency>
-
-
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>sockjs-client</artifactId>
@@ -172,7 +161,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-websocket</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
@@ -190,7 +178,6 @@
       <version>2.8.4</version>
     </dependency>
     <!-- Access http://localhost:8080/swagger-ui/index.html -->
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -210,7 +197,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-
     <!-- <dependency> -->
     <!--   <groupId>ch.qos.logback</groupId> -->
     <!--   <artifactId>logback-classic</artifactId> -->
@@ -222,7 +208,6 @@
     <!--   <artifactId>logback-core</artifactId> -->
     <!--   <version>1.4.7</version> -->
     <!-- </dependency> -->
-
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
@@ -233,32 +218,26 @@
       <artifactId>flyway-core</artifactId>
       <version>11.11.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-database-postgresql</artifactId>
     </dependency>
-
     <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
-
-
     <!-- Keycloak user migration  -->
     <dependency>
       <groupId>org.keycloak</groupId>
       <artifactId>keycloak-admin-client</artifactId>
       <version>26.0.2</version>
     </dependency>
-
     <!-- Jakarta WS-RS API (required for Keycloak 20+) -->
     <dependency>
       <groupId>jakarta.ws.rs</groupId>
       <artifactId>jakarta.ws.rs-api</artifactId>
       <version>3.1.0</version>
     </dependency>
-
     <!-- Resteasy Client -->
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
@@ -270,19 +249,16 @@
       <artifactId>resteasy-jackson2-provider</artifactId>
       <version>6.2.7.Final</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.shell</groupId>
       <artifactId>spring-shell-starter</artifactId>
       <version>3.1.3</version>
     </dependency>
-
     <dependency>
       <groupId>com.github.javafaker</groupId>
       <artifactId>javafaker</artifactId>
       <version>1.0.2</version>
     </dependency>
-
     <!-- <dependency> -->
     <!--   <groupId>com.querydsl</groupId> -->
     <!--   <artifactId>querydsl-apt</artifactId> -->
@@ -292,27 +268,22 @@
     <!--   <groupId>com.querydsl</groupId> -->
     <!--   <artifactId>querydsl-jpa</artifactId> -->
     <!-- </dependency> -->
-
     <!-- Spring Cache Abstraction interface -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
-
     <!-- Caffeine Cache for inmemory -->
     <dependency>
       <groupId>com.github.ben-manes.caffeine</groupId>
       <artifactId>caffeine</artifactId>
     </dependency>
-
     <!-- Redis Cache need to config for redis! -->
     <!-- <dependency> -->
     <!--   <groupId>org.springframework.boot</groupId> -->
     <!--   <artifactId>spring-boot-starter-data-redis</artifactId> -->
     <!-- </dependency> -->
-
   </dependencies>
-
   <build>
     <plugins>
       <plugin>
@@ -337,7 +308,6 @@
         <!--     </configuration> -->
         <!--   </execution> -->
         <!-- </executions> -->
-
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -379,7 +349,6 @@
           </excludes>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -397,7 +366,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
@@ -414,7 +382,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
@@ -450,8 +417,5 @@
       <!--   </executions> -->
       <!-- </plugin> -->
     </plugins>
-
-
   </build>
-
 </project>

@@ -1,4 +1,4 @@
-package com.loci.loci_backend.common.mapper;
+package com.loci.loci_backend.common.ddd.infrastructure.mapper;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -44,6 +44,10 @@ public class ValueObjectTypeConverter {
 
   }
 
+  public <R> R unwrap(ValueObject<R> value) {
+    return NullSafe.getIfPresent(value);
+  }
+
   private Class<?> getRawType(Class<?> clazz) {
     for (Type genericInterface : clazz.getGenericInterfaces()) {
       if (genericInterface instanceof ParameterizedType pt && pt.getRawType().equals(ValueObject.class)) {
@@ -54,10 +58,6 @@ public class ValueObjectTypeConverter {
       }
     }
     return null;
-  }
-
-  public <R> R unwrap(ValueObject<R> value) {
-    return NullSafe.getIfPresent(value);
   }
 
 }
