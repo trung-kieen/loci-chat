@@ -1,6 +1,5 @@
 package com.loci.loci_backend.common.authentication.infrastructure.primary.config;
 
-import com.loci.loci_backend.common.authentication.domain.Role;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.entrypoint.AuthenticationEntryPointImpl;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.entrypoint.AuthorizationEntryPointImpl;
 import com.loci.loci_backend.common.authentication.infrastructure.primary.filter.JwtUserSyncFilter;
@@ -9,7 +8,6 @@ import com.loci.loci_backend.common.authentication.infrastructure.primary.keyclo
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityConfiguration {
@@ -63,7 +61,7 @@ public class SecurityConfiguration {
         request -> request
             .requestMatchers(SecurityWhitelist.PATTERNS).permitAll()
             // .requestMatchers("/actuator/**").hasRole(Role.ADMIN.name())
-            .requestMatchers("/actuator/**").permitAll()
+            // .requestMatchers("/actuator/**").permitAll()
             .anyRequest().hasRole("user")
 
     );

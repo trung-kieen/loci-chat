@@ -1,18 +1,43 @@
+# global:
+#   scrape_interval: 15s
+#   evaluation_interval: 15s
+
+# scrape_configs:
+#   - job_name: "prometheus-spring-boot-monitoring"
+#     static_configs:
+#       - targets: ["localhost:9090"]
+
+#   - job_name: "spring-boot-app"
+#     metrics_path: "/actuator/prometheus"
+#     static_configs:
+#       - targets: ["localhost:8080"] # Must match service name in docker-compose
+#     # Optional: Add labels to identify instance
+#     relabel_configs:
+#       - source_labels: [__address__]
+#         target_label: instance
+#         replacement: "your-app-local"
+
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
 
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: "codelab-monitor"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's our Spring Boot api.
 scrape_configs:
-  - job_name: "prometheus"
-    static_configs:
-      - targets: ["localhost:9090"]
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "spring-boot-monitoring"
 
-  - job_name: "spring-boot-app"
-    metrics_path: "/actuator/prometheus"
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+    metrics_path: "/api/v1/actuator/prometheus"
     static_configs:
-      - targets: ["localhost:8080"] # Must match service name in docker-compose
-    # Optional: Add labels to identify instance
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: instance
-        replacement: "your-app-local"
+      # Docker on Linux doesn't support host.docker.internal by default. Use the docker bridge IP: 172.17.0.1:8080
+      - targets: ["host.docker.internal:8080", "localhost:8080"] # use docker service name or ip
+        labels:
+          application: "demo spring boot monitoring"

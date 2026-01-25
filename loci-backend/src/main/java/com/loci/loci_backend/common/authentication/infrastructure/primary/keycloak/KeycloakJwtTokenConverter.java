@@ -1,6 +1,7 @@
 package com.loci.loci_backend.common.authentication.infrastructure.primary.keycloak;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +36,11 @@ public class KeycloakJwtTokenConverter implements Converter<Jwt, Collection<Gran
 
   @Override
   public Collection<GrantedAuthority> convert(Jwt jwt) {
+    if (jwt == null) {
+      log.warn("Missing jwt token when convert to authorities");
+      return Arrays.asList();
+    }
+
     Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
     Collection<String> roles = realmAccess.get("roles");
     return roles.stream()
@@ -45,7 +51,7 @@ public class KeycloakJwtTokenConverter implements Converter<Jwt, Collection<Gran
   public User convert(JwtAuthenticationToken token) {
 
     if (token == null) {
-      log.warn("Missing token to convert");
+      log.warn("Missing token when convert to User Principal");
       return null;
     }
     Map<String, Object> attributes = token.getTokenAttributes();

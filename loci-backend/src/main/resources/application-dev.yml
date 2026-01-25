@@ -15,9 +15,21 @@ spring:
   #   port: 6379
   #   password:
 
+  threads:
+    virtual:
+      enabled: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
   security:
     websocket:
       same-origin-disabled: true
+    oauth2:
+      resourceserver:
+        jwt.issuer-uri: http://localhost:9090/realms/loci-realm
   flyway:
     enabled: true
     locations: classpath:db/migrations

@@ -79,49 +79,57 @@ services:
     networks:
       - loci-net
 
-  # loci-prometheus:
-  #   image: prom/prometheus:v2.45.0
-  #   container_name: loci-prometheus
-  #   command:
-  #     - "--config.file=/etc/prometheus/prometheus.yml"
-  #     - "--storage.tsdb.path=/prometheus"
-  #     - "--storage.tsdb.retention.time=10d" # 10-day retention
-  #     - "--web.console.libraries=/etc/prometheus/console_libraries"
-  #     - "--web.console.templates=/etc/prometheus/consoles"
-  #     - "--web.enable-lifecycle" # Allows hot-reload via API
-  #   volumes:
-  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-  #     - prometheus_data:/prometheus
-  #   ports:
-  #     - "9092:9090"
-  #   networks:
-  #     - loci-net
-  #   restart: unless-stopped
+  loci-prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: loci-prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=10d" # 10-day retention
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle" # Allows hot-reload via API
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    # network_mode: host
+    ports:
+      - "9092:9090"
+    networks:
+      - loci-net
+    extra_hosts:
+      # Access via dns
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
 
-  # # Visualization
+  # Visualization
 
-  # loci-grafana:
-  #   image: grafana/grafana:10.0.0
-  #   container_name: loci-grafana
-  #   environment:
-  #     - GF_SECURITY_ADMIN_USER=admin
-  #     - GF_SECURITY_ADMIN_PASSWORD=admin
-  #     - GF_USERS_ALLOW_SIGN_UP=false
-  #     - GF_SERVER_ROOT_URL=http://localhost:3000
-  #     # Optional: Disable auth for local dev
-  #     # TODO: remove for production
-  #     - GF_AUTH_ANONYMOUS_ENABLED=true
-  #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-  #   volumes:
-  #     - ./grafana/provisioning:/etc/grafana/provisioning:ro
-  #     - grafana_data:/var/lib/grafana
-  #   ports:
-  #     - "3000:3000"
-  #   networks:
-  #     - monitoring
-  #   depends_on:
-  #     - loci-prometheus
-  #   restart: unless-stopped
+  loci-grafana:
+    image: grafana/grafana:10.0.0
+    container_name: loci-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://localhost:3000
+      - DS_PROMETHEUS=Prometheus
+      # Optional: Disable auth for local dev
+
+      # NOTE: remove for production
+      # - GF_AUTH_ANONYMOUS_ENABLED=true
+      # - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - ./grafana/provisioning/dashboards/:/etc/grafana/dashboards:ro
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards
+    ports:
+      - "3000:3000"
+    networks:
+      - loci-net
+    depends_on:
+      - loci-prometheus
+    restart: unless-stopped
 
   loci-minio:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
