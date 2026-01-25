@@ -1,7 +1,6 @@
 package com.loci.loci_backend.core.discovery.domain.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.loci.loci_backend.common.authentication.domain.KeycloakPrincipal;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
@@ -10,7 +9,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfile;
 import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
-import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
+import com.loci.loci_backend.core.social.domain.aggregate.UserConnections;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,11 +47,11 @@ public class SearchResultExtractor {
 
     List<UserDBId> matchingUserIds = matchingUsers.getContent().stream().map(User::getDbId).toList();
 
-    Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus = connectionResolver
+    UserConnections userConnections = connectionResolver
         .aggreateConnection(currentUser.getDbId(), matchingUserIds);
 
     Page<ContactProfile> contacts = matchingUsers.map(user -> {
-      return connectionResolver.buildSearchContact(userDbIdToFriendStatus, user);
+      return connectionResolver.extractContactProfile(userConnections, user);
     });
     return new ContactProfileList(contacts);
   }

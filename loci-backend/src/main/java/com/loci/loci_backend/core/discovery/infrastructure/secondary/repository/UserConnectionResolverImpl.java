@@ -15,6 +15,7 @@ import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileBuild
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRelationJpaVO;
 import com.loci.loci_backend.core.discovery.infrastructure.secondary.vo.ContactRequestRelationJpaVO;
+import com.loci.loci_backend.core.social.domain.aggregate.UserConnections;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 import com.loci.loci_backend.core.social.infrastructure.secondary.enumernation.FriendshipStatusEnum;
 import com.loci.loci_backend.core.social.infrastructure.secondary.repository.JpaContactRepository;
@@ -32,8 +33,8 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
    * Check is userid is connect to all the list of targetUserIds
    */
   public boolean isConnected(UserDBId userId, Collection<UserDBId> targetUserIds) {
-    Map<UserDBId, FriendshipStatus> connections = this.aggreateConnection(userId, targetUserIds);
-    return connections.values().stream().allMatch(connect -> connect.isConnected());
+    UserConnections connections = this.aggreateConnection(userId, targetUserIds);
+    return connections.onlyContainFriend();
 
   }
 
@@ -61,7 +62,7 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
     return new FriendshipStatus(FriendshipStatusEnum.NOT_CONNECTED);
   }
 
-  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, Collection<UserDBId> ids) {
+  public UserConnections aggreateConnection(UserDBId userId, Collection<UserDBId> ids) {
     Long currentUserId = userId.value();
     List<Long> targetUserIds = ids.stream().map(UserDBId::value).toList();
     // Init to unknown for all
@@ -81,25 +82,25 @@ public class UserConnectionResolverImpl implements UserConnectionResolver {
       targetUserIdToFriendStatus.put(new UserDBId(targetId), status);
     }
 
-    // Hihger priority to update => update last
+    // Higher priority to update => update last
     for (ContactRelationJpaVO contact : contacts) {
       FriendshipStatus status = contact.friendshipStatusWithUser(currentUserId);
       Long targetId = contact.getOpponent(currentUserId);
       targetUserIdToFriendStatus.put(new UserDBId(targetId), status);
     }
 
-    return targetUserIdToFriendStatus;
+    return new UserConnections(userId, targetUserIdToFriendStatus);
   }
 
-  public ContactProfile buildSearchContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user) {
+  public ContactProfile extractContactProfile(UserConnections userConnections, User contactUser) {
     return ContactProfileBuilder.contactProfile()
-        .publicId(user.getUserPublicId())
-        .fullname(user.getFullname())
-        .username(user.getUsername())
-        .userEmail(user.getEmail())
-        .imageUrl(user.getProfilePicture())
-        .friendshipStatus(userDbIdToFriendStatus.getOrDefault(user.getDbId(),
-            new FriendshipStatus(FriendshipStatusEnum.NOT_CONNECTED)))
+        .publicId(contactUser.getUserPublicId())
+        .fullname(contactUser.getFullname())
+        .username(contactUser.getUsername())
+        .userEmail(contactUser.getEmail())
+        .imageUrl(contactUser.getProfilePicture())
+        .friendshipStatus(
+            userConnections.determineFriendStatusOrDefaults(contactUser.getDbId(), FriendshipStatus.notConnected()))
         .build();
   }
 

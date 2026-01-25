@@ -2,7 +2,6 @@ package com.loci.loci_backend.common.validation.infrastructure.primary.handler;
 
 import java.util.UUID;
 
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -13,7 +12,7 @@ import lombok.extern.log4j.Log4j2;
 
 @ControllerAdvice
 @Log4j2
-@Order(3)
+@Order(4)
 class GenericExceptionHandler {
 
   @ExceptionHandler(Exception.class)

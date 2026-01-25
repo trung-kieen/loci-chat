@@ -1,5 +1,6 @@
 package com.loci.loci_backend.core.conversation.infrastructure.secondary.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -44,14 +45,21 @@ public interface JpaParticipantRepository extends JpaRepository<ConversationPart
   long countByConversationId(Long conversationId);
 
   @Query("""
-    SELECT p.userId
-    FROM GroupEntity g
-    JOIN
-    ConversationParticipantEntity p
-    ON g.conversationId = p.conversationId
-    WHERE
-      g.id = :groupId
-    """)
+      SELECT p.userId
+      FROM GroupEntity g
+      JOIN
+      ConversationParticipantEntity p
+      ON g.conversationId = p.conversationId
+      WHERE
+        g.id = :groupId
+      """)
   Set<Long> getUserIdInConversationByGroupId(@Param("groupId") Long groupId);
+
+  @Query("""
+        SELECT p.userId
+        FROM ConversationParticipantEntity p
+        WHERE p.conversationId = :conversationId
+      """)
+  List<Long> getUserIdInConversation(@Param("conversationId") Long conversationId);
 
 }

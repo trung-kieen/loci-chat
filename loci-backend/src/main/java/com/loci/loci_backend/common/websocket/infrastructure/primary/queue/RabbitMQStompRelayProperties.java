@@ -1,17 +1,17 @@
 package com.loci.loci_backend.common.websocket.infrastructure.primary.queue;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
- * Relay (broker) port configuration for communication between rabbitmq and STOMP
+ * Relay (broker) port configuration for communication between rabbitmq and
+ * STOMP
  */
-@Component
+// @Component
 @ConfigurationProperties(prefix = "stomp.relay")
-@Data
-public class StompRelayProperties {
+@Getter
+public class RabbitMQStompRelayProperties {
   // RabbitMQ host
   private String relayHost = "localhost";
 

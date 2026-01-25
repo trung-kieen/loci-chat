@@ -11,6 +11,7 @@ public class SecurityWhitelist {
       "/api/v1/ws",
       "/swagger-ui/**",
       "/api-docs/**",
+      "/actuator/**",
       "/error"
   };
 }

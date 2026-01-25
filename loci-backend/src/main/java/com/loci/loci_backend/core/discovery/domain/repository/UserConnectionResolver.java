@@ -1,22 +1,21 @@
 package com.loci.loci_backend.core.discovery.domain.repository;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.vo.UserDBId;
 import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfile;
+import com.loci.loci_backend.core.social.domain.aggregate.UserConnections;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
 public interface UserConnectionResolver {
 
-  public Map<UserDBId, FriendshipStatus> aggreateConnection(UserDBId userId, Collection<UserDBId> ids);
+  public UserConnections aggreateConnection(UserDBId userId, Collection<UserDBId> ids);
 
   /**
    * Build contact information from hashmap information of friendship status
    */
-  public ContactProfile buildSearchContact(Map<UserDBId, FriendshipStatus> userDbIdToFriendStatus, User user);
+  public ContactProfile extractContactProfile(UserConnections userConnections, User user);
 
   public FriendshipStatus aggreateConnection(UserDBId userId, UserDBId targetUserId);
 

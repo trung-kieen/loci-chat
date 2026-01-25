@@ -1,7 +1,6 @@
 package com.loci.loci_backend.core.discovery.domain.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.loci.loci_backend.common.authentication.domain.CurrentUser;
 import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
@@ -12,7 +11,7 @@ import com.loci.loci_backend.core.discovery.domain.aggregate.ContactProfileList;
 import com.loci.loci_backend.core.discovery.domain.repository.DiscoveryUserRepository;
 import com.loci.loci_backend.core.discovery.domain.repository.UserConnectionResolver;
 import com.loci.loci_backend.core.discovery.domain.vo.SuggestFriendCriteria;
-import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
+import com.loci.loci_backend.core.social.domain.aggregate.UserConnections;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.data.domain.Pageable;
@@ -39,19 +38,11 @@ public class PersonalizedRecommendationService {
         .orElseThrow(() -> new EntityNotFoundException());
 
     // Get their friend status
-    Map<UserDBId, FriendshipStatus> suggestUserIdToConnectionStatus = connectionResolver
+    UserConnections userConnections = connectionResolver
         .aggreateConnection(currentUser.getDbId(), suggestUserIds);
 
     // filter for only not connected user
-    List<UserDBId> notConnectedUserIds = suggestUserIdToConnectionStatus.entrySet().stream()
-        .filter(entry -> {
-          // TODO: use policy service to determine the user allow in this case
-          // only allow NOT_CONNECTED userId
-          return entry.getValue().isNotConnected();
-        })
-        .map(Map.Entry::getKey)
-        .toList();
-
+    List<UserDBId> notConnectedUserIds = userConnections.getNotConnectedUserIds();
     // Build user detail information of suggsetion
     return searchExtractor.fromUserIds(notConnectedUserIds, pageable);
   }

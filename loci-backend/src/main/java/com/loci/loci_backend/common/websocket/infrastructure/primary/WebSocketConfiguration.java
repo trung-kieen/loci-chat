@@ -4,20 +4,17 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loci.loci_backend.common.websocket.infrastructure.WsPaths;
-import com.loci.loci_backend.common.websocket.infrastructure.primary.queue.StompRelayProperties;
+import com.loci.loci_backend.common.websocket.infrastructure.primary.broker.InMemoryWebSocketBrokerAutoConfiguration;
+import com.loci.loci_backend.common.websocket.infrastructure.primary.broker.RabbitMQWebSocketBrokerAutoConfiguration;
 import com.loci.loci_backend.common.websocket.infrastructure.primary.security.SecurityChannelInterceptorAdapter;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 import org.springframework.messaging.converter.DefaultContentTypeResolver;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 import org.springframework.messaging.simp.config.ChannelRegistration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -27,43 +24,22 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Autoconfigure relay for message broker with broker autoconfigure proxy class
+ * ({@link RabbitMQWebSocketBrokerAutoConfiguration}
+ * {@link InMemoryWebSocketBrokerAutoConfiguration})
+ * for provide configureMessageBroker
+ *
+ */
 @Configuration
 @RequiredArgsConstructor
 @Log4j2
 @Order(Ordered.HIGHEST_PRECEDENCE - 10) // after the cors filter
 @EnableWebSocketMessageBroker
-public class SimpleWebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-  private final Environment env;
   private final CorsConfiguration corsConfiguration;
   private final SecurityChannelInterceptorAdapter authChannelInterceptorAdapter;
-
-  private final StompRelayProperties relayProperties;
-
-  @Override
-  public void configureMessageBroker(MessageBrokerRegistry config) {
-
-    // TODO extract autoconfigure with @ConditionalOnProperty(name="service.mock", havingValue="true")
-    if (env.acceptsProfiles(Profiles.of("rabbitmq"))) {
-      log.info("Use rabbitmq as broker for ws");
-      log.info("Register stomp relay at port {}", relayProperties.getRelayPort());
-      config.enableStompBrokerRelay(WsPaths.TOPIC, WsPaths.QUEUE)
-          .setRelayHost(relayProperties.getRelayHost())
-          .setRelayPort(relayProperties.getRelayPort())
-          .setClientLogin(relayProperties.getClientLogin())
-          .setClientPasscode(relayProperties.getClientPasscode())
-          .setSystemLogin(relayProperties.getSystemLogin())
-          .setSystemPasscode(relayProperties.getSystemPasscode())
-          .setSystemHeartbeatSendInterval(relayProperties.getSystemHeartbeatSendInterval())
-          .setAutoStartup(true)
-          .setSystemHeartbeatReceiveInterval(relayProperties.getSystemHeartbeatReceiveInterval());
-      // Config relay as proxy between websocket client and rabbitmq
-      config.setApplicationDestinationPrefixes(WsPaths.APP);
-    } else {
-      log.info("Profile rabbitmq is not active, use simple in-memory as message broker for ws");
-      config.enableSimpleBroker(WsPaths.TOPIC, WsPaths.QUEUE);
-    }
-  }
 
   @Override
   public boolean configureMessageConverters(List<MessageConverter> messageConverters) {

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -24,7 +23,7 @@ import jakarta.validation.ConstraintViolationException;
  * Response as status code 400
  */
 @ControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE-1)
+@Order(3)
 class BeanValidationErrorsHandler {
   // Validation errors specific details field, use Map<String, String>
   private static final String ERRORS = "errors";

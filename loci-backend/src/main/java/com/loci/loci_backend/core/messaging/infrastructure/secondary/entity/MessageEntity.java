@@ -14,6 +14,9 @@ import com.loci.loci_backend.core.messaging.domain.vo.MessageState;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageStatus;
 import com.loci.loci_backend.core.messaging.domain.vo.MessageType;
 
+import org.jilt.Builder;
+import org.jilt.BuilderStyle;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,7 +40,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "message")
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageEntity extends AbstractAuditingEntity<Long> {
@@ -120,6 +123,20 @@ public class MessageEntity extends AbstractAuditingEntity<Long> {
   // this.type = type;
   // this.status = MessageStatus.PREPARE;
   // }
+
+  @Builder(style = BuilderStyle.STAGED)
+  public MessageEntity(Long id, UUID publicId, Long conversationId, Long senderId, String content, MessageType type,
+      Long replyToMessageId, MessageState status, boolean deleted) {
+    this.id = id;
+    this.publicId = publicId;
+    this.conversationId = conversationId;
+    this.senderId = senderId;
+    this.content = content;
+    this.type = type;
+    this.replyToMessageId = replyToMessageId;
+    this.status = status;
+    this.deleted = deleted;
+  }
 
   public MediaName getMediaName() {
     return new MediaName(mediaName);

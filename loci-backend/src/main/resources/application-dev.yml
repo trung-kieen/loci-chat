@@ -1,4 +1,6 @@
 spring:
+  cache:
+    type: hybrid # hybrid | redis | caffeine
   application:
     name: loci
   boot:
@@ -7,6 +9,11 @@ spring:
         url: ${SPRING_BOOT_ADMIN_CLIENT_URL:http://localhost:7070}
         username: ${SPRING_BOOT_ADMIN_CLIENT_USERNAME:admin}
         password: ${SPRING_BOOT_ADMIN_CLIENT_PASSWORD:adminadmin}
+
+  # redis:
+  #   host: localhost
+  #   port: 6379
+  #   password:
 
   security:
     websocket:
@@ -31,14 +38,16 @@ spring:
     hikari:
       poolName: Hikari
       # Require to specify commit use like @Transactional
-      # auto-commit: false
+      auto-commit: false # connection is acquired immediately upon entering a @Transactional
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: true
+    open-in-view: false # Release connection directly instead of wait for HTTP response completes
     properties:
       hibernate:
+        generate_statistics: true
         format_sql: true
 
       # NOTE: Use for init database schema
@@ -85,6 +94,7 @@ spring:
     max-binary-message-size: 8192
 
 stomp.relay:
+  type: ${STOMP_RELAY_TYPE:inmemory} # rabbitmq | inmemory
   relay-host: ${STOMP_RELAY_HOST:localhost}
   relay-port: ${STOMP_RELAY_PORT:61613}
   client-login: ${STOMP_RELAY_CLIENT_LOGIN:guest}
@@ -107,6 +117,8 @@ application:
 
 management:
   endpoints:
+    prometheus:
+      enabled: true # Check /actuator/prometheus
     jmx:
       exposure:
         include: health,info
@@ -118,15 +130,23 @@ management:
         # include: health,info,metrics,prometheus,httpexchanges
 
         exclude: env,beans
+
   endpoint:
     health:
       show-details: always
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
   metrics:
     export:
       prometheus:
         enabled: true
     tags:
-      application: loci-app # tag for app-server metrics
+      application: loci-app
+    distribution.percentiles-histogram.http:
+      server.requests: true
+      client.requests: true # 50ms,100ms,200ms,500ms,1s,5s #true
 
 flyway:
   enabled: true

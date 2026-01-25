@@ -23,11 +23,14 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j2;
+
 /**
  * Implement converter lambda function to convert token to list to roles and
  * authorities
  */
 @Service
+@Log4j2
 public class KeycloakJwtTokenConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
   @Override
@@ -41,6 +44,10 @@ public class KeycloakJwtTokenConverter implements Converter<Jwt, Collection<Gran
 
   public User convert(JwtAuthenticationToken token) {
 
+    if (token == null) {
+      log.warn("Missing token to convert");
+      return null;
+    }
     Map<String, Object> attributes = token.getTokenAttributes();
     Set<String> tokenRoles = token.getAuthorities().stream().map(GrantedAuthority::getAuthority)
         .collect(Collectors.toSet());

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -59,7 +60,7 @@ public class ConversationResource {
 
   @PostMapping("/group")
   public ResponseEntity<RestCreatedGroupConversationResponse> createGroupConveration(
-      @RequestBody RestCreateGroup rest) {
+      @Valid @RequestBody RestCreateGroup rest) {
     CreateGroupRequest request = mapper.toDomain(rest);
     GroupConversationInfo conversation = conversationService.createGroupConversation(request);
 

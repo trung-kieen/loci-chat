@@ -36,6 +36,7 @@ dependencies {
     api libs.org.springframework.boot.spring.boot.starter.aop
     api libs.org.springframework.boot.spring.boot.starter.actuator
     api libs.org.springframework.boot.spring.boot.starter.cache
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:3.5.3")
 
     // Spring Security
     api libs.org.springframework.security.spring.security.messaging
@@ -111,6 +112,7 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 
 
+    implementation("io.micrometer:micrometer-registry-prometheus")
 
     // Development tools
     runtimeOnly libs.org.springframework.boot.spring.boot.devtools

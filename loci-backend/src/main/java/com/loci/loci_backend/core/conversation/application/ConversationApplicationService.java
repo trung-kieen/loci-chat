@@ -39,6 +39,7 @@ public class ConversationApplicationService {
 
   public GroupConversationInfo createGroupConversation(CreateGroupRequest request) {
 
+    // Create conversation
     Conversation currentUserConversation = converationManager.createGroupConversation(request);
 
     request.provideMandatoryField();
@@ -46,6 +47,7 @@ public class ConversationApplicationService {
     CreateGroupProfileRequest createProfileRequest = CreateGroupProfileRequest
         .fromConversation(currentUserConversation, request);
 
+    // Create group profile for conversation
     GroupProfile profile = groupManager.createGroupProfile(createProfileRequest);
     log.debug("Create group profile {} for conversation {}", profile, currentUserConversation);
 

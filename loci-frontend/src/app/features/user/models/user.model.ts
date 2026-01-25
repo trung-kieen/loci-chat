@@ -1,5 +1,15 @@
 import { FriendshipStatus } from '../../contact/models/contact.model';
 
+export type PresenceStatus = 'online' | 'offline' | 'away';
+
+export interface IUser {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  status: PresenceStatus;
+  lastSeen?: Date;
+}
+
 export interface IPersonalProfile {
   userId: string;
   firstname: string;
@@ -10,9 +20,11 @@ export interface IPersonalProfile {
   activityStatus: boolean;
 }
 
+export type SeenSettingType = 'Everyone' | 'Contacts Only' | 'Nobody';
+export type FriendRequestType = 'Everyone' | 'Friends of Friends' | 'Nobody';
 export interface IPersonalSettings {
-  lastSeenSetting: 'Everyone' | 'Contacts Only' | 'Nobody';
-  friendRequests: 'Everyone' | 'Friends of Friends' | 'Nobody';
+  lastSeenSetting: SeenSettingType;
+  friendRequests: FriendRequestType;
   profileVisibility: boolean;
 }
 
@@ -43,9 +55,10 @@ export interface IUpdatedStatus {
   status: FriendshipStatus;
 }
 
+export type ActivityType = 'message' | 'connection' | 'file' | 'other';
 export interface IRecentActivity {
   id: string;
-  type: 'message' | 'connection' | 'file' | 'other';
+  type: ActivityType;
   message: string;
   timestamp: Date;
 }

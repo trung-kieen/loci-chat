@@ -62,7 +62,8 @@ public class SecurityConfiguration {
     http.authorizeHttpRequests(
         request -> request
             .requestMatchers(SecurityWhitelist.PATTERNS).permitAll()
-            .requestMatchers("/actuator/**").hasRole(Role.ADMIN.name())
+            // .requestMatchers("/actuator/**").hasRole(Role.ADMIN.name())
+            .requestMatchers("/actuator/**").permitAll()
             .anyRequest().hasRole("user")
 
     );

@@ -8,6 +8,7 @@ import com.loci.loci_backend.core.identity.domain.enumeration.PresenceStatusEnum
 
 import org.jilt.Builder;
 import org.jilt.BuilderStyle;
+import org.springframework.cache.annotation.Cacheable;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
