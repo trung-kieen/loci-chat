@@ -9,6 +9,7 @@ export interface ITypingEvent {
   userId: string;
   isTyping: boolean;
 }
+export type ChatFilter = 'inbox' | 'unread' | 'followups' | 'archived';
 
 export interface IUserStatusUpdate {
   userId: string;

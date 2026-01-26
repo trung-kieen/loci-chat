@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { ChatList } from '../chat-list/chat-list';
+import { LoggerService } from '../../../../core/services/logger.service';
 
 @Component({
   selector: 'app-chat-layout',
@@ -9,5 +10,19 @@ import { ChatList } from '../chat-list/chat-list';
   styleUrl: './chat-layout.css',
 })
 export class ChatLayout {
+  private isInChatDetail$ = signal<boolean>(false);
+  private loggerService = inject(LoggerService);
+  private logger = this.loggerService.getLogger('ChatLayout');
 
+  private router = inject(Router);
+
+  isDetailRoute(): boolean {
+    const url = this.router.url;
+    return !this.isChatListPage(url);
+  }
+
+  isChatListPage(url: string) {
+    console.log(url);
+    return url === '/chat' || url === '/chat/';
+  }
 }

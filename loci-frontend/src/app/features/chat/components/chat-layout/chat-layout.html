@@ -1,6 +1,13 @@
-<main id="main-content" class="flex flex-row h-[calc(100vh-4rem)]">
-  <app-chat-list class="overflow-y-auto h-full"></app-chat-list>
-  <div class="flex-1 overflow-auto h-full">
-    <router-outlet class="flex-1"></router-outlet>
+<div class="flex h-full overflow-hidden">
+  <app-chat-list
+    class="w-full md:w-96 flex-shrink-0 border-r border-neutral-200 md:block"
+    [class.max-md:hidden]="isDetailRoute()"
+  ></app-chat-list>
+
+  <div
+    class="flex-1 w-full md:w-auto md:block"
+    [class.max-md:hidden]="!isDetailRoute()"
+  >
+    <router-outlet></router-outlet>
   </div>
-</main>
+</div>
