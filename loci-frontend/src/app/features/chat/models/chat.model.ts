@@ -1,8 +1,8 @@
 export type ConversationType = 'one to one' | 'group';
-import { IMessage } from '@stomp/rx-stomp';
 import { Page } from '../../../core/model/page';
 import { FriendshipStatus } from '../../contact/models/contact.model';
 import { IUser, PresenceStatus } from '../../user/models/user.model';
+import { IMessage } from './message.model';
 
 export interface ITypingEvent {
   conversationId: string;
@@ -24,7 +24,7 @@ export interface IConversation {
   lastMessage?: IMessage;
 }
 
-export type ChatError = 'blocked' | 'unavailable' | 'network';
+export type ChatError = 'blocked' | 'unavailable' | 'network' | 'validation';
 
 export interface IChatError {
   message: string;

@@ -1,0 +1,86 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+#message-area {
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 3px;
+
+    &:hover {
+      background: #a3a3a3;
+    }
+  }
+}
+
+textarea {
+  max-height: 120px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 2px;
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-enter {
+  animation: slideIn 0.2s ease-out;
+}
+
+.cursor-pointer {
+  transition: all 0.2s ease;
+}
+
+#error-card {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-spin {
+  animation: spin 1s linear infinite;
+}
+
+@media (max-width: 1024px) {
+  #chat-header {
+    .lg\\:hidden {
+      display: block;
+    }
+  }
+}

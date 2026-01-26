@@ -32,3 +32,10 @@ export interface IMessageStatusUpdate {
   messageId: string;
   status: MessageStatus;
 }
+
+export interface ICreateMessage {
+  conversationId: string;
+  content: string;
+  type: MessageType;
+  attachmentId?: string;
+}

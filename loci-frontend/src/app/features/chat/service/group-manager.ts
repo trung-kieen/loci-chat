@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 import {
-  IChatReference,
   ICreatedGroupResponse,
   ICreateGroupRequest,
   IGroupMetadata,

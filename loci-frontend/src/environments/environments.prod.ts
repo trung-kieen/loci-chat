@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  socketEndpoint: 'ws://localhost:8080/ws',
+  socketEndpoint: 'wss://localhost:8080/ws',
   apiUrl: '//localhost:8080/api/v1',
   keycloak: {
     // Keycloak url

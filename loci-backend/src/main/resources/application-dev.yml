@@ -59,23 +59,22 @@ spring:
     open-in-view: false # Release connection directly instead of wait for HTTP response completes
     properties:
       hibernate:
-        generate_statistics: true
+        #
+        #generate_statistics: true
         format_sql: true
 
       # NOTE: Use for init database schema
       # hibernate:
       #   ddl-auto: create
       # properties:
-      # javax:
+      # jakarta:
       #   persistence:
       #     schema-generation:
       #       scripts:
       #         action: create
       #         create-target: src/main/resources/schema.sql
 
-      # NOTE: update schema helper
-      # properties:
-      javax: # use jakartar
+      jakarta:
         persistence:
           schema-generation:
             create-source: metadata

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IMessage } from '@stomp/rx-stomp';
 import { Observable, Subject } from 'rxjs';
+import {
+  ICreateMessage,
+  IMessage,
+  IMessageStatusUpdate,
+} from '../models/message.model';
+import { ITypingEvent, IUserStatusUpdate } from '../models/chat.model';
 
 /**
  * Mock STOMP service for development
@@ -11,9 +16,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MockStompService {
   private messageSubject = new Subject<IMessage>();
-  private typingSubject = new Subject<TypingEvent>();
-  private statusSubject = new Subject<UserStatusUpdate>();
-  private messageStatusSubject = new Subject<MessageStatusUpdate>();
+  private typingSubject = new Subject<ITypingEvent>();
+  private statusSubject = new Subject<IUserStatusUpdate>();
+  private messageStatusSubject = new Subject<IMessageStatusUpdate>();
 
   private connected = false;
 
@@ -40,7 +45,7 @@ export class MockStompService {
   }
 
   // Subscribe to incoming messages
-  subscribeToMessages(userId: string): Observable<Message> {
+  subscribeToMessages(userId: string): Observable<IMessage> {
     console.log(
       `[MockStompService] Subscribed to /user/${userId}/queue/messages`,
     );
@@ -48,7 +53,7 @@ export class MockStompService {
   }
 
   // Subscribe to typing indicators
-  subscribeToTyping(conversationId: string): Observable<TypingEvent> {
+  subscribeToTyping(conversationId: string): Observable<ITypingEvent> {
     console.log(
       `[MockStompService] Subscribed to /topic/conversations/${conversationId}/typing`,
     );
@@ -56,7 +61,7 @@ export class MockStompService {
   }
 
   // Subscribe to user status updates
-  subscribeToStatus(userId: string): Observable<UserStatusUpdate> {
+  subscribeToStatus(userId: string): Observable<IUserStatusUpdate> {
     console.log(
       `[MockStompService] Subscribed to /user/${userId}/queue/status`,
     );
@@ -64,7 +69,9 @@ export class MockStompService {
   }
 
   // Subscribe to message status updates (delivery/read receipts)
-  subscribeToMessageStatus(messageId: string): Observable<MessageStatusUpdate> {
+  subscribeToMessageStatus(
+    messageId: string,
+  ): Observable<IMessageStatusUpdate> {
     console.log(
       `[MockStompService] Subscribed to /topic/messages/${messageId}/status`,
     );
@@ -72,7 +79,7 @@ export class MockStompService {
   }
 
   // Send message via WebSocket
-  sendMessage(message: CreateMessageDto): void {
+  sendMessage(message: ICreateMessage): void {
     console.log('[MockStompService] SEND /app/chat.send', message);
     // In mock, we don't actually send - API service handles it
   }
@@ -91,22 +98,22 @@ export class MockStompService {
   }
 
   // Simulate incoming message (for testing)
-  simulateIncomingMessage(message: Message): void {
+  simulateIncomingMessage(message: IMessage): void {
     this.messageSubject.next(message);
   }
 
   // Simulate typing event (for testing)
-  simulateTypingEvent(event: TypingEvent): void {
+  simulateTypingEvent(event: ITypingEvent): void {
     this.typingSubject.next(event);
   }
 
   // Simulate status update (for testing)
-  simulateStatusUpdate(update: UserStatusUpdate): void {
+  simulateStatusUpdate(update: IUserStatusUpdate): void {
     this.statusSubject.next(update);
   }
 
   // Simulate message status update (for testing)
-  simulateMessageStatusUpdate(update: MessageStatusUpdate): void {
+  simulateMessageStatusUpdate(update: IMessageStatusUpdate): void {
     this.messageStatusSubject.next(update);
   }
 }

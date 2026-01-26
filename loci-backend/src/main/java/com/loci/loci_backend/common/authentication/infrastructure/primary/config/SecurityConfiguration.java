@@ -35,9 +35,9 @@ public class SecurityConfiguration {
   @Bean
   public JwtAuthenticationConverter jwtAuthenticationConverterForKeycloak() {
 
-    log.warn("CONVERT TOKEN to user");
+    log.info("Init Spring Bean for Token Converter");
 
-    var jwtAuthenticationConverter = new JwtAuthenticationConverter();
+    JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
     // Set converter to mapping token to roles
     jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(tokenConverter);
 
