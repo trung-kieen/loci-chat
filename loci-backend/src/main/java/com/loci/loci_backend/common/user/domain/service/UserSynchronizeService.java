@@ -6,9 +6,9 @@ import com.loci.loci_backend.common.ddd.infrastructure.stereotype.DomainService;
 import com.loci.loci_backend.common.user.domain.aggregate.User;
 import com.loci.loci_backend.common.user.domain.repository.AuthorityRepository;
 import com.loci.loci_backend.common.user.domain.repository.UserRepository;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 // removed direct JPA repository usage - use domain repository instead
-import com.loci.loci_backend.core.identity.domain.repository.UserSettingsRepository;
+import com.loci.loci_backend.core.identity.domain.repository.UserSettingRepository;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j2;
 public class UserSynchronizeService {
 
   private final UserRepository userRepository;
-  private final UserSettingsRepository userSettingsRepository;
+  private final UserSettingRepository userSettingRepository;
   private final AuthorityRepository authorityRepository;
 
   @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -67,11 +67,11 @@ public class UserSynchronizeService {
 
       // Init authorities
 
-      UserSettings defaultUserSettings = new UserSettings(savedUser);
+      UserSetting defaultUserSetting = new UserSetting(savedUser);
 
       // Make sure flush entity before further setting creation, to avoid duplicate
       // user entity in persistence context
-      userSettingsRepository.createSettings(savedUser, defaultUserSettings);
+      userSettingRepository.createSetting(savedUser, defaultUserSetting);
     }
 
   }

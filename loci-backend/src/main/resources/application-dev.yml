@@ -59,7 +59,7 @@ spring:
     open-in-view: false # Release connection directly instead of wait for HTTP response completes
     properties:
       hibernate:
-        #
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         #generate_statistics: true
         format_sql: true
 
@@ -67,20 +67,20 @@ spring:
       # hibernate:
       #   ddl-auto: create
       # properties:
-      # jakarta:
-      #   persistence:
-      #     schema-generation:
-      #       scripts:
-      #         action: create
-      #         create-target: src/main/resources/schema.sql
-
       jakarta:
         persistence:
           schema-generation:
-            create-source: metadata
             scripts:
-              action: update
-              create-target: src/main/resources/update.sql
+              action: create
+              create-target: src/main/resources/schema.sql
+
+      # jakarta:
+      #   persistence:
+      #     schema-generation:
+      #       create-source: metadata
+      #       scripts:
+      #         action: update
+      #         create-target: src/main/resources/update.sql
 
   devtools:
     restart:

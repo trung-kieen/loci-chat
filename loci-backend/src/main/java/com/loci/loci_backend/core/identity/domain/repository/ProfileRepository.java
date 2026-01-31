@@ -9,7 +9,7 @@ import com.loci.loci_backend.common.user.domain.vo.UserEmail;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 
 public interface ProfileRepository {
   PersonalProfile findPersonalProfile(UserEmail userEmail);
@@ -22,8 +22,8 @@ public interface ProfileRepository {
 
   PersonalProfile applyProfileUpdate(Username username, PersonalProfileChanges profileChanges);
 
-  UserSettings findProfileSettings(UserDBId dbId);
+  UserSetting findProfileSettings(UserDBId dbId);
 
-  UserSettings save(UserSettings settings);
+  UserSetting save(UserSetting settings);
 
 }

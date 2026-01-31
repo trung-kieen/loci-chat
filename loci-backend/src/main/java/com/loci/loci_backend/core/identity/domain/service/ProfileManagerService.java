@@ -19,7 +19,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.repository.ProfileRepository;
 import com.loci.loci_backend.core.identity.domain.vo.ProfilePublicId;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
@@ -84,16 +84,16 @@ public class ProfileManagerService {
     return repository.applyProfileUpdate(principal.getUsername(), profileChanges);
   }
 
-  public UserSettings readProfileSettings() {
+  public UserSetting readProfileSettings() {
     User currentUser = userRepository.getByUsername(principal.getUsername())
         .orElseThrow(() -> new EntityNotFoundException());
-    UserSettings settings = repository.findProfileSettings(currentUser.getDbId());
+    UserSetting settings = repository.findProfileSettings(currentUser.getDbId());
 
     return settings;
   }
 
-  public UserSettings applyUpdate(ProfileSettingChanges settingsChanges) {
-    UserSettings settings = this.readProfileSettings();
+  public UserSetting applyUpdate(ProfileSettingChanges settingsChanges) {
+    UserSetting settings = this.readProfileSettings();
 
     profileMapper.applyChanges(settings, settingsChanges);
     return repository.save(settings);

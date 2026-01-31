@@ -7,16 +7,16 @@ import com.loci.loci_backend.common.ddd.infrastructure.stereotype.SecondaryMappe
 import com.loci.loci_backend.common.user.infrastructure.secondary.entity.UserEntity;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.aggregate.UserSummary;
-import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserSettingsEntity;
+import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserSettingEntity;
 import com.loci.loci_backend.core.social.domain.vo.FriendshipStatus;
 
 import lombok.RequiredArgsConstructor;
 
 @SecondaryMapper
 @RequiredArgsConstructor
-public class IdentityEntityMapper implements DomainEntityMapper<UserSettings, UserSettingsEntity> {
+public class IdentityEntityMapper implements DomainEntityMapper<UserSetting, UserSettingEntity> {
   private final MapStructIdentityEntityMapper mapstruct;
 
   public PublicProfile toPublicProfile(UserEntity userEntity, FriendshipStatus connectionStatus) {
@@ -75,12 +75,12 @@ public class IdentityEntityMapper implements DomainEntityMapper<UserSettings, Us
   }
 
   @Override
-  public UserSettings toDomain(UserSettingsEntity settings) {
+  public UserSetting toDomain(UserSettingEntity settings) {
     return mapstruct.toDomain(settings);
   }
 
   @Override
-  public UserSettingsEntity from(UserSettings domainObjectt) {
+  public UserSettingEntity from(UserSetting domainObjectt) {
     return mapstruct.from(domainObjectt);
   }
 }

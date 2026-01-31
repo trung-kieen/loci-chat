@@ -10,7 +10,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.service.ProfileManagerService;
 import com.loci.loci_backend.core.identity.domain.vo.ProfilePublicId;
 
@@ -43,12 +43,12 @@ public class IdentityApplicationService {
     return savedProfile;
   }
 
-  public UserSettings getPersonalProfileSettings() {
-    UserSettings settings = profileManager.readProfileSettings();
+  public UserSetting getPersonalProfileSettings() {
+    UserSetting settings = profileManager.readProfileSettings();
     return settings;
   }
 
-  public UserSettings updateProfileSettings(ProfileSettingChanges settingsChanges) {
+  public UserSetting updateProfileSettings(ProfileSettingChanges settingsChanges) {
     return profileManager.applyUpdate(settingsChanges);
   }
 

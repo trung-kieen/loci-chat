@@ -5,7 +5,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfile;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfilePatch;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestProfileSettings;
@@ -21,7 +21,7 @@ public interface MapStructRestProfileMapper {
   public ProfileSettingChanges toDomain(RestProfileSettingsPatch patchRequest);
 
   @Mapping(source = "friendRequestSetting", target = "friendRequests")
-  public RestProfileSettings from(UserSettings profile);
+  public RestProfileSettings from(UserSetting profile);
 
   @Mapping(source = "userPublicId", target = "userId")
   @Mapping(source = "email", target = "emailAddress")

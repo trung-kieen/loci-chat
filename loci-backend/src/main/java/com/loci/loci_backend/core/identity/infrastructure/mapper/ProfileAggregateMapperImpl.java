@@ -5,7 +5,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChangesBuilder;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.service.ProfileAggregateMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class ProfileAggregateMapperImpl implements ProfileAggregateMapper {
   }
 
   @Override
-  public void applyChanges(UserSettings settings, ProfileSettingChanges changes) {
+  public void applyChanges(UserSetting settings, ProfileSettingChanges changes) {
     profileMapper.applySettingsUpdatePartial(settings, changes);
   }
 

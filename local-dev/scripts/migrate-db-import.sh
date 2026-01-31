@@ -1,4 +1,5 @@
 #!/bin/bash
+# Import all sql in ../backups/ folder as migration script to docker db service
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # NOTE: run this in current directory not root (use relative path to the ../backups/ folder)

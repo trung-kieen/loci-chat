@@ -15,7 +15,7 @@ import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.vo.ProfilePublicId;
 import com.loci.loci_backend.core.identity.infrastructure.primary.mapper.RestProfileMapper;
 import com.loci.loci_backend.core.identity.infrastructure.primary.payload.RestPersonalProfile;
@@ -79,7 +79,7 @@ public class UserIdentityResource {
 
   @GetMapping("me/settings")
   public ResponseEntity<RestProfileSettings> currentUserProfileSettings() {
-    UserSettings profile = identityApplicationService.getPersonalProfileSettings();
+    UserSetting profile = identityApplicationService.getPersonalProfileSettings();
     log.debug(profile);
     RestProfileSettings restResponse = restProfileMapper.from(profile);
     return ResponseEntity.ok(restResponse);
@@ -98,7 +98,7 @@ public class UserIdentityResource {
   public ResponseEntity<RestProfileSettings> partialUpdateProfile(
       @RequestBody RestProfileSettingsPatch patchRequest) {
     ProfileSettingChanges settingsChanges = restProfileMapper.toDomain(patchRequest);
-    UserSettings updatedSettings = identityApplicationService.updateProfileSettings(settingsChanges);
+    UserSetting updatedSettings = identityApplicationService.updateProfileSettings(settingsChanges);
     return ResponseEntity.ok(restProfileMapper.from(updatedSettings));
   }
 

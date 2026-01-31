@@ -12,9 +12,9 @@ import com.loci.loci_backend.common.user.infrastructure.secondary.repository.Jpa
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.PublicProfile;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 import com.loci.loci_backend.core.identity.domain.repository.ProfileRepository;
-import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserSettingsEntity;
+import com.loci.loci_backend.core.identity.infrastructure.secondary.entity.UserSettingEntity;
 import com.loci.loci_backend.core.identity.infrastructure.secondary.mapper.IdentityEntityMapper;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -68,17 +68,17 @@ public class SpringDataProfileRepository implements ProfileRepository {
   }
 
   @Override
-  public UserSettings findProfileSettings(UserDBId dbId) {
+  public UserSetting findProfileSettings(UserDBId dbId) {
     Long userDbId = dbId.value();
-    UserSettingsEntity settings = userSettingRepository.findById(userDbId)
+    UserSettingEntity settings = userSettingRepository.findById(userDbId)
         .orElseThrow(() -> new EntityNotFoundException("Settings is not exists for user"));
     return profileMapper.toDomain(settings);
   }
 
   @Override
-  public UserSettings save(UserSettings settings) {
-    UserSettingsEntity settingEntity = profileMapper.from(settings);
-    UserSettingsEntity savedEntity = userSettingRepository.save(settingEntity);
+  public UserSetting save(UserSetting settings) {
+    UserSettingEntity settingEntity = profileMapper.from(settings);
+    UserSettingEntity savedEntity = userSettingRepository.save(settingEntity);
     return profileMapper.toDomain(savedEntity);
   }
 

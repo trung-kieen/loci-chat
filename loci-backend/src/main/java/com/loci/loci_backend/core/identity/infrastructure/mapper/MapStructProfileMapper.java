@@ -5,7 +5,7 @@ import com.loci.loci_backend.common.util.NullSafe;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfile;
 import com.loci.loci_backend.core.identity.domain.aggregate.PersonalProfileChanges;
 import com.loci.loci_backend.core.identity.domain.aggregate.ProfileSettingChanges;
-import com.loci.loci_backend.core.identity.domain.aggregate.UserSettings;
+import com.loci.loci_backend.core.identity.domain.aggregate.UserSetting;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Condition;
@@ -28,7 +28,7 @@ public interface MapStructProfileMapper {
 
   // @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
   @Mapping(target = "userId", ignore = true)
-  public void applySettingsUpdatePartial(@MappingTarget UserSettings settings,
+  public void applySettingsUpdatePartial(@MappingTarget UserSetting settings,
       ProfileSettingChanges changes);
 
 
